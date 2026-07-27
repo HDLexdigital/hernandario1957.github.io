@@ -1,0 +1,8 @@
+{
+  "urls": [
+    "http://localhost:8080/index.html",
+    "http://localhost:8080/publicaciones.html",
+    "http://localhost:8080/suscripcion.html",
+    "http://localhost:8080/contacto.html"
+  ]
+}
