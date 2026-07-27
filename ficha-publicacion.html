@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<title>[Nombre del sitio] — Catálogo de publicaciones digitales</title>
+<title>Ficha de publicación — [Nombre del sitio]</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Catálogo de publicaciones digitales en HTML, EPUB y PDF, con acceso por suscripción o licencia individual.">
+<meta name="description" content="Detalle de una publicación: descripción, formatos disponibles y acceso.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
-<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="styles/single_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/single_responsive.css">
 <link rel="stylesheet" type="text/css" href="css/catalogo-extra.css">
 </head>
 
@@ -57,7 +58,7 @@
 						</div>
 						<nav class="navbar" aria-label="Navegación principal">
 							<ul class="navbar_menu">
-								<li class="menu_item"><a href="index.html" aria-current="page">Inicio</a></li>
+								<li class="menu_item"><a href="index.html">Inicio</a></li>
 					<li class="menu_item"><a href="publicaciones.html">Publicaciones</a></li>
 					<li class="menu_item"><a href="suscripcion.html">Suscripción</a></li>
 					<li class="menu_item"><a href="contacto.html">Contacto</a></li>
@@ -79,7 +80,7 @@
 		<div class="hamburger_menu_content text-right">
 			<ul class="menu_top_nav">
 				<li class="menu_item"><a href="login.html">Mi cuenta</a></li>
-				<li class="menu_item"><a href="index.html" aria-current="page">Inicio</a></li>
+				<li class="menu_item"><a href="index.html">Inicio</a></li>
 				<li class="menu_item"><a href="publicaciones.html">Publicaciones</a></li>
 				<li class="menu_item"><a href="suscripcion.html">Suscripción</a></li>
 				<li class="menu_item"><a href="contacto.html">Contacto</a></li>
@@ -87,124 +88,135 @@
 		</div>
 	</div>
 
-	<!-- Slider -->
+	<main id="main-content" class="container product_section_container">
+		<div class="row">
+			<div class="col">
 
-	<main id="main-content">
-	<div class="main_slider" style="background-image:url(images/slider_1.jpg)">
-		<div class="container fill_height">
-			<div class="row align-items-center fill_height">
-				<div class="col">
-					<div class="main_slider_content">
-						<h6>Lectura, descarga y consulta en un solo lugar</h6>
-						<h1>[Nombre del sitio]: tu biblioteca digital de publicaciones</h1>
-						<div class="red_button shop_now_button"><a href="publicaciones.html">Ver publicaciones</a></div>
+				<!-- Breadcrumbs -->
+
+				<nav class="breadcrumbs d-flex flex-row align-items-center" aria-label="Ruta de navegación">
+					<ul>
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="publicaciones.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Publicaciones</a></li>
+						<li class="active" aria-current="page"><i class="fa fa-angle-right" aria-hidden="true"></i>Constitución Política de Colombia</li>
+					</ul>
+				</nav>
+
+			</div>
+		</div>
+
+		<!--
+			NOTA PARA QUIEN EDITE ESTA PLANTILLA:
+			Esta ficha muestra un ejemplo estático (Constitución Política de Colombia,
+			tomado de index.json). Para convertirla en una ficha por publicación,
+			duplica este archivo por cada documento (o cárgalo dinámicamente con JS
+			leyendo un parámetro ?id= y buscando en index.json, igual que hace
+			js/catalogo.js con el catálogo completo).
+		-->
+
+		<div class="row">
+			<div class="col-lg-5">
+				<div class="publicacion_portada" style="height:320px;">
+					<i class="fa fa-file-text-o" style="font-size:90px;"></i>
+				</div>
+			</div>
+			<div class="col-lg-7">
+				<div class="product_details">
+					<div class="product_details_title">
+						<span class="etiqueta-categoria">Derecho Constitucional</span>
+						<h1>Constitución Política de Colombia</h1>
+						<p>Texto completo de la Constitución Política, actualizado y comentado.</p>
 					</div>
+					<div class="estado-acceso-badge suscripcion" style="margin-bottom:20px;">Acceso por suscripción</div>
+
+					<div class="acciones-formato" style="padding:0 0 15px;">
+						<a class="boton-formato" href="documentos/constitucion_colombia.html">
+							<i class="fa fa-file-code-o" aria-hidden="true"></i> HTML
+						</a>
+						<a class="boton-formato" href="documentos/constitucion_colombia.epub">
+							<i class="fa fa-book" aria-hidden="true"></i> EPUB
+						</a>
+						<a class="boton-formato" href="documentos/constitucion_colombia.pdf">
+							<i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+						</a>
+					</div>
+
+					<p class="mensaje-permiso" style="padding:0;">
+						¿No tienes acceso? <a href="suscripcion.html">Ver planes de suscripción</a> o
+						<a href="login.html">inicia sesión</a> si ya tienes una cuenta.
+					</p>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Categorías destacadas -->
+	</main>
 
-	<div class="banner">
+	<!-- Descripción detallada -->
+
+	<div class="tabs_section_container">
+
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(images/banner_1.jpg)">
-						<div class="banner_category">
-							<a href="publicaciones.html">Derecho Constitucional</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(images/banner_2.jpg)">
-						<div class="banner_category">
-							<a href="publicaciones.html">Referencia</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(images/banner_3.jpg)">
-						<div class="banner_category">
-							<a href="publicaciones.html">Derecho Procesal</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Publicaciones destacadas (cargadas dinámicamente desde index.json) -->
-
-	<div class="new_arrivals">
-		<div class="container">
-			<div class="row">
-				<div class="col text-center">
-					<div class="section_title new_arrivals_title">
-						<h2>Publicaciones destacadas</h2>
-					</div>
-				</div>
-			</div>
-			<p id="destacadas-estado" role="status" aria-live="polite" class="sr-only"></p>
-			<div class="row">
 				<div class="col">
-					<div class="product-grid" id="destacadas-grid">
-						<p class="text-center">Cargando publicaciones…</p>
+					<div class="tab_title">
+						<h4>Descripción</h4>
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col text-center" style="margin-top:20px;">
-					<div class="red_button shop_now_button"><a href="publicaciones.html">Ver todo el catálogo</a></div>
+					<div class="tab_text_block">
+						<p>Esta edición incluye el texto íntegro de la Constitución Política de Colombia,
+							organizado por títulos y capítulos, con una versión adaptada para lectura en
+							dispositivos móviles y notas de contexto para facilitar su consulta.</p>
+						<p>Formatos disponibles: lectura en línea (HTML, con versión móvil), descarga en
+							EPUB para lectores electrónicos, y PDF para impresión o consulta offline.</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Beneficios -->
+		<!-- Benefit -->
 
 	<div class="benefit">
-		<div class="container">
-			<div class="row benefit_row">
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Multi-formato</h6>
-							<p>Lee en HTML o descarga en EPUB y PDF</p>
-						</div>
+	<div class="container">
+		<div class="row benefit_row">
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+					<div class="benefit_content">
+						<h6>Multi-formato</h6>
+						<p>Lee en HTML o descarga en EPUB y PDF</p>
 					</div>
 				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-refresh" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Suscripción flexible</h6>
-							<p>Acceso completo o por licencia individual</p>
-						</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+					<div class="benefit_content">
+						<h6>Suscripción flexible</h6>
+						<p>Acceso completo o por licencia individual</p>
 					</div>
 				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-universal-access" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Accesible</h6>
-							<p>Compatible con lectores de pantalla y teclado</p>
-						</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon"><i class="fa fa-universal-access" aria-hidden="true"></i></div>
+					<div class="benefit_content">
+						<h6>Accesible</h6>
+						<p>Compatible con lectores de pantalla y teclado</p>
 					</div>
 				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-life-ring" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Soporte técnico y legal</h6>
-							<p>Te acompañamos si tienes dudas</p>
-						</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon"><i class="fa fa-life-ring" aria-hidden="true"></i></div>
+					<div class="benefit_content">
+						<h6>Soporte técnico y legal</h6>
+						<p>Te acompañamos si tienes dudas</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 	<!-- Newsletter -->
 
@@ -230,11 +242,7 @@
 		</div>
 	</div>
 
-	</main>
-
 	<!-- Footer -->
-
-<!-- Footer -->
 
 	<footer class="footer">
 		<div class="container">
@@ -273,11 +281,8 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
 <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="plugins/easing/easing.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/catalogo.js"></script>
 </body>
 
 </html>
