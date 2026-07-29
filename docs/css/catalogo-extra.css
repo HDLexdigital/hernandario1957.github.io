@@ -254,7 +254,7 @@ input:focus-visible,
   .acciones-formato { flex-direction: column; }
 }
 .logo img {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
 }
 .top-bar {
