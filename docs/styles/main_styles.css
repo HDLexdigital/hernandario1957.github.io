@@ -283,15 +283,16 @@ section
 	text-transform: uppercase;
 }
 .top-bar {
-  background-color: #003366; /* franja negra */
+  background-color: #003366; /* franja azul petroleo */
+	
 }
-
 .top-bar .logo img {
-  height: 40px; /* ajusta según tu preferencia */
+  height: 40px;
+  filter: brightness(0) invert(1); /* convierte el logo a blanco */
 }
 
 .top-bar .account-link {
-  color: #fff; /* texto blanco para contraste */
+  color: #FFFFFF; /* blanco */
   text-decoration: none;
   font-weight: 600;
 }
