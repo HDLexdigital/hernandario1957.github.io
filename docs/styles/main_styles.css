@@ -282,6 +282,19 @@ section
 	color: #b5aec4;
 	text-transform: uppercase;
 }
+.top-bar {
+  background-color: #000; /* franja negra */
+}
+
+.top-bar .logo img {
+  height: 40px; /* ajusta según tu preferencia */
+}
+
+.top-bar .account-link {
+  color: #fff; /* texto blanco para contraste */
+  text-decoration: none;
+  font-weight: 600;
+}
 
 /*********************************
 3.1 Currency
