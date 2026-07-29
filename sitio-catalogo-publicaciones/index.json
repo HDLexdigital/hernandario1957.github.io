@@ -1,0 +1,72 @@
+{
+  "publicaciones": [
+    {
+      "id": "constitucion-colombia",
+      "titulo": "Constitución Política de Colombia",
+      "categoria": "Derecho Constitucional",
+      "descripcion": "Texto completo de la Constitución Política, actualizado y comentado.",
+      "formatos": {
+        "html": "documentos/constitucion_colombia.html",
+        "epub": "documentos/constitucion_colombia.epub",
+        "pdf": "documentos/constitucion_colombia.pdf"
+      },
+      "acceso": "suscripcion"
+    },
+    {
+      "id": "codigo-judicial-panama",
+      "titulo": "Código Judicial de la República de Panamá",
+      "categoria": "Derecho Procesal",
+      "descripcion": "Compilación anotada del Código Judicial vigente.",
+      "formatos": {
+        "html": "documentos/codigo_judicial_panama.html",
+        "epub": "documentos/codigo_judicial_panama.epub",
+        "pdf": "documentos/codigo_judicial_panama.pdf"
+      },
+      "acceso": "licencia_individual"
+    },
+    {
+      "id": "glosario-juridico-basico",
+      "titulo": "Glosario Jurídico Básico",
+      "categoria": "Referencia",
+      "descripcion": "Términos legales explicados en lenguaje sencillo para el ciudadano.",
+      "formatos": {
+        "html": "documentos/glosario_juridico.html",
+        "pdf": "documentos/glosario_juridico.pdf"
+      },
+      "acceso": "libre"
+    },
+    {
+      "id": "manual-contratos",
+      "titulo": "Manual Práctico de Contratos Civiles",
+      "categoria": "Derecho Civil",
+      "descripcion": "Guía práctica con modelos de contratos y explicaciones claras.",
+      "formatos": {
+        "html": "documentos/manual_contratos.html",
+        "epub": "documentos/manual_contratos.epub",
+        "pdf": "documentos/manual_contratos.pdf"
+      },
+      "acceso": "suscripcion"
+    },
+    {
+      "id": "codigo-penal-comentado",
+      "titulo": "Código Penal Comentado",
+      "categoria": "Derecho Procesal",
+      "descripcion": "Edición comentada del Código Penal con jurisprudencia relevante.",
+      "formatos": {
+        "html": "documentos/codigo_penal.html",
+        "pdf": "documentos/codigo_penal.pdf"
+      },
+      "acceso": "licencia_individual"
+    },
+    {
+      "id": "glosario-terminos-notariales",
+      "titulo": "Glosario de Términos Notariales",
+      "categoria": "Referencia",
+      "descripcion": "Vocabulario esencial del ámbito notarial explicado para el público general.",
+      "formatos": {
+        "html": "documentos/glosario_notarial.html"
+      },
+      "acceso": "libre"
+    }
+  ]
+}

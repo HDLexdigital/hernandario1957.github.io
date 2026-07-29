@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Ficha de publicación — [Nombre del sitio]</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Detalle de una publicación: descripción, formatos disponibles y acceso.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="styles/single_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/single_responsive.css">
+<link rel="stylesheet" type="text/css" href="css/catalogo-extra.css">
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header trans_300">
+
+		<!-- Top Navigation -->
+
+		<div class="top_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-right">
+						<div class="top_nav_right">
+							<ul class="top_nav_menu">
+								<li class="account">
+									<a href="login.html">
+										<i class="fa fa-user" aria-hidden="true"></i>
+										Mi cuenta
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Main Navigation -->
+
+		<div class="main_nav_container">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-right">
+						<div class="logo_container">
+							<a href="index.html">biblio<span>teca</span></a>
+						</div>
+						<nav class="navbar" aria-label="Navegación principal">
+							<ul class="navbar_menu">
+								<li class="menu_item"><a href="index.html">Inicio</a></li>
+					<li class="menu_item"><a href="publicaciones.html">Publicaciones</a></li>
+					<li class="menu_item"><a href="suscripcion.html">Suscripción</a></li>
+					<li class="menu_item"><a href="contacto.html">Contacto</a></li>
+							</ul>
+							<div class="hamburger_container">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+	<div class="fs_menu_overlay"></div>
+	<div class="hamburger_menu">
+		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		<div class="hamburger_menu_content text-right">
+			<ul class="menu_top_nav">
+				<li class="menu_item"><a href="login.html">Mi cuenta</a></li>
+				<li class="menu_item"><a href="index.html">Inicio</a></li>
+				<li class="menu_item"><a href="publicaciones.html">Publicaciones</a></li>
+				<li class="menu_item"><a href="suscripcion.html">Suscripción</a></li>
+				<li class="menu_item"><a href="contacto.html">Contacto</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<main id="main-content" class="container product_section_container">
+		<div class="row">
+			<div class="col">
+
+				<!-- Breadcrumbs -->
+
+				<nav class="breadcrumbs d-flex flex-row align-items-center" aria-label="Ruta de navegación">
+					<ul>
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="publicaciones.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Publicaciones</a></li>
+						<li class="active" aria-current="page"><i class="fa fa-angle-right" aria-hidden="true"></i>Constitución Política de Colombia</li>
+					</ul>
+				</nav>
+
+			</div>
+		</div>
+
+		<!--
+			NOTA PARA QUIEN EDITE ESTA PLANTILLA:
+			Esta ficha muestra un ejemplo estático (Constitución Política de Colombia,
+			tomado de index.json). Para convertirla en una ficha por publicación,
+			duplica este archivo por cada documento (o cárgalo dinámicamente con JS
+			leyendo un parámetro ?id= y buscando en index.json, igual que hace
+			js/catalogo.js con el catálogo completo).
+		-->
+
+		<div class="row">
+			<div class="col-lg-5">
+				<div class="publicacion_portada" style="height:320px;">
+					<i class="fa fa-file-text-o" style="font-size:90px;"></i>
+				</div>
+			</div>
+			<div class="col-lg-7">
+				<div class="product_details">
+					<div class="product_details_title">
+						<span class="etiqueta-categoria">Derecho Constitucional</span>
+						<h1>Constitución Política de Colombia</h1>
+						<p>Texto completo de la Constitución Política, actualizado y comentado.</p>
+					</div>
+					<div class="estado-acceso-badge suscripcion" style="margin-bottom:20px;">Acceso por suscripción</div>
+
+					<div class="acciones-formato" style="padding:0 0 15px;">
+						<a class="boton-formato" href="documentos/constitucion_colombia.html">
+							<i class="fa fa-file-code-o" aria-hidden="true"></i> HTML
+						</a>
+						<a class="boton-formato" href="documentos/constitucion_colombia.epub">
+							<i class="fa fa-book" aria-hidden="true"></i> EPUB
+						</a>
+						<a class="boton-formato" href="documentos/constitucion_colombia.pdf">
+							<i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+						</a>
+					</div>
+
+					<p class="mensaje-permiso" style="padding:0;">
+						¿No tienes acceso? <a href="suscripcion.html">Ver planes de suscripción</a> o
+						<a href="login.html">inicia sesión</a> si ya tienes una cuenta.
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+	<!-- Descripción detallada -->
+
+	<div class="tabs_section_container">
+
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="tab_title">
+						<h4>Descripción</h4>
+					</div>
+					<div class="tab_text_block">
+						<p>Esta edición incluye el texto íntegro de la Constitución Política de Colombia,
+							organizado por títulos y capítulos, con una versión adaptada para lectura en
+							dispositivos móviles y notas de contexto para facilitar su consulta.</p>
+						<p>Formatos disponibles: lectura en línea (HTML, con versión móvil), descarga en
+							EPUB para lectores electrónicos, y PDF para impresión o consulta offline.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<!-- Benefit -->
+
+	<div class="benefit">
+	<div class="container">
+		<div class="row benefit_row">
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+					<div class="benefit_content">
+						<h6>Multi-formato</h6>
+						<p>Lee en HTML o descarga en EPUB y PDF</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+					<div class="benefit_content">
+						<h6>Suscripción flexible</h6>
+						<p>Acceso completo o por licencia individual</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon"><i class="fa fa-universal-access" aria-hidden="true"></i></div>
+					<div class="benefit_content">
+						<h6>Accesible</h6>
+						<p>Compatible con lectores de pantalla y teclado</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon"><i class="fa fa-life-ring" aria-hidden="true"></i></div>
+					<div class="benefit_content">
+						<h6>Soporte técnico y legal</h6>
+						<p>Te acompañamos si tienes dudas</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+						<h4>Novedades</h4>
+						<p>Entérate cuando publiquemos nuevos documentos</p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<form action="post" aria-label="Suscribirse a novedades por correo">
+						<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+							<label for="newsletter_email" class="sr-only">Correo electrónico</label>
+							<input id="newsletter_email" type="email" placeholder="Tu correo electrónico" required="required" data-error="Ingresa un correo válido.">
+							<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Suscribirme</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+						<ul class="footer_nav">
+							<li><a href="publicaciones.html">Publicaciones</a></li>
+							<li><a href="contacto.html#faq">Preguntas frecuentes</a></li>
+							<li><a href="contacto.html">Contacto</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+						<ul>
+							<li><a href="#" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#" aria-label="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							<li><a href="#" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="footer_nav_container">
+						<div class="cr">&copy; 2026 [Nombre del sitio]. Todos los derechos reservados. Plantilla visual adaptada de <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a> (ColoShop, uso libre).</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Suscripción y licencias — [Nombre del sitio]</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Planes de suscripción y compra de licencias individuales.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+<link rel="stylesheet" type="text/css" href="css/catalogo-extra.css">
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header trans_300">
+
+		<!-- Top Navigation -->
+
+		<div class="top_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-right">
+						<div class="top_nav_right">
+							<ul class="top_nav_menu">
+								<li class="account">
+									<a href="login.html">
+										<i class="fa fa-user" aria-hidden="true"></i>
+										Mi cuenta
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Main Navigation -->
+
+		<div class="main_nav_container">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-right">
+						<div class="logo_container">
+							<a href="index.html">biblio<span>teca</span></a>
+						</div>
+						<nav class="navbar" aria-label="Navegación principal">
+							<ul class="navbar_menu">
+								<li class="menu_item"><a href="index.html">Inicio</a></li>
+								<li class="menu_item"><a href="publicaciones.html">Publicaciones</a></li>
+								<li class="menu_item"><a href="suscripcion.html" aria-current="page">Suscripción</a></li>
+								<li class="menu_item"><a href="contacto.html">Contacto</a></li>
+							</ul>
+							<div class="hamburger_container">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+	<div class="fs_menu_overlay"></div>
+	<div class="hamburger_menu">
+		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		<div class="hamburger_menu_content text-right">
+			<ul class="menu_top_nav">
+				<li class="menu_item"><a href="login.html">Mi cuenta</a></li>
+				<li class="menu_item"><a href="index.html">Inicio</a></li>
+				<li class="menu_item"><a href="publicaciones.html">Publicaciones</a></li>
+				<li class="menu_item"><a href="suscripcion.html" aria-current="page">Suscripción</a></li>
+				<li class="menu_item"><a href="contacto.html">Contacto</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<main id="main-content" class="container product_section_container">
+		<div class="row">
+			<div class="col">
+				<nav class="breadcrumbs d-flex flex-row align-items-center" aria-label="Ruta de navegación">
+					<ul>
+						<li><a href="index.html">Inicio</a></li>
+						<li class="active" aria-current="page"><i class="fa fa-angle-right" aria-hidden="true"></i>Suscripción</li>
+					</ul>
+				</nav>
+				<h1>Planes de suscripción</h1>
+				<p>Elige el plan que mejor se adapte a tus necesidades, o compra publicaciones individuales.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<div class="planes-suscripcion">
+					<div class="plan-item">
+						<h3>Básico</h3>
+						<div class="precio">$4.99<span style="font-size:14px;"> /mes</span></div>
+						<p>Acceso a lectura en HTML de publicaciones libres y con licencia básica.</p>
+						<button class="red_button" style="border:none; width:100%; padding:10px;" data-plan="basico" data-precio="4.99">Elegir Básico</button>
+					</div>
+					<div class="plan-item destacado">
+						<h3>Premium</h3>
+						<div class="precio">$9.99<span style="font-size:14px;"> /mes</span></div>
+						<p>Acceso completo: HTML, EPUB y PDF de todo el catálogo, incluidas publicaciones por suscripción.</p>
+						<button class="red_button" style="border:none; width:100%; padding:10px;" data-plan="premium" data-precio="9.99">Elegir Premium</button>
+					</div>
+					<div class="plan-item">
+						<h3>Institucional</h3>
+						<div class="precio" style="font-size:20px;">Cotizar</div>
+						<p>Licencias para bibliotecas, universidades y entidades públicas.</p>
+						<a class="red_button" style="display:block; border:none; width:100%; padding:10px; text-decoration:none;" href="contacto.html">Contactar a ventas</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin-top:30px;">
+			<div class="col">
+				<h2 style="font-size:22px;">Compra individual</h2>
+				<p>¿Solo necesitas una publicación? Cómprala por licencia individual desde su ficha en el
+					<a href="publicaciones.html">catálogo</a>.</p>
+			</div>
+		</div>
+
+		<!-- ============================================================
+			 PUNTO DE INTEGRACIÓN CON PASARELA DE PAGO
+			 Sustituye el bloque de abajo por el checkout real de
+			 Stripe o PayPal:
+
+			 Stripe Checkout (recomendado para suscripciones):
+			   1. Cargar <script src="https://js.stripe.com/v3/"></script>
+			   2. Crear una sesión de Checkout en tu backend
+				  (Stripe requiere servidor; no se puede hacer solo en el navegador)
+			   3. Redirigir con stripe.redirectToCheckout({ sessionId })
+
+			 PayPal Buttons SDK (compras individuales o suscripciones):
+			   1. Cargar <script src="https://www.paypal.com/sdk/js?client-id=TU_CLIENT_ID&vault=true&intent=subscription"></script>
+			   2. Renderizar paypal.Buttons({...}).render('#contenedor-paypal')
+
+			 El formulario de abajo es solo una SIMULACIÓN visual; no
+			 procesa pagos reales.
+			 ============================================================ -->
+
+		<div class="row" id="checkout" style="margin-top:30px;">
+			<div class="col-lg-6 offset-lg-3">
+				<div class="formulario-cuenta">
+					<h2 style="font-size:20px;">Confirmar pago (simulado)</h2>
+					<form id="form-pago" novalidate>
+						<p id="resumen-plan" role="status" aria-live="polite">Selecciona un plan arriba para continuar.</p>
+						<div class="campo">
+							<label for="pago-correo">Correo electrónico</label>
+							<input type="email" id="pago-correo" name="correo" required autocomplete="email">
+						</div>
+						<!-- Aquí se montaría el botón/iframe real de Stripe o PayPal -->
+						<div id="contenedor-pasarela-pago" class="texto-ayuda" style="margin-bottom:15px;">
+							[Aquí se integra el botón de Stripe Checkout o PayPal Buttons]
+						</div>
+						<button type="submit" class="red_button" style="width:100%; padding:12px; border:none;" disabled id="boton-confirmar-pago">Confirmar suscripción</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+						<ul class="footer_nav">
+							<li><a href="publicaciones.html">Publicaciones</a></li>
+							<li><a href="contacto.html#faq">Preguntas frecuentes</a></li>
+							<li><a href="contacto.html">Contacto</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+						<ul>
+							<li><a href="#" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#" aria-label="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							<li><a href="#" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="footer_nav_container">
+						<div class="cr">&copy; 2026 [Nombre del sitio]. Todos los derechos reservados. Plantilla visual adaptada de <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a> (ColoShop, uso libre).</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var resumenPlan = document.getElementById("resumen-plan");
+		var botonConfirmar = document.getElementById("boton-confirmar-pago");
+
+		document.querySelectorAll("[data-plan]").forEach(function (boton) {
+			boton.addEventListener("click", function () {
+				var plan = boton.dataset.plan;
+				var precio = boton.dataset.precio;
+				resumenPlan.textContent = "Plan seleccionado: " + plan + " — $" + precio + "/mes. Completa tus datos para continuar.";
+				botonConfirmar.disabled = false;
+				document.getElementById("checkout").scrollIntoView({ behavior: "smooth" });
+			});
+		});
+
+		document.getElementById("form-pago").addEventListener("submit", function (e) {
+			e.preventDefault();
+			alert("Simulación: aquí se dispararía la integración real con Stripe/PayPal.");
+		});
+	});
+</script>
+</body>
+
+</html>

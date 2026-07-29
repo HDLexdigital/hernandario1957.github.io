@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Iniciar sesión — [Nombre del sitio]</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Inicia sesión o crea una cuenta para acceder a tus publicaciones.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+<link rel="stylesheet" type="text/css" href="css/catalogo-extra.css">
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header trans_300">
+
+		<!-- Top Navigation -->
+
+		<div class="top_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-right">
+						<div class="top_nav_right">
+							<ul class="top_nav_menu">
+								<li class="account">
+									<a href="login.html" aria-current="page">
+										<i class="fa fa-user" aria-hidden="true"></i>
+										Mi cuenta
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Main Navigation -->
+
+		<div class="main_nav_container">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-right">
+						<div class="logo_container">
+							<a href="index.html">biblio<span>teca</span></a>
+						</div>
+						<nav class="navbar" aria-label="Navegación principal">
+							<ul class="navbar_menu">
+								<li class="menu_item"><a href="index.html">Inicio</a></li>
+								<li class="menu_item"><a href="publicaciones.html">Publicaciones</a></li>
+								<li class="menu_item"><a href="suscripcion.html">Suscripción</a></li>
+								<li class="menu_item"><a href="contacto.html">Contacto</a></li>
+							</ul>
+							<div class="hamburger_container">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+	<div class="fs_menu_overlay"></div>
+	<div class="hamburger_menu">
+		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		<div class="hamburger_menu_content text-right">
+			<ul class="menu_top_nav">
+				<li class="menu_item"><a href="login.html">Mi cuenta</a></li>
+				<li class="menu_item"><a href="index.html">Inicio</a></li>
+				<li class="menu_item"><a href="publicaciones.html">Publicaciones</a></li>
+				<li class="menu_item"><a href="suscripcion.html">Suscripción</a></li>
+				<li class="menu_item"><a href="contacto.html">Contacto</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<main id="main-content" class="container product_section_container">
+		<div class="row">
+			<div class="col">
+				<nav class="breadcrumbs d-flex flex-row align-items-center" aria-label="Ruta de navegación">
+					<ul>
+						<li><a href="index.html">Inicio</a></li>
+						<li class="active" aria-current="page"><i class="fa fa-angle-right" aria-hidden="true"></i>Iniciar sesión</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6 offset-lg-3">
+
+				<div role="tablist" aria-label="Acceso a la cuenta" style="display:flex; gap:10px; margin-bottom:10px;">
+					<button role="tab" aria-selected="true" id="tab-login" class="red_button" aria-controls="panel-login" style="flex:1; padding:12px;">Iniciar sesión</button>
+					<button role="tab" aria-selected="false" id="tab-registro" class="red_button" aria-controls="panel-registro" style="flex:1; padding:12px; background:#fff; color:#c1392b; border:1px solid #c1392b;">Crear cuenta</button>
+				</div>
+
+				<section id="panel-login" role="tabpanel" aria-labelledby="tab-login" class="formulario-cuenta">
+					<form novalidate>
+						<div class="campo">
+							<label for="login-correo">Correo electrónico</label>
+							<input type="email" id="login-correo" name="correo" autocomplete="email" required aria-describedby="login-correo-ayuda">
+							<span class="texto-ayuda" id="login-correo-ayuda">Usa el correo con el que te registraste.</span>
+						</div>
+						<div class="campo">
+							<label for="login-clave">Contraseña</label>
+							<input type="password" id="login-clave" name="clave" autocomplete="current-password" required>
+						</div>
+						<button type="submit" class="red_button" style="width:100%; padding:12px; border:none;">Entrar</button>
+						<p style="margin-top:15px; text-align:center;"><a href="#recuperar-clave">¿Olvidaste tu contraseña?</a></p>
+					</form>
+				</section>
+
+				<section id="panel-registro" role="tabpanel" aria-labelledby="tab-registro" class="formulario-cuenta" hidden>
+					<form novalidate>
+						<div class="campo">
+							<label for="registro-nombre">Nombre completo</label>
+							<input type="text" id="registro-nombre" name="nombre" autocomplete="name" required>
+						</div>
+						<div class="campo">
+							<label for="registro-correo">Correo electrónico</label>
+							<input type="email" id="registro-correo" name="correo" autocomplete="email" required>
+						</div>
+						<div class="campo">
+							<label for="registro-clave">Contraseña</label>
+							<input type="password" id="registro-clave" name="clave" autocomplete="new-password" required aria-describedby="registro-clave-ayuda">
+							<span class="texto-ayuda" id="registro-clave-ayuda">Mínimo 8 caracteres, incluye letras y números.</span>
+						</div>
+						<button type="submit" class="red_button" style="width:100%; padding:12px; border:none;">Crear cuenta</button>
+					</form>
+				</section>
+
+				<!-- Estados de acceso posibles tras iniciar sesión (ejemplo visual) -->
+				<div style="margin-top:40px;">
+					<h2 style="font-size:20px;">Estados de acceso</h2>
+					<p><span class="estado-acceso-badge suscripcion">Acceso por suscripción</span> — el usuario tiene un plan activo.</p>
+					<p><span class="estado-acceso-badge licencia_individual">Acceso por licencia individual</span> — el usuario compró publicaciones puntuales.</p>
+					<p class="mensaje-permiso" style="padding:0;">Ejemplo de mensaje de permiso denegado: "No tienes acceso a esta publicación. Suscríbete o compra una licencia individual para continuar."</p>
+				</div>
+
+				<!--
+					NOTA: este formulario es una SIMULACIÓN de interfaz. No autentica
+					usuarios reales. Conéctalo a tu proveedor de autenticación real
+					(Firebase Auth, Auth0, tu propio backend, etc.) antes de publicar.
+				-->
+			</div>
+		</div>
+	</main>
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+						<ul class="footer_nav">
+							<li><a href="publicaciones.html">Publicaciones</a></li>
+							<li><a href="contacto.html#faq">Preguntas frecuentes</a></li>
+							<li><a href="contacto.html">Contacto</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+						<ul>
+							<li><a href="#" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#" aria-label="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							<li><a href="#" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="footer_nav_container">
+						<div class="cr">&copy; 2026 [Nombre del sitio]. Todos los derechos reservados. Plantilla visual adaptada de <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a> (ColoShop, uso libre).</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+<script>
+	// Alternancia accesible entre pestañas de login / registro
+	document.addEventListener("DOMContentLoaded", function () {
+		var tabLogin = document.getElementById("tab-login");
+		var tabRegistro = document.getElementById("tab-registro");
+		var panelLogin = document.getElementById("panel-login");
+		var panelRegistro = document.getElementById("panel-registro");
+
+		function activar(tabActivo, tabInactivo, panelActivo, panelInactivo, estiloActivo, estiloInactivo) {
+			tabActivo.setAttribute("aria-selected", "true");
+			tabInactivo.setAttribute("aria-selected", "false");
+			panelActivo.hidden = false;
+			panelInactivo.hidden = true;
+			tabActivo.style.background = "#c1392b";
+			tabActivo.style.color = "#fff";
+			tabActivo.style.border = "none";
+			tabInactivo.style.background = "#fff";
+			tabInactivo.style.color = "#c1392b";
+			tabInactivo.style.border = "1px solid #c1392b";
+		}
+
+		tabLogin.addEventListener("click", function () {
+			activar(tabLogin, tabRegistro, panelLogin, panelRegistro);
+		});
+		tabRegistro.addEventListener("click", function () {
+			activar(tabRegistro, tabLogin, panelRegistro, panelLogin);
+		});
+	});
+</script>
+</body>
+
+</html>
