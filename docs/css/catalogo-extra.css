@@ -257,3 +257,16 @@ input:focus-visible,
   max-width: 100%;
   height: auto;
 }
+.top-bar {
+  background-color: #000; /* franja negra */
+}
+
+.top-bar .logo img {
+  height: 40px; /* ajusta según tu preferencia */
+}
+
+.top-bar .account-link {
+  color: #fff; /* texto blanco para contraste */
+  text-decoration: none;
+  font-weight: 600;
+}
