@@ -262,7 +262,8 @@ input:focus-visible,
 }
 
 .top-bar .logo img {
-  height: 40px; /* ajusta según tu preferencia */
+  height: 20px; /* ajusta según tu preferencia */
+     filter: brightness(0) invert(1); /* efecto blanco */
 }
 
 .top-bar .account-link {
