@@ -254,20 +254,21 @@ input:focus-visible,
   .acciones-formato { flex-direction: column; }
 }
 .logo img {
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
 }
 .top-bar {
   background-color: #000; /* franja negra */
 }
 
-.top-bar .logo img {
-  height: 20px; /* ajusta según tu preferencia */
-     filter: brightness(0) invert(1); /* efecto blanco */
+.top-bar .logo img.logo-blanco {
+  height: 40px;
+  filter: brightness(0) invert(1); /* convierte el logo a blanco */
 }
 
 .top-bar .account-link {
-  color: #fff; /* texto blanco para contraste */
+  color: #fff; /* texto blanco */
   text-decoration: none;
   font-weight: 600;
 }
+
