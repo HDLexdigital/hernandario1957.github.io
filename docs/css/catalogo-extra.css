@@ -253,3 +253,7 @@ input:focus-visible,
   .planes-suscripcion { grid-template-columns: 1fr; }
   .acciones-formato { flex-direction: column; }
 }
+.logo img {
+  max-width: 100%;
+  height: auto;
+}
