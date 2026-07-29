@@ -267,11 +267,11 @@ input:focus-visible,
 }
 
 .top-bar .account-link {
-  color: #fff; /* texto blanco */
+  color: #000; /* texto blanco */
   text-decoration: none;
   font-weight: 600;
 }
 
 body {
-    background-color: white; /* o #f5f5f5 */
+    background-color: #f5f5f5; /* o #f5f5f5 */
 }
