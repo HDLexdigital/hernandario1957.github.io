@@ -1,0 +1,3 @@
+TIPO: titulo | PATRON: ^TÍTULO +[IVXLCDM]+\.
+TIPO: articulo | PATRON: ^Artículo \d+\.
+TIPO: articulo | PATRON: ^Artículo \d+-\u\.
