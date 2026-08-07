@@ -1,0 +1,16 @@
+steps:
+# Paso 1: Construir la imagen
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/lexdigitalhd', '.']
+
+# Paso 2: Subir la imagen al Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/lexdigitalhd']
+
+# Paso 3: Desplegar en Cloud Run
+- name: 'gcr.io/google-cloud-sdk'
+  args: ['gcloud', 'run', 'deploy', 'lexdigitalhd',
+         '--image', 'gcr.io/$PROJECT_ID/lexdigitalhd',
+         '--region', 'us-central1',
+         '--platform', 'managed',
+         '--allow-unauthenticated']
