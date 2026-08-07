@@ -15,3 +15,7 @@ steps:
          '--platform', 'managed',
          '--allow-unauthenticated']
 logs_bucket: gs://lexdigitalhd-build-logs
+logs_bucket: gs://lexdigitalhd-build-logs
+options:
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+logging: CLOUD_LOGGING_ONLY
