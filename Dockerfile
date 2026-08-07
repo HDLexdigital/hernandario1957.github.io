@@ -1,5 +1,3 @@
-FROM node:18-alpine
-WORKDIR /app
-COPY . .
-RUN npm install
-CMD ["npm", "start"]
+docker build \
+    -t gcr.io/lexdigitalhd/github.com/hdlexdigital/hernandario1957.github.io:$COMMIT_SHA \
+    .
