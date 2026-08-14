@@ -1,17 +1,23 @@
 /**
  * Constructor XHTML para LexDigitalHD
+ * Contrato C.42: Serializador estricto (Dumb Pipe).
  */
 
 'use strict';
 
-const { PresentationResolver } = require('../resolucion/PresentationResolver');
-const presentationResolver = new PresentationResolver();
-
 function constructorXHTML(nodos) {
     if (!nodos) return '';
 
+    if (!nodos.tipoNodo && Array.isArray(nodos.contenido)) {
+        return nodos.contenido
+            .map(nodo => renderizarNodo(nodo))
+            .join('');
+    }
+
     if (Array.isArray(nodos)) {
-        return nodos.map(nodo => renderizarNodo(nodo)).join('');
+        return nodos
+            .map(nodo => renderizarNodo(nodo))
+            .join('');
     }
 
     return renderizarNodo(nodos);
@@ -19,43 +25,52 @@ function constructorXHTML(nodos) {
 
 function renderizarNodo(nodo) {
     if (!nodo || typeof nodo !== 'object') {
-        return typeof nodo === 'string' ? nodo : '';
+        return typeof nodo === 'string' ? escapeHtml(nodo) : '';
     }
 
     const tag = nodo.resolvedTag || 'p';
 
-    // Construcción limpia de la clase final combinando presentación y semántica
-    let classAttr = '';
-
-    if (nodo.resolvedClass && typeof nodo.resolvedClass === 'string') {
-        classAttr = nodo.resolvedClass.trim();
-    } else {
-        const presClass = presentationResolver.resolve(nodo) || '';
-        const semClass = nodo.claseLegal || nodo.claseSemantica || '';
-        classAttr = [presClass, semClass].filter(Boolean).join(' ').trim();
-    }
+    const classAttr =
+        nodo.resolvedClass &&
+        typeof nodo.resolvedClass === 'string'
+            ? nodo.resolvedClass.trim()
+            : '';
 
     let contenidoHtml = '';
 
-    if (nodo.texto && typeof nodo.texto === 'string') {
+    // CORRECCIÓN QUIRÚRGICA: La estructura AST tiene prioridad sobre el texto plano.
+    if (Array.isArray(nodo.contenido)) {
+        contenidoHtml = nodo.contenido
+            .map(hijo => renderizarNodo(hijo))
+            .join('');
+    } else if (typeof nodo.texto === 'string') {
         contenidoHtml = escapeHtml(nodo.texto);
     }
 
-    if (nodo.contenido && Array.isArray(nodo.contenido)) {
-        contenidoHtml = nodo.contenido.map(hijo => renderizarNodo(hijo)).join('');
-    }
-
-    // Soporte robusto y transparente de trazabilidad efímera (C.17.8)
     const traceAttr =
-        typeof nodo.__traceId === 'string' && nodo.__traceId.trim()
+        typeof nodo.__traceId === 'string' &&
+        nodo.__traceId.trim()
             ? ` data-trace="${escapeHtml(nodo.__traceId.trim())}"`
             : '';
 
-    if (!classAttr) {
-        return `<${tag}${traceAttr}>${contenidoHtml}</${tag}>\n`;
-    }
+    const claseHtml = classAttr
+        ? ` class="${escapeHtml(classAttr)}"`
+        : '';
 
-    return `<${tag}${traceAttr} class="${escapeHtml(classAttr)}">${contenidoHtml}</${tag}>\n`;
+    const isInline = [
+        'span',
+        'a',
+        'b',
+        'i',
+        'em',
+        'strong',
+        'sup',
+        'sub'
+    ].includes(tag);
+
+    const sufijo = isInline ? '' : '\n';
+
+    return `<${tag}${traceAttr}${claseHtml}>${contenidoHtml}</${tag}>${sufijo}`;
 }
 
 function escapeHtml(str) {

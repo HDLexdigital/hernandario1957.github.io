@@ -1,0 +1,247 @@
+PS H:\LexDigital\Recursos\AUTOMATIZAR INDESIGN\proyecto-lexdigital_modular> Get-Content .\src\index.js
+const { performance } = require('perf_hooks');
+const { normalizarJSON } = require('./core/validadorJson');
+const { aplicarReglasJuridicas } = require('./core/clasificadorLegal');
+const { construirEstructura } = require('./core/constructorXHTML');
+const { procesarDOM } = require('./core/postProcesadorDom');
+const { Logger } = require('./utils/logger');
+const { PipelineError, ValidationError } = require('./utils/errores');
+const { Metricas } = require('./utils/metricas');
+const { validarEntrada } = require('./utils/validadores');
+const { CONFIGURACION } = require('./config/default');
+const { validarDocumento } = require('./core/validators/DocumentSchemaValidator');
+
+const logger = new Logger('compilarLexmotor');
+
+async function compilarLexmotor(
+    jsonCrudo,
+    nombreBase,
+    nombreCSS,
+    opciones = {}
+) {
+    if (opciones.debug) {
+        logger.setNivel('debug');
+    }
+
+    const metricas = new Metricas('Pipeline Completo');
+    const tiempoInicio = performance.now();
+
+   try {
+        logger.info('Iniciando compilaciÃ³n de LexDigital', {
+            nombreBase,
+            nombreCSS,
+            debug: opciones.debug
+        });
+
+        // ValidaciÃ³n robusta de entrada Ãºnica
+        if (jsonCrudo === null || typeof jsonCrudo !== 'object') {
+            throw new TypeError(
+                `jsonCrudo debe ser un objeto, se recibiÃ³: ${
+                    jsonCrudo === null ? 'null' : typeof jsonCrudo
+                }`
+            );
+        }
+        if (typeof nombreBase !== 'string' || nombreBase.trim() === '') {
+            throw new TypeError('nombreBase debe ser un string no vacÃ­o');
+        }
+        if (typeof nombreCSS !== 'string' || nombreCSS.trim() === '') {
+            throw new TypeError('nombreCSS debe ser un string no vacÃ­o');
+        }
+        if (typeof opciones !== 'object' || opciones === null) {
+            throw new TypeError('opciones debe ser un objeto');
+        }
+
+        const config = {
+            debug: opciones.debug ?? false,
+            timeoutMs: (opciones.timeoutMs ?? CONFIGURACION.TIMEOUT_TOTAL) || 30000,
+            cache: opciones.cache ?? true,
+            validarSalida: opciones.validarSalida ?? true
+        };
+
+        logger.debug('Opciones de configuraciÃ³n', config);
+
+        logger.info('â–¶ Fase 1: ValidaciÃ³n y NormalizaciÃ³n JSON');
+        const tiempoFase1 = performance.now();
+        try {
+            validarEntrada(jsonCrudo, 'jsonCrudo');
+                        validarDocumento(jsonCrudo);
+            const jsonEstructurado = normalizarJSON(jsonCrudo, nombreBase);
+
+            if (!jsonEstructurado || !jsonEstructurado.tokens) {
+                throw new ValidationError('normalizarJSON no retornÃ³ estructura esperada');
+            }
+
+            const duracionFase1 = performance.now() - tiempoFase1;
+            metricas.registrarFase('ValidaciÃ³n', duracionFase1);
+            logger.info('âœ“ Fase 1 completa', {
+                tokens: jsonEstructurado.tokens.length,
+                duracion: `${duracionFase1.toFixed(2)}ms`
+            });
+
+            logger.info('â–¶ Fase 2: AplicaciÃ³n de Reglas JurÃ­dicas');
+            const tiempoFase2 = performance.now();
+            try {
+                const tokensClasificados = aplicarReglasJuridicas(jsonEstructurado.tokens);
+
+                if (!Array.isArray(tokensClasificados)) {
+                    throw new ValidationError('aplicarReglasJuridicas no retornÃ³ array');
+                }
+
+                const duracionFase2 = performance.now() - tiempoFase2;
+                metricas.registrarFase('ClasificaciÃ³n', duracionFase2);
+                logger.info('âœ“ Fase 2 completa', {
+                    tokensClasificados: tokensClasificados.length,
+                    duracion: `${duracionFase2.toFixed(2)}ms`
+                });
+
+                logger.info('â–¶ Fase 3: ConstrucciÃ³n de Estructura XHTML');
+                const tiempoFase3 = performance.now();
+                try {
+                    const htmlBase = construirEstructura(
+                        tokensClasificados,
+                        jsonEstructurado.documento,
+                        nombreCSS
+                    );
+
+                    if (typeof htmlBase !== 'string' || htmlBase.length === 0) {
+                        throw new ValidationError('construirEstructura retornÃ³ string vacÃ­o o invÃ¡lido');
+                    }
+
+                    const duracionFase3 = performance.now() - tiempoFase3;
+                    metricas.registrarFase('ConstrucciÃ³n', duracionFase3);
+                    logger.info('âœ“ Fase 3 completa', {
+                        tamanioHTML: `${(htmlBase.length / 1024).toFixed(2)}KB`,
+                        duracion: `${duracionFase3.toFixed(2)}ms`
+                    });
+
+                    logger.info('â–¶ Fase 4: Post-Procesamiento DOM');
+                    const tiempoFase4 = performance.now();
+                    try {
+                        const xhtmlFinal = procesarDOM(htmlBase);
+
+                        if (typeof xhtmlFinal !== 'string' || xhtmlFinal.length === 0) {
+                            throw new ValidationError('procesarDOM retornÃ³ string vacÃ­o o invÃ¡lido');
+                        }
+
+                        const duracionFase4 = performance.now() - tiempoFase4;
+                        metricas.registrarFase('PostProcesamiento', duracionFase4);
+                        logger.info('âœ“ Fase 4 completa', {
+                            tamanioXHTML: `${(xhtmlFinal.length / 1024).toFixed(2)}KB`,
+                            duracion: `${duracionFase4.toFixed(2)}ms`
+                        });
+
+                        if (config.validarSalida) {
+                            logger.info('Validando salida final...');
+                            if (!xhtmlFinal.includes('<!DOCTYPE') && !xhtmlFinal.includes('<html')) {
+                                throw new ValidationError('XHTML final no contiene estructura HTML vÃ¡lida');
+                            }
+                            logger.debug('âœ“ ValidaciÃ³n de salida exitosa');
+                        }
+
+                        const tiempoTotal = performance.now() - tiempoInicio;
+                        metricas.registrarFaseTotal(tiempoTotal);
+
+                        const resultado = {
+                            jsonOficial: jsonEstructurado,
+                            xhtml: xhtmlFinal,
+                            metadatos: {
+                                nombre: nombreBase,
+                                version: '1.0.0',
+                                timestamp: new Date().toISOString(),
+                                tiempoTotal: parseFloat(tiempoTotal.toFixed(2)),
+                                fases: {
+                                    validacion: parseFloat(metricas.obtenerDuracionFase('ValidaciÃ³n').toFixed(2)),
+                                    clasificacion: parseFloat(metricas.obtenerDuracionFase('ClasificaciÃ³n').toFixed(2)),
+                                    construccion: parseFloat(metricas.obtenerDuracionFase('ConstrucciÃ³n').toFixed(2)),
+                                    postprocesamiento: parseFloat(metricas.obtenerDuracionFase('PostProcesamiento').toFixed(2))
+                                }
+                            }
+                        };
+
+                        logger.info('âœ… Pipeline completado exitosamente', {
+                            tiempoTotal: `${tiempoTotal.toFixed(2)}ms`,
+                            velocidad: `${((jsonCrudo.contenido?.length || 0) / (tiempoTotal / 1000)).toFixed(2)} elementos/seg`
+                        });
+
+                        return resultado;
+
+                    } catch (errorFase4) {
+                        throw new PipelineError('Post-procesamiento DOM fallÃ³', { fase: 4, causa: errorFase4 });
+                    }
+                } catch (errorFase3) {
+                    throw new PipelineError('ConstrucciÃ³n XHTML fallÃ³', { fase: 3, causa: errorFase3 });
+                }
+            } catch (errorFase2) {
+                throw new PipelineError('ClasificaciÃ³n jurÃ­dica fallÃ³', { fase: 2, causa: errorFase2 });
+            }
+        } catch (errorFase1) {
+                        throw new PipelineError(
+        `ValidaciÃ³n y normalizaciÃ³n fallÃ³: ${errorFase1.message}`,
+        {
+            fase: 1,
+            causa: errorFase1
+        }
+    );
+}
+        } catch (error) {
+
+                logger.error(
+                        'âŒ Error en el pipeline',
+                        {
+                                error: error.message,
+                                tipo: error.constructor.name
+                        }
+                );
+
+
+                if (
+                        error instanceof ValidationError ||
+                        error instanceof TypeError
+                ) {
+                        throw error;
+                }
+
+
+                throw new PipelineError(
+                        `CompilaciÃ³n fallÃ³: ${error.message}`,
+                        {
+                                original: error
+                        }
+                );
+        }
+
+function validarCompatibilidad(jsonCrudo) {
+    const resultado = {
+        esValido: false,
+        errores: [],
+        advertencias: [],
+        estadisticas: {}
+    };
+    try {
+        if (!jsonCrudo || typeof jsonCrudo !== 'object') {
+            resultado.errores.push('Entrada no es un objeto');
+            return resultado;
+        }
+        if (!jsonCrudo.documento) {
+            resultado.errores.push('Campo "documento" faltante');
+        }
+        if (!Array.isArray(jsonCrudo.contenido)) {
+            resultado.errores.push('Campo "contenido" no es un array');
+        } else {
+            resultado.estadisticas.elementos = jsonCrudo.contenido.length;
+        }
+        resultado.esValido = resultado.errores.length === 0;
+    } catch (error) {
+        resultado.errores.push(`Error en validaciÃ³n: ${error.message}`);
+    }
+    return resultado;
+}
+
+module.exports = {
+    compilarLexmotor,
+    validarCompatibilidad,
+    PipelineError,
+    ValidationError,
+    Logger,
+    validarEntrada
+};

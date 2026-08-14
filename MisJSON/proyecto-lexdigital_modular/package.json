@@ -1,0 +1,12 @@
+{
+  "name": "proyecto-lexdigital",
+  "version": "1.0.0",
+  "description": "Motor modular para procesamiento de textos jurídicos",
+  "main": "index.js",
+  "scripts": {
+    "start": "node interfaces/cli.js"
+  },
+  "dependencies": {
+    "jsdom": "^24.0.0"
+  }
+}

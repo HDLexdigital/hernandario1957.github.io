@@ -1,0 +1,25 @@
+{
+  "manifestVersion": 5,
+  "id": "com.lexmotor.uxp",
+  "name": "Lexmotor Compiler",
+  "version": "1.0.0",
+  "main": "index.html",
+  "host": {
+    "app": "ID",
+    "minVersion": "21.4.1"
+  },
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "lexmotorPanel",
+      "label": "Lexmotor Compiler",
+      "minimumSize": {
+        "width": 300,
+        "height": 400
+      }
+    }
+  ],
+  "requiredPermissions": {
+    "localFileSystem": "fullAccess"
+  }
+}
