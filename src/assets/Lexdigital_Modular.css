@@ -1,0 +1,403 @@
+/* =======================================================
+   CSS MULTIPLATAFORMA (HTML5, EPUB3, PDF ACCESIBLE)
+   Generado desde InDesign: Constitución-Colombia_a_preparar.indd
+   ======================================================= */
+
+:root {
+	font-size: 12pt;
+}
+
+/* --- ESTILOS DE PÁRRAFO --- */
+
+.P01_PARRAFO_BASICO {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 11pt;
+	font-size: 0.917rem;
+	color: #000000;
+	text-align: justify;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P01_BODY_BASE {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	margin-top: 0.292em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P01_BODY_CONT {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	text-indent: 0.500em;
+	margin-top: 0.125em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P01_BODY_FIRST {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P01_BODY_NO_SENTENCE {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	margin-top: 0.292em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P07_INDENT_L1 {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	margin-left: 1.117em;
+	text-indent: -0.647em;
+	margin-top: 0.125em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P07_INDENT_L1_NONUM {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	margin-left: 1.117em;
+	text-indent: -0.000em;
+	margin-top: 0.125em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P07_INDENT_L2 {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	margin-left: 1.705em;
+	text-indent: -0.559em;
+	margin-top: 0.125em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P02_TITLE_BASE {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	font-size: 15pt;
+	font-size: 1.250rem;
+	color: #000000;
+	text-align: center;
+	margin-top: 0.292em;
+	orphans: 2;
+	widows: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P02_TITLE_MAIN {
+	font-family: 'Georgia Pro', sans-serif;
+	font-weight: bold;
+	font-size: 16pt;
+	font-size: 1.333rem;
+	color: #333333;
+	text-align: center;
+	margin-top: 0.417em;
+	margin-bottom: 0.083em;
+	orphans: 2;
+	widows: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P02_TITLE_CHAPTER {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #333333;
+	text-align: center;
+	margin-top: 0.333em;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P02_TITLE_PART {
+	font-family: 'Georgia Pro', sans-serif;
+	font-weight: bold;
+	font-size: 24pt;
+	font-size: 2.000rem;
+	color: #000000;
+	text-align: center;
+	margin-left: 0.167em;
+	margin-top: 0.417em;
+	margin-bottom: 0.083em;
+	orphans: 2;
+	widows: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P02_TITLE_BOOK_SUB {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	font-size: 16pt;
+	font-size: 1.333rem;
+	color: #333333;
+	text-align: center;
+	margin-bottom: 0.833em;
+	orphans: 2;
+	widows: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P02_TITLE_BOOK {
+	font-family: 'Georgia Pro', sans-serif;
+	font-weight: bold;
+	font-size: 20pt;
+	font-size: 1.667rem;
+	color: #333333;
+	text-align: center;
+	margin-top: 0.417em;
+	margin-bottom: 0.833em;
+	orphans: 2;
+	widows: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P03_CENTER_NORMAL {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: center;
+	margin-top: 0.147em;
+	margin-bottom: 0.147em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P03_CENTER_BOLD {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: center;
+	margin-top: 0.147em;
+	margin-bottom: 0.147em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P03_OFFICIAL_NAME {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: center;
+	margin-bottom: 0.250em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P03_OFFICIAL_ROLE {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: center;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P05_IDX_ART {
+	font-family: 'Minion Pro', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	margin-bottom: 0.083em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P08_GLS-ART {
+	font-family: 'Liberation Sans Narrow', sans-serif;
+	font-weight: bold;
+	font-size: 12pt;
+	font-size: 1.000rem;
+	color: #333333;
+	text-align: left;
+	margin-bottom: 0.167em;
+	orphans: 2;
+	widows: 2;
+	page-break-inside: avoid;
+	break-inside: avoid;
+	page-break-after: avoid;
+	break-after: avoid;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P08_GLS_TERM_DD {
+	font-family: 'Liberation Sans Narrow', sans-serif;
+	font-size: 12pt;
+	font-size: 1.000rem;
+	color: #000000;
+	text-align: justify;
+	orphans: 2;
+	widows: 2;
+	page-break-inside: avoid;
+	break-inside: avoid;
+	page-break-after: avoid;
+	break-after: avoid;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P08_GLS_TERM_DT {
+	font-family: 'Liberation Sans Narrow', sans-serif;
+	font-weight: bold;
+	font-size: 12pt;
+	font-size: 1.000rem;
+	color: #333333;
+	text-align: justify;
+	orphans: 2;
+	widows: 2;
+	page-break-inside: avoid;
+	break-inside: avoid;
+	page-break-after: avoid;
+	break-after: avoid;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+/* --- ESTILOS DE CARÁCTER --- */
+
+.C00_NORMAL {
+	font-family: 'Liberation Serif', sans-serif;
+}
+
+.C01_BOLD {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	color: #333333;
+}
+
+.C02_ITALIC {
+	font-family: 'Liberation Serif', sans-serif;
+	font-style: italic;
+	color: #333333;
+}
+
+.C05_HIPERLINK_CHAR {
+	color: #333333;
+}
+
+.C12_CROSSREF {
+	font-weight: bold;
+	color: #333333;
+}
+
+.C03_SUPERSCRIPT {
+	font-family: 'Liberation Serif', sans-serif;
+	color: #000000;
+}
+
+.C11_HYPERLINK {
+	color: #333333;
+}
+
+.C13_TABNUM_CONTENT {
+	font-family: 'Liberation Serif', sans-serif;
+}
+
+.C14_ROMAN_UPPER {
+}
+
+.C15_NARROW_90 {
+	font-family: 'Liberation Serif', sans-serif;
+}
+
+.DT_Termino_Glosario {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	color: #000000;
+}
+
+.SYS_FIX_ARTICLE_NUMBER {
+	color: #000000;
+}
+

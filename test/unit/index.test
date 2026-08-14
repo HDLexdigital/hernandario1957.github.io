@@ -1,0 +1,34 @@
+const { compilarLexmotor, validarCompatibilidad } = require('../../src/index');
+
+describe('compilarLexmotor', () => {
+    test('debe retornar resultado con estructura correcta', async () => {
+        const entrada = {
+            documento: { titulo: 'Test' },
+            contenido: [{ texto: 'Contenido' }]
+        };
+        
+        const resultado = await compilarLexmotor(entrada, 'test', 'test.css');
+        
+        expect(resultado).toHaveProperty('jsonOficial');
+        expect(resultado).toHaveProperty('xhtml');
+        expect(resultado).toHaveProperty('metadatos');
+    });
+
+    test('debe lanzar error con entrada inválida', async () => {
+        await expect(
+            compilarLexmotor(null, 'test', 'test.css')
+        ).rejects.toThrow('jsonCrudo debe ser un objeto');
+    });
+});
+
+describe('validarCompatibilidad', () => {
+    test('debe validar documento correcto', () => {
+        const entrada = {
+            documento: { titulo: 'Test' },
+            contenido: []
+        };
+        
+        const resultado = validarCompatibilidad(entrada);
+        expect(resultado.esValido).toBe(true);
+    });
+});

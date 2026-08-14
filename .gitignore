@@ -1,0 +1,13 @@
+﻿node_modules/
+coverage/
+logs/
+*.log
+.tmp.driveupload/
+salidaXHTML/
+salidaTestCLI/
+auditoria-exportada/
+*.bak
+fragmento.html
+index.xhtml
+jest-config-resolved.json
+estructura-proyecto.txt
