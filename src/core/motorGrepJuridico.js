@@ -1,9 +1,10 @@
+'use strict';
+
 /**
  * core/motorGrepJuridico.js
- * Motor centralizado que lee dinámicamente las reglas GREP sincronizadas desde InDesign.
+ * Motor centralizado y puro de evaluación GREP jurídica.
+ * Totalmente agnóstico del filesystem, rutas y disco duro.
  */
-const fs = require('fs');
-const path = require('path');
 
 // 1. Reglas base inquebrantables del sistema jurídico
 const REGLAS_BASE = [
@@ -82,57 +83,17 @@ const REGLAS_BASE = [
 ];
 
 /**
- * Función que lee dinámicamente el archivo .txt exportado por InDesign
- * desde la ruta donde el usuario decidió guardarlo.
+ * Evalúa un token de texto utilizando un conjunto de reglas activas inyectadas en memoria.
+ * 
+ * @param {string} texto - Texto del token a evaluar.
+ * @param {Array} [reglasDinamicas=[]] - Opcional: reglas externas cargadas por la infraestructura.
+ * @returns {Object} Resultado de la clasificación semántica.
  */
-function cargarReglasDinamicas() {
-    let reglasDinamicas = [];
-    
-    // Ruta relativa a la carpeta 'config/' dentro de tu proyecto modular
-    // (Asegúrate de guardar allí el .txt cuando el script de InDesign te pregunte dónde ubicarlo)
-    const rutaTxtPersonalizada = path.join(__dirname, '../config/ReglasGrepJuridicas.txt');
-
-    if (fs.existsSync(rutaTxtPersonalizada)) {
-        try {
-            const contenido = fs.readFileSync(rutaTxtPersonalizada, 'utf-8');
-            const lineas = contenido.split(/\r?\n/);
-
-            lineas.forEach(linea => {
-                if (linea.trim() !== '') {
-                    const partes = linea.split('|');
-                    if (partes.length === 2) {
-                        const tipoExtraido = partes[0].replace('TIPO:', '').trim();
-                        let patronTexto = partes[1].replace('PATRON:', '').trim();
-
-                        let flags = '';
-                        if (patronTexto.endsWith('/i')) {
-                            flags = 'i';
-                            patronTexto = patronTexto.slice(1, -2);
-                        } else if (patronTexto.startsWith('/') && patronTexto.endsWith('/')) {
-                            patronTexto = patronTexto.slice(1, -1);
-                        }
-
-                        reglasDinamicas.push({
-                            patron: new RegExp(patronTexto, flags),
-                            tipo: tipoExtraido,
-                            epubType: 'notice',
-                            nivelHtml: 6
-                        });
-                    }
-                }
-            });
-        } catch (e) {
-            console.warn('⚠️ Advertencia al leer reglas dinámicas:', e.message);
-        }
-    }
-
-    // Retorna la unión de las reglas dinámicas + las reglas base
-    return [...reglasDinamicas, ...REGLAS_BASE];
-}
-
-function evaluarTokenConGrep(texto) {
+function evaluarTokenConGrep(texto, reglasDinamicas = []) {
     const textoLimpio = (texto || '').trim();
-    const reglasActivas = cargarReglasDinamicas(); // Carga sincronizada al vuelo
+    
+    // Unimos las reglas dinámicas inyectadas al frente y las base al fondo
+    const reglasActivas = [...reglasDinamicas, ...REGLAS_BASE];
 
     for (const regla of reglasActivas) {
         if (regla.patron.test(textoLimpio)) {
@@ -153,4 +114,4 @@ function evaluarTokenConGrep(texto) {
     };
 }
 
-module.exports = { evaluarTokenConGrep };
+module.exports = { evaluarTokenConGrep, REGLAS_BASE };

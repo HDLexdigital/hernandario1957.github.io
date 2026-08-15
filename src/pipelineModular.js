@@ -20,8 +20,13 @@ const { Metricas } = require('./utils/metricas');
  * @returns {Object} - El artefacto canónico { jsonOficial, xhtml, metadatos }.
  */
 function ejecutarPipelineModular(jsonCrudo, opciones = {}) {
-    if (!jsonCrudo || typeof jsonCrudo !== 'object') {
-        throw new Error("El orquestador requiere un jsonCrudo válido.");
+	if (!jsonCrudo || typeof jsonCrudo !== 'object' || Array.isArray(jsonCrudo)) {
+        throw new Error("ERR_INVALID_INPUT: El orquestador requiere un jsonCrudo válido.");
+    }
+
+    // Guardia estructural para bloquear objetos arbitrarios anómalos (ej. { foo: 'bar' })
+    if (!jsonCrudo.tokens && !jsonCrudo.contenido && !jsonCrudo.documento) {
+        throw new Error("ERR_INVALID_INPUT: El jsonCrudo carece de una estructura semántica válida.");
     }
 
     const metricas = new Metricas('Pipeline Modular');
