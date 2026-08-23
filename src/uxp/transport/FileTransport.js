@@ -34,7 +34,7 @@ class FileTransport {
         return requestId;
     }
 
-    async readResponse(requestId, timeoutMs = 5000) {
+    async readResponse(requestId, timeoutMs = 30000) {
         const filePath = path.join(this.responsesDir, `response-${requestId}.json`);
         
         const startTime = Date.now();

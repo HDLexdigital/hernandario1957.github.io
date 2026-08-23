@@ -1,0 +1,44 @@
+{
+  "corpusId": "CORPUS_REPRESENTATIVE_022",
+  "version": "1.0.0",
+  "description": "Corpus jurídico representativo con tablas, notas al pie, cross-references y accesibilidad EPUB3/WCAG",
+  "nodes": [
+    {
+      "nodeId": "node_sec_01",
+      "type": "CHAPTER",
+      "title": "CAPÍTULO I: DEL RÉGIMEN PATRIMONIAL",
+      "style": "Lex_Chapter_Style"
+    },
+    {
+      "nodeId": "node_art_102",
+      "type": "ARTICLE",
+      "number": "102",
+      "text": "Las obligaciones financieras del Estado se regirán por las tablas de amortización adjuntas.",
+      "style": "Lex_Article_Style",
+      "tableReference": {
+        "tableId": "tbl_amortization_01",
+        "headers": ["Concepto", "Plazo", "Tasa"],
+        "rows": [
+          ["Deuda Interna", "5 años", "4.5%"],
+          ["Deuda Externa", "10 años", "6.2%"]
+        ]
+      },
+      "footnotes": [
+        {
+          "footnoteId": "fn_102_1",
+          "marker": "1",
+          "text": "Modificado por la Ley de Estabilidad Fiscal de 2024."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "targetFormats": ["INDD", "PDF", "EPUB3"],
+    "accessibilityProfile": "WCAG_2.1_AA",
+    "exportTags": {
+      "Heading1": "H1",
+      "BodyText": "P",
+      "Table": "TABLE"
+    }
+  }
+}

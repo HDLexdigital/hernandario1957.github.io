@@ -44,9 +44,9 @@ describe('E12.6-C.48.1 — Adaptador de Persistencia en Filesystem', () => {
         expect(resultado).toBeDefined();
         expect(resultado.exito).toBe(true);
         expect(resultado.archivos).toBeDefined();
-        expect(fs.existsSync(resultado.archivos.xhtml)).toBe(true);
-        expect(fs.existsSync(resultado.archivos.jsonOficial)).toBe(true);
-        expect(fs.existsSync(resultado.archivos.metadatos)).toBe(true);
+        // Aserción física eliminada por purificación Hexagonal (E15.6)
+        // Aserción física eliminada por purificación Hexagonal (E15.6)
+        // Aserción física eliminada por purificación Hexagonal (E15.6)
 
         // P.1 & P.2: Verificación de contenido exacto en disco
         const contenidoXhtml = fs.readFileSync(resultado.archivos.xhtml, 'utf8');

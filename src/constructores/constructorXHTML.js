@@ -1,85 +1,89 @@
-/**
- * Constructor XHTML para LexDigitalHD
- * Contrato C.42: Serializador estricto (Dumb Pipe).
- */
-
 'use strict';
 
-function constructorXHTML(nodos) {
-    if (!nodos) return '';
-
-    if (!nodos.tipoNodo && Array.isArray(nodos.contenido)) {
-        return nodos.contenido
-            .map(nodo => renderizarNodo(nodo))
-            .join('');
-    }
-
-    if (Array.isArray(nodos)) {
-        return nodos
-            .map(nodo => renderizarNodo(nodo))
-            .join('');
-    }
-
-    return renderizarNodo(nodos);
-}
-
-function renderizarNodo(nodo) {
-    if (!nodo || typeof nodo !== 'object') {
-        return typeof nodo === 'string' ? escapeHtml(nodo) : '';
-    }
-
-    const tag = nodo.resolvedTag || 'p';
-
-    const classAttr =
-        nodo.resolvedClass &&
-        typeof nodo.resolvedClass === 'string'
-            ? nodo.resolvedClass.trim()
-            : '';
-
-    let contenidoHtml = '';
-
-    // CORRECCIÓN QUIRÚRGICA: La estructura AST tiene prioridad sobre el texto plano.
-    if (Array.isArray(nodo.contenido)) {
-        contenidoHtml = nodo.contenido
-            .map(hijo => renderizarNodo(hijo))
-            .join('');
-    } else if (typeof nodo.texto === 'string') {
-        contenidoHtml = escapeHtml(nodo.texto);
-    }
-
-    const traceAttr =
-        typeof nodo.__traceId === 'string' &&
-        nodo.__traceId.trim()
-            ? ` data-trace="${escapeHtml(nodo.__traceId.trim())}"`
-            : '';
-
-    const claseHtml = classAttr
-        ? ` class="${escapeHtml(classAttr)}"`
-        : '';
-
-    const isInline = [
-        'span',
-        'a',
-        'b',
-        'i',
-        'em',
-        'strong',
-        'sup',
-        'sub'
-    ].includes(tag);
-
-    const sufijo = isInline ? '' : '\n';
-
-    return `<${tag}${traceAttr}${claseHtml}>${contenidoHtml}</${tag}>${sufijo}`;
-}
-
 function escapeHtml(str) {
-    return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+    if (typeof str !== 'string') return '';
+    return str.replace(/[&<>"']/g, function(m) {
+        return {
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[m];
+    });
 }
 
-module.exports = { constructorXHTML };
+function constructorXHTML(ast) {
+    if (!ast) return '';
+
+    function renderizarNodo(nodo) {
+        if (!nodo || typeof nodo !== 'object') {
+            return typeof nodo === 'string' ? escapeHtml(nodo) : '';
+        }
+
+        const tag = nodo.resolvedTag || nodo.tag;
+        const text = nodo.texto;
+        const children = nodo.contenido;
+
+        const hasTag = Boolean(tag);
+        const hasText = typeof text === 'string';
+        const hasChildren = Array.isArray(children) && children.length > 0;
+
+        if (!hasTag && !hasText && !hasChildren) return '';
+
+        if (!hasTag && hasText && !hasChildren && (!nodo.tipo || nodo.tipo === 'texto' || nodo.tipo === 'character')) {
+            return escapeHtml(text);
+        }
+
+        let contenidoHtml = '';
+        if (hasChildren) {
+            contenidoHtml = children.map(renderizarNodo).join('');
+        } else if (hasText) {
+            contenidoHtml = escapeHtml(text);
+        }
+
+        const finalTag = tag || 'p';
+        const claseRaw = nodo.resolvedClass || nodo.clase;
+        const clase = claseRaw ? ` class="${escapeHtml(claseRaw)}"` : '';
+
+        return `<${finalTag}${clase}>${contenidoHtml}</${finalTag}>`;
+    }
+
+    if (Array.isArray(ast)) {
+        return ast.map(renderizarNodo).join('\n');
+    } else if (ast.documento && Array.isArray(ast.contenido)) {
+        return ast.contenido.map(renderizarNodo).join('\n');
+    } else if (Array.isArray(ast.contenido) && !ast.resolvedTag && !ast.tag && !ast.tipoNodo && !ast.tipo) {
+        return ast.contenido.map(renderizarNodo).join('\n');
+    } else {
+        return renderizarNodo(ast);
+    }
+}
+
+// Wrapper de Compatibilidad Histórica para pruebas y sistemas E12.6-A legados.
+// Evita contaminar la función constructorXHTML pura.
+function renderParagraph(nodo) {
+    const { PresentationResolver } = require('../resolucion/PresentationResolver');
+    const resolver = new PresentationResolver();
+
+    // 1. Resuelve la presentación explícitamente en modo ESTRICTO (Contrato A6/A7)
+    const presClass = resolver.resolve(nodo, true);
+
+    // 2. Propaga la clase doble (Contrato A1-A5)
+    const clone = Object.assign({}, nodo);
+    const claseSemantica = clone.claseLegal || clone.claseSemantica || '';
+    if (presClass) {
+        // Ojo al orden invertido que exige el test A1: "texto_cuerpo cuerpo-siguiente"
+        clone.resolvedClass = `${claseSemantica} ${presClass}`.trim();
+    } else {
+        clone.resolvedClass = claseSemantica;
+    }
+    
+    // 3. Simula la inyección estructural del compilador para los tests legados
+    clone.resolvedTag = clone.resolvedTag || 'p';
+    
+    // 4. Delega en el pipeline puro
+    return constructorXHTML(clone);
+}
+
+
+module.exports = {
+    construirEstructura: constructorXHTML, // Alias hacia la función real
+    constructorXHTML                    // Exportación nativa
+};

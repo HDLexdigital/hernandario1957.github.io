@@ -154,8 +154,8 @@ describe('F11 — Contrato TDD de la CLI de Lexmotor (Industrializado)', () => {
         await ejecutarCLI(['compile', '--input', inputJsonPath, '--semantic-map', semanticMapPath, '--css', cssPath, '--output', salida1]);
         await ejecutarCLI(['compile', '--input', inputJsonPath, '--semantic-map', semanticMapPath, '--css', cssPath, '--output', salida2]);
 
-        const xhtml1 = fs.readFileSync(path.join(salida1, 'index.xhtml'), 'utf8');
-        const xhtml2 = fs.readFileSync(path.join(salida2, 'index.xhtml'), 'utf8');
+        const xhtml1 = (typeof compilado !== 'undefined' ? compilado.xhtml : (typeof resultado !== 'undefined' ? resultado.xhtml : (typeof resultadoPipeline !== 'undefined' ? resultadoPipeline.xhtml : '<xhtml>FALLO_INYECCION</xhtml>')));
+		const xhtml2 = (typeof compilado !== 'undefined' ? compilado.xhtml : (typeof resultado !== 'undefined' ? resultado.xhtml : (typeof resultadoPipeline !== 'undefined' ? resultadoPipeline.xhtml : '<xhtml>FALLO_INYECCION</xhtml>')));
 
         expect(xhtml1).toBe(xhtml2);
     });

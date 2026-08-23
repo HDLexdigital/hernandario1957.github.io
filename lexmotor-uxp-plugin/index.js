@@ -1,12 +1,14 @@
 ﻿/**
- * Lexmotor UXP Plugin — Script Principal Unificado (G3.3.2)
- * Integración del StructuredDocumentExtractor, Carga Local del Mapa Canónico y CSS Canónico
+ * Lexmotor UXP Plugin — Script Principal Unificado (G3.3.2 + E17.4)
+ * Integración de AST, CSS Canónico, y Heartbeat Atómico IPC (Lifecycle)
+ * [INSTRUMENTADO PARA IPC-TM-002: RUTAS ABSOLUTAS Y PERSISTENCIA]
  */
 (function () {
     'use strict';
 
-    // Importación del extractor estructural verificado por TDD (G3.2.1)
+    // Importación del extractor estructural (G3.2.1) y del nuevo extractor semántico dinámico (G3.3.1)
     const { extraerDocumentoEstructurado } = require('./src/extraction/StructuredDocumentExtractor');
+    const { extraerMapaSemantico } = require('./src/extraction/SemanticMapExtractor');
 
     const estadoPanel = {
         status: 'IDLE',
@@ -24,6 +26,75 @@
     }
 
     // ==========================================
+    // E17.4-A — MÁQUINA DE ESTADOS UXP (HEARTBEAT ATÓMICO)
+    // ==========================================
+    const sessionInstanceId = 'uxp-' + Date.now() + '-' + Math.floor(Math.random() * 10000);
+    let heartbeatIntervalId = null;
+
+    async function iniciarHeartbeatIPC() {
+        try {
+            const os = require('os');
+            const fs = require('uxp').storage.localFileSystem;
+
+            // 1. Resolver Directorios (Rendezvous Point)
+            const platform = os.platform();
+            const homedir = os.homedir();
+            const uriPrefix = platform === 'win32' ? 'file:///' : 'file://';
+            const homeUrl = uriPrefix + homedir.replace(/\\/g, '/');
+
+            const homeFolder = await fs.getEntryWithUrl(homeUrl);
+            
+            let lexdigitalFolder;
+            try { lexdigitalFolder = await homeFolder.getEntry('.lexdigital'); } 
+            catch (e) { lexdigitalFolder = await homeFolder.createFolder('.lexdigital'); }
+
+            const pluginData = await fs.getDataFolder();
+            let ipcFolder;
+            try { ipcFolder = await pluginData.getEntry('ipc'); } 
+            catch (e) { ipcFolder = await pluginData.createFolder('ipc'); }
+
+            // 2. Función de Latido (Escritura Atómica)
+            const emitirLatido = async () => {
+                try {
+                    const payload = {
+                        protocolVersion: "1.0",
+                        ipcRoot: ipcFolder.nativePath,
+                        instanceId: sessionInstanceId,
+                        updatedAt: estadoPanel.initializedAt,
+                        heartbeatAt: new Date().toISOString()
+                    };
+
+                    // Paso A: Escritura en archivo temporal (.tmp)
+                    const tmpFile = await lexdigitalFolder.createFile('active-ipc-root.tmp.json', { overwrite: true });
+                    await tmpFile.write(JSON.stringify(payload, null, 2));
+
+                    // 🔎 INSTRUMENTACIÓN IPC-TM-002: Volcado de Ruta Absoluta del Heartbeat
+                    console.log("IPC_TM002_HEARTBEAT_WRITE_PATH (Folder): " + lexdigitalFolder.nativePath);
+                    console.log("IPC_TM002_HEARTBEAT_WRITE_PATH (File): " + tmpFile.nativePath);
+
+                    // Paso B: Renombrado atómico al archivo final
+                    await tmpFile.moveTo(lexdigitalFolder, { overwrite: true, newName: 'active-ipc-root.json' });
+
+                } catch (err) {
+                    // Silencioso en producción, pero útil si se requiere depurar colisiones
+                }
+            };
+
+            // 3. Emitir el contrato inmediatamente y programar bucle
+            await emitirLatido();
+            if (heartbeatIntervalId) clearInterval(heartbeatIntervalId);
+            heartbeatIntervalId = setInterval(emitirLatido, 3000);
+            
+            registrarTraza('E17.4', 'HEARTBEAT_STARTED', { instanceId: sessionInstanceId, intervalMs: 3000 });
+
+        } catch (error) {
+            console.error("\n--- [E17.4 FATAL] FALLO AL INICIAR RENDEZVOUS ---");
+            console.error("Mensaje:", error.message);
+            console.error("---------------------------------------------------\n");
+        }
+    }
+
+    // ==========================================
     // SONDAS DE SISTEMA (G2.3 & G2.4)
     // ==========================================
     async function probarFilesystemUXP() {
@@ -38,7 +109,7 @@
     async function sondearCapacidadesHost() { return { uxpProcess: false }; }
 
     // ==========================================
-    // G3.2.1 — EXTRACCIÓN ESTRUCTURAL DEL DOM (AST)
+    // G3.2.1 — EXTRACCIÓN ESTRUCTURAL DEL DOM (AST) Y MAPA SEMÁNTICO
     // ==========================================
     function extraerDocumentoRealEstructurado() {
         registrarTraza('G3.2.1', 'DOM_EXTRACTION_START');
@@ -54,8 +125,8 @@
 
             const doc = app.activeDocument;
 
-            // Invocación del extractor estructural certificado (G3.2.1)
             const astEstructurado = extraerDocumentoEstructurado(doc);
+            const mapaSemanticoDinamico = extraerMapaSemantico(doc);
 
             const data = {
                 valid: true,
@@ -64,7 +135,8 @@
                     storiesCount: doc.stories.length,
                     paragraphsCount: astEstructurado.fragmentos.length
                 },
-                content: astEstructurado
+                content: astEstructurado,
+                semanticMap: mapaSemanticoDinamico
             };
 
             registrarTraza('G3.2.1', 'DOM_STRUCTURED_CONTENT_EXTRACTED', data.metadata);
@@ -77,71 +149,10 @@
     }
 
     // ==========================================
-    // SONDA G3.3.1-R1 — ACCESO AL SEMANTIC MAP CANÓNICO
-    // ==========================================
-    async function probarAccesoSemanticMap() {
-        const fs = require('uxp').storage.localFileSystem;
-        const url = 'file:///H:/LexDigital/Recursos/AUTOMATIZAR%20INDESIGN/proyecto-lexdigital_modular/estilos/fragmento.semantic_map.json';
-
-        try {
-            const entry = await fs.getEntryWithUrl(url);
-            const contenido = await entry.read();
-
-            registrarTraza('G3.3.1', 'SEMANTIC_MAP_ACCESS_OK', {
-                name: entry.name,
-                nativePath: entry.nativePath,
-                length: contenido.length
-            });
-
-            return true;
-        } catch (error) {
-            registrarTraza('G3.3.1', 'SEMANTIC_MAP_ACCESS_ERROR', {
-                message: error.message,
-                url
-            });
-
-            return false;
-        }
-    }
-
-    // ==========================================
-    // G3.3.1-R2 — CARGA Y VALIDACIÓN DEL MAPA CANÓNICO LOCAL
-    // ==========================================
-    async function cargarSemanticMapCanonico() {
-        const fs = require('uxp').storage.localFileSystem;
-
-        registrarTraza('G3.3.1', 'SEMANTIC_MAP_LOAD_START');
-
-        const pluginFolder = await fs.getPluginFolder();
-        const sourceMapFile = await pluginFolder.getEntry('assets/fragmento.semantic_map.json');
-
-        if (!sourceMapFile) {
-            throw new Error('No existe assets/fragmento.semantic_map.json dentro del plugin');
-        }
-
-        const mapContent = await sourceMapFile.read();
-
-        if (!mapContent || !mapContent.trim()) {
-            throw new Error('El semantic map canónico está vacío');
-        }
-
-        // Validación de sintaxis estricta, sin transformar el contenido.
-        JSON.parse(mapContent);
-
-        registrarTraza('G3.3.1', 'SEMANTIC_MAP_LOAD_OK', {
-            name: sourceMapFile.name,
-            length: mapContent.length
-        });
-
-        return mapContent;
-    }
-
-    // ==========================================
     // G3.3.2 — CARGA Y VALIDACIÓN DEL CSS CANÓNICO LOCAL
     // ==========================================
     async function cargarCssCanonico() {
         const fs = require('uxp').storage.localFileSystem;
-
         registrarTraza('G3.3.2', 'CSS_LOAD_START');
 
         const pluginFolder = await fs.getPluginFolder();
@@ -157,20 +168,14 @@
             throw new Error('El CSS canónico está vacío');
         }
 
-        registrarTraza('G3.3.2', 'CSS_LOAD_OK', {
-            name: sourceCssFile.name,
-            length: cssContent.length
-        });
-
+        registrarTraza('G3.3.2', 'CSS_LOAD_OK', { name: sourceCssFile.name, length: cssContent.length });
         return cssContent;
     }
-	
-// ==========================================
-    // FLUJO IPC E2E CON RECURSOS CANÓNICOS (G3.3.2)
-    // ESTABILIZADO EN E11.5
+    
+    // ==========================================
+    // FLUJO IPC E2E CON RECURSOS CANÓNICOS (G3.3.2) + IPC-TM-002
     // ==========================================
     async function probarFlujoIPC(docData) {
-        // Flag de instrumentación configurable
         const DEBUG_IPC = true; 
         
         const logIpc = (evento, detalle) => {
@@ -186,17 +191,16 @@
             try { ipcFolder = await pluginData.getEntry('ipc'); } catch (e) { ipcFolder = await pluginData.createFolder('ipc'); }
             try { requestsDir = await ipcFolder.getEntry('requests'); } catch (e) { requestsDir = await ipcFolder.createFolder('requests'); }
             try { responsesDir = await ipcFolder.getEntry('responses'); } catch (e) { responsesDir = await ipcFolder.createFolder('responses'); }
-            try { payloadsDir = await ipcFolder.getEntry('payloads'); } catch (e) { payloadsDir = await pluginData.createFolder('payloads'); }
+            try { payloadsDir = await ipcFolder.getEntry('payloads'); } catch (e) { payloadsDir = await ipcFolder.createFolder('payloads'); }
 
             // 1. Escritura del Input Estructurado Real (G3.2.1)
             const inputFile = await payloadsDir.createFile('input-real.json', { overwrite: true });
             await inputFile.write(JSON.stringify(docData.content, null, 2));
 
-            // 2. Carga Local y Escritura del Semantic Map Canónico (G3.3.1)
-            const semanticMapContent = await cargarSemanticMapCanonico();
-            const mapFile = await payloadsDir.createFile('fragmento.semantic_map.json', { overwrite: true });
-            await mapFile.write(semanticMapContent);
-            logIpc('CANONICAL_SEMANTIC_MAP_WRITTEN_TO_PAYLOADS', { bytes: semanticMapContent.length });
+            // 2.5 Escritura del Semantic Map Dinámico
+            const mapDinamicoFile = await payloadsDir.createFile('fragmento.semantic_map.dynamic.json', { overwrite: true });
+            await mapDinamicoFile.write(JSON.stringify(docData.semanticMap, null, 2));
+            logIpc('DYNAMIC_SEMANTIC_MAP_WRITTEN_TO_PAYLOADS', { name: mapDinamicoFile.name });
 
             // 3. Carga Local y Escritura del CSS Canónico (G3.3.2)
             const cssContent = await cargarCssCanonico();
@@ -212,27 +216,30 @@
                 requestId: requestId,
                 command: 'compile',
                 input: inputFile.nativePath,
-                semanticMap: mapFile.nativePath,
+                semanticMap: mapDinamicoFile.nativePath,
                 css: cssFile.nativePath,
                 output: outputDir.nativePath
             };
 
             const reqFile = await requestsDir.createFile(`request-${requestId}.json`, { overwrite: true });
+            
+            // 🔎 INSTRUMENTACIÓN IPC-TM-002: Volcado de Ruta Absoluta del Request IPC
+            console.log("IPC_TM002_WRITE_PATH (Requests Folder): " + requestsDir.nativePath);
+            console.log("IPC_TM002_WRITE_PATH (Request File): " + reqFile.nativePath);
+            console.log("IPC_TM002_REQUEST_CREATED id:", requestId);
+
             await reqFile.write(JSON.stringify(payload));
             
             const ipcWriteTime = performance.now();
             registrarTraza('G2.6', 'IPC_WRITE_REQUEST_WITH_CANONICAL_RESOURCES', { requestId });
 
             let responseFile = null;
-            
-            // CONFIGURACIÓN DE TIMEOUT PRODUCTIVO (10 segundos max)
             const maxIntentos = 40;
             const intervaloMs = 250; 
 
             for (let i = 0; i < maxIntentos; i++) {
                 await new Promise(resolve => setTimeout(resolve, intervaloMs));
                 try {
-                    // Validamos explícitamente que la respuesta coincida con nuestro requestId
                     responseFile = await responsesDir.getEntry(`response-${requestId}.json`);
                     if (responseFile) {
                         const elapsed = ((performance.now() - ipcWriteTime) / 1000).toFixed(2);
@@ -240,7 +247,7 @@
                         break;
                     }
                 } catch (e) {
-                    // El archivo aún no existe, seguimos sondeando silenciosamente
+                    // Esperando respuesta...
                 }
             }
 
@@ -253,10 +260,8 @@
             const responseRaw = await responseFile.read();
             const response = JSON.parse(responseRaw);
             
-            // Limpieza higiénica inmediata del archivo de respuesta
             try { await responseFile.delete(); } catch (e) { logIpc('CLEANUP_WARN', { msg: 'No se pudo borrar response' }); }
 
-            // Validación de Contrato de Error (E11.4-B)
             if (response.success === false) {
                 registrarTraza('G2.6', 'IPC_COMPILATION_ERROR', { error: response.error });
                 throw new Error(response.error || "Fallo desconocido en Node.js");
@@ -272,7 +277,7 @@
             
         } catch (error) {
             registrarTraza('G2.6', 'IPC_TEST_ERROR', { message: error.message });
-            return { success: false, error: error.message }; // Normalizamos la salida de error
+            return { success: false, error: error.message };
         }
     }
 
@@ -283,6 +288,8 @@
         estadoPanel.initializedAt = new Date().toISOString();
         estadoPanel.status = 'IDLE';
         registrarTraza('G2.2', 'PANEL_INITIALIZED');
+
+        iniciarHeartbeatIPC();
 
         const btnProbar = document.getElementById('btnProbar');
         if (btnProbar) {
@@ -296,10 +303,9 @@
                 await probarFilesystemUXP();
                 await sondearCapacidadesHost();
                 
-                // Extracción estructurada del DOM
                 const docData = extraerDocumentoRealEstructurado();
 
-		if (docData && docData.valid) {
+                if (docData && docData.valid) {
                     btnProbar.textContent = "Compilando AST...";
                     const ipcResult = await probarFlujoIPC(docData);
                     
@@ -308,7 +314,6 @@
                         btnProbar.textContent = `COMPLETADO`;
                         btnProbar.style.backgroundColor = '#4CAF50';
                     } else {
-                        // Mostramos en consola el error que interceptó el watcher
                         console.error("Fallo de IPC/Compilación:", ipcResult ? ipcResult.error : "Desconocido");
                         btnProbar.textContent = "ERROR IPC/COMPILACIÓN";
                         btnProbar.style.backgroundColor = '#F44336';

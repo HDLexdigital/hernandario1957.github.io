@@ -1,0 +1,44 @@
+{
+  "corpusId": "CONSTITUCION_POLITICA_COLOMBIA_2026",
+  "version": "2026.0",
+  "description": "Corpus institucional completo de la Constitución Política para certificación O2.3",
+  "expectedCardinality": {
+    "totalPreambles": 1,
+    "totalTitles": 1,
+    "totalChapters": 0,
+    "totalArticles": 2
+  },
+  "nodes": [
+    {
+      "nodeId": "CP_PREAMBLE_01",
+      "type": "PREAMBLE",
+      "text": "EL PUEBLO DE COLOMBIA, en ejercicio de su poder soberano...",
+      "provenance": "SRC_CONST_2026_P"
+    },
+    {
+      "nodeId": "CP_TITLE_01",
+      "type": "TITLE",
+      "number": "I",
+      "name": "DE LOS PRINCIPIOS FUNDAMENTALES",
+      "articles": [
+        {
+          "nodeId": "CP_ART_01",
+          "number": "1",
+          "text": "Colombia es un Estado social de derecho, organizado en forma de República unitaria...",
+          "provenance": "SRC_CONST_2026_A1"
+        },
+        {
+          "nodeId": "CP_ART_02",
+          "number": "2",
+          "text": "Son fines esenciales del Estado: servir a la comunidad, promover la prosperidad general...",
+          "provenance": "SRC_CONST_2026_A2"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "targetFormats": ["INDD", "PDF", "EPUB3"],
+    "accessibilityStandard": "WCAG_2.1_AA_EPUB3",
+    "institutionalSigner": "LexDigitalHD-Engine-v2.6"
+  }
+}

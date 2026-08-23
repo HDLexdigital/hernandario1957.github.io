@@ -70,8 +70,10 @@ function extraerDocumentoEstructurado(documento) {
                 }
             } catch (e) {}
 
+            // AÑADIDO: Extracción del texto crudo a nivel de párrafo para el contrato LEDM
             resultado.fragmentos.push({
                 estilo: estiloParrafo,
+                texto: paragraph.contents || "",
                 fragmentos
             });
         }

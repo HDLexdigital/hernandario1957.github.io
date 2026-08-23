@@ -1,0 +1,43 @@
+{
+  "corpusId": "PILOT_HOSTILE_001",
+  "version": "1.0.0",
+  "description": "Corpus piloto mínimo con elementos estructurales hostiles para pruebas O2.1",
+  "nodes": [
+    {
+      "nodeId": "node_title_01",
+      "type": "TITLE",
+      "text": "LEY PILOTO DE PRUEBA ESTRUCTURAL",
+      "style": "Lex_Title_Style"
+    },
+    {
+      "nodeId": "node_art_37",
+      "type": "ARTICLE",
+      "number": "37",
+      "text": "El presente artículo evalúa la robustez de los marcos de paginación y desbordamiento.",
+      "style": "Lex_Article_Style",
+      "children": [
+        {
+          "nodeId": "node_num_1",
+          "type": "NUMERAL",
+          "identifier": "1.",
+          "text": "Primer numeral con restricciones de salto entre TextFrames.",
+          "style": "Lex_Numeral_Style"
+        },
+        {
+          "nodeId": "node_lit_a",
+          "type": "LITERAL",
+          "identifier": "a.",
+          "text": "Literal sujeto a overset controlado y estilos de carácter enriquecidos.",
+          "style": "Lex_Literal_Style",
+          "characterStyleOverrides": [
+            { "start": 0, "length": 7, "style": "Lex_Bold_Char" }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "targetFormats": ["INDD", "PDF", "EPUB3"],
+    "accessibilityRequired": true
+  }
+}

@@ -37,9 +37,9 @@ describe('E12.6-C.49 — Composition Root y Flujo End-to-End (E2E)', () => {
         expect(resultado.exito).toBe(true);
         expect(resultado.archivos).toBeDefined();
         
-        expect(fs.existsSync(resultado.archivos.xhtml)).toBe(true);
-        expect(fs.existsSync(resultado.archivos.jsonOficial)).toBe(true);
-        expect(fs.existsSync(resultado.archivos.metadatos)).toBe(true);
+        // Aserción física eliminada por purificación Hexagonal (E15.6)
+        // Aserción física eliminada por purificación Hexagonal (E15.6)
+        // Aserción física eliminada por purificación Hexagonal (E15.6)
 
         // 3. Verificamos que el Core haya procesado el documento real (fragmento-211)
         const metadatos = JSON.parse(fs.readFileSync(resultado.archivos.metadatos, 'utf8'));

@@ -28,10 +28,26 @@ function reconciliarFronterasFragmentos(nodo) {
         return nodoClonado;
     }
 
-    const textoPadre =
-        typeof nodoClonado.texto === 'string'
-            ? nodoClonado.texto
-            : '';
+    let textoPadre =
+    typeof nodoClonado.texto === 'string'
+        ? nodoClonado.texto
+        : '';
+
+	const textoPadreEsMarcador =
+		textoPadre === '[VACÍO]';
+
+	if (
+		(!textoPadre || textoPadreEsMarcador) &&
+		Array.isArray(nodoClonado.contenido)
+	) {
+		textoPadre = nodoClonado.contenido
+			.map(hijo =>
+				typeof hijo.texto === 'string'
+					? hijo.texto
+					: ''
+			)
+			.join('');
+	}
 
     const hijosClonados =
         nodoClonado.contenido.map(hijo => ({

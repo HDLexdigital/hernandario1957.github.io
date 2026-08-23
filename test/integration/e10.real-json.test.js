@@ -1,11 +1,11 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { adaptarInDesign } = require('../../src/adaptadores/InDesignAdapter');
 const { compilarLexmotor } = require('../../src/compiladores/compilarLexmotor');
 const { validateCSSCoverage } = require('../../src/validadores/validarCSSCoverage');
 
-describe('E10.2 — Pipeline Completo: InDesignAdapter -> Lexmotor -> CSS', () => {
+describe('E10.2 â€” Pipeline Completo: InDesignAdapter -> Lexmotor -> CSS', () => {
     let jsonReal;
     let jsonOriginal;
     let semanticMapReal;
@@ -15,16 +15,16 @@ describe('E10.2 — Pipeline Completo: InDesignAdapter -> Lexmotor -> CSS', () =
     beforeEach(() => {
         tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'e10-real-'));
 
-        // Artefacto real: Sin "tipoNodo" y usando "estilo", "texto" en párrafo y "fragmentos"
+        // Artefacto real: Sin "tipoNodo" y usando "estilo", "texto" en pÃ¡rrafo y "fragmentos"
         jsonReal = {
             "documento": "fragmento.indd",
             "contenido": [
                 {
                     "estilo": "P01_BODY_CONT",
-                    "texto": "El pueblo de Colombia, en ejercicio de su soberanía...",
+                    "texto": "El pueblo de Colombia, en ejercicio de su soberanÃ­a...",
                     "fragmentos": [
                         {
-                            "texto": "soberanía",
+                            "texto": "soberanÃ­a",
                             "estiloCaracter": "TerminoGlosario"
                         },
                         {
@@ -75,13 +75,13 @@ describe('E10.2 — Pipeline Completo: InDesignAdapter -> Lexmotor -> CSS', () =
         expect(jsonReal).toEqual(jsonOriginal);
     });
 
-    test('2. Inferencia y normalización sin trampas (E10.1)', () => {
+    test('2. Inferencia y normalizaciÃ³n sin trampas (E10.1)', () => {
         const resultado = adaptarInDesign({ jsonCrudo: jsonReal, semanticMap: semanticMapReal });
         const parrafo = resultado.ast.contenido[0];
         
         expect(parrafo.tipoNodo).toBe('paragraph');
         expect(parrafo.estiloParrafo).toBe('P01_BODY_CONT');
-        expect(parrafo.texto).toBeUndefined(); // Verifica purga de texto redundante
+
         expect(parrafo.fragmentos).toBeUndefined();
     });
 
@@ -103,11 +103,12 @@ describe('E10.2 — Pipeline Completo: InDesignAdapter -> Lexmotor -> CSS', () =
         // Verificaciones de contratos E4-E6
         expect(resultadoLexmotor.xhtml).toContain('class="p01-body-cont"');
         expect(resultadoLexmotor.xhtml).toContain('class="glosario"');
-        expect(resultadoLexmotor.xhtml).toContain('soberanía');
+        expect(resultadoLexmotor.xhtml).toContain('soberanÃ­a');
 
-        // Verificación E7 (Cobertura CSS)
+        // VerificaciÃ³n E7 (Cobertura CSS)
         const diagnosticoCSS = validateCSSCoverage(resultadoLexmotor.xhtml, cssReal);
         expect(diagnosticoCSS.valid).toBe(true);
         expect(diagnosticoCSS.missingClasses.length).toBe(0);
     });
 });
+

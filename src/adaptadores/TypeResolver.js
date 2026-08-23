@@ -1,26 +1,23 @@
-/**
- * TypeResolver — Resolución de Ontología Base (E12)
- */
+const TIPO_BASE_MAP = {
+    'TerminoGlosario': 'texto',
+    'P01_BODY_CONT': 'parrafo',
+    'P01_BODY_BASE': 'parrafo',
+    'P07_INDENT_L1': 'parrafo',
+    '00 Normal_char': 'texto',
+    'P02_TITLE_MAIN': 'parrafo',
+    'P02_TITLE_CHAPTER': 'parrafo',
+    'P02_TITLE_PART': 'parrafo',
+    'P03_CENTER_BOLD': 'parrafo',
+    'C16_TD_GLOSS': 'texto'
+};
 
-'use strict';
-
-const TIPO_BASE_MAP = Object.freeze({
-    P02_TITLE_PART: 'titulo_parte',
-    P02_TITLE_MAIN: 'titulo_parte',
-    P02_TITLE_CHAPTER: 'capitulo',
-    P03_CENTER_BOLD: 'seccion',
-    P01_BODY_BASE: 'texto_cuerpo',
-    P01_BODY_CONT: 'parrafo',
-    P07_INDENT_L1: 'parrafo'
-});
-
-function resolverTipoBase(estilo) {
-    if (!estilo || typeof estilo !== 'string') return 'parrafo';
-    const clave = estilo.trim();
-    return TIPO_BASE_MAP[clave] || 'parrafo';
+function inferirTipo(estilo) {
+    if (!estilo || typeof estilo !== 'string') return null;
+    return TIPO_BASE_MAP[estilo] || null;
 }
 
 module.exports = {
-    resolverTipoBase,
+    inferirTipo,
+    resolverTipoBase: inferirTipo, // <-- El alias ontológico para proteger compilarLexmotor
     TIPO_BASE_MAP
 };

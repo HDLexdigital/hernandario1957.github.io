@@ -1,29 +1,37 @@
-/**
- * PresentationResolver — Resolución de Clases de Presentación (E12)
- */
-
 'use strict';
 
-const PRESENTATION_MAP = Object.freeze({
-    P01_BODY_BASE: 'cuerpo-siguiente',
-    P01_BODY_CONT: 'cuerpo-siguiente',
-    P07_INDENT_L1: 'sangria-n1',
-    P02_TITLE_MAIN: 'p02-title-main',
-    P02_TITLE_PART: 'titulo_parte',
-    P02_TITLE_CHAPTER: 'titulo',
-    P03_CENTER_BOLD: 'texto-centrado-bold'
-});
+const ErrorModulo = require('../errors/PresentationResolutionError');
+const PresentationResolutionError = ErrorModulo.PresentationResolutionError || ErrorModulo;
+const semanticMapRaw = require('../assets/style-model.json');
+const { indexSemanticMap, _sanitizeSelector } = require('../adaptadores/SemanticResolver');
 
 class PresentationResolver {
-    resolve(nodo) {
-        if (!nodo || typeof nodo !== 'object') return null;
-        const estilo = nodo.inDesignStyle || nodo.estiloParrafo || nodo.estilo || '';
-        if (!estilo) return null;
-        return PRESENTATION_MAP[estilo] || null;
+    constructor() {
+        this.map = indexSemanticMap(semanticMapRaw);
+    }
+
+    resolve(nodo, strict = false) {
+        if (!nodo || (!nodo.estiloParrafo && !nodo.inDesignStyle && !nodo.clase && !nodo.estiloCaracter)) {
+            if (strict) throw new PresentationResolutionError('Nodo sin estilo de origen');
+            return null;
+        }
+
+        const estiloOrigen = nodo.estiloParrafo || nodo.inDesignStyle || nodo.estiloCaracter || nodo.clase;
+        
+        let claseResuelta = null;
+        
+        // Si el mapa lo conoce, extraemos su clase limpia (la regla semántica base)
+        if (this.map[estiloOrigen]) {
+            claseResuelta = _sanitizeSelector(estiloOrigen);
+        }
+
+        if (!claseResuelta) {
+            if (strict) throw new PresentationResolutionError(`Estilo desconocido: ${estiloOrigen}`);
+            return null;
+        }
+
+        return claseResuelta;
     }
 }
 
-module.exports = {
-    PresentationResolver,
-    PRESENTATION_MAP
-};
+module.exports = { PresentationResolver };

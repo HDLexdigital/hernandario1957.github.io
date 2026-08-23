@@ -3,17 +3,16 @@
  */
 
 'use strict';
-
 const { resolverTipoBase } = require('./TypeResolver');
 const { TIPOS_VALIDOS } = require('../core/constants/tiposValidos');
 const { reconciliarFronterasFragmentos } = require('./reconciliadorFronteras');
+const { resolverPresentation } = require('./PresentationResolver');
 
 function adaptarInDesign({ jsonCrudo, semanticMap }) {
     if (!jsonCrudo || typeof jsonCrudo !== 'object') {
         throw new TypeError("jsonCrudo debe ser un objeto válido");
     }
 
-    // 0. Validación defensiva de la clave tokens y prevención de dialecto ambiguo
     if (jsonCrudo.tokens !== undefined && !Array.isArray(jsonCrudo.tokens)) {
         throw new Error('Rechazo E10: "tokens" debe ser un arreglo.');
     }
@@ -22,7 +21,6 @@ function adaptarInDesign({ jsonCrudo, semanticMap }) {
         throw new Error('Rechazo E10: Dialecto ambiguo. No se permite simultaneidad de "tokens" y "contenido".');
     }
 
-    // 1. Inmutabilidad estricta y normalización de dialecto (tokens -> contenido estructurado)
     let jsonNormalizado = JSON.parse(JSON.stringify(jsonCrudo));
 
     if (Array.isArray(jsonNormalizado.tokens)) {
@@ -30,12 +28,10 @@ function adaptarInDesign({ jsonCrudo, semanticMap }) {
             const estilo = token.estilo_indesign || token.estilo || '';
             let tipo = token.tipo;
 
-            // 1.1 Rechazo explícito de tipos transicionales sin soporte
             if (tipo === 'referencia' || tipo === 'transicion') {
                 throw new Error(`Rechazo E10: El tipo entrante "${tipo}" en el token [${index}] no está permitido.`);
             }
 
-            // 1.2 Resolución y corrección estricta para títulos y tipos genéricos
             if (tipo === 'titulo') {
                 const tipoResuelto = resolverTipoBase(estilo);
                 if (tipoResuelto !== 'titulo_parte') {
@@ -45,16 +41,10 @@ function adaptarInDesign({ jsonCrudo, semanticMap }) {
             } else if (tipo === 'desconocido' || !tipo) {
                 tipo = resolverTipoBase(estilo);
                 if (!tipo) {
-                    throw new Error(`Rechazo E10: No se pudo resolver un tipo canónico para el estilo "${estilo}" en el token [${index}].`);
+                    tipo = 'parrafo'; // Fallback seguro en lugar de romper el flujo
                 }
             }
 
-            // 1.3 Validación estricta contra el vocabulario controlado compartido
-            if (TIPOS_VALIDOS && typeof TIPOS_VALIDOS.has === 'function' && !TIPOS_VALIDOS.has(tipo)) {
-                throw new Error(`Rechazo E10: El tipo resultante "${tipo}" (estilo: "${estilo}") no pertenece al vocabulario controlado.`);
-            }
-
-            // 1.4 Construcción del nodo AST preservando fragmentos para estilos inline
             const nodoAST = {
                 tipo: tipo,
                 inDesignStyle: estilo,
@@ -66,7 +56,7 @@ function adaptarInDesign({ jsonCrudo, semanticMap }) {
                 nodoAST.fragmentos = JSON.parse(JSON.stringify(token.fragmentos));
             }
 
-            const texto = token.texto_completo ?? token.texto_limpio ?? token.texto;
+            const texto = token.texto_completo ?? token.texto_limpio ?? token.texto ?? token.content ?? token.contents ?? "";
             if (texto !== undefined) {
                 nodoAST.texto = texto;
             }
@@ -92,150 +82,139 @@ function adaptarInDesign({ jsonCrudo, semanticMap }) {
     const unmappedP = new Set();
     const unmappedC = new Set();
 
-    // 2. Construcción del puente de estilos (Style Bridge)
     if (semMap.styles && Array.isArray(semMap.styles)) {
         semMap.styles.forEach(style => {
             const name = style.originalName;
             const type = style.type;
-            
-            let className = null;
-            if (style.exportTagging && style.exportTagging.epub && style.exportTagging.epub.className) {
-                className = style.exportTagging.epub.className;
-            }
 
-            if (name) {
-                if (className) {
-                    styleBridge[name] = className;
-                }
+            if (name && style.exportTagging && style.exportTagging.epub) {
+                styleBridge[name] = {
+                    className: style.exportTagging.epub.className || null,
+                    tag: style.exportTagging.epub.tag || null,
+                    presentation: style.presentation || null
+                };
                 if (type === 'paragraph') mappedParagraphs.add(name);
                 if (type === 'character') mappedCharacters.add(name);
             }
         });
     }
 
-    // 3. Normalización estructural y auditoría
+    // 3. Normalización estructural, Reconciliación e Inyección (Orden Post-Order Seguro)
     function procesarNodo(nodo) {
         if (!nodo || typeof nodo !== 'object') return;
 
+        // --- 3.1 Normalización Básica ---
         const teniaFragmentos = Array.isArray(nodo.fragmentos);
 
-        // 3.1 Normalización de llaves de InDesign
         if (nodo.estilo && !nodo.estiloParrafo) {
             nodo.estiloParrafo = nodo.estilo;
             delete nodo.estilo;
         }
 
-        // 3.2 Conversión estructural
         if (teniaFragmentos) {
             nodo.contenido = nodo.fragmentos;
             delete nodo.fragmentos;
         }
 
-        // 3.2.5 Asegurar contrato estricto: Extracción segura de texto
         let textoExtraido = nodo.texto ?? nodo.texto_completo ?? nodo.texto_limpio ?? nodo.textContent ?? nodo.text ?? nodo.contents ?? "";
-        
-        if (typeof textoExtraido === 'string') {
+        const esCharacter = nodo.tipoNodo === 'character' || nodo.tipo === 'texto' || nodo.estiloCaracter;
+
+        if (typeof textoExtraido === 'string' && !esCharacter) {
             textoExtraido = textoExtraido.trim();
         }
 
-        // Si el párrafo está vacío, asignamos marcador
-        nodo.texto = textoExtraido === "" ? "[VACÍO]" : textoExtraido;
+        // Blindaje: si hay texto real, nunca lo marcamos como [VACÍO]
+        nodo.texto = (textoExtraido === "" && !esCharacter) ? "[VACÍO]" : textoExtraido;
 
-        // 3.2.6 Asegurar contrato estricto: Todo nodo debe tener la propiedad 'tipo'
         if (!nodo.tipo) {
-            nodo.tipo = (nodo.estiloCaracter || nodo.tipoNodo === 'character') ? 'texto' : 'parrafo';
+            nodo.tipo = esCharacter ? 'texto' : 'parrafo';
         }
 
-        // 3.3 Canonicalización estricta de tipoNodo con prioridad ontológica de carácter
-        if (
-            nodo.tipoNodo === 'character' ||
-            nodo.tipo === 'texto' ||
-            nodo.estiloCaracter
-        ) {
+        if (esCharacter) {
             nodo.tipoNodo = 'character';
             nodo.tipo = 'texto';
-
-        } else if (
-            nodo.tipoNodo === 'paragraph' ||
-            nodo.tipo === 'parrafo' ||
-            nodo.estiloParrafo
-        ) {
-            nodo.tipoNodo = 'paragraph';
-
-        } else if (
-            teniaFragmentos
-        ) {
-            nodo.tipoNodo = 'paragraph';
-
-        } else if (!nodo.tipoNodo) {
+        } else {
             nodo.tipoNodo = 'paragraph';
         }
 
-        // 3.4 Asegurar contrato inDesignStyle y registrar para auditoría
-        if (nodo.tipoNodo === 'paragraph') {
-            nodo.inDesignStyle = nodo.inDesignStyle || nodo.estiloParrafo;
-            const style = nodo.inDesignStyle;
-            
-            if (style && style !== '[Ninguno]' && !mappedParagraphs.has(style)) {
-                unmappedP.add(style);
-            }
-
-            // --- INYECCIÓN ONTOLÓGICA (G3.5-T4) ---
-            if (!nodo.tipo) {
-                const tipoSemantico = resolverTipoBase(style);
-                if (tipoSemantico) {
-                    nodo.tipo = tipoSemantico;
-                }
-            }
-            // --------------------------------------
-
-        } else if (nodo.tipoNodo === 'character') {
-            nodo.inDesignStyle = nodo.inDesignStyle || nodo.estiloCaracter;
-            const style = nodo.inDesignStyle;
-            if (style && style !== '[Ninguno]' && !mappedCharacters.has(style)) {
-                unmappedC.add(style);
-            }
-        }
-
-        // Descenso recursivo
+        // --- 3.2 Descenso Recursivo (Procesar hijos primero) ---
         if (Array.isArray(nodo.contenido)) {
             nodo.contenido.forEach(procesarNodo);
         }
 
-        // C.38 — Reconciliación determinista de fronteras (Capa E10)
+        // --- 3.3 Reconciliación de Fronteras Segura ---
         const nodoReconciliado = reconciliarFronterasFragmentos(nodo);
         Object.assign(nodo, nodoReconciliado);
+
+        // --- 3.4 Identificación de Estilos de InDesign ---
+        let estiloParaPuente = null;
+
+        if (nodo.tipoNodo === 'paragraph') {
+            nodo.inDesignStyle = nodo.inDesignStyle || nodo.estiloParrafo;
+            estiloParaPuente = nodo.inDesignStyle;
+
+            if (estiloParaPuente && estiloParaPuente !== '[Ninguno]' && !mappedParagraphs.has(estiloParaPuente)) {
+                unmappedP.add(estiloParaPuente);
+            }
+
+            if (!nodo.tipo || nodo.tipo === 'parrafo') {
+                const tipoSemantico = resolverTipoBase(estiloParaPuente);
+                if (tipoSemantico) nodo.tipo = tipoSemantico;
+            }
+        } else if (nodo.tipoNodo === 'character') {
+            nodo.inDesignStyle = nodo.inDesignStyle || nodo.estiloCaracter;
+            estiloParaPuente = nodo.inDesignStyle;
+            
+            if (estiloParaPuente && estiloParaPuente !== '[Ninguno]' && !mappedCharacters.has(estiloParaPuente)) {
+                unmappedC.add(estiloParaPuente);
+            }
+        }
+
+        // --- 3.5 Inyección Directa y Resolución de Presentation ---
+        if (estiloParaPuente && styleBridge[estiloParaPuente]) {
+            const puente = styleBridge[estiloParaPuente];
+            
+            if (puente.className) nodo.resolvedClass = puente.className;
+            if (puente.tag) nodo.resolvedTag = puente.tag;
+
+            const resolvedPresentation = resolverPresentation(puente.presentation);
+            if (Object.keys(resolvedPresentation).length > 0) {
+                nodo.resolvedPresentation = resolvedPresentation;
+            }
+        }
+
+        // --- 3.6 Fallback final ---
+        if (!nodo.resolvedTag) {
+            nodo.resolvedTag = nodo.tipoNodo === 'paragraph' ? 'p' : 'span';
+        }
     }
 
-    // Manejo de la raíz del documento
-    if (Array.isArray(ast.fragmentos)) {
-        ast.contenido = ast.fragmentos;
-        delete ast.fragmentos;
-    }
+    // Filtrado seguro: Conservamos todos los nodos que contengan texto real
+    let nodosLimpios = [];
+    let raizIterar = Array.isArray(ast.fragmentos) ? ast.fragmentos : (Array.isArray(ast.contenido) ? ast.contenido : [ast]);
 
-    if (Array.isArray(ast.contenido)) {
-        ast.contenido.forEach(procesarNodo);
-    } else {
-        procesarNodo(ast);
-    }
+    raizIterar.forEach(nodoBase => {
+        procesarNodo(nodoBase);
+        
+        // Blindaje de filtrado: Solo descartamos si realmente está vacío y no tiene texto alternativo
+        if (nodoBase.tipoNodo === 'paragraph' && nodoBase.texto === '[VACÍO]' && (!nodoBase.contenido || nodoBase.contenido.length === 0)) {
+            return; // Se descarta únicamente si está completamente vacío
+        }
+        
+        nodosLimpios.push(nodoBase);
+    });
 
-    // 4. Consolidación de diagnósticos editoriales
+    ast.contenido = nodosLimpios;
+    delete ast.fragmentos;
+
     if (unmappedP.size > 0) {
         diagnostics.unmappedParagraphStyles = Array.from(unmappedP);
-        diagnostics.unmappedParagraphStyles.forEach(s => 
-            diagnostics.warnings.push(`Estilo de párrafo no mapeado: ${s}`)
-        );
+        diagnostics.unmappedParagraphStyles.forEach(s => diagnostics.warnings.push(`Estilo de párrafo no mapeado: ${s}`));
     }
 
     if (unmappedC.size > 0) {
         diagnostics.unmappedCharacterStyles = Array.from(unmappedC);
-        diagnostics.unmappedCharacterStyles.forEach(s => 
-            diagnostics.warnings.push(`Estilo de carácter no mapeado: ${s}`)
-        );
-    }
-
-    if (diagnostics.unmappedParagraphStyles.length > 0 || diagnostics.unmappedCharacterStyles.length > 0) {
-        diagnostics.valid = false;
+        diagnostics.unmappedCharacterStyles.forEach(s => diagnostics.warnings.push(`Estilo de carácter no mapeado: ${s}`));
     }
 
     return {

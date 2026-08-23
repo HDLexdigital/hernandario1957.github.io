@@ -8,12 +8,29 @@ const {
 } = require('../utils/cssPurifier');
 
 function construirEstructura(
-    tokens,
-    documento,
+    tokensEntrada,
+    documentoEntrada,
     nombreCSS = 'Lexdigital_Modular.css',
     cssCrudoOriginal = ''
 ) {
-    const titulo = documento.titulo;
+    // Blindaje absoluto: Maneja tanto si entra un arreglo directo como un objeto AST/Estructurado
+    let tokens = [];
+    let documento = documentoEntrada || { titulo: "Documento Jurídico" };
+
+    if (Array.isArray(tokensEntrada)) {
+        tokens = tokensEntrada;
+    } else if (tokensEntrada && typeof tokensEntrada === 'object') {
+        if (tokensEntrada.documento) {
+            documento = tokensEntrada.documento;
+        }
+        if (Array.isArray(tokensEntrada.tokens)) {
+            tokens = tokensEntrada.tokens;
+        } else if (Array.isArray(tokensEntrada.contenido)) {
+            tokens = tokensEntrada.contenido;
+        }
+    }
+
+    const titulo = documento.titulo || "Documento Jurídico";
 
     const cssDepurado = cssCrudoOriginal
         ? purgarCSSInDesign(cssCrudoOriginal)
@@ -46,18 +63,14 @@ ${cssDepurado}
 `;
 
     tokens.forEach((token) => {
-        // Única Fuente de Verdad para el texto (alias eliminados)
-        const texto = escaparHTML(token.texto);
-        
-        // Confiamos en la semántica del clasificador
+        const texto = escaparHTML(token.texto || '');
         const clase = normalizarClase(
-            token.claseLegal || token.tipo
+            token.claseLegal || token.tipo || 'parrafo'
         );
 
         let etiqueta = 'p';
         let atributos = '';
 
-        // El switch reacciona al contrato canónico, no a expresiones regulares locales
         switch (token.tipo) {
             case 'preliminar_portada':
             case 'preliminar_legal':

@@ -6,13 +6,15 @@ const WebSocket = require('ws');
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
+const chokidar = require('chokidar');
+const os = require('os');
 
 const {
     compilarLexmotor,
     validarCompatibilidad,
     PipelineError,
     ValidationError
-} = require('./index');
+} = require('../index');
 
 const { jsonEditorialAdapter } = require('./core/jsonEditorialAdapter');
 const config = require('./config.json');
@@ -34,12 +36,12 @@ const servidorWs = new WebSocket.Server({ server: servidorHttp });
 
 console.log('');
 console.log('============================================================');
-console.log('              LEXDIGITAL PIPELINE');
+console.log('             LEXDIGITAL PIPELINE');
 console.log('============================================================');
 console.log('');
 console.log(`Interfaz Web: http://${HOST}:${PORT}`);
 console.log(`HTTP Endpoint: http://${HOST}:${PORT}/api/pipeline/procesar-json`);
-console.log(`WebSocket:    ws://${HOST}:${PORT}`);
+console.log(`WebSocket:     ws://${HOST}:${PORT}`);
 console.log('');
 console.log('Motor: LexDigital');
 console.log('Estado: iniciado');
@@ -146,7 +148,7 @@ async function procesarMensaje(socket, data) {
                     typeof request.jsonCrudo !== 'object'
                 ) {
                     throw new ValidationError(
-                        'El campo "jsonCrudo" es obligatorio.'
+                        'El campo "jsonCrudo" is obligatorio.'
                     );
                 }
 
@@ -201,7 +203,6 @@ async function procesarMensaje(socket, data) {
  */
 app.post('/api/pipeline/procesar-json', async (req, res) => {
     try {
-        // Soportamos tanto peticiones con { datos, outputFormat } como JSON directo
         const { datos, outputFormat = 'pdf' } = req.body;
         const datosInDesign = datos || req.body;
 
@@ -214,10 +215,8 @@ app.post('/api/pipeline/procesar-json', async (req, res) => {
         console.log(`Solicitud POST /api/pipeline/procesar-json [Formato: ${outputFormat.toUpperCase()}]`);
         console.log('------------------------------------------------------------');
 
-        // 1. Normalizar estructura con el adaptador editorial
         const jsonNormalizado = jsonEditorialAdapter(datosInDesign);
 
-        // 2. Directorio de salidas
         const directorioSalida = path.join(__dirname, 'salidas');
         if (!fs.existsSync(directorioSalida)) {
             fs.mkdirSync(directorioSalida, { recursive: true });
@@ -225,7 +224,6 @@ app.post('/api/pipeline/procesar-json', async (req, res) => {
 
         let nombreArchivoSalida = '';
 
-        // 3. Generación según el formato de salida seleccionado
         if (outputFormat === 'json') {
             nombreArchivoSalida = `documento_${Date.now()}_corregido.json`;
             const rutaSalida = path.join(directorioSalida, nombreArchivoSalida);
@@ -252,7 +250,6 @@ app.post('/api/pipeline/procesar-json', async (req, res) => {
             console.log(`🎉 XHTML estructurado generado con éxito en: ${rutaSalida}`);
 
         } else {
-            // Formato por defecto: PDF Accesible mediante Puppeteer
             nombreArchivoSalida = `documento_${Date.now()}.pdf`;
             const rutaSalida = path.join(directorioSalida, nombreArchivoSalida);
 
@@ -373,102 +370,161 @@ servidorHttp.on('error', (error) => {
 
 /* 
  * =====================================================================
- * ENDPOINT IPC (FILESYSTEM WATCHER PARA UXP / INDESIGN)
+ * ENDPOINT IPC (FILESYSTEM WATCHER PARA UXP / INDESIGN - E17.4 DINÁMICO)
  * =====================================================================
  */
-const chokidar = require('chokidar');
-
-// Ruta compartida con UXP (Ajusta la base si es necesario según donde esté tu carpeta UXP)
-const ipcDir = path.join(__dirname, 'ipc');
-const requestsDir = path.join(ipcDir, 'requests');
-const responsesDir = path.join(ipcDir, 'responses');
-const payloadsDir = path.join(ipcDir, 'payloads');
-
-// Asegurar que las carpetas existen
-[ipcDir, requestsDir, responsesDir, payloadsDir].forEach(dir => {
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-});
-
-console.log('Iniciando Watcher IPC para InDesign (UXP)...');
-console.log(`Vigilando: ${requestsDir}`);
-
-const watcher = chokidar.watch(requestsDir, {
-    ignored: /(^|[\/\\])\../, // ignora archivos ocultos
-    persistent: true,
-    awaitWriteFinish: { stabilityThreshold: 200, pollInterval: 100 }
-});
-
-watcher.on('add', async (filePath) => {
-    const fileName = path.basename(filePath);
-    
-    // Solo procesar archivos de request de UXP
-    if (!fileName.startsWith('request-req-uxp-') || !fileName.endsWith('.json')) return;
-
-    const requestId = fileName.replace('request-', '').replace('.json', '');
-    console.log(`\n[IPC] REQUEST_RECEIVED id=${requestId}`);
-    console.log(`Archivo: ${fileName}`);
-
+function inicializarSubsistemaIPC() {
     try {
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
-        const payload = JSON.parse(fileContent);
-        console.log(`[IPC] PAYLOAD_PARSED`);
-        console.log(`Comando: ${payload.command}`);
+        const homeDir = os.homedir();
+        const rendezvousPath = path.join(homeDir, '.lexdigital', 'active-ipc-root.json');
 
-        // Leer los recursos locales que InDesign depositó en "payloads"
-        const inputData = JSON.parse(fs.readFileSync(payload.input, 'utf-8'));
-        const semanticMap = payload.semanticMap ? JSON.parse(fs.readFileSync(payload.semanticMap, 'utf-8')) : null;
-        
-        console.log(`[IPC] COMPILATION_START`);
-        
-        // Fase 0: Adaptación E10 y Fase 1-4: Compilación
-        const { adaptarInDesign } = require('./adaptadores/InDesignAdapter');
-        let jsonNormalizado = inputData;
-        
-        if (inputData.tokens) {
-             const adaptacion = adaptarInDesign({ jsonCrudo: inputData, semanticMap });
-             jsonNormalizado = adaptacion.ast;
+        if (!fs.existsSync(rendezvousPath)) {
+            console.warn(`[E17.4 WARN] No se encontró el archivo de rendezvous en: ${rendezvousPath}. El transporte IPC permanecerá inactivo hasta que UXP emita su latido.`);
+            return null;
         }
 
-        const resultado = await compilarLexmotor(
-            jsonNormalizado,
-            'InDesign_Export',
-            payload.css || 'estilos.css'
-        );
-
-        console.log(`[IPC] COMPILATION_COMPLETE id=${requestId}`);
-
-        // Escribir la respuesta
-        console.log(`[IPC] RESPONSE_WRITE_START`);
-        const responseData = {
-            success: true,
-            requestId: requestId,
-            timestamp: new Date().toISOString(),
-            result: resultado
-        };
-
-        const responsePath = path.join(responsesDir, `response-${requestId}.json`);
-        fs.writeFileSync(responsePath, JSON.stringify(responseData, null, 2), 'utf-8');
+        const rendezvousContent = fs.readFileSync(rendezvousPath, 'utf-8');
+        const rendezvous = JSON.parse(rendezvousContent);
         
-        console.log(`[IPC] RESPONSE_WRITE_COMPLETE`);
-        
-        // Limpieza del request procesado (opcional, pero recomendado)
-        fs.unlinkSync(filePath);
+        if (!rendezvous || !rendezvous.ipcRoot) {
+            console.warn(`[E17.4 WARN] El rendezvous no contiene una propiedad ipcRoot válida.`);
+            return null;
+        }
 
-    } catch (error) {
-        console.error(`[IPC] COMPILATION_ERROR id=${requestId}`);
-        console.error(error.message);
+        const ipcRootPath = rendezvous.ipcRoot;
+        const rootStat = fs.existsSync(ipcRootPath) ? fs.statSync(ipcRootPath) : null;
+        if (!rootStat || !rootStat.isDirectory()) {
+            console.warn(`[E17.4 WARN] El ipcRoot especificado no existe o no es un directorio válido: ${ipcRootPath}`);
+            return null;
+        }
 
-        // Devolver respuesta de error a UXP para evitar que espere los 30 segundos
-        const errorResponsePath = path.join(responsesDir, `response-${requestId}.json`);
-        const errorData = {
-            success: false,
-            requestId: requestId,
-            error: error.message
-        };
-        fs.writeFileSync(errorResponsePath, JSON.stringify(errorData, null, 2), 'utf-8');
-        fs.unlinkSync(filePath); // Limpiar request fallido
+        const requestsDir = path.join(ipcRootPath, 'requests');
+        const responsesDir = path.join(ipcRootPath, 'responses');
+        const payloadsDir = path.join(ipcRootPath, 'payloads');
+
+        [requestsDir, responsesDir, payloadsDir].forEach(dir => {
+            if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) {
+                throw new Error(`[E17.4 FATAL] La subcarpeta requerida no es un directorio válido: ${dir}`);
+            }
+        });
+
+        console.log(`[E17.4] Rendezvous validado correctamente. ipcRoot activo: ${ipcRootPath}`);
+        return { requestsDir, responsesDir, payloadsDir };
+
+    } catch (e) {
+        console.error(`[E17.4 ERROR] Fallo al inicializar el subsistema IPC: ${e.message}`);
+        return null;
     }
-});
+}
+
+const ipcCarpetas = inicializarSubsistemaIPC();
+
+if (ipcCarpetas) {
+    const { requestsDir, responsesDir, payloadsDir } = ipcCarpetas;
+
+    console.log('Iniciando Watcher IPC dinámico para InDesign (UXP)...');
+    console.log(`Vigilando requests en: ${requestsDir}`);
+
+    const watcher = chokidar.watch(requestsDir, {
+        ignored: /(^|[\/\\])\../,
+        persistent: true,
+        awaitWriteFinish: { stabilityThreshold: 200, pollInterval: 100 }
+    });
+
+    watcher.on('add', async (filePath) => {
+        const fileName = path.basename(filePath);
+        
+        if (!fileName.startsWith('request-req-uxp-') || !fileName.endsWith('.json')) return;
+
+        const requestId = fileName.replace('request-', '').replace('.json', '');
+        console.log(`\n[IPC] REQUEST_RECEIVED id=${requestId}`);
+        console.log(`Archivo: ${fileName}`);
+
+        try {
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            const payload = JSON.parse(fileContent);
+            console.log(`[IPC] PAYLOAD_PARSED`);
+            console.log(`Comando: ${payload.command}`);
+
+			const inputData = JSON.parse(fs.readFileSync(payload.input, 'utf-8'));
+			console.log("[DEBUG INPUT DATA DESDE UXP]:", JSON.stringify(inputData, null, 2));
+            const semanticMap = payload.semanticMap ? JSON.parse(fs.readFileSync(payload.semanticMap, 'utf-8')) : null;
+            
+            console.log(`[IPC] COMPILATION_START`);
+            
+            const { adaptarInDesign } = require('../src/adaptadores/InDesignAdapter');
+            let jsonNormalizado = inputData;
+            
+            if (inputData.tokens) {
+                 const adaptacion = adaptarInDesign({ jsonCrudo: inputData, semanticMap });
+                 jsonNormalizado = adaptacion.ast;
+            }
+
+            const resultado = await compilarLexmotor(
+                jsonNormalizado,
+                'InDesign_Export',
+                payload.css || 'estilos.css'
+            );
+
+            console.log(`[IPC] COMPILATION_COMPLETE id=${requestId}`);
+
+            // =================================================================
+            // SALIDA JERÁRQUICA ORGANIZADA POR DOCUMENTO
+            // =================================================================
+            const rawName = payload.nombreBase || payload.documentName || payload.name || `documento_${requestId}`;
+            const docNameClean = String(rawName).replace(/[^a-zA-Z0-9-_]/g, '_');
+            
+            const docOutputDir = path.join(__dirname, 'salidas', docNameClean);
+            const xhtmlDir = path.join(docOutputDir, 'xhtml');
+            const jsonDir = path.join(docOutputDir, 'json');
+            const assetsDir = path.join(docOutputDir, 'assets');
+
+            [docOutputDir, xhtmlDir, jsonDir, assetsDir].forEach(d => {
+                if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
+            });
+
+            const xhtmlFilePath = path.join(xhtmlDir, `${docNameClean}.xhtml`);
+            const jsonFilePath = path.join(jsonDir, `${docNameClean}.json`);
+
+            fs.writeFileSync(xhtmlFilePath, resultado.xhtml, 'utf-8');
+            fs.writeFileSync(jsonFilePath, JSON.stringify(resultado.jsonOficial, null, 2), 'utf-8');
+
+            console.log(`[IPC] Artefactos escritos físicamente en: ${docOutputDir}`);
+            // =================================================================
+
+            // Escribir la respuesta para UXP
+            console.log(`[IPC] RESPONSE_WRITE_START`);
+            const responseData = {
+                success: true,
+                requestId: requestId,
+                timestamp: new Date().toISOString(),
+                result: resultado
+            };
+
+            const responsePath = path.join(responsesDir, `response-${requestId}.json`);
+            fs.writeFileSync(responsePath, JSON.stringify(responseData, null, 2), 'utf-8');
+            
+            console.log(`[IPC] RESPONSE_WRITE_COMPLETE`);
+            
+            fs.unlinkSync(filePath);
+
+        } catch (error) {
+            console.error(`[IPC] COMPILATION_ERROR id=${requestId}`);
+            console.error(error.stack || error.message); // <-- Traza completa del error activada
+
+            const errorResponsePath = path.join(responsesDir, `response-${requestId}.json`);
+            const errorData = {
+                success: false,
+                requestId: requestId,
+                error: error.message
+            };
+            fs.writeFileSync(errorResponsePath, JSON.stringify(errorData, null, 2), 'utf-8');
+            try { fs.unlinkSync(filePath); } catch (e) {}
+        }
+    });
+} else {
+    console.log('[E17.4] Subsistema IPC omitido por ausencia de rendezvous válido. Los servicios HTTP y WebSocket continúan activos.');
+}
 
 /**
  * Iniciar servidor compartido unificado.
@@ -476,11 +532,11 @@ watcher.on('add', async (filePath) => {
 servidorHttp.listen(PORT, HOST, () => {
     console.log('');
     console.log('============================================================');
-    console.log('              LEXDIGITAL PIPELINE ACTIVO');
+    console.log('             LEXDIGITAL PIPELINE ACTIVO');
     console.log('============================================================');
     console.log(`Interfaz Web: http://${HOST}:${PORT}`);
     console.log(`HTTP Endpoint: http://${HOST}:${PORT}/api/pipeline/procesar-json`);
-    console.log(`WebSocket:    ws://${HOST}:${PORT}`);
+    console.log(`WebSocket:     ws://${HOST}:${PORT}`);
     console.log('============================================================');
     console.log('');
     console.log('Acciones WebSocket disponibles:');

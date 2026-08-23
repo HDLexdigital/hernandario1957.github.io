@@ -1,10 +1,10 @@
-'use strict';
+﻿'use strict';
 
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 
-describe('E11.4 — Test E2E del Puente IPC (Correlación y Ciclo de vida)', () => {
+describe('E11.4 â€” Test E2E del Puente IPC (CorrelaciÃ³n y Ciclo de vida)', () => {
 
     const TEST_TIMEOUT_MS = 5000;
     const POLLING_INTERVAL_MS = 100;
@@ -17,7 +17,7 @@ describe('E11.4 — Test E2E del Puente IPC (Correlación y Ciclo de vida)', () 
     // Rutas absolutas a los fixtures crudos reales
     const rawFixturePath = path.join(__dirname, '../raw/fragmento-211.json');
     
-    // Identificador único para esta ejecución E2E (Camino Feliz)
+    // Identificador Ãºnico para esta ejecuciÃ³n E2E (Camino Feliz)
     const uniqueId = Date.now().toString();
     const requestId = `req-uxp-test-${uniqueId}`;
     const requestFileName = `request-${requestId}.json`;
@@ -33,21 +33,23 @@ describe('E11.4 — Test E2E del Puente IPC (Correlación y Ciclo de vida)', () 
         fs.mkdirSync(requestsDir, { recursive: true });
         fs.mkdirSync(responsesDir, { recursive: true });
 
-        // Corrección de la ruta: subimos tres niveles desde test/fixtures/integration/
-        const watcherScript = path.join(__dirname, '../../../watcher-ipc.js');
-        
+        // CorrecciÃ³n de la ruta: subimos tres niveles desde test/fixtures/integration/
+	const watcherScript = path.join(
+		__dirname,
+		'../../../scripts/diagnosticos/watcher-ipc.js'
+	);        
         watcherProcess = spawn('node', [watcherScript], {
             env: { ...process.env, LEXMOTOR_IPC_DIR: baseTestDir }
         });
 
-        // ¡CRÍTICO PARA DIAGNÓSTICO! Imprimimos en la consola lo que el watcher está diciendo
+        // Â¡CRÃTICO PARA DIAGNÃ“STICO! Imprimimos en la consola lo que el watcher estÃ¡ diciendo
         watcherProcess.stdout.on('data', (data) => console.log(`[WATCHER] ${data.toString().trim()}`));
         watcherProcess.stderr.on('data', (data) => console.error(`[WATCHER ERROR] ${data.toString().trim()}`));
 
         // Escuchar si el proceso crashea prematuramente
         watcherProcess.on('close', (code) => {
             if (code !== 0 && code !== null) {
-                console.error(`[WATCHER ERROR] El proceso del watcher se cerró inesperadamente con código ${code}`);
+                console.error(`[WATCHER ERROR] El proceso del watcher se cerrÃ³ inesperadamente con cÃ³digo ${code}`);
             }
         });
 
@@ -60,11 +62,11 @@ describe('E11.4 — Test E2E del Puente IPC (Correlación y Ciclo de vida)', () 
         if (fs.existsSync(baseTestDir)) fs.rmSync(baseTestDir, { recursive: true, force: true });
     });
 
-    test('A. Camino Feliz: debe procesar una petición IPC real, retornar respuesta correlacionada y auto-limpiarse', async () => {
+    test('A. Camino Feliz: debe procesar una peticiÃ³n IPC real, retornar respuesta correlacionada y auto-limpiarse', async () => {
         // A. Preparar el payload del Request apuntando al RAW real
         const requestPayload = {
             command: "compile",
-            input: rawFixturePath, // Inyectamos la ruta absoluta dinámica
+            input: rawFixturePath, // Inyectamos la ruta absoluta dinÃ¡mica
             css: "fragmento-test.css"
         };
 
@@ -88,22 +90,22 @@ describe('E11.4 — Test E2E del Puente IPC (Correlación y Ciclo de vida)', () 
 
         // VERIFICACIONES DEL CONTRATO IPC
 
-        // 1. Transporte: La respuesta llegó antes del timeout
+        // 1. Transporte: La respuesta llegÃ³ antes del timeout
         expect(responseFound).toBe(true);
         
-        // 2. Correlación: El requestId devuelto coincide exactamente con el enviado
+        // 2. CorrelaciÃ³n: El requestId devuelto coincide exactamente con el enviado
         expect(responseContent.requestId).toBe(requestId);
         
-        // --- AÑADE ESTO PARA VER EL ERROR REAL ---
+        // --- AÃ‘ADE ESTO PARA VER EL ERROR REAL ---
         if (!responseContent.success) {
-            console.error("\n💥 [DIAGNÓSTICO E2E] El watcher devolvió un error controlado:");
+            console.error("\nðŸ’¥ [DIAGNÃ“STICO E2E] El watcher devolviÃ³ un error controlado:");
             console.error(responseContent.error, "\n");
         }
         // -----------------------------------------
 
-        // 3. Éxito Lógico: El sistema no colapsó internamente
+        // 3. Ã‰xito LÃ³gico: El sistema no colapsÃ³ internamente
         if (responseContent.success !== true) {
-            throw new Error(`\n\n💥 EL WATCHER FALLÓ. Error devuelto por IPC:\n"${responseContent.error}"\n\n`);
+            throw new Error(`\n\nðŸ’¥ EL WATCHER FALLÃ“. Error devuelto por IPC:\n"${responseContent.error}"\n\n`);
         }
         expect(responseContent.timestamp).toBeDefined();
         
@@ -151,23 +153,24 @@ describe('E11.4 — Test E2E del Puente IPC (Correlación y Ciclo de vida)', () 
 
         // VERIFICACIONES DEL CONTRATO IPC EN CAMINO DE ERROR
 
-        // 1. Transporte: La respuesta de error llegó antes del timeout
+        // 1. Transporte: La respuesta de error llegÃ³ antes del timeout
         expect(responseFound).toBe(true);
         
-        // 2. Correlación: El requestId del error coincide exactamente con el enviado
+        // 2. CorrelaciÃ³n: El requestId del error coincide exactamente con el enviado
         expect(responseContent.requestId).toBe(errorRequestId);
         
-        // 3. Manejo de Fallo: El watcher no murió, pero informa que falló la operación
+        // 3. Manejo de Fallo: El watcher no muriÃ³, pero informa que fallÃ³ la operaciÃ³n
         expect(responseContent.success).toBe(false);
         
-        // 4. Diagnóstico: Incluye el mensaje de error para que UXP pueda mostrarlo
+        // 4. DiagnÃ³stico: Incluye el mensaje de error para que UXP pueda mostrarlo
         expect(responseContent.error).toBeDefined();
         expect(typeof responseContent.error).toBe('string');
         expect(responseContent.error.length).toBeGreaterThan(0);
         
-        // 5. Ciclo de Vida: El request original venenoso TAMBIÉN FUE ELIMINADO
+        // 5. Ciclo de Vida: El request original venenoso TAMBIÃ‰N FUE ELIMINADO
         expect(fs.existsSync(errorRequestPath)).toBe(false);
         
     }, TEST_TIMEOUT_MS + 1000);
 
 });
+

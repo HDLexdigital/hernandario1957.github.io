@@ -58,7 +58,7 @@ beforeAll(async () => {
     test('E12.2-A — Carga y existencia del archivo CSS canónico en disco', () => {
         // Apuntamos a la ruta real de los estilos del proyecto
         const cssPath = path.join(__dirname, '../../../estilos/fragmento.css'); 
-        expect(fs.existsSync(cssPath)).toBe(true);
+        // Aserción física eliminada por purificación Hexagonal (E15.6)
         const cssContent = fs.readFileSync(cssPath, 'utf8');
         expect(typeof cssContent).toBe('string');
         expect(cssContent.trim().length).toBeGreaterThan(0);

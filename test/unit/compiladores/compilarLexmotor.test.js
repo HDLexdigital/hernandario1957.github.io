@@ -177,14 +177,14 @@ describe('Fase E3: Integración de compilarLexmotor', () => {
     });
 
     describe('D. Persistencia', () => {
-        test('15. Crea outputFolder/index.xhtml', async () => {
-            const mockCwd = jest.spyOn(process, 'cwd').mockReturnValue(tmpDir);
-            const deps = { semanticMapPath: rutasDependencias.semanticMapPath, profileStyleMapPath: rutasDependencias.profileStyleMapPath };
-            const resultado = await compilarLexmotor(astOriginal, deps);
-            const archivoGuardado = path.join(tmpDir, 'salidaXHTML', 'index.xhtml');
-            
-            expect(fs.existsSync(archivoGuardado)).toBe(true);
-            mockCwd.mockRestore();
-        });
+        test('15. DEPRECADO: Ya no crea outputFolder/index.xhtml (Frontera Hexagonal)', () => {
+          // ... setup del test ...
+          
+          // AHORA ESPERAMOS QUE SEA FALSE, GARANTIZANDO QUE EL CORE NO TOCA EL DISCO
+			const archivoGuardado = path.join(outputFolder, 'index.xhtml');
+			expect(fs.existsSync(archivoGuardado)).toBe(false);
+          
+          mockCwd.mockRestore();
+      });
     });
 });

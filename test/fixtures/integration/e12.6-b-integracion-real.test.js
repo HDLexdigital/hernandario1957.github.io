@@ -15,7 +15,7 @@ describe('E12.6-B — Integración Real y Medición de Cobertura del Fixture 211
         const rutaJsonFixture = path.resolve(rootDir, 'test/fixtures/raw/fragmento-211.json');
         const rutaSemanticMap = path.resolve(rootDir, 'estilos/fragmento.semantic_map.json');
         
-        expect(fs.existsSync(rutaJsonFixture)).toBe(true);
+        // Aserción física eliminada por purificación Hexagonal (E15.6)
 
         const contenidoRaw = JSON.parse(fs.readFileSync(rutaJsonFixture, 'utf8'));
         

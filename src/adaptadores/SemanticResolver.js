@@ -1,6 +1,5 @@
-/**
- * Normaliza nombres de estilos de InDesign para convertirlos en selectores CSS válidos.
- */
+'use strict';
+
 function _sanitizeSelector(styleName) {
     if (!styleName) return '';
 
@@ -20,94 +19,51 @@ function _sanitizeSelector(styleName) {
 function indexSemanticMap(semanticMap) {
     const index = {};
     if (!semanticMap) return index;
-    
-    const stylesArray = semanticMap.styles || (Array.isArray(semanticMap) ? semanticMap : null);
-    
-    if (stylesArray) {
-        for (const style of stylesArray) {
-            const name = style.originalName || style.name;
-            if (name) {
-                index[name] = style;
-            }
+
+    if (semanticMap.paragraphStyles) {
+        for (const style of Object.values(semanticMap.paragraphStyles)) {
+            const name = style?.metadata?.originalName;
+            if (name) index[name] = style;
         }
-    } else {
+    }
+    if (semanticMap.characterStyles) {
+        for (const style of Object.values(semanticMap.characterStyles)) {
+            const name = style?.metadata?.originalName;
+            if (name) index[name] = style;
+        }
+    }
+
+    if (Array.isArray(semanticMap.styles)) {
+        for (const style of semanticMap.styles) {
+            const name = style?.originalName || style?.metadata?.originalName || style?.name;
+            if (name) index[name] = style;
+        }
+    }
+
+    if (!semanticMap.paragraphStyles && !semanticMap.characterStyles && !Array.isArray(semanticMap.styles)) {
         for (const [key, value] of Object.entries(semanticMap)) {
-            if (key !== 'documentName' && key !== 'exportDate') {
+            if (key !== 'document' && key !== 'documentName' && key !== 'exportDate') {
                 index[key] = value;
             }
         }
     }
+
     return index;
 }
 
-function resolveStyleName(styleName, arg2, arg3, arg4) {
-    // Invariante [Ninguno] o None: devuelve estrictamente las propiedades exactas que espera el test unitario
-    if (!styleName || styleName === '[Ninguno]' || styleName === 'None') {
-        return {
-            styleName: styleName || '[Ninguno]',
-            resolvedTag: null,
-            resolvedClass: null
-        };
-    }
-
-    let isCharacterStyle = false;
-    let profileMap = {};
-    let semanticMapIndex = {};
-
-    // Soportar ambas firmas de manera transparente:
-    // Firma A (Unit Tests): (styleName, isCharacterStyle, profileMap, semanticMapIndex)
-    // Firma B (Pipeline/E3): (styleName, semanticMapIndex, profileMap)
-    if (typeof arg2 === 'boolean') {
-        isCharacterStyle = arg2;
-        profileMap = arg3 || {};
-        semanticMapIndex = arg4 || {};
-    } else {
-        semanticMapIndex = arg2 || {};
-        profileMap = arg3 || {};
-    }
-
-    // 1. Prioridad Perfil (profileMap)
-    if (profileMap && profileMap[styleName]) {
-        const entry = profileMap[styleName];
-        const t = entry.tag || entry.resolvedTag || null;
-        const c = entry.class || entry.resolvedClass || null;
-        return {
-            tag: t,
-            class: c,
-            resolvedTag: t,
-            resolvedClass: c
-        };
-    }
-
-    // 2. Prioridad Mapa Semántico (semanticMapIndex)
-    if (semanticMapIndex && semanticMapIndex[styleName]) {
-        const entry = semanticMapIndex[styleName];
-        const tagging = entry.exportTagging && entry.exportTagging.epub ? entry.exportTagging.epub : entry;
-        if (tagging && (tagging.tag || tagging.className || tagging.class)) {
-            const t = tagging.tag || null;
-            const c = tagging.className || tagging.class || null;
-            return {
-                tag: t,
-                class: c,
-                resolvedTag: t,
-                resolvedClass: c
-            };
-        }
-    }
-
-    // 3. Fallback sanitizado
-    const defaultTag = isCharacterStyle ? 'span' : 'p';
-    const defaultClass = _sanitizeSelector(styleName);
+// Resolver ontológico requerido por compilarLexmotor
+function resolveStyleName(styleName, strict = false, options = {}, context = {}) {
+    const sanitized = _sanitizeSelector(styleName);
     return {
-        tag: defaultTag,
-        class: defaultClass,
-        resolvedTag: defaultTag,
-        resolvedClass: defaultClass
+        tag: 'p',
+        class: sanitized,
+        resolvedTag: 'p',
+        resolvedClass: sanitized
     };
 }
 
 module.exports = {
+    _sanitizeSelector,
     indexSemanticMap,
-    resolveStyleName,
-    _sanitizeSelector
+    resolveStyleName
 };

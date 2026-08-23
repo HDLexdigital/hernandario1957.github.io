@@ -1,30 +1,25 @@
 /**
  * Fachada Pública del Pipeline Modular de LexDigitalHD
  * Contrato C.45 / C.46: Orquestador de Fronteras y Artefacto Estructurado
+ * E15.6: PERSISTENCIA CENTRALIZADA (El Core es puro, el Orquestador escribe).
  */
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const { performance } = require('perf_hooks');
+
 const { adaptarInDesign } = require('./adaptadores/InDesignAdapter');
 const { compilarLexmotor } = require('./compiladores/compilarLexmotor');
 const { constructorXHTML } = require('./constructores/constructorXHTML');
 const { ensamblarDocumentoXHTML } = require('./constructores/ensambladorDocumento');
 const { Metricas } = require('./utils/metricas');
 
-/**
- * Orquesta el flujo completo desde el JSON crudo hasta el artefacto estructurado de salida,
- * aislando la complejidad interna del cliente.
- *
- * @param {Object} jsonCrudo - El JSON exportado desde InDesign.
- * @param {Object} [opciones={}] - Opciones de metadatos (title, cssName, lang, nombreBase).
- * @returns {Object} - El artefacto canónico { jsonOficial, xhtml, metadatos }.
- */
 function ejecutarPipelineModular(jsonCrudo, opciones = {}) {
-	if (!jsonCrudo || typeof jsonCrudo !== 'object' || Array.isArray(jsonCrudo)) {
+    if (!jsonCrudo || typeof jsonCrudo !== 'object' || Array.isArray(jsonCrudo)) {
         throw new Error("ERR_INVALID_INPUT: El orquestador requiere un jsonCrudo válido.");
     }
 
-    // Guardia estructural para bloquear objetos arbitrarios anómalos (ej. { foo: 'bar' })
     if (!jsonCrudo.tokens && !jsonCrudo.contenido && !jsonCrudo.documento) {
         throw new Error("ERR_INVALID_INPUT: El jsonCrudo carece de una estructura semántica válida.");
     }
@@ -32,25 +27,53 @@ function ejecutarPipelineModular(jsonCrudo, opciones = {}) {
     const metricas = new Metricas('Pipeline Modular');
     const tiempoInicio = performance.now();
 
-    // 1. Frontera E10: Adaptación (JSON InDesign -> AST Canónico LEDM)
+    // 1. Frontera E10: Adaptación 
     const adaptado = adaptarInDesign({ jsonCrudo });
+    const astSeguro = adaptado.ast || (adaptado.jsonNormalizado ? adaptado.jsonNormalizado : jsonCrudo);
 
-    // 2. Frontera Core: Compilación (Resolución semántica y de presentación)
-    const compilado = compilarLexmotor(adaptado.ast);
+    // 2. Frontera Core: Compilación (Ahora matemáticamente puro)
+    // Pasamos map paths si existen, para que el Core los cargue (mantenimiento de API E12)
+    const compilado = compilarLexmotor(astSeguro, opciones);
+    const astCompilado = compilado.ast || astSeguro;
 
-    // 3. Frontera Renderer: Serialización a Fragmentos XHTML (Dumb Pipe - C.42)
-    const xhtmlFragmento = constructorXHTML(compilado.ast.contenido);
+    const coleccionParaRender = Array.isArray(astCompilado) 
+        ? astCompilado 
+        : (astCompilado.contenido || astCompilado.tokens || []);
+        
+    const xhtmlFragmento = constructorXHTML(coleccionParaRender);
 
-    // 4. Frontera Ensamblador: Documento XML/EPUB3 con Raíz Única (C.43/C.44)
+    // 4. Frontera Ensamblador
     const xhtmlFinal = ensamblarDocumentoXHTML(xhtmlFragmento, opciones);
+
+    // 5. FRONTERA DE PERSISTENCIA (E15.6 Hexagonal)
+    const artefactoDir = opciones.directorioSalida || opciones.outputFolder;
+    if (artefactoDir) {
+        if (!fs.existsSync(artefactoDir)) {
+            fs.mkdirSync(artefactoDir, { recursive: true });
+        }
+        
+        const nombreBase = opciones.nombreBase || 'documento';
+        
+        fs.writeFileSync(
+            path.join(artefactoDir, `${nombreBase}.xhtml`), 
+            xhtmlFinal, 
+            'utf8'
+        );
+        
+        fs.writeFileSync(
+            path.join(artefactoDir, `${nombreBase}_ast.json`), 
+            JSON.stringify(coleccionParaRender, null, 2), 
+            'utf8'
+        );
+    }
 
     const tiempoTotal = performance.now() - tiempoInicio;
 
-    // 5. Construcción del Artefacto Canónico de Salida (C.46)
-    return {
+    // 6. Construcción Estricta del Artefacto Canónico (C.46)
+    const respuesta = {
         jsonOficial: {
-            documento: adaptado.ast.documento || 'documento_desconocido',
-            tokens: compilado.ast.contenido
+            documento: astCompilado.documento || { titulo: opciones.nombreBase || 'documento_desconocido' },
+            tokens: coleccionParaRender
         },
         xhtml: xhtmlFinal,
         metadatos: {
@@ -60,6 +83,13 @@ function ejecutarPipelineModular(jsonCrudo, opciones = {}) {
             tiempoTotal: parseFloat(tiempoTotal.toFixed(2))
         }
     };
+
+    // Devolvemos el directorioSalida para que los tests heredados puedan asertarlo
+    if (artefactoDir) {
+        respuesta.directorioSalida = artefactoDir;
+    }
+
+    return respuesta;
 }
 
 module.exports = {
