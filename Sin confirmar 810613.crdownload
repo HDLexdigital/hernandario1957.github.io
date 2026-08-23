@@ -1,0 +1,2 @@
+cd "H:\LexDigital\Recursos\AUTOMATIZAR INDESIGN"
+Compress-Archive "proyecto-lexdigital_modular" "backup_$(Get-Date -Format 'yyyyMMdd_HHmmss').zip"
