@@ -64,7 +64,7 @@ function generateXhtmlContent(block, title, index) {
 function generateNavXhtml(blocks) {
     const items = blocks.map((block, index) => {
         const padded = String(index + 1).padStart(3, '0');
-        const href = `article-${padded}.xhtml`;
+        const href = `xhtml/article-${padded}.xhtml`;
         const label = escapeHtml(extractNodeText(block).substring(0, 50) || block.nodeId);
         return `<li><a href="${href}">${label}</a></li>`;
     }).join('\n            ');
