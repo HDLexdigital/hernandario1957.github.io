@@ -6,23 +6,16 @@ const { JSDOM } = require('jsdom');
 const axe = require('axe-core');
 const JSZip = require('jszip');
 
-// Importar compilador y extractor de texto
 const { compile, extractNodeText } = require('../../compiler/src/semanticCompiler');
+const { generateEpub } = require('../../epub/EpubGenerator');
 
-// Rutas
-const epubPath = path.join(__dirname, '..', '..', '..', 'publication.epub');
-const subsetFixturePath = path.join(
-    __dirname,
-    '..',
-    'fixtures',
-    'authentic',
-    'CIDM_subset_articulos_1_10.json'
-);
+const subsetFixturePath = path.join(__dirname, '..', 'fixtures', 'authentic', 'CIDM_subset_articulos_1_10.json');
 
-let xhtmlContents = [];
 let ledm = null;
+let epubBuffer = null;
+let xhtmlContents = [];
 
-// Función auxiliar para ejecutar axe sobre un HTML
+// Función para ejecutar axe sobre un HTML
 function runAxeOnHtml(html) {
     return new Promise((resolve, reject) => {
         const dom = new JSDOM(html, { url: 'http://localhost/' });
@@ -42,13 +35,6 @@ function runAxeOnHtml(html) {
     });
 }
 
-// Función para obtener texto normativo del LEDM (como referencia)
-function extractLedmText(ledmDoc) {
-    return ledmDoc.structure.blocks
-        .map(block => extractNodeText(block))
-        .join('\n');
-}
-
 // Función para extraer texto de los XHTML del EPUB
 async function extractTextFromEpubBuffer(epubBuffer) {
     const zip = await JSZip.loadAsync(epubBuffer);
@@ -65,14 +51,23 @@ async function extractTextFromEpubBuffer(epubBuffer) {
     return allText.replace(/\n$/, '');
 }
 
+// Función para obtener texto normativo del LEDM
+function extractLedmText(ledmDoc) {
+    return ledmDoc.structure.blocks
+        .map(block => extractNodeText(block))
+        .join('\n');
+}
+
 describe('MVP-003: Auditoría automatizada de accesibilidad del EPUB', () => {
     beforeAll(async () => {
         // Cargar y compilar LEDM una vez
         const cidm = JSON.parse(fs.readFileSync(subsetFixturePath, 'utf8'));
         ledm = compile(cidm);
 
+        // Generar EPUB directamente (sin depender de archivo externo)
+        epubBuffer = await generateEpub(ledm);
+
         // Extraer XHTML del EPUB una vez para todas las pruebas
-        const epubBuffer = fs.readFileSync(epubPath);
         const zip = await JSZip.loadAsync(epubBuffer);
         const entries = Object.keys(zip.files).filter(name =>
             name.startsWith('OEBPS/xhtml/') && name.endsWith('.xhtml')
@@ -85,16 +80,16 @@ describe('MVP-003: Auditoría automatizada de accesibilidad del EPUB', () => {
         }
     });
 
-    test('A11Y-001: El EPUB existe y puede abrirse como ZIP', async () => {
-        expect(fs.existsSync(epubPath)).toBe(true);
-        const epubBuffer = fs.readFileSync(epubPath);
+    test('A11Y-001: El EPUB es un buffer ZIP válido', async () => {
+        expect(Buffer.isBuffer(epubBuffer)).toBe(true);
         const zip = await JSZip.loadAsync(epubBuffer);
         expect(Object.keys(zip.files).length).toBeGreaterThan(0);
     });
 
     test('A11Y-002: Se extraen todos los XHTML del EPUB', async () => {
         expect(xhtmlContents.length).toBeGreaterThan(0);
-        expect(xhtmlContents.length).toBe(ledm.structure.blocks.length);
+        // Con agrupación estructural, el número de XHTML es menor o igual al de bloques
+        expect(xhtmlContents.length).toBeLessThanOrEqual(ledm.structure.blocks.length);
     });
 
     test('A11Y-003: axe-core no reporta violations CRITICAL', async () => {
@@ -142,7 +137,6 @@ describe('MVP-003: Auditoría automatizada de accesibilidad del EPUB', () => {
 
     test('A11Y-007: El texto normativo del EPUB coincide con el LEDM', async () => {
         const textLedm = extractLedmText(ledm).replace(/\s+/g, ' ').trim();
-        const epubBuffer = fs.readFileSync(epubPath);
         const textEpub = (await extractTextFromEpubBuffer(epubBuffer)).replace(/\s+/g, ' ').trim();
         expect(textEpub).toBe(textLedm);
     });

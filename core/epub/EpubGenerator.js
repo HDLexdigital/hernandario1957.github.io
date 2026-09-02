@@ -3,11 +3,9 @@
 const JSZip = require('jszip');
 const { extractNodeText } = require('../compiler/src/semanticCompiler');
 
-// Constantes
 const MIMETYPE = 'application/epub+zip';
 const FIXED_DATE = new Date('1980-01-01T00:00:00Z');
 
-// Escapado
 function escapeHtml(value) {
     return String(value)
         .replace(/&/g, '&amp;')
@@ -16,12 +14,10 @@ function escapeHtml(value) {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
 }
-
 function escapeXml(value) {
     return escapeHtml(value);
 }
 
-// Renderizar nodo LEDM a XHTML
 function renderNode(node) {
     if (!node) return '';
     if (node.type === 'text') return escapeHtml(node.text || '');
@@ -30,7 +26,6 @@ function renderNode(node) {
     return content;
 }
 
-// Renderizar bloque LEDM a XHTML
 function renderBlockXhtml(block) {
     const content = (block.children || []).map(renderNode).join('');
     switch (block.type) {
@@ -41,9 +36,39 @@ function renderBlockXhtml(block) {
     }
 }
 
-// Generar un archivo XHTML para un bloque
-function generateXhtmlContent(block, title, index) {
-    const bodyContent = renderBlockXhtml(block);
+function chunkLedmIntoSections(blocks) {
+    const sections = [];
+    let currentSection = null;
+
+    for (const block of blocks) {
+        if (block.type === 'title') {
+            currentSection = { titleBlock: block, blocks: [] };
+            sections.push(currentSection);
+        } else {
+            if (!currentSection) {
+                currentSection = { titleBlock: null, blocks: [] };
+                sections.push(currentSection);
+            }
+            currentSection.blocks.push(block);
+        }
+    }
+
+    return sections;
+}
+
+function generateSectionXhtml(section, sectionIndex) {
+    const title = section.titleBlock
+        ? extractNodeText(section.titleBlock)
+        : `Sección ${sectionIndex + 1}`;
+
+    const contentParts = [];
+    if (section.titleBlock) {
+        contentParts.push(renderBlockXhtml(section.titleBlock));
+    }
+    contentParts.push(...section.blocks.map(block => renderBlockXhtml(block)));
+
+    const bodyContent = contentParts.join('\n        ');
+
     return `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-CO">
@@ -60,12 +85,13 @@ function generateXhtmlContent(block, title, index) {
 </html>`;
 }
 
-// Generar nav.xhtml
-function generateNavXhtml(blocks) {
-    const items = blocks.map((block, index) => {
+function generateNavXhtml(sections) {
+    const items = sections.map((section, index) => {
         const padded = String(index + 1).padStart(3, '0');
-        const href = `xhtml/article-${padded}.xhtml`;
-        const label = escapeHtml(extractNodeText(block).substring(0, 50) || block.nodeId);
+        const href = `section-${padded}.xhtml`;
+        const label = section.titleBlock
+            ? escapeHtml(extractNodeText(section.titleBlock).substring(0, 80))
+            : `Sección ${index + 1}`;
         return `<li><a href="${href}">${label}</a></li>`;
     }).join('\n            ');
 
@@ -86,8 +112,7 @@ function generateNavXhtml(blocks) {
 </html>`;
 }
 
-// Generar content.opf
-function generateOpf(ledm, blockCount) {
+function generateOpf(ledm, sectionCount) {
     const title = escapeXml(ledm.structure?.title || 'Documento');
     const modified = ledm.provenance?.retrievedAt || '2026-01-01T00:00:00Z';
     const language = ledm.meta?.jurisdiction === 'CO' ? 'es-CO' : 'es';
@@ -98,10 +123,10 @@ function generateOpf(ledm, blockCount) {
     manifestItems.push(`<item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>`);
     manifestItems.push(`<item id="css" href="css/publication.css" media-type="text/css"/>`);
 
-    for (let i = 1; i <= blockCount; i++) {
+    for (let i = 1; i <= sectionCount; i++) {
         const padded = String(i).padStart(3, '0');
-        const id = `article-${padded}`;
-        const href = `xhtml/article-${padded}.xhtml`;
+        const id = `section-${padded}`;
+        const href = `xhtml/section-${padded}.xhtml`;
         manifestItems.push(`<item id="${id}" href="${href}" media-type="application/xhtml+xml"/>`);
         spineItems.push(`<itemref idref="${id}"/>`);
     }
@@ -123,7 +148,6 @@ function generateOpf(ledm, blockCount) {
 </package>`;
 }
 
-// Generar container.xml
 function generateContainer() {
     return `<?xml version="1.0" encoding="UTF-8"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -133,7 +157,6 @@ function generateContainer() {
 </container>`;
 }
 
-// Generar CSS mínimo
 function generateCss() {
     return `body { font-family: serif; }
 article { margin: 1rem 0; }
@@ -142,53 +165,41 @@ strong { font-weight: bold; }
 p { margin: 0.5em 0; }`;
 }
 
-/**
- * Genera un EPUB a partir de un LEDM 2.0 válido.
- * @param {object} ledm - Documento LEDM 2.0
- * @returns {Promise<Buffer>} Buffer con el archivo .epub
- */
 async function generateEpub(ledm) {
     if (!ledm || ledm.meta?.model !== 'LEDM-2.0' || !Array.isArray(ledm.structure?.blocks)) {
         throw new Error('LEDM inválido para generación EPUB');
     }
     const blocks = ledm.structure.blocks;
-    if (blocks.length === 0) {
-        throw new Error('LEDM no contiene bloques');
-    }
+    if (blocks.length === 0) throw new Error('LEDM sin bloques');
 
+    const sections = chunkLedmIntoSections(blocks);
     const zip = new JSZip();
-    const date = FIXED_DATE;
 
-    // Agregar mimetype sin compresión y como primera entrada
-    zip.file('mimetype', MIMETYPE, { compression: 'STORE', date });
-    zip.file('META-INF/container.xml', generateContainer(), { date });
-    zip.file('OEBPS/content.opf', generateOpf(ledm, blocks.length), { date });
-    zip.file('OEBPS/nav.xhtml', generateNavXhtml(blocks), { date });
-    zip.file('OEBPS/css/publication.css', generateCss(), { date });
+    zip.file('mimetype', MIMETYPE, { compression: 'STORE', date: FIXED_DATE });
+    zip.file('META-INF/container.xml', generateContainer(), { date: FIXED_DATE });
+    zip.file('OEBPS/content.opf', generateOpf(ledm, sections.length), { date: FIXED_DATE });
+    zip.file('OEBPS/nav.xhtml', generateNavXhtml(sections), { date: FIXED_DATE });
+    zip.file('OEBPS/css/publication.css', generateCss(), { date: FIXED_DATE });
 
-    // Agregar archivos XHTML por bloque
-    blocks.forEach((block, index) => {
+    sections.forEach((section, index) => {
         const padded = String(index + 1).padStart(3, '0');
-        const filename = `OEBPS/xhtml/article-${padded}.xhtml`;
-        const content = generateXhtmlContent(block, block.nodeId || `Artículo ${index + 1}`, index + 1);
-        zip.file(filename, content, { date });
+        zip.file(`OEBPS/xhtml/section-${padded}.xhtml`, generateSectionXhtml(section, index), { date: FIXED_DATE });
     });
 
-    const buffer = await zip.generateAsync({
+    return await zip.generateAsync({
         type: 'nodebuffer',
         compression: 'DEFLATE',
         compressionOptions: { level: 6 },
         platform: 'DOS'
     });
-
-    return buffer;
 }
 
 module.exports = {
     generateEpub,
-    generateXhtmlContent,
+    generateSectionXhtml,
     generateNavXhtml,
     generateOpf,
     generateContainer,
-    generateCss
+    generateCss,
+    chunkLedmIntoSections
 };
