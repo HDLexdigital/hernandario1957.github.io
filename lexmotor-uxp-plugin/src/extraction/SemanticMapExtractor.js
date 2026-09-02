@@ -42,6 +42,25 @@ function extraerMapaSemantico(documento) {
                 }
             };
 
+            // 🚀 MEJORA: Atrapar tipografía para alimentar el CSS dinámico de Node.js
+            try {
+                if (style.fontStyle) {
+                    styleNode.presentation.fontStyle = String(style.fontStyle);
+                }
+                if (style.pointSize) {
+                    styleNode.presentation.pointSize = style.pointSize;
+                }
+                if (style.appliedFont && style.appliedFont.name) {
+                    styleNode.presentation.fontFamily = String(style.appliedFont.name);
+                }
+                // Si usan Character Shading (fondo de color en el texto) para resaltes formales
+                if (style.characterShadingColor && style.characterShadingColor.name && style.characterShadingColor.name !== "None") {
+                    styleNode.presentation.backgroundColor = normalizarColorInDesign(style.characterShadingColor);
+                }
+            } catch(e) {
+                // Silenciamos el error por si InDesign falla al leer propiedades heredadas o corruptas
+            }
+
             const maps = style.styleExportTagMaps;
             if (maps && typeof maps.length === 'number') {
                 const mapsCount = maps.length;

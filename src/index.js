@@ -1,156 +1,115 @@
 'use strict';
-
-const fs = require('fs');
-const path = require('path');
-const { ejecutarPipelineModular } = require('./pipelineModular');
-const { PersistenciaAdapter } = require('./infra/adaptadores/persistenciaAdapter');
-const { TransporteUXPAdapter } = require('./infra/adaptadores/transporteUXPAdapter');
-const SemanticResolver = require('./adaptadores/SemanticResolver');
-// 1. INYECTAR LOS GUARDIANES DE CONTRATO (Fase 1 y 2)
-const { validarDocumento } = require('./core/validators/DocumentSchemaValidator');
-const { validarContenido } = require('./core/validators/ContentSchemaValidator');
-
-// 1. APIs Modernas (Arquitectura Modular C.45-C.50)
-function procesarDocumentoE2E(rutaEntrada, rutaDestino, opciones = {}) {
-    const contenidoCrudo = fs.readFileSync(rutaEntrada, 'utf8');
-    const jsonCrudo = JSON.parse(contenidoCrudo);
-    const artefactoC46 = ejecutarPipelineModular(jsonCrudo, opciones);
-    const persistencia = new PersistenciaAdapter();
-    return persistencia.guardar(artefactoC46, rutaDestino);
-}
-
-async function procesarDocumentoIPC(jsonCrudo, clienteIPC, opciones = {}) {
-    const artefactoC46 = ejecutarPipelineModular(jsonCrudo, opciones);
-    const transporte = new TransporteUXPAdapter(clienteIPC);
-    return await transporte.enviar(artefactoC46);
-}
-
-// 2. Adaptadores de Compatibilidad Histórica (Para los Tests legacy y E9)
-function validarCompatibilidad(jsonCrudo) {
-    try {
-        if (!jsonCrudo || typeof jsonCrudo !== 'object' || Array.isArray(jsonCrudo)) {
-            return { esValido: false, errores: ['jsonCrudo debe ser un objeto válido.'] };
+class LexDigitalCompiler {
+    constructor(opciones = {}) {
+        this.version = '2.0.0';
+        this.config = this.cargarConfiguracion(opciones);
+        this.modulos = {};
+        this.inicializar();
+    }
+    cargarConfiguracion(opciones) {
+        try {
+            const configDefault = require('./config/default');
+            return { ...configDefault, ...opciones };
+        } catch (e) {
+            return opciones;
         }
-        if (typeof jsonCrudo.documento === 'function' || Object.getOwnPropertyDescriptor(jsonCrudo, 'documento')?.get) {
-            throw new Error("Fallo catastrófico simulado");
-        }
-        if (!jsonCrudo.documento) {
-            return { esValido: false, errores: ['Campo "documento" faltante.'] };
-        }
-        if (!Array.isArray(jsonCrudo.contenido)) {
-            return { esValido: false, errores: ['La colección "contenido" debe ser un arreglo.'] };
-        }
-        return { esValido: true, errores: [], estadisticas: {} };
-    } catch (e) {
-        return { esValido: false, errores: [e.message] };
     }
-}
-
-async function compilarLexmotor(jsonCrudo, nombreBaseOrDeps, cssNameOrOptions, opcionesExtra) {
-    // A. Filtros Iniciales Básicos
-    if (!jsonCrudo || typeof jsonCrudo !== 'object' || Array.isArray(jsonCrudo)) {
-        throw new Error("ERR_INVALID_INPUT: jsonCrudo debe ser un objeto válido.");
-    }
-    if (typeof jsonCrudo.documento === 'function' || Object.getOwnPropertyDescriptor(jsonCrudo, 'documento')?.get) {
-        throw new Error("Fallo catastrófico simulado");
-    }
-
-    // B. GUARDIANES DE CONTRATOS (PIPE-CONTRACT-002 y PIPE-CONTRACT-003)
-    // El orquestador ya no tiene que adivinar; la fachada rechaza de inmediato si no cumple el esquema.
-    validarDocumento(jsonCrudo);
-    validarContenido(jsonCrudo);
-
-    let nombreBase = 'lexdigital_doc';
-    let cssName = 'styles.css';
-    let opciones = {};
-    let dependencias = {};
-
-    if (typeof nombreBaseOrDeps === 'string') {
-        nombreBase = nombreBaseOrDeps;
-        cssName = typeof cssNameOrOptions === 'string' ? cssNameOrOptions : cssName;
-        opciones = opcionesExtra || (typeof cssNameOrOptions === 'object' ? cssNameOrOptions : {});
-    } else if (typeof nombreBaseOrDeps === 'object' && nombreBaseOrDeps !== null) {
-        dependencias = nombreBaseOrDeps;
-    }
-
-    if (dependencias.semanticMapPath) {
-        SemanticResolver.indexSemanticMap(dependencias.semanticMapPath);
-    }
-
-    // C. El pipeline puro y asegurado.
-    const artefactoC46 = ejecutarPipelineModular(jsonCrudo, { nombreBase, cssName, ...opciones, ...dependencias });
-    let xhtmlFinal = artefactoC46.xhtml;
-
-    if (jsonCrudo.documento && jsonCrudo.documento.titulo) {
-        xhtmlFinal = xhtmlFinal.replace('<title>Documento LexDigital</title>', `<title>${jsonCrudo.documento.titulo}</title>`);
-    }
-
-    const astEnriquecidoLegacy = JSON.parse(JSON.stringify(artefactoC46.jsonOficial));
-    astEnriquecidoLegacy.contenido = astEnriquecidoLegacy.tokens;
-
-    const nombreDocumento = typeof jsonCrudo.documento === 'string' 
-        ? jsonCrudo.documento 
-        : (jsonCrudo.documento && jsonCrudo.documento.titulo ? jsonCrudo.documento.titulo : '');
-        
-    const isE9Regression = typeof nombreDocumento === 'string' && nombreDocumento.includes('E9_Regresion');
-
-    function adaptarContratoLegacy(nodo) {
-        if (!nodo || typeof nodo !== 'object') return;
-        
-        if (isE9Regression) {
-            if (nodo.tipoNodo === 'character' && (nodo.inDesignStyle === '[Ninguno]' || nodo.estiloCaracter === '[Ninguno]')) {
-                if (nodo.resolvedClass === null) {
-                    nodo.resolvedTag = null;
-                    delete nodo.resolvedClass;
-                }
+    inicializar() {
+        console.log('🚀 LexDigital Compiler v' + this.version);
+        // Cargar compilador
+        try {
+            const compiladorModulo = require('./core/compiladores/compilarLexmotor');
+            if (compiladorModulo.compilarLexmotor) {
+                this.modulos.compilador = compiladorModulo.compilarLexmotor;
+                console.log('  ✅ Compilador cargado');
             }
-
-            if (nodo.resolvedClass === 'cuerpo-siguiente texto_cuerpo') {
-                nodo.resolvedClass = 'body-base';
+        } catch (e) {
+            console.warn('  ⚠️ Compilador no disponible:', e.message);
+        }
+        // Cargar constructor
+        try {
+            const constructorModulo = require('./core/constructores/constructorXHTML');
+            this.modulos.constructor = constructorModulo.constructorXHTML || constructorModulo;
+            console.log('  ✅ Constructor cargado');
+        } catch (e) {
+            console.warn('  ⚠️ Constructor no disponible:', e.message);
+        }
+        // Cargar validador (manejar diferentes formatos)
+        try {
+            const validadorModulo = require('./core/utils/validadorJson');
+            // Si es función directa
+            if (typeof validadorModulo === 'function') {
+                this.modulos.validadorJson = validadorModulo;
             }
-            if (nodo.resolvedClass === 'terminoglosario') {
-                nodo.resolvedClass = 'glosario';
+            // Si es objeto con método validar
+            else if (validadorModulo.validar) {
+                this.modulos.validadorJson = validadorModulo.validar.bind(validadorModulo);
             }
+            // Si es objeto con validadorJson
+            else if (validadorModulo.validadorJson) {
+                this.modulos.validadorJson = validadorModulo.validadorJson;
+            }
+            // Si es objeto con default
+            else if (validadorModulo.default) {
+                this.modulos.validadorJson = validadorModulo.default;
+            }
+            // Si es objeto, usar como está
+            else {
+                this.modulos.validadorJson = validadorModulo;
+            }
+            console.log('  ✅ Validador cargado');
+        } catch (e) {
+            console.warn('  ⚠️ Validador no disponible:', e.message);
         }
-        
-        if (Array.isArray(nodo.contenido)) {
-            nodo.contenido.forEach(adaptarContratoLegacy);
+        // Cargar clasificador
+        try {
+            this.modulos.clasificadorLegal = require('./core/utils/clasificadorLegal');
+            console.log('  ✅ Clasificador cargado');
+        } catch (e) {
+            console.warn('  ⚠️ Clasificador no disponible:', e.message);
+        }
+        console.log('✅ Módulos cargados:', Object.keys(this.modulos).join(', '));
+    }
+    async compilar(jsonData, opciones = {}) {
+        if (!this.modulos.compilador) {
+            throw new Error('Compilador no disponible');
+        }
+        try {
+            const resultado = await this.modulos.compilador(jsonData, { ...this.config, ...opciones });
+            return resultado;
+        } catch (error) {
+            throw error;
         }
     }
-
-    if (Array.isArray(astEnriquecidoLegacy.contenido)) {
-        astEnriquecidoLegacy.contenido.forEach(adaptarContratoLegacy);
-    }
-
-    if (isE9Regression) {
-        xhtmlFinal = xhtmlFinal.replace(/cuerpo-siguiente texto_cuerpo/g, 'body-base');
-        xhtmlFinal = xhtmlFinal.replace(/class="terminoglosario"/g, 'class="glosario"');
-
-        if (artefactoC46.metadatos && artefactoC46.metadatos.diagnosticoCSS) {
-            artefactoC46.metadatos.diagnosticoCSS.usedClasses = ['body-base', 'glosario'];
-            artefactoC46.metadatos.diagnosticoCSS.missingClasses = [];
-            artefactoC46.metadatos.diagnosticoCSS.valid = true;
+    validar(jsonData) {
+        if (!this.modulos.validadorJson) {
+            throw new Error('Validador no disponible');
         }
+        // Manejar diferentes tipos de validador
+        if (typeof this.modulos.validadorJson === 'function') {
+            return this.modulos.validadorJson(jsonData);
+        }
+        // Si es objeto con método validar
+        if (this.modulos.validadorJson.validar) {
+            return this.modulos.validadorJson.validar(jsonData);
+        }
+        // Si es objeto, retornar como está
+        return this.modulos.validadorJson;
     }
-
-    if (dependencias.outputFolder) {
-        const dirSalida = path.resolve(process.cwd(), dependencias.outputFolder);
-        if (!fs.existsSync(dirSalida)) fs.mkdirSync(dirSalida, { recursive: true });
-        fs.writeFileSync(path.join(dirSalida, 'index.xhtml'), xhtmlFinal, 'utf8');
+    clasificar(jsonData) {
+        if (!this.modulos.clasificadorLegal) {
+            throw new Error('Clasificador no disponible');
+        }
+        if (typeof this.modulos.clasificadorLegal === 'function') {
+            return this.modulos.clasificadorLegal(jsonData);
+        }
+        return this.modulos.clasificadorLegal;
     }
-
-    return {
-        astEnriquecido: astEnriquecidoLegacy,
-        xhtml: xhtmlFinal,
-        jsonOficial: artefactoC46.jsonOficial,
-        metadatos: artefactoC46.metadatos,
-        diagnostico: artefactoC46.metadatos.diagnosticoCSS
-    };
 }
-
 module.exports = {
-    procesarDocumentoE2E,
-    procesarDocumentoIPC,
-    compilarLexmotor,
-    validarCompatibilidad
+    Compiler: LexDigitalCompiler,
+    compilar: (jsonData, opciones) => new LexDigitalCompiler(opciones).compilar(jsonData),
+    validar: (jsonData) => new LexDigitalCompiler().validar(jsonData),
+    clasificar: (jsonData) => new LexDigitalCompiler().clasificar(jsonData),
+    version: '2.0.0'
 };

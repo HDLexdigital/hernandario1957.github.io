@@ -1,44 +1,40 @@
 {
-    "name": "lexdigital",
-    "version": "1.0.0",
-    "description": "Motor modular para procesamiento automatizado de textos jurÃ­dicos. Convierte documentos legales desde mÃºltiples fuentes a formatos accesibles.",
-    "main": "src/index.js",
-    "bin": {
-        "lexdigital": "bin/cli.js"
-    },
-    "scripts": {
-        "start": "node bin/cli.js",
-        "dev": "nodemon bin/cli.js --watch src --watch config",
-        "build": "node bin/cli.js",
-        "test": "jest --coverage --detectOpenHandles",
-        "test:watch": "jest --watch",
-        "lint": "eslint src bin test --max-warnings 5",
-        "lint:fix": "eslint src bin test --fix",
-        "format": "prettier --write \"src/**/*.js\" \"bin/**/*.js\" \"test/**/*.js\""
-    },
-    "dependencies": {
-        "@xmldom/xmldom": "^0.9.11",
-        "adm-zip": "^0.6.0",
-        "archiver": "^5.3.2",
-        "chokidar": "^5.0.0",
-        "express": "^5.2.1",
-        "jsdom": "^24.0.0",
-        "puppeteer": "^25.5.0"
-    },
-    "devDependencies": {
-        "eslint": "^8.52.0",
-        "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-plugin-import": "^2.29.0",
-        "husky": "^8.0.3",
-        "jest": "^29.7.0",
-        "lint-staged": "^15.0.2",
-        "nodemon": "^3.0.1",
-        "prettier": "^3.0.3"
-    },
-    "engines": {
-        "node": ">=14.0.0"
-    },
-    "allowScripts": {
-        "puppeteer@25.5.0": true
-    }
+  "name": "lexdigital",
+  "version": "1.0.0",
+  "description": "Compilador editorial LexDigital",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --config jest.config.js",
+    "test:contracts": "jest core/ledm/test/ledm-v2.contract.test.js core/cidm/test/cidm-v1.contract.test.js --config jest.config.js --verbose",
+    "test:ledm": "jest core/ledm/test/ledm-v2.contract.test.js --config jest.config.js --verbose",
+    "test:cidm": "jest core/cidm/test/cidm-v1.contract.test.js --config jest.config.js --verbose",
+    "test:compiler": "jest core/compiler/test/semantic-compiler.contract.test.js --config jest.config.js --verbose",
+    "test:integration": "jest core/integration/test/cidm-to-ledm.pipeline.test.js --config jest.config.js --verbose",
+    "test:all": "npm run test:ledm && npm run test:cidm && npm run test:compiler && npm run test:integration",
+    "test:esencial": "jest test/esencial/suite-esencial.test.js --verbose",
+    "test:unit": "jest test/unit --silent",
+    "test:integration:legacy": "jest test/integration --runInBand",
+    "test:e2e": "jest test/integration/e2e.pipeline.test.js --detectOpenHandles",
+    "test:coverage": "jest --coverage --coverageDirectory='coverage'",
+    "test:watch": "jest --watch",
+    "start": "node src/index.js",
+    "pipeline": "node LexDigital-Pipeline/server.js",
+    "verify": "node scripts/verificar-estructura.js"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.11",
+    "adm-zip": "^0.6.0",
+    "archiver": "^5.3.2",
+    "cheerio": "^1.2.0",
+    "chokidar": "^5.0.0",
+    "express": "^5.2.1",
+    "fs-extra": "^11.4.0",
+    "jsdom": "^24.0.0",
+    "puppeteer": "^25.9.0"
+  },
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^3.0.1",
+    "jest": "^29.7.0"
+  }
 }

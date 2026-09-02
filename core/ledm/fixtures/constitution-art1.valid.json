@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "model": "LEDM-2.0",
+    "jurisdiction": "CO",
+    "corpusId": "CO-CONST-1991",
+    "documentId": "CO-CONST-1991",
+    "version": {
+      "id": "CO-CONST-1991-v1.0.0",
+      "number": 1,
+      "status": "CURRENT"
+    },
+    "dates": {
+      "promulgation": "1991-07-07",
+      "publication": "1991-07-07",
+      "effectiveFrom": "1991-07-07"
+    }
+  },
+  "provenance": {
+    "sourceType": "OFFICIAL_GAZETTE",
+    "sourceId": "Gaceta Constitucional No. 116",
+    "retrievedAt": "2026-09-01T00:00:00Z",
+    "transformationsApplied": [
+      { "id": "normalization_utf8", "version": "1.0.0" },
+      { "id": "structure_inference", "version": "1.0.0" }
+    ]
+  },
+  "integrity": {
+    "sourceHash": { "algorithm": "SHA-256", "value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" },
+    "contentHash": { "algorithm": "SHA-256", "value": "8b1a9953c4611296a827abf8c47804d7e6c49c6bafd9a5933a307c0397fc9161" },
+    "ledmHash": { "algorithm": "SHA-256", "value": "b53227da4280f0e18270f21dd77c91d8ecb16fb32467d5e492215c2ec4df6461" }
+  },
+  "structure": {
+    "type": "constitution",
+    "title": "Constitución Política de Colombia",
+    "blocks": [
+      {
+        "nodeId": "CO-CONST-T1-C1-ART1",
+        "type": "article",
+        "number": "1",
+        "children": [
+          {
+            "nodeId": "CO-CONST-T1-C1-ART1-P1",
+            "type": "paragraph",
+            "children": [
+              { "type": "text", "value": "Colombia es un " },
+              {
+                "type": "emphasis",
+                "children": [
+                  { "type": "text", "value": "Estado social de derecho" }
+                ]
+              }
+            ]
+          }
+        ],
+        "relations": {
+          "references": ["CO-LAW-134-1994-ART3"],
+          "amends": [],
+          "repeals": [],
+          "develops": []
+        }
+      }
+    ]
+  }
+}

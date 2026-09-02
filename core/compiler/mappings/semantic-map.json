@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "description": "Mapeo declarativo de estilos nativos a tipos semánticos editoriales",
+  "paragraphStyles": {
+    "style-p-title": { "semanticType": "title" },
+    "style-p-body": { "semanticType": "paragraph" },
+    "style-p-titulo-capitulo": { "semanticType": "title" },
+    "style-p-articulo": { "semanticType": "article" },
+
+    "style-p-p02_title_part": { "semanticType": "title" },
+    "style-p-p03_center_bold": { "semanticType": "paragraph" },
+    "style-p-p01_body_first": { "semanticType": "paragraph" },
+    "style-p-p02_title_main": { "semanticType": "title" },
+    "style-p-p01_body_base": { "semanticType": "paragraph" },
+    "style-p-p01_body_cont": { "semanticType": "paragraph" },
+    "style-p-p02_title_chapter": { "semanticType": "title" },
+    "style-p-p07_indent_l1": { "semanticType": "paragraph" },
+    "style-p-p07_indent_l2": { "semanticType": "paragraph" },
+    "style-p-p07_indent_l1_nonum": { "semanticType": "paragraph" },
+    "style-p-p03_center_normal": { "semanticType": "paragraph" },
+    "style-p-p02_title_book": { "semanticType": "title" },
+    "style-p-p05_idx_art": { "semanticType": "paragraph" },
+    "style-p-p08_gls_term_dt": { "semanticType": "paragraph" },
+    "style-p-p08_gls_term_dd": { "semanticType": "paragraph" },
+    "style-p-p08_gls-art": { "semanticType": "paragraph" }
+  },
+  "characterStyles": {
+    "style-c-bold": { "semanticType": "strong" },
+    "style-c-negrita": { "semanticType": "strong" },
+    "style-c-c01_bold": { "semanticType": "strong" }
+  }
+}

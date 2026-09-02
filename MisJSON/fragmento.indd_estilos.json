@@ -1,0 +1,293 @@
+{
+  "documento": "fragmento.indd",
+  "estilosParrafo": [
+    {
+      "nombre": "P01_BODY_CONT",
+      "propiedades": {
+        "fontFamily": "Liberation Serif\tRegular",
+        "fontStyle": "Regular",
+        "pointSize": 14,
+        "leading": "AUTO",
+        "tracking": 8,
+        "justification": "LEFT_JUSTIFIED",
+        "leftIndent": 0,
+        "rightIndent": 0,
+        "firstLineIndent": 5.997,
+        "spaceBefore": 1.5,
+        "spaceAfter": 0,
+        "capitalization": "NORMAL",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#000000",
+        "fillTint": -1
+      }
+    },
+    {
+      "nombre": "P01_BODY_BASE",
+      "propiedades": {
+        "fontFamily": "Liberation Serif\tRegular",
+        "fontStyle": "Regular",
+        "pointSize": 14,
+        "leading": "AUTO",
+        "tracking": 8,
+        "justification": "LEFT_JUSTIFIED",
+        "leftIndent": 0,
+        "rightIndent": 0,
+        "firstLineIndent": 0,
+        "spaceBefore": 3.5,
+        "spaceAfter": 0,
+        "capitalization": "NORMAL",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#000000",
+        "fillTint": -1
+      }
+    },
+    {
+      "nombre": "P07_INDENT_L1",
+      "propiedades": {
+        "fontFamily": "Minion Pro\tRegular",
+        "fontStyle": "Regular",
+        "pointSize": 14,
+        "leading": "AUTO",
+        "tracking": 8,
+        "justification": "LEFT_ALIGN",
+        "leftIndent": 13.406,
+        "rightIndent": 0,
+        "firstLineIndent": -7.761,
+        "spaceBefore": 1.5,
+        "spaceAfter": 0,
+        "capitalization": "NORMAL",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#000000",
+        "fillTint": -1
+      }
+    },
+    {
+      "nombre": "P02_TITLE_BASE",
+      "propiedades": {
+        "fontFamily": "Liberation Serif\tBold",
+        "fontStyle": "Bold",
+        "pointSize": 15,
+        "leading": "AUTO",
+        "tracking": 8,
+        "justification": "CENTER_ALIGN",
+        "leftIndent": 0,
+        "rightIndent": 0,
+        "firstLineIndent": 0,
+        "spaceBefore": 3.5,
+        "spaceAfter": 0,
+        "capitalization": "NORMAL",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#000000",
+        "fillTint": -1
+      }
+    },
+    {
+      "nombre": "P02_TITLE_PART",
+      "propiedades": {
+        "fontFamily": "Georgia Pro\tCond Semibold",
+        "fontStyle": "Cond Semibold",
+        "pointSize": 24,
+        "leading": "AUTO",
+        "tracking": 8,
+        "justification": "CENTER_ALIGN",
+        "leftIndent": 2,
+        "rightIndent": 0,
+        "firstLineIndent": 0,
+        "spaceBefore": 5,
+        "spaceAfter": 1,
+        "capitalization": "ALL_CAPS",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#000000",
+        "fillTint": 85
+      }
+    },
+    {
+      "nombre": "P02_TITLE_MAIN",
+      "propiedades": {
+        "fontFamily": "Georgia Pro\tCond Semibold",
+        "fontStyle": "Cond Semibold",
+        "pointSize": 16,
+        "leading": "AUTO",
+        "tracking": 8,
+        "justification": "CENTER_ALIGN",
+        "leftIndent": 0,
+        "rightIndent": 0,
+        "firstLineIndent": 0,
+        "spaceBefore": 5,
+        "spaceAfter": 1,
+        "capitalization": "ALL_CAPS",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#0054a8",
+        "fillTint": -1
+      }
+    },
+    {
+      "nombre": "P02_TITLE_CHAPTER",
+      "propiedades": {
+        "fontFamily": "Liberation Serif\tBold",
+        "fontStyle": "Bold",
+        "pointSize": 14,
+        "leading": "AUTO",
+        "tracking": 0,
+        "justification": "CENTER_ALIGN",
+        "leftIndent": 0,
+        "rightIndent": 0,
+        "firstLineIndent": 0,
+        "spaceBefore": 4,
+        "spaceAfter": 0,
+        "capitalization": "NORMAL",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#0054a8",
+        "fillTint": -1
+      }
+    },
+    {
+      "nombre": "P03_CENTER_NORMAL",
+      "propiedades": {
+        "fontFamily": "Liberation Serif\tRegular",
+        "fontStyle": "Regular",
+        "pointSize": 14,
+        "leading": "AUTO",
+        "tracking": 8,
+        "justification": "CENTER_ALIGN",
+        "leftIndent": 0,
+        "rightIndent": 0,
+        "firstLineIndent": 0,
+        "spaceBefore": 1.76388888888889,
+        "spaceAfter": 1.76388888888889,
+        "capitalization": "NORMAL",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#000000",
+        "fillTint": -1
+      }
+    },
+    {
+      "nombre": "P03_CENTER_BOLD",
+      "propiedades": {
+        "fontFamily": "Liberation Serif\tBold",
+        "fontStyle": "Bold",
+        "pointSize": 14,
+        "leading": "AUTO",
+        "tracking": 8,
+        "justification": "CENTER_ALIGN",
+        "leftIndent": 0,
+        "rightIndent": 0,
+        "firstLineIndent": 0,
+        "spaceBefore": 1.76388888888889,
+        "spaceAfter": 1.76388888888889,
+        "capitalization": "NORMAL",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#000000",
+        "fillTint": -1
+      }
+    }
+  ],
+  "estilosCaracter": [
+    {
+      "nombre": "C00_NORMAL",
+      "propiedades": {
+        "fontFamily": "",
+        "fontStyle": "Regular",
+        "pointSize": "Heredado",
+        "tracking": "Heredado",
+        "capitalization": "Heredado",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "",
+        "fillTint": "Heredado"
+      }
+    },
+    {
+      "nombre": "C01_BOLD",
+      "propiedades": {
+        "fontFamily": "",
+        "fontStyle": "Bold",
+        "pointSize": "Heredado",
+        "tracking": "Heredado",
+        "capitalization": "Heredado",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#0054a8",
+        "fillTint": 100
+      }
+    },
+    {
+      "nombre": "00 Normal_char",
+      "propiedades": {
+        "fontFamily": "",
+        "fontStyle": "Regular",
+        "pointSize": "Heredado",
+        "tracking": "Heredado",
+        "capitalization": "Heredado",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "",
+        "fillTint": "Heredado"
+      }
+    },
+    {
+      "nombre": "TerminoGlosario",
+      "propiedades": {
+        "fontFamily": "",
+        "fontStyle": "Heredado",
+        "pointSize": "Heredado",
+        "tracking": "Heredado",
+        "capitalization": "Heredado",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#000000",
+        "fillTint": 100
+      }
+    },
+    {
+      "nombre": "C16_TD_GLOSS",
+      "propiedades": {
+        "fontFamily": "",
+        "fontStyle": "Regular",
+        "pointSize": "Heredado",
+        "tracking": "Heredado",
+        "capitalization": "Heredado",
+        "underline": false,
+        "strikeThru": false,
+        "fillColor": "#0054a8",
+        "fillTint": 100
+      }
+    }
+  ],
+  "relacionesGREP": [
+    {
+      "estiloParrafo": "P01_BODY_BASE",
+      "estiloCaracter": "TerminoGlosario",
+      "textoEjemplo": "norma de normas"
+    },
+    {
+      "estiloParrafo": "P01_BODY_CONT",
+      "estiloCaracter": "TerminoGlosario",
+      "textoEjemplo": "igualdad"
+    },
+    {
+      "estiloParrafo": "P01_BODY_BASE",
+      "estiloCaracter": "C16_TD_GLOSS",
+      "textoEjemplo": " libertad de expresar y difundir su pensamiento y opiniones"
+    },
+    {
+      "estiloParrafo": "P01_BODY_CONT",
+      "estiloCaracter": "00 Normal_char",
+      "textoEjemplo": "pena"
+    },
+    {
+      "estiloParrafo": "P07_INDENT_L1",
+      "estiloCaracter": "TerminoGlosario",
+      "textoEjemplo": "Elegir"
+    }
+  ]
+}

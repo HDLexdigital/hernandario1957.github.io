@@ -1,0 +1,1619 @@
+Condiciones ideales para la extracción y compilación en InDesign
+
+Disciplina estricta de estilos: Uso exclusivo y riguroso de Estilos de Párrafo y Estilos de Carácter nativos para toda la jerarquía tipográfica, manteniendo los overrides (formato manual directo) en un 0% o por debajo del umbral del 5%.
+
+Flujo de historias limpio y lineal: Cadenas de texto (stories) ordenadas secuencialmente de principio a fin, sin marcos de texto flotantes desconectados, hilos rotos o cajas superpuestas que alteren el orden lógico del DOM.
+
+Nomenclatura semántica predecible: Títulos, capítulos y artículos estructurados con patrones de texto consistentes que faciliten la evaluación instantánea del motor GREP externo.
+
+Entorno de hardware dedicado: Ejecución sobre almacenamiento SSD local con suficiente RAM disponible para que ExtendScript procese la serialización del AST sin competir con recursos de red o procesos pesados en segundo plano.
+
+Peores condiciones que degradan o bloquean el proceso
+
+Abuso masivo de formato manual (Overrides): Documentos donde los maquetadores modifican tamaño, interlineado, negritas o colores directamente sobre el texto seleccionado sin crear estilos, lo que desborda la capacidad del script de extracción y rompe la consistencia del CSS generado.
+
+Estructura de caja caótica: Documentos construidos mediante marcos de texto independientes y sueltos en lugar de un flujo continuo, generando saltos impredecibles en el orden de los nodos del árbol sintáctico.
+
+Uso indiscriminado del estilo base: Párrafos enteros configurados con [Sin estilo] o [Basic Paragraph Style], obligando al motor a adivinar la semántica y provocando que la clasificación GREP falle o clasifique erróneamente el contenido jurídico.
+
+Saturación del hilo principal de InDesign: Archivos .indd extremadamente pesados con miles de notas al pie anidadas, tablas complejas o gráficos vinculados defectuosos que bloquean el motor ES3 y provocan tiempos de espera agotados (timeout) o congelamiento total de la aplicación.
+
+Sí. El texto que planteas es técnicamente correcto como punto de partida, pero haría una precisión importante: **no conviene tratar la extracción como un problema exclusivamente de scripting**. En un flujo InDesign → AST → XHTML/CSS, la calidad del resultado depende de una cadena anterior de decisiones editoriales: **original → normalización → estilos → estructura de stories → auditoría → extracción → validación del AST → compilación**.
+
+La documentación actual de Adobe confirma además que InDesign dispone de mecanismos nativos precisamente para varios de estos controles: estilos de párrafo/carácter, GREP, Preflight, Export Tagging, stories enlazadas y automatización mediante scripting/UXP. 
+
+# 1. Conclusión ejecutiva
+
+Para tu proyecto **LexDigital**, recomiendo establecer una **Norma de Preparación de Documento InDesign para Extracción (NPDI-E)** con cinco niveles:
+
+| Nivel | Objetivo | Estado requerido |
+|---|---|---|
+| P0 | Integridad del archivo | INDD abre, guarda y recompone correctamente |
+| P1 | Integridad textual | Stories completas, sin overset ni hilos rotos |
+| P2 | Integridad semántica | 100 % de párrafos con estilo válido |
+| P3 | Integridad de formato | Overrides ≤ 5 %, ideal = 0 % |
+| P4 | Integridad de extracción | AST determinista y XHTML sin anomalías |
+
+**El 0 % de overrides debe ser el objetivo de documentos nuevos o controlados. El 5 % debe considerarse un umbral de tolerancia, no un estándar de calidad.**
+
+Esto es especialmente importante porque InDesign aplica la jerarquía:
+
+> override de carácter → estilo de carácter → override de párrafo → estilo de párrafo.
+
+Es decir, el formato manual tiene precedencia sobre el estilo. 
+
+Por tanto, para un extractor como el tuyo, un override no es simplemente un problema visual: **es una fuente potencial de divergencia entre la semántica editorial y la representación que recibe el AST**.
+
+---
+
+# 2. Arquitectura recomendada
+
+Yo formalizaría el proceso así:
+
+```text
+                 ORIGINAL
+                    │
+                    ▼
+          ┌─────────────────────┐
+          │ 1. PREPARACIÓN      │
+          │ Word / OCR / TXT    │
+          │ limpieza textual    │
+          └──────────┬──────────┘
+                     │
+                     ▼
+          ┌─────────────────────┐
+          │ 2. NORMALIZACIÓN    │
+          │ estilos semánticos  │
+          │ nomenclatura        │
+          └──────────┬──────────┘
+                     │
+                     ▼
+          ┌─────────────────────┐
+          │ 3. MAQUETACIÓN      │
+          │ stories             │
+          │ frames              │
+          │ tablas/notas        │
+          └──────────┬──────────┘
+                     │
+                     ▼
+          ┌─────────────────────┐
+          │ 4. PRE-FLIGHT       │
+          │ overrides           │
+          │ overset              │
+          │ links/fonts         │
+          │ estructura          │
+          └──────────┬──────────┘
+                     │
+               ¿APROBADO?
+                /       \
+              NO         SÍ
+              │           │
+              ▼           ▼
+          CORRECCIÓN   EXTRACCIÓN
+                          │
+                          ▼
+                 InDesign Adapter
+                          │
+                          ▼
+                    AST / LEDM
+                          │
+                          ▼
+                    VALIDACIÓN
+                          │
+                          ▼
+                   COMPILACIÓN
+                          │
+                          ▼
+                     XHTML/CSS
+```
+
+La clave es que **el Adapter no debe ser el encargado de reparar un documento editorialmente defectuoso**.
+
+Debe transformar:
+
+```text
+InDesign bien estructurado
+        ↓
+AST canónico
+```
+
+y no:
+
+```text
+InDesign caótico
+        ↓
+intentar adivinar qué quiso hacer el maquetador
+        ↓
+AST
+```
+
+Ese segundo enfoque destruiría precisamente la determinación que estás buscando en LexDigital.
+
+---
+
+# 3. Disciplina de estilos
+
+## 3.1. Regla fundamental
+
+Todo significado editorial debe estar representado por un estilo.
+
+Por ejemplo:
+
+```text
+00_ARTICULO
+01_CUERPO
+02_PIE
+03_TITULO
+04_SANGRIA_N1
+05_LITERAL
+06_NUMERAL
+07_NOTA
+08_CITA
+09_GLOSARIO_TERMINO
+10_GLOSARIO_DEFINICION
+...
+```
+
+Y no:
+
+```text
+Cuerpo
+Cuerpo 2
+Cuerpo-final
+Cuerpo pequeño
+Cuerpo negrita
+Cuerpo 10
+Cuerpo nuevo
+```
+
+Adobe confirma que los estilos de párrafo y carácter son precisamente el mecanismo destinado a mantener consistencia de formato. 
+
+### Recomendación para LexDigital
+
+No uses el nombre visual como identidad primaria.
+
+Usa:
+
+```text
+P01_BODY
+P02_ARTICLE
+P03_TITLE
+P04_SUBTITLE
+P05_LITERAL
+C01_BOLD
+C02_ITALIC
+C03_SMALLCAPS
+```
+
+y después mantén una tabla:
+
+```json
+{
+  "P02_ARTICLE": {
+    "semanticType": "article",
+    "htmlTag": "p",
+    "cssClass": "articulo"
+  }
+}
+```
+
+Así el nombre InDesign deja de ser la semántica definitiva.
+
+---
+
+# 4. Overrides: cómo controlarlos realmente
+
+Adobe proporciona un indicador visual de overrides mediante **Style Override Highlighter**, además de la posibilidad de aplicar un estilo y borrar las modificaciones. 
+
+Pero para tu proyecto recomiendo **tres niveles de control**.
+
+## Nivel A — inspección visual
+
+Activar:
+
+**Window → Styles → Paragraph Styles**
+
+y:
+
+**Style Override Highlighter**
+
+Esto permite detectar visualmente dónde existen modificaciones locales. 
+
+## Nivel B — corrección mediante Find/Change
+
+Adobe permite utilizar Find/Change para localizar contenido según estilos y sustituirlo por otro estilo. 
+
+La comunidad de usuarios de InDesign también utiliza este procedimiento para eliminar overrides globalmente, aunque conviene hacerlo siempre sobre una copia del documento. 
+
+## Nivel C — automatización
+
+Para tu flujo, este es el nivel apropiado.
+
+Crear un auditor:
+
+```javascript
+auditarOverrides(documento)
+```
+
+que produzca:
+
+```json
+{
+  "paragraphs": 12450,
+  "paragraphsWithOverrides": 73,
+  "overrideRate": 0.00586,
+  "status": "WARNING"
+}
+```
+
+Y definir:
+
+```text
+0 %        → PASS
+>0–5 %     → WARNING
+>5 %       → FAIL
+```
+
+Pero añadiría otra regla:
+
+```text
+Override en nodo semántico crítico
+→ FAIL inmediato
+```
+
+Por ejemplo:
+
+```text
+ARTÍCULO
+TÍTULO
+CAPÍTULO
+LITERAL
+NUMERAL
+GLOSARIO
+```
+
+Un único override en un título podría ser más peligroso que 30 overrides tipográficos irrelevantes.
+
+---
+
+# 5. No confundir Character Styles con Overrides
+
+Este punto es crucial para tu extractor.
+
+La comunidad de Adobe ha señalado repetidamente la confusión entre estilos de carácter y overrides. Un estilo de carácter aplicado directamente **no es simplemente equivalente a un override de párrafo**. 
+
+Por ejemplo:
+
+```text
+P02_BODY
+    │
+    ├── texto normal
+    ├── C01_BOLD
+    └── C02_ITALIC
+```
+
+es una estructura perfectamente válida.
+
+Mientras que:
+
+```text
+P02_BODY
+    │
+    └── texto manualmente puesto en bold
+```
+
+debería considerarse una anomalía.
+
+### Regla LexDigital
+
+**Negrita, cursiva, versalitas, subíndice, superíndice, etc. → Character Style.**
+
+No:
+
+```text
+Ctrl+B
+Ctrl+I
+```
+
+aplicados directamente.
+
+---
+
+# 6. Herramientas para automatizar la limpieza de overrides
+
+Aquí hay una combinación interesante.
+
+### Gratuita
+
+Existe un script open source `clearOverrides`, distribuido bajo GPL-3.0, que permite limpiar overrides de texto, tablas y objetos y puede limitarse a determinados estilos. 
+
+Es especialmente interesante para construir una fase de **normalización previa**.
+
+### Comercial
+
+ID-Extras ofrece herramientas específicas para este problema. Su producto **Auto Character Styles** puede convertir determinados overrides locales —por ejemplo bold, italic o underline— en estilos de carácter, incluyendo texto de tablas y notas al pie. 
+
+Su catálogo incluye además herramientas de automatización de documentos largos y actualmente muestra productos individuales alrededor de los US$49–79. 
+
+### Recomendación
+
+Para LexDigital:
+
+```text
+Documento recibido
+      ↓
+auditor
+      ↓
+¿override?
+      ↓
+clasificar
+   ┌──┴──────────────┐
+   │                 │
+válido             inválido
+   │                 │
+Character Style     limpiar
+   │                 │
+   └───────┬─────────┘
+           ▼
+      nuevo auditor
+```
+
+**No recomiendo limpiar automáticamente todos los overrides sin clasificación.**
+
+---
+
+# 7. Estructura de Stories
+
+Este es probablemente el segundo problema más importante después de los estilos.
+
+Adobe explica que los text frames enlazados forman una única story y que los puertos de entrada/salida permiten observar el flujo. 
+
+Para un documento jurídico lineal, recomiendo:
+
+```text
+Story 001
+Página 1 → Página 2 → Página 3 → ... → Página N
+```
+
+en lugar de:
+
+```text
+Frame A
+Frame B
+Frame C
+Frame D
+```
+
+sin conexión lógica.
+
+## Auditor que deberías implementar
+
+Para cada story:
+
+```json
+{
+  "storyId": "S001",
+  "frames": 48,
+  "firstPage": 1,
+  "lastPage": 48,
+  "threaded": true,
+  "overset": false,
+  "sequenceValid": true
+}
+```
+
+Y detectar:
+
+```text
+Story sin frame
+Frame desconectado
+Story secundaria inesperada
+Overset
+Frame superpuesto
+Frame fuera del flujo principal
+```
+
+---
+
+# 8. El problema de los marcos flotantes
+
+Aquí introduciría una distinción importante:
+
+**Un marco flotante no es necesariamente un error editorial.**
+
+Puede ser perfectamente válido para:
+
+- una figura;
+- una tabla;
+- una nota;
+- una llamada;
+- una ilustración;
+- un elemento lateral.
+
+El problema aparece cuando se utiliza un marco independiente para contenido que conceptualmente forma parte del flujo textual.
+
+Por eso el auditor no debería decir:
+
+```text
+"frame independiente = error"
+```
+
+sino:
+
+```text
+"frame independiente con contenido textual
+que no tiene función estructural declarada = WARNING/FAIL"
+```
+
+---
+
+# 9. Orden de lectura
+
+Esto es especialmente importante porque tu destino final es XHTML.
+
+Adobe permite configurar el orden de contenido de EPUB reflowable mediante:
+
+- Page Layout;
+- XML Structure;
+- Articles Panel. 
+
+Esto demuestra que **la posición geométrica de los objetos y el orden semántico no son necesariamente la misma cosa**.
+
+Para LexDigital recomiendo que el orden semántico sea explícito.
+
+Idealmente:
+
+```text
+Story → nodo AST → XHTML
+```
+
+y no:
+
+```text
+posición X/Y → intentar reconstruir lectura
+```
+
+Si utilizas el Articles Panel como referencia editorial, documenta esa decisión como parte del contrato de extracción.
+
+---
+
+# 10. Nomenclatura semántica + GREP
+
+Aquí tu planteamiento es correcto.
+
+Adobe proporciona Find/Change con GREP para buscar y modificar patrones complejos. 
+
+Y también permite GREP Styles, que aplican automáticamente estilos de carácter a patrones. 
+
+Pero yo separaría dos cosas:
+
+### GREP de limpieza
+
+```text
+espacios dobles
+retornos
+guiones OCR
+caracteres incorrectos
+```
+
+### GREP semántico
+
+```text
+ARTÍCULO 1.
+ARTÍCULO 2.
+CAPÍTULO I
+TÍTULO II
+a)
+b)
+1.
+2.
+```
+
+El segundo debe producir una **clasificación**, no solamente formato.
+
+Por ejemplo:
+
+```text
+ARTÍCULO 15.
+```
+
+→
+
+```json
+{
+  "type": "article",
+  "number": "15"
+}
+```
+
+No depender exclusivamente de:
+
+```text
+fontSize = 10
+bold = true
+```
+
+---
+
+# 11. Uso de Export Tagging como segunda capa semántica
+
+Esta es una oportunidad particularmente importante para LexDigital.
+
+Adobe permite asociar a los estilos:
+
+- etiquetas HTML;
+- clases CSS;
+- ARIA roles;
+- configuración de exportación. 
+
+Por ejemplo:
+
+```text
+P03_TITLE
+   ↓
+Tag: h1
+Class: titulo-principal
+ARIA: heading
+```
+
+o:
+
+```text
+P09_GLOSSARY_TERM
+   ↓
+Tag: dt
+```
+
+y:
+
+```text
+P10_GLOSSARY_DEFINITION
+   ↓
+Tag: dd
+```
+
+Adobe documenta explícitamente este modelo para glosarios accesibles. 
+
+### Para LexDigital
+
+Yo utilizaría tres evidencias semánticas:
+
+```text
+E1 = nombre del estilo
+E2 = patrón textual
+E3 = Export Tagging
+```
+
+Ejemplo:
+
+```text
+P02_ARTICLE
++
+"ARTÍCULO 15."
++
+tag=p
+```
+
+produce una confianza alta.
+
+Pero:
+
+```text
+[Sin estilo]
++
+"ARTÍCULO 15."
++
+sin tagging
+```
+
+debe generar:
+
+```text
+SEMANTIC_WARNING
+```
+
+---
+
+# 12. El uso de `[Sin estilo]` / `[Basic Paragraph]`
+
+Aquí sería bastante más estricto que el texto original.
+
+Para documentos destinados a extracción automática:
+
+```text
+[Sin estilo]       → FAIL
+[Basic Paragraph]  → FAIL o WARNING según el contenido
+```
+
+No necesariamente porque esos estilos sean "malos" en InDesign, sino porque **no contienen suficiente información semántica para un compilador jurídico**.
+
+Un documento visualmente perfecto puede ser semánticamente inútil.
+
+Ejemplo:
+
+```text
+[Basic Paragraph]
+ARTÍCULO 1.
+
+[Basic Paragraph]
+Colombia es un Estado...
+```
+
+Visualmente:
+
+```text
+perfecto
+```
+
+Semánticamente:
+
+```text
+ambiguo
+```
+
+En cambio:
+
+```text
+P02_ARTICLE
+P03_BODY
+```
+
+permite una extracción determinista.
+
+---
+
+# 13. Preflight debe convertirse en una barrera del pipeline
+
+Adobe Preflight comprueba continuamente cuestiones como:
+
+- fuentes;
+- enlaces;
+- overset text;
+- imágenes;
+- texto;
+- objetos;
+- documento. 
+
+Pero para tu caso recomiendo crear un perfil específico:
+
+# `LEXDIGITAL_EXTRACTION`
+
+Con reglas al menos para:
+
+### Documento
+
+```text
+Document opens
+No missing fonts
+No missing links
+No damaged links
+```
+
+### Texto
+
+```text
+No overset text
+No missing glyphs
+No empty required frames
+```
+
+### Estructura
+
+```text
+No unexpected stories
+No unthreaded primary text
+```
+
+### Producción
+
+```text
+No unresolved warnings
+```
+
+Y complementar Preflight con un **script de auditoría semántica**, porque Preflight no conoce tu taxonomía LEDM.
+
+---
+
+# 14. Importante: no mantener siempre activo el Preflight pesado
+
+Adobe advierte actualmente que Live Preflight consume recursos y que, en documentos pesados, puede ser conveniente desactivarlo durante el trabajo y ejecutarlo cuando sea necesario. 
+
+Por tanto:
+
+```text
+EDICIÓN
+↓
+Live Preflight mínimo/OFF
+
+AUDITORÍA
+↓
+LEXDIGITAL_EXTRACTION
+
+EXTRACCIÓN
+↓
+Preflight OFF
+```
+
+Esto encaja directamente con el problema de timeouts que ya has encontrado en tu arquitectura.
+
+---
+
+# 15. Hardware y almacenamiento
+
+La recomendación de SSD local es correcta y Adobe actualmente recomienda guardar los archivos en un disco interno/local en lugar de unidades de red, externas o medios extraíbles cuando se investigan problemas de rendimiento. 
+
+Para tu pipeline:
+
+```text
+INDD
+JSON
+request files
+response files
+logs
+AST
+XHTML
+CSS
+```
+
+deberían estar temporalmente en:
+
+```text
+SSD local
+```
+
+y no:
+
+```text
+\\servidor\proyecto\
+OneDrive\...
+Google Drive\...
+NAS\...
+USB\...
+```
+
+durante la fase de extracción.
+
+Después:
+
+```text
+resultado validado
+       ↓
+sincronización
+```
+
+---
+
+# 16. Optimización de InDesign para extracción
+
+Adobe identifica como factores de rendimiento:
+
+- configuración de pantalla;
+- preferencias corruptas;
+- problemas específicos del documento;
+- recursos del sistema;
+- thumbnails;
+- Live Preflight;
+- fuentes;
+- GPU. 
+
+Para una estación dedicada a LexDigital recomiendo:
+
+### Durante extracción
+
+```text
+Pages thumbnails       → OFF
+Live Preflight         → OFF
+Live Screen Drawing    → mínimo/Delayed
+Document               → SSD local
+otras aplicaciones     → mínimo
+```
+
+Adobe indica que desactivar thumbnails puede reducir considerablemente el uso de memoria en documentos extensos. 
+
+---
+
+# 17. Documentos corruptos o estructuralmente dañados
+
+Aquí hay una herramienta que considero fundamental:
+
+## IDML como mecanismo de saneamiento
+
+Adobe recomienda exportar un documento problemático a IDML y volver a abrirlo cuando existen problemas estructurales o de corrupción. 
+
+Procedimiento:
+
+```text
+INDD problemático
+       ↓
+Export IDML
+       ↓
+abrir IDML
+       ↓
+guardar como nuevo INDD
+       ↓
+recomponer
+       ↓
+auditar
+```
+
+Además Adobe recomienda recomponer todas las stories cuando existe inconsistencia de composición. 
+
+En Windows:
+
+```text
+Ctrl + Alt + /
+```
+
+para recomponer todas las stories.
+
+---
+
+# 18. Paquetización
+
+Antes de enviar un documento a otra máquina o entorno:
+
+**File → Package**
+
+Adobe permite reunir:
+
+- INDD;
+- gráficos;
+- fuentes permitidas;
+- reporte;
+- IDML. 
+
+Esto es especialmente útil para crear un **artefacto reproducible de extracción**:
+
+```text
+LEXDIGITAL_PACKAGE/
+│
+├── document.indd
+├── document.idml
+├── Document fonts/
+├── Links/
+├── report.txt
+├── extraction-profile.idpp
+└── manifest.json
+```
+
+El tema de las fuentes debe manejarse respetando sus licencias; Adobe advierte expresamente que no todas pueden redistribuirse mediante Package. 
+
+---
+
+# 19. Word y preparación del original
+
+Aquí recomiendo cambiar radicalmente el concepto de "original limpio".
+
+No significa:
+
+> texto visualmente bonito.
+
+Significa:
+
+> texto estructuralmente etiquetado.
+
+Si el original procede de Word:
+
+```text
+OCR
+ ↓
+limpieza
+ ↓
+normalización
+ ↓
+estilos Word
+ ↓
+importación a InDesign
+```
+
+Adobe señala que, para máximo control de formato, Word con estilos definidos puede mapearse a estilos de párrafo y carácter de InDesign. 
+
+Esto es mucho más robusto que:
+
+```text
+OCR
+ ↓
+copiar/pegar
+ ↓
+formatear manualmente
+```
+
+---
+
+# 20. Auto Style: útil, pero no como autoridad
+
+La versión actual de InDesign incluye Auto Style, que utiliza IA para identificar encabezados, subtítulos, párrafos y listas. 
+
+Puede ser muy útil para:
+
+```text
+documento desconocido
+       ↓
+clasificación inicial
+       ↓
+revisión humana
+       ↓
+estilos LexDigital
+```
+
+Pero **no lo utilizaría como fuente definitiva de semántica jurídica**.
+
+Para una Constitución:
+
+```text
+ARTÍCULO
+PARÁGRAFO
+NUMERAL
+LITERAL
+INCISO
+NOTA
+```
+
+las reglas jurídicas son demasiado específicas como para delegar la decisión final a una clasificación genérica.
+
+---
+
+# 21. Historias: auditor automático recomendado
+
+Aquí propongo incorporar al proyecto un módulo:
+
+```text
+src/auditors/InDesignStoryAuditor.js
+```
+
+que genere:
+
+```json
+{
+  "stories": 12,
+  "mainStories": 1,
+  "secondaryStories": 11,
+  "unthreadedTextFrames": 4,
+  "oversetStories": 0,
+  "emptyStories": 2,
+  "sequenceViolations": 0
+}
+```
+
+Y establecer:
+
+```text
+oversetStories > 0
+→ FAIL
+
+unexpectedUnthreadedTextFrames > 0
+→ WARNING
+
+mainStory != expected
+→ FAIL
+```
+
+---
+
+# 22. Auditor de estilos
+
+Otro módulo:
+
+```text
+src/auditors/InDesignStyleAuditor.js
+```
+
+Salida:
+
+```json
+{
+  "paragraphs": 1325,
+  "styledParagraphs": 1325,
+  "unstyledParagraphs": 0,
+  "basicParagraphs": 0,
+  "unknownStyles": 0,
+  "overrideParagraphs": 0,
+  "overrideRate": 0
+}
+```
+
+Esto permitiría que el pipeline rechazara el documento **antes de tocar el Adapter**.
+
+---
+
+# 23. Auditor de semántica
+
+Un tercer módulo:
+
+```text
+src/auditors/InDesignSemanticAuditor.js
+```
+
+Por ejemplo:
+
+```json
+{
+  "articles": 211,
+  "articlesWithExpectedStyle": 211,
+  "articlesDetectedByGrep": 211,
+  "styleTagAgreement": 211,
+  "semanticConflicts": 0
+}
+```
+
+Esto es particularmente potente porque te permite comprobar:
+
+```text
+texto
+vs.
+estilo
+vs.
+GREP
+vs.
+Export Tagging
+```
+
+---
+
+# 24. Matriz de decisión que recomiendo
+
+| Problema | Detección | Acción | Resultado |
+|---|---|---|---|
+| Override | Style Override / script | corregir | ≤5 %, ideal 0 |
+| `[Sin estilo]` | auditor estilos | reasignar | 0 |
+| Basic Paragraph | auditor | reasignar | 0 |
+| Story rota | Story Auditor | reencadenar | 0 |
+| Overset | Preflight/API | corregir | 0 |
+| Frame independiente textual | auditor | revisar | 0 críticos |
+| Patrón jurídico incorrecto | GREP | corregir | 0 |
+| Estilo desconocido | Style Auditor | mapear | 0 |
+| Font missing | Preflight | instalar/reemplazar | 0 |
+| Link missing | Preflight | relink | 0 |
+| Documento sospechoso | IDML round-trip | regenerar | PASS |
+| CPU/memoria alta | monitorización | optimizar entorno | estable |
+| Live Preflight pesado | Preferences | desactivar durante extracción | estable |
+| CSS ambiguo | Export Tagging | normalizar | determinista |
+
+---
+
+# 25. Criterios de aceptación definitivos
+
+Yo establecería este **contrato de entrada**:
+
+```text
+LEXDIGITAL EXTRACTION CONTRACT v1.0
+```
+
+### Documento
+
+```text
+✓ INDD válido
+✓ guardado localmente
+✓ versión soportada
+✓ no corrupción
+```
+
+### Stories
+
+```text
+✓ story principal identificada
+✓ flujo continuo
+✓ 0 overset
+✓ 0 hilos rotos
+✓ 0 stories inesperadas críticas
+```
+
+### Estilos
+
+```text
+✓ 100 % de párrafos clasificados
+✓ 0 estilos desconocidos
+✓ 0 [Sin estilo]
+✓ 0 Basic Paragraph en contenido semántico
+```
+
+### Overrides
+
+```text
+ideal: 0 %
+máximo: 5 %
+crítico: 0 overrides en nodos estructurales
+```
+
+### Semántica
+
+```text
+✓ patrones GREP válidos
+✓ estilos válidos
+✓ Export Tagging consistente
+✓ taxonomía LEDM válida
+```
+
+### Recursos
+
+```text
+✓ fuentes disponibles
+✓ enlaces disponibles
+✓ SSD local
+✓ suficiente RAM
+```
+
+### Extracción
+
+```text
+✓ AST válido
+✓ nodos esperados
+✓ IDs deterministas
+✓ sin [VACÍO]
+✓ sin estilos huérfanos
+```
+
+---
+
+# 26. Herramientas que considero realmente útiles
+
+## Sin coste adicional
+
+**Adobe InDesign nativo**
+
+- Paragraph Styles
+- Character Styles
+- GREP Find/Change
+- GREP Styles
+- Preflight
+- Export Tagging
+- Articles
+- Story threading
+- scripting
+- IDML
+
+Son suficientes para construir la primera versión profesional del proceso. 
+
+**ClearOverrides**
+
+Script open source para limpiar overrides de texto, tablas y objetos. 
+
+---
+
+## Bajo coste / especializado
+
+**ID-Extras**
+
+Especialmente interesante para:
+
+- convertir overrides en Character Styles;
+- automatización de documentos largos;
+- operaciones GREP avanzadas.
+
+Su Auto Character Styles es especialmente pertinente para originales procedentes de Word. 
+
+---
+
+## Profesional / editorial industrial
+
+**Typefi**
+
+Aquí estamos ante otra categoría.
+
+Typefi utiliza automatización de InDesign para composición editorial a gran escala y declara capacidad para documentos de más de 1000 páginas por hora, además de soportar estructuras complejas como tablas y notas al pie. 
+
+No lo recomendaría para sustituir LexDigital, sino como **referencia de arquitectura industrial**.
+
+Su modelo es especialmente interesante porque utiliza XML/estructura semántica como intermediario y luego utiliza InDesign como motor de composición. 
+
+---
+
+# 27. Una observación importante sobre ExtendScript
+
+Tu texto habla de "motor ES3", y eso requiere matización.
+
+Adobe documenta actualmente la transición de ExtendScript hacia UXP: ExtendScript utiliza un JavaScript antiguo basado en ES3, mientras UXP utiliza V8 y capacidades modernas de ECMAScript. 
+
+Por tanto, para LexDigital yo no diseñaría nueva infraestructura alrededor de:
+
+```text
+ExtendScript como arquitectura permanente
+```
+
+sino:
+
+```text
+UXP / InDesign
+      ↓
+adaptador
+      ↓
+IPC
+      ↓
+Node.js
+      ↓
+LEDM
+```
+
+y mantendría ExtendScript solamente donde exista una necesidad de compatibilidad o una API que todavía lo justifique.
+
+Esto además encaja con lo que ya has construido en tu arquitectura UXP + Pipeline.
+
+---
+
+# 28. La solución que recomiendo para LexDigital
+
+No compraría inmediatamente una herramienta grande.
+
+Primero implementaría una **capa de certificación InDesign** propia:
+
+```text
+LexDigital-InDesign-Inspector
+```
+
+con seis componentes:
+
+```text
+01 DocumentInspector
+02 StoryInspector
+03 StyleInspector
+04 OverrideInspector
+05 SemanticInspector
+06 ResourceInspector
+```
+
+y una séptima capa:
+
+```text
+07 ExtractionGate
+```
+
+La secuencia sería:
+
+```text
+INDD
+ │
+ ▼
+DocumentInspector
+ │
+ ├── FAIL → detener
+ │
+ ▼
+StoryInspector
+ │
+ ├── FAIL → detener
+ │
+ ▼
+StyleInspector
+ │
+ ├── FAIL → detener
+ │
+ ▼
+OverrideInspector
+ │
+ ├── WARNING
+ │
+ ▼
+SemanticInspector
+ │
+ ├── FAIL → detener
+ │
+ ▼
+ResourceInspector
+ │
+ ▼
+ExtractionGate
+ │
+ ▼
+adaptaInDesign()
+ │
+ ▼
+LEDM AST
+ │
+ ▼
+validators
+ │
+ ▼
+compilador
+ │
+ ▼
+XHTML/CSS
+```
+
+Esta arquitectura tiene una ventaja enorme:
+
+**los documentos malos dejan de llegar al compilador.**
+
+---
+
+# 29. Y añadiría una puntuación de calidad
+
+Por ejemplo:
+
+```text
+DOCUMENT QUALITY SCORE
+```
+
+```json
+{
+  "structure": 100,
+  "styles": 100,
+  "overrides": 98,
+  "semantic": 100,
+  "resources": 100,
+  "performance": 96,
+  "total": 99.0,
+  "status": "CERTIFIED"
+}
+```
+
+Pero no permitiría que una media oculte un fallo crítico.
+
+Por ejemplo:
+
+```text
+Score = 99
+overset = 1
+```
+
+debe ser:
+
+```text
+FAIL
+```
+
+no:
+
+```text
+99/100 = PASS
+```
+
+La calidad debe funcionar como **gates**, no únicamente como puntuación.
+
+---
+
+# 30. Procedimiento operativo definitivo
+
+## FASE A — Preparar original
+
+1. Obtener texto fuente.
+2. Ejecutar OCR.
+3. Eliminar errores OCR.
+4. Normalizar espacios.
+5. Normalizar retornos.
+6. Normalizar caracteres especiales.
+7. Detectar encabezados jurídicos.
+8. Detectar artículos.
+9. Detectar numerales.
+10. Detectar literales.
+11. Detectar notas.
+12. Detectar glosario.
+13. Aplicar estilos semánticos en Word.
+14. Revisar manualmente los casos ambiguos.
+
+---
+
+## FASE B — Importar en InDesign
+
+1. Utilizar plantilla LexDigital.
+2. Importar estilos.
+3. Mapear estilos Word → InDesign.
+4. No aplicar formato manual.
+5. Aplicar Character Styles para variaciones.
+6. Crear stories principales.
+7. Evitar frames independientes para contenido lineal.
+8. Mantener tablas como tablas reales.
+9. Mantener notas como footnotes reales.
+10. Evitar convertir estructura semántica en geometría.
+
+---
+
+## FASE C — Normalización
+
+Ejecutar:
+
+```text
+GREP cleanup
+↓
+style normalization
+↓
+override audit
+↓
+style audit
+```
+
+Si hay overrides:
+
+```text
+clasificar
+```
+
+No simplemente:
+
+```text
+borrar todo
+```
+
+---
+
+## FASE D — Auditoría estructural
+
+Comprobar:
+
+```text
+Stories
+Frames
+Threading
+Overset
+Tables
+Footnotes
+Links
+Fonts
+```
+
+---
+
+## FASE E — Auditoría semántica
+
+Comprobar:
+
+```text
+Style
+Text pattern
+Export Tag
+ARIA
+LEDM mapping
+```
+
+---
+
+## FASE F — Preflight
+
+Ejecutar:
+
+```text
+LEXDIGITAL_EXTRACTION
+```
+
+y exigir:
+
+```text
+0 errores críticos
+```
+
+---
+
+## FASE G — Preparar entorno
+
+Antes de extraer:
+
+```text
+SSD local
+Live Preflight OFF
+thumbnails OFF
+aplicaciones pesadas cerradas
+documento guardado
+backup realizado
+```
+
+Adobe recomienda precisamente almacenamiento local y señala que thumbnails y Live Preflight pueden impactar el rendimiento. 
+
+---
+
+## FASE H — Extracción
+
+```text
+InDesign
+   ↓
+UXP
+   ↓
+serialización
+   ↓
+IPC
+   ↓
+Node
+   ↓
+adaptarInDesign
+```
+
+El Adapter **no corrige** errores editoriales.
+
+Solamente:
+
+```text
+InDesign dialect
+      ↓
+canonical dialect
+```
+
+---
+
+## FASE I — Validación
+
+Comprobar:
+
+```text
+schema
+taxonomy
+node count
+style mapping
+parent-child relation
+IDs
+text integrity
+```
+
+---
+
+## FASE J — Compilación
+
+Finalmente:
+
+```text
+AST
+ ↓
+renderer
+ ↓
+XHTML
+ ↓
+CSS
+```
+
+Y hacer una segunda auditoría:
+
+```text
+AST ↔ XHTML
+```
+
+por ejemplo:
+
+```text
+AST nodes = 1117
+XHTML semantic nodes = 1117
+```
+
+Los 208 `<p>` sin clase que encontraste anteriormente serían entonces un **fallo explícito de contrato**, no algo que el sistema simplemente tolera.
+
+---
+
+# 31. El punto más importante para tu proyecto
+
+Tu texto original plantea:
+
+> "el script de extracción debe ser capaz de soportar documentos imperfectos".
+
+Yo cambiaría esa filosofía por:
+
+> **El sistema debe detectar documentos imperfectos antes de extraerlos y reservar la tolerancia únicamente para anomalías clasificadas y cuantificadas.**
+
+Eso cambia completamente la robustez del sistema.
+
+La arquitectura final debería ser:
+
+```text
+                    DOCUMENTO
+                        │
+                        ▼
+              ┌─────────────────┐
+              │ INDESIGN GATE   │
+              └────────┬────────┘
+                       │
+             ┌─────────┴─────────┐
+             │                   │
+          RECHAZAR            CERTIFICAR
+             │                   │
+             ▼                   ▼
+       Informe errores       EXTRAER
+                                 │
+                                 ▼
+                          ADAPTER E10
+                                 │
+                                 ▼
+                           AST / LEDM
+                                 │
+                                 ▼
+                         VALIDACIÓN E11+
+                                 │
+                                 ▼
+                           COMPILACIÓN
+                                 │
+                                 ▼
+                         XHTML + CSS
+                                 │
+                                 ▼
+                       AUDITORÍA FINAL
+```
+
+**Ese "InDesign Gate" es, en mi opinión, la pieza que falta para convertir las condiciones que has descrito en un procedimiento industrial reproducible.**
+
+Además, Adobe confirma que InDesign está concebido para automatización mediante XML, IDML y scripting, mientras que Export Tagging proporciona una capa adicional de semántica para HTML/EPUB/PDF. 
+
+Y esto encaja muy bien con tu arquitectura actual: **E10 debe ser un adaptador limpio; la reparación, certificación y clasificación del documento deben producirse antes de E10, mientras que E11 debe verificar que la extracción certificada conserva las invariantes del LEDM.**

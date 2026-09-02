@@ -1,0 +1,4926 @@
+Explicar con más detalles:
+Profesional / editorial industrial
+Typefi
+Aquí estamos ante otra categoría.
+Typefi utiliza automatización de InDesign para composición editorial a gran escala y declara capacidad para documentos de más de 1000 páginas por hora, además de soportar estructuras complejas como tablas y notas al pie. Typefi
+No lo recomendaría para sustituir LexDigital, sino como referencia de arquitectura industrial.
+Su modelo es especialmente interesante porque utiliza XML/estructura semántica como intermediario y luego utiliza InDesign como motor de composición. 
+Haciendo énfasis de porqué no lo recomiendas para sustituir LexDigital
+
+
+
+
+
+Mostrar más
+
+
+
+
+
+
+
+Sí. Y después de revisar la documentación actual de Typefi, haría una distinción todavía más fuerte: Typefi no es simplemente una alternativa más sofisticada a LexDigital; pertenece a una categoría arquitectónica distinta.
+La comparación correcta no es:
+“¿Typefi hace lo mismo que LexDigital pero mejor?”
+
+sino:
+“¿Qué problema resuelve Typefi y qué problema estamos resolviendo nosotros con LexDigital?”
+
+La respuesta muestra por qué no recomiendo sustituir LexDigital por Typefi, aunque sí recomiendo estudiar Typefi muy seriamente como referencia de arquitectura industrial.
+1. ¿Qué es realmente Typefi?
+
+
+
+Sí. A la luz de la arquitectura que ya has construido, **no propondría rehacer LexDigital**. Propondría una **evolución arquitectónica controlada**, tomando de Typefi la separación entre contenido, estructura y composición, pero conservando el núcleo LEDM que ya has desarrollado.
+
+Adobe, de hecho, acaba de reforzar oficialmente esta dirección: su documentación de agosto de 2026 presenta XML, IDML y scripting como tecnologías complementarias para automatización editorial y señala explícitamente que XML separa contenido y diseño, mientras que IDML permite representar y manipular programáticamente documentos InDesign. 
+
+## Mi propuesta: LexDigital 2.0, no LexDigital 2.0 "desde cero"
+
+La evolución que recomiendo es:
+
+```text
+                         FUENTES
+              ┌────────────┼────────────┐
+              │            │            │
+           InDesign       Word         JSON/XML
+              │            │            │
+              ▼            ▼            ▼
+          Adapters / Normalizers
+                     │
+                     ▼
+             ┌────────────────┐
+             │   LEDM / AST    │
+             │  CANONICAL CORE │
+             └───────┬────────┘
+                     │
+          ┌──────────┼──────────┐
+          ▼          ▼          ▼
+       Validator   Compiler   Semantic
+          │          │        Services
+          └──────────┼──────────┘
+                     ▼
+                Renderers
+          ┌──────────┼──────────┐
+          ▼          ▼          ▼
+        XHTML      EPUB        PDF
+```
+
+Pero añadiría **tres capas nuevas**:
+
+```text
+1. Editorial Contract
+2. InDesign Certification Gate
+3. Canonical Intermediate Representation
+```
+
+Estas tres piezas son las que convertirían lo que tienes actualmente en una arquitectura mucho más cercana a un sistema editorial industrial.
+
+---
+
+# 1. No tocaría todavía el núcleo LEDM
+
+Esta es mi primera recomendación y probablemente la más importante.
+
+**No rediseñaría `compilarLexmotor()`.**
+
+Tampoco modificaría ahora:
+
+```text
+src/core/
+validators/
+compiler/
+renderer/
+```
+
+salvo para introducir interfaces mejor definidas.
+
+Tu E10 ya demostró algo muy valioso:
+
+```text
+InDesign
+   ↓
+adaptaInDesign()
+   ↓
+AST canónico
+```
+
+y E11 demostró que:
+
+```text
+211 párrafos
+→ 208 nodos canónicos
+→ 1117 nodos AST totales
+→ XHTML
+```
+
+puede funcionar de forma determinista.
+
+Eso es precisamente lo que debemos **cristalizar**, no reemplazar.
+
+---
+
+# 2. La primera ampliación: Editorial Contract
+
+Yo introduciría inmediatamente:
+
+```text
+docs/
+└── contracts/
+    └── LEXDIGITAL_EDITORIAL_CONTRACT.md
+```
+
+Este documento sería el equivalente conceptual a lo que Typefi consigue mediante su modelo estructurado CXML.
+
+Typefi utiliza CXML como formato intermedio para codificar contenido, y su versión actual contempla explícitamente headings, tablas, notas al pie, referencias cruzadas, listas, imágenes, spans de caracteres, etc. 
+
+Nosotros debemos hacer lo mismo, pero **con LEDM**, no con CXML.
+
+El contrato debe definir:
+
+```text
+¿Qué es un documento?
+¿Qué es un artículo?
+¿Qué es un numeral?
+¿Qué es un literal?
+¿Qué es un párrafo?
+¿Qué es una nota?
+¿Qué es una referencia?
+¿Qué es contenido inline?
+¿Qué es contenido flotante?
+¿Qué es estructura editorial?
+```
+
+Y, sobre todo:
+
+> **qué información es obligatoria antes de que un documento pueda entrar al compilador.**
+
+---
+
+# 3. Segunda ampliación: InDesign Certification Gate
+
+Esta es la pieza que implementaría **inmediatamente**.
+
+Actualmente tienes:
+
+```text
+InDesign
+ ↓
+Adapter
+ ↓
+AST
+```
+
+Yo lo convertiría en:
+
+```text
+InDesign
+ ↓
+INSPECTION
+ ↓
+CERTIFICATION GATE
+ ↓
+Adapter
+ ↓
+AST
+```
+
+Es decir:
+
+```text
+                 INDD
+                  │
+                  ▼
+        ┌──────────────────┐
+        │ InDesign Inspector│
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Certification    │
+        │ Gate              │
+        └────────┬─────────┘
+                 │
+          ┌──────┴──────┐
+          ▼             ▼
+        FAIL           PASS
+          │             │
+          ▼             ▼
+       Report        E10 Adapter
+                        │
+                        ▼
+                      AST
+```
+
+Esto no requiere rediseñar el núcleo.
+
+---
+
+# 4. ¿Qué debería inspeccionar?
+
+Inicialmente seis dimensiones.
+
+## A. Documento
+
+```text
+documentOpen
+documentSaved
+version
+pageCount
+stories
+links
+fonts
+```
+
+## B. Stories
+
+```text
+storyCount
+mainStory
+unthreadedFrames
+oversetText
+emptyStories
+```
+
+## C. Estilos
+
+```text
+paragraphCount
+unstyledParagraphs
+basicParagraphs
+unknownStyles
+characterStyles
+```
+
+## D. Overrides
+
+```text
+overrideParagraphs
+overrideCharacters
+overrideRate
+criticalOverrides
+```
+
+## E. Semántica
+
+```text
+articlesDetected
+articlesStyled
+grepAgreement
+tagAgreement
+unknownSemanticNodes
+```
+
+## F. Recursos
+
+```text
+missingFonts
+missingLinks
+brokenLinks
+```
+
+---
+
+# 5. Y produciría un `ExtractionManifest`
+
+Este sería un cambio muy importante.
+
+Antes de extraer:
+
+```json
+{
+  "document": {
+    "name": "constitucion.indd",
+    "version": "21.3"
+  },
+  "stories": {
+    "count": 1,
+    "overset": 0,
+    "unthreaded": 0
+  },
+  "styles": {
+    "paragraphs": 1325,
+    "unstyled": 0,
+    "unknown": 0
+  },
+  "overrides": {
+    "count": 0,
+    "rate": 0
+  },
+  "semantic": {
+    "articles": 211,
+    "unclassified": 0
+  },
+  "resources": {
+    "missingFonts": 0,
+    "missingLinks": 0
+  },
+  "status": "CERTIFIED"
+}
+```
+
+Y solamente:
+
+```javascript
+if (manifest.status !== 'CERTIFIED') {
+    throw new ExtractionGateError(...);
+}
+```
+
+se permite continuar.
+
+---
+
+# 6. Esto cambia la filosofía del proyecto
+
+Actualmente la filosofía podría resumirse como:
+
+> "Extraigamos y luego descubramos si el documento estaba bien."
+
+La arquitectura nueva sería:
+
+> **"Certifiquemos primero y extraigamos después."**
+
+Eso tiene un enorme impacto positivo en depuración.
+
+Si aparece:
+
+```text
+AST incorrecto
+```
+
+podemos preguntar:
+
+```text
+¿El documento estaba certificado?
+```
+
+Si:
+
+```text
+sí
+```
+
+entonces el problema está probablemente en:
+
+```text
+Adapter
+Core
+Compiler
+Renderer
+```
+
+Si:
+
+```text
+no
+```
+
+no debemos culpar al compilador.
+
+---
+
+# 7. Tercera ampliación: separar "contenido" de "dialecto InDesign"
+
+Esto ya existe parcialmente en E10, pero yo lo formalizaría.
+
+Actualmente:
+
+```text
+adaptaInDesign()
+```
+
+debe convertirse conceptualmente en:
+
+```text
+InDesignDialect
+        ↓
+InDesignAdapter
+        ↓
+CanonicalDocument
+```
+
+Por ejemplo:
+
+```text
+InDesign:
+
+P02_ARTICLE
+"ARTÍCULO 15."
+
+        ↓
+
+Adapter
+
+        ↓
+
+LEDM:
+
+{
+    type: "article",
+    number: "15"
+}
+```
+
+El Core **jamás debería saber que existió `P02_ARTICLE`**.
+
+---
+
+# 8. Crear una representación intermedia canónica
+
+Aquí tomaría directamente la idea más potente de Typefi.
+
+Typefi tiene:
+
+```text
+CXML
+```
+
+Nosotros debemos tener:
+
+```text
+LEDM Canonical Representation
+```
+
+No necesariamente un nuevo formato.
+
+Puede ser exactamente el AST que ya tienes, pero con un contrato formal.
+
+Por ejemplo:
+
+```json
+{
+  "schema": "LEDM",
+  "version": "1.1.0",
+  "document": {
+    "type": "legal-document",
+    "children": [
+      {
+        "type": "article",
+        "id": "article-15",
+        "number": "15",
+        "children": []
+      }
+    ]
+  }
+}
+```
+
+La diferencia es que ahora declaramos:
+
+> **Este JSON es una interfaz pública del sistema.**
+
+No es simplemente el objeto temporal que genera `adaptaInDesign()`.
+
+---
+
+# 9. Esto permitiría introducir una capacidad extraordinariamente útil
+
+Una vez que tienes:
+
+```text
+LEDM Canonical
+```
+
+puedes hacer:
+
+```text
+InDesign
+     ↓
+    LEDM
+     ↓
+    JSON
+```
+
+guardar ese JSON.
+
+Y posteriormente:
+
+```text
+JSON LEDM
+     ↓
+    LEDM
+     ↓
+ XHTML
+```
+
+sin abrir InDesign.
+
+Esto es fundamental.
+
+Significa que InDesign deja de formar parte del proceso de compilación.
+
+---
+
+# 10. Entonces el pipeline quedaría dividido en dos
+
+## Pipeline A — Ingesta
+
+```text
+INDD
+ ↓
+UXP
+ ↓
+Inspector
+ ↓
+Certification Gate
+ ↓
+InDesign Adapter
+ ↓
+LEDM
+ ↓
+guardar canonical.json
+```
+
+## Pipeline B — Producción
+
+```text
+canonical.json
+ ↓
+Validator
+ ↓
+Compiler
+ ↓
+XHTML
+ ↓
+EPUB/PDF/etc.
+```
+
+Y esto es, en mi opinión, **el salto arquitectónico más importante que puedes hacer ahora mismo**.
+
+---
+
+# 11. ¿Por qué es tan importante?
+
+Porque actualmente tienes:
+
+```text
+INDD → AST → XHTML
+```
+
+Yo quiero que tengas:
+
+```text
+             ┌───────────────┐
+             │               │
+          InDesign         Word
+             │               │
+             ▼               ▼
+          Adapter         Adapter
+             │               │
+             └───────┬───────┘
+                     ▼
+                Canonical LEDM
+                     │
+             ┌───────┼────────┐
+             ▼       ▼        ▼
+           HTML     EPUB      PDF
+```
+
+Así, en el futuro puedes incorporar:
+
+```text
+DOCXAdapter
+XMLAdapter
+MarkdownAdapter
+TEIAdapter
+DatabaseAdapter
+```
+
+sin tocar el Core.
+
+Eso es **hexagonalidad real**, no solamente una organización de carpetas.
+
+---
+
+# 12. Y aquí Typefi se convierte en referencia, no dependencia
+
+Typefi demuestra que este modelo es viable industrialmente.
+
+Su CXML es un intermediario y puede alimentar InDesign; además Typefi dispone incluso de una acción para exportar CXML desde INDD y otra para actualizar documentos InDesign a partir de CXML. 
+
+Nosotros podemos adoptar la misma filosofía:
+
+```text
+LEDM
+ ↕
+InDesign
+```
+
+pero sin introducir Typefi:
+
+```text
+LEDM
+ ↕
+InDesign Adapter
+```
+
+---
+
+# 13. Cuarta ampliación: `LEDM → InDesign`
+
+Aquí hay una evolución que todavía no haría como prioridad, pero que **sí diseñaría desde ahora**.
+
+Actualmente:
+
+```text
+InDesign → LEDM
+```
+
+En el futuro:
+
+```text
+LEDM → InDesign
+```
+
+Eso permitiría:
+
+```text
+JSON jurídico
+ ↓
+LEDM
+ ↓
+InDesign
+```
+
+y tendrías un sistema bidireccional:
+
+```text
+         ┌─────────────┐
+         │    LEDM     │
+         └──────┬──────┘
+          ▲      │
+          │      ▼
+      InDesign  InDesign
+      Adapter   Renderer
+```
+
+Esto sería una evolución muy potente.
+
+---
+
+# 14. Pero NO intentaría hacer esto todavía
+
+No empezaría ahora a construir:
+
+```text
+LEDM → INDD
+```
+
+hasta que:
+
+```text
+InDesign → LEDM
+```
+
+esté completamente certificado.
+
+Primero:
+
+```text
+INGESTA
+```
+
+después:
+
+```text
+REGENERACIÓN
+```
+
+Es exactamente la misma lógica que utilizaría un sistema editorial industrial.
+
+---
+
+# 15. Quinta ampliación: snapshots canónicos
+
+Esta sería otra mejora inmediata.
+
+Cada extracción debería generar:
+
+```text
+runs/
+└── 2026-09-01T06-30-00/
+    ├── extraction-manifest.json
+    ├── source-metadata.json
+    ├── canonical-ledm.json
+    ├── audit-report.json
+    ├── xhtml/
+    └── logs/
+```
+
+Y guardar:
+
+```text
+sourceHash
+adapterVersion
+ledmVersion
+compilerVersion
+documentVersion
+timestamp
+```
+
+Ejemplo:
+
+```json
+{
+  "sourceHash": "sha256:...",
+  "adapter": "InDesignAdapter 1.4.0",
+  "ledm": "1.1.0",
+  "compiler": "2.0.0",
+  "status": "CERTIFIED"
+}
+```
+
+Esto convierte cada compilación en un **artefacto reproducible**.
+
+---
+
+# 16. Sexta ampliación: Golden Tests sobre LEDM, no solamente sobre InDesign
+
+Aquí haría una evolución importante respecto de E11.
+
+Actualmente tienes:
+
+```text
+raw fixture
+ ↓
+adapter
+ ↓
+compiler
+ ↓
+XHTML
+```
+
+Mantendría ese test.
+
+Pero agregaría:
+
+```text
+canonical-ledm.json
+ ↓
+compiler
+ ↓
+XHTML
+```
+
+como Golden Test independiente.
+
+Entonces tendrías:
+
+### Golden A
+
+```text
+INDD fixture
+→ Adapter
+→ LEDM
+```
+
+### Golden B
+
+```text
+LEDM fixture
+→ Compiler
+→ XHTML
+```
+
+### Golden C
+
+```text
+INDD fixture
+→ Adapter
+→ LEDM
+→ Compiler
+→ XHTML
+```
+
+Esto separa definitivamente:
+
+```text
+problemas de extracción
+```
+
+de:
+
+```text
+problemas de compilación.
+```
+
+---
+
+# 17. Séptima ampliación: contrato de equivalencia
+
+Aquí puedes aprovechar muchísimo el trabajo E12 que ya has realizado.
+
+En vez de comprobar solamente:
+
+```text
+1117 nodes
+```
+
+podemos establecer:
+
+```text
+AST invariant
+```
+
+Por ejemplo:
+
+```text
+N1:
+todo Article tiene number
+
+N2:
+todo Article puede contener Paragraph
+
+N3:
+todo Literal pertenece a Numeral o Paragraph permitido
+
+N4:
+todo nodo tiene semanticType
+
+N5:
+todo nodo renderizable tiene mapping XHTML
+
+N6:
+ningún nodo tiene [VACÍO]
+
+N7:
+ningún estilo InDesign aparece en el Core
+```
+
+Esto sería mucho más importante que simplemente aumentar el porcentaje de cobertura de Jest.
+
+---
+
+# 18. Octava ampliación: un "Semantic Diff"
+
+Esta es una función que yo pondría en el roadmap.
+
+Supongamos:
+
+```text
+Constitución v1
+```
+
+y después:
+
+```text
+Constitución v2
+```
+
+Podríamos hacer:
+
+```text
+LEDM v1
+   ↕
+semantic diff
+   ↕
+LEDM v2
+```
+
+Resultado:
+
+```text
+Artículo 15
+  texto modificado
+
+Artículo 16
+  sin cambios
+
+Artículo 17
+  numeral 3 añadido
+
+Artículo 18
+  literal b eliminado
+```
+
+Eso abre una posibilidad comercial muy interesante para LexDigital:
+
+**control de versiones jurídicas semánticas**, no solamente comparación de documentos visuales.
+
+---
+
+# 19. Novena ampliación: sustituir el concepto de "estilo" por "evidencia"
+
+Este punto es más avanzado.
+
+Actualmente:
+
+```text
+P02_ARTICLE
+```
+
+es una señal.
+
+Pero podemos tener:
+
+```json
+{
+  "semanticType": "article",
+  "evidence": {
+    "paragraphStyle": "P02_ARTICLE",
+    "grepPattern": "ARTÍCULO\\s+\\d+",
+    "exportTag": "p"
+  }
+}
+```
+
+Entonces el Adapter puede calcular:
+
+```text
+confidence = HIGH
+```
+
+si las tres evidencias coinciden.
+
+Por ejemplo:
+
+```text
+STYLE       → ARTICLE
+GREP        → ARTICLE
+TAG         → ARTICLE
+```
+
+= alta confianza.
+
+Pero:
+
+```text
+STYLE       → BODY
+GREP        → ARTICLE
+TAG         → p
+```
+
+= conflicto.
+
+Eso permitiría que LexDigital deje de ser un sistema basado en:
+
+> "confío en el estilo".
+
+y pase a ser:
+
+> **"corroboro la semántica mediante múltiples evidencias."**
+
+---
+
+# 20. Esto es especialmente importante para documentos heredados
+
+Supongamos un INDD antiguo:
+
+```text
+[Sin estilo]
+ARTÍCULO 15.
+```
+
+El sistema no debería simplemente decir:
+
+```text
+unknown
+```
+
+Podría decir:
+
+```json
+{
+  "detected": "article",
+  "evidence": {
+    "grep": true,
+    "style": false,
+    "tag": false
+  },
+  "confidence": "LOW",
+  "action": "REVIEW"
+}
+```
+
+Eso permitiría crear posteriormente un:
+
+```text
+LexDigital Document Repairer
+```
+
+pero como **herramienta separada del compilador**.
+
+---
+
+# 21. Décima ampliación: separar Repair de Compile
+
+Esto lo considero crucial.
+
+Nunca haría:
+
+```text
+Compiler
+  ↓
+si encuentra error
+  ↓
+repara InDesign
+```
+
+Debe ser:
+
+```text
+             INDD
+              │
+       ┌──────┴──────┐
+       ▼             ▼
+   Inspector       Repairer
+       │             │
+       ▼             ▼
+    Report       INDD limpio
+       │             │
+       └──────┬──────┘
+              ▼
+           Adapter
+              ▼
+             LEDM
+              ▼
+          Compiler
+```
+
+El **Repairer** puede ser agresivo.
+
+El **Compiler** debe ser determinista.
+
+Nunca mezclaría ambos.
+
+---
+
+# 22. ¿Qué herramientas utilizaría?
+
+No compraría Typefi ahora.
+
+Utilizaría:
+
+### Adobe InDesign
+
+Para:
+
+- UXP;
+- XML;
+- IDML;
+- scripting;
+- Preflight;
+- estilos;
+- estructura. 
+
+Adobe mantiene oficialmente XML, IDML y scripts como tecnologías de automatización y además señala InDesign Server como opción para publicación automatizada basada en servidor. 
+
+### UXP
+
+Lo convertiría progresivamente en la capa primaria de integración con InDesign.
+
+Adobe documenta que UXP utiliza V8/ECMAScript moderno frente al ExtendScript basado en ES3. 
+
+Esto coincide directamente con el camino que ya has iniciado.
+
+### Node.js
+
+Mantendría:
+
+```text
+Pipeline
+Core
+Validators
+Compiler
+Tests
+```
+
+fuera de InDesign.
+
+---
+
+# 23. ¿Y ExtendScript?
+
+No lo eliminaría inmediatamente.
+
+Lo pondría como:
+
+```text
+LEGACY / COMPATIBILITY ADAPTER
+```
+
+Mientras que:
+
+```text
+UXP
+```
+
+sería:
+
+```text
+PRIMARY INTEGRATION
+```
+
+Adobe dispone actualmente de guías explícitas para migrar de ExtendScript a UXP. 
+
+Por tanto, no tiene sentido invertir ahora grandes cantidades de código nuevo en una arquitectura exclusivamente ExtendScript.
+
+---
+
+# 24. La estructura de proyecto que propondría
+
+Sin destruir tu proyecto actual:
+
+```text
+proyecto-lexdigital_modular/
+│
+├── src/
+│   │
+│   ├── core/
+│   │   ├── domain/
+│   │   ├── validators/
+│   │   ├── compiler/
+│   │   └── contracts/
+│   │
+│   ├── adapters/
+│   │   ├── indesign/
+│   │   │   ├── adaptarInDesign.js
+│   │   │   ├── InDesignStoryInspector.js
+│   │   │   ├── InDesignStyleInspector.js
+│   │   │   ├── InDesignOverrideInspector.js
+│   │   │   └── InDesignSemanticInspector.js
+│   │   │
+│   │   ├── json/
+│   │   └── xml/
+│   │
+│   ├── certification/
+│   │   ├── ExtractionGate.js
+│   │   ├── ExtractionManifest.js
+│   │   └── CertificationRules.js
+│   │
+│   ├── compiler/
+│   │
+│   └── renderers/
+│
+├── schemas/
+│   ├── ledm.schema.json
+│   └── extraction-manifest.schema.json
+│
+├── fixtures/
+│   ├── indesign/
+│   ├── ledm/
+│   └── expected/
+│
+├── test/
+│   ├── adapters/
+│   ├── certification/
+│   ├── core/
+│   ├── compiler/
+│   └── fixtures/
+│
+└── docs/
+    ├── AST_EDITORIAL_SPECIFICATION.md
+    ├── EDITORIAL_CONTRACT.md
+    ├── EXTRACTION_CONTRACT.md
+    └── INDESIGN_CERTIFICATION.md
+```
+
+---
+
+# 25. No crearía una nueva arquitectura de servidor todavía
+
+Esto también es importante.
+
+Ya tienes:
+
+```text
+LexDigital-UXP-Plugin
+       ↕
+WebSocket
+       ↕
+LexDigital-Pipeline
+```
+
+**Lo conservaría.**
+
+No migraría ahora a:
+
+```text
+InDesign Server
+Docker
+Kubernetes
+microservicios
+colas distribuidas
+```
+
+Eso sería prematuro.
+
+Primero haría que:
+
+```text
+INDD → LEDM → XHTML
+```
+
+sea absolutamente reproducible.
+
+Después:
+
+```text
+InDesign Server
+```
+
+puede convertirse en un nuevo Adapter/Execution Target.
+
+Adobe confirma que InDesign Server comparte la misma base de código de InDesign y está destinado precisamente a flujos de publicación automatizados basados en servidor. 
+
+---
+
+# 26. El roadmap que considero óptimo
+
+Yo lo haría en **cinco fases**, no en una reescritura.
+
+## Fase 1 — Certificación
+
+**Prioridad: inmediata**
+
+Implementar:
+
+```text
+InDesign Inspector
+Extraction Manifest
+Extraction Gate
+```
+
+Resultado:
+
+```text
+INDD → CERTIFIED / REJECTED
+```
+
+---
+
+## Fase 2 — Canonical LEDM
+
+Formalizar:
+
+```text
+LEDM 1.1
+```
+
+y garantizar:
+
+```text
+Adapter → canonical AST
+```
+
+Resultado:
+
+```text
+INDD → LEDM.json
+```
+
+---
+
+## Fase 3 — Compiler independiente
+
+Crear Golden Tests:
+
+```text
+LEDM.json → XHTML
+```
+
+Resultado:
+
+```text
+InDesign ya no es necesario para probar el compilador.
+```
+
+---
+
+## Fase 4 — Reparación editorial
+
+Construir:
+
+```text
+DocumentRepairer
+```
+
+para:
+
+- estilos;
+- overrides;
+- stories;
+- nomenclatura;
+- semántica;
+- etc.
+
+Resultado:
+
+```text
+INDD defectuoso
+ ↓
+Repair
+ ↓
+INDD certificado
+```
+
+---
+
+## Fase 5 — Regeneración
+
+Finalmente:
+
+```text
+LEDM
+ ↓
+InDesign Adapter/Renderer
+ ↓
+INDD
+```
+
+Aquí ya estaríamos entrando realmente en una arquitectura editorial bidireccional.
+
+---
+
+# 27. El resultado final
+
+La arquitectura objetivo sería:
+
+```text
+                         LEXDIGITAL
+                             │
+                ┌────────────┴────────────┐
+                │                         │
+             INGESTA                  GENERACIÓN
+                │                         │
+       ┌────────┼────────┐                │
+       ▼        ▼        ▼                ▼
+   InDesign   Word     XML/JSON         LEDM
+       │        │        │                │
+       ▼        ▼        ▼                │
+     Adapter / Normalizer                  │
+                │                          │
+                └──────────┬───────────────┘
+                           ▼
+                    ┌──────────────┐
+                    │    LEDM      │
+                    │ CANONICAL    │
+                    └──────┬───────┘
+                           │
+                  ┌────────┼────────┐
+                  ▼        ▼        ▼
+              Validator  Compiler  Diff
+                  │        │        │
+                  └────────┼────────┘
+                           ▼
+                       Renderers
+                           │
+                ┌──────────┼──────────┐
+                ▼          ▼          ▼
+              XHTML      EPUB        PDF
+```
+
+---
+
+# 28. Mi decisión concreta
+
+Si este fuera mi proyecto, **no lo rediseñaría desde cero y tampoco compraría Typefi en esta etapa**.
+
+Haría exactamente esto:
+
+### Mantener
+
+```text
+LEDM
+AST
+E10 Adapter
+E11 Golden Test
+Node.js
+UXP
+WebSocket
+Pipeline
+Validators
+Compiler
+```
+
+### Añadir inmediatamente
+
+```text
+1. Extraction Contract
+2. InDesign Inspector
+3. Extraction Gate
+4. Extraction Manifest
+5. Canonical LEDM snapshot
+6. LEDM-only Golden Tests
+```
+
+### Después
+
+```text
+7. Semantic Evidence Engine
+8. Document Repairer
+9. Semantic Diff
+10. LEDM → InDesign
+```
+
+Y dejaría como **fase posterior, no inmediata**:
+
+```text
+11. InDesign Server
+12. procesamiento desatendido
+13. escalamiento de múltiples documentos
+```
+
+---
+
+## La idea central
+
+Typefi nos ha mostrado una arquitectura industrial muy madura donde **el contenido estructurado está separado de la composición**; su CXML actúa como intermediario y puede alimentar InDesign, mientras que Typefi también puede extraer CXML desde documentos InDesign y aplicar actualizaciones específicas sin recomponer necesariamente todo el documento. 
+
+Pero **LexDigital puede llevar esa separación un paso más allá**:
+
+```text
+             TYPEFI
+                │
+          Content XML
+                │
+                ▼
+           InDesign
+                │
+                ▼
+             Output
+```
+
+frente a:
+
+```text
+            LEXDIGITAL
+
+ InDesign ─┐
+ Word ─────┤
+ XML ──────┤
+ JSON ─────┘
+      │
+      ▼
+ ┌───────────────┐
+ │  LEDM / AST   │  ← verdadera fuente canónica
+ └───────┬───────┘
+         │
+    ┌────┼────┐
+    ▼    ▼    ▼
+  XHTML EPUB PDF
+```
+
+**Por eso mi recomendación no es "hacer un Typefi casero".**
+
+Es construir **un núcleo semántico propio que pueda, llegado el momento, utilizar InDesign de la misma manera que Typefi lo utiliza: como un motor de composición intercambiable**.
+
+Y el paso inmediato para conseguirlo no es reescribir el Core: es construir el **`InDesign Certification Gate + Canonical LEDM Snapshot + LEDM-only Golden Test`**. Esa tríada convertiría la arquitectura actual de LexDigital en una plataforma mucho más sólida sin tirar el trabajo E10/E11 que ya está funcionando.
+
+
+1
+
+
+
+Typefi es una plataforma comercial de publicación automatizada basada en Adobe InDesign.
+La propia empresa la describe como un motor que utiliza InDesign para componer automáticamente publicaciones complejas, con capacidad declarada de 1000+ páginas por hora, incluyendo documentos largos y elementos complejos como tablas y notas al pie. Typefi
+Pero esa descripción se queda corta.
+Su arquitectura real es aproximadamente:
+             FUENTE EDITORIAL
+          Word / XML / otros
+                  │
+                  ▼
+           Typefi Content XML
+                 (CXML)
+                  │
+                  ▼
+          Typefi Workflow
+                  │
+                  ▼
+        Adobe InDesign Server
+                  │
+                  ▼
+        composición automática
+                  │
+          ┌───────┼────────┐
+          ▼       ▼        ▼
+         PDF    EPUB     HTML/XML
+Typefi documenta explícitamente que Content XML (CXML) es su formato intermedio de contenido. En muchas implementaciones, el usuario ni siquiera ve ese XML: el contenido se marca en Word y se transforma en CXML antes de generar el documento final de InDesign. Typefi Docs
+Y existe incluso una acción específica de Typefi para:
+CXML → INDD
+mediante InDesign Server. Typefi Soporte
+También existe el camino inverso:
+INDD → CXML
+mediante su acción Export to Content XML. Typefi Soporte
+Eso es muy interesante para nosotros.
+2. Typefi no empieza realmente en InDesign
+Esta es la primera diferencia fundamental.
+En un flujo tradicional:
+Word
+ ↓
+InDesign
+ ↓
+maquetación
+ ↓
+PDF
+el documento de InDesign termina convirtiéndose en la fuente de verdad editorial.
+Typefi intenta evitar eso.
+Su modelo es más parecido a:
+CONTENIDO ESTRUCTURADO
+        ↓
+      CXML
+        ↓
+PLANTILLA INDESIGN
+        ↓
+COMPOSICIÓN
+        ↓
+OUTPUT
+Por eso Typefi puede generar diferentes productos a partir de una misma fuente. La propia compañía describe la generación de PDF, EPUB, HTML y XML desde una misma fuente de contenido. Typefi
+3. El concepto fundamental: separar contenido y composición
+Esta es probablemente la enseñanza arquitectónica más importante que podemos extraer de Typefi.
+Supongamos:
+ARTÍCULO 1.
+
+Colombia es un Estado social de derecho...
+En un INDD convencional podríamos tener:
+ParagraphStyle = P02_ARTICULO
+ParagraphStyle = P03_BODY
+Pero Typefi intenta llevar el concepto a un nivel superior:
+<section type="Article">
+    <p>...</p>
+</section>
+El contenido tiene una identidad estructural antes de llegar a InDesign.
+Luego la plantilla decide:
+Article
+   ↓
+Paragraph Style X
+   ↓
+composición visual
+Esto significa:
+la semántica no nace de la apariencia.
+
+La apariencia se deriva de la semántica.
+Y esta es exactamente una de las ideas que deberíamos incorporar a LexDigital.
+4. Entonces, ¿Typefi ya hace lo que hace LexDigital?
+No.
+Y aquí está la razón fundamental por la que no recomiendo reemplazar LexDigital.
+Typefi está orientado principalmente a resolver:
+¿Cómo puedo producir automáticamente miles de páginas correctamente compuestas utilizando InDesign?
+
+LexDigital está intentando resolver algo diferente:
+¿Cómo puedo convertir documentos editoriales de InDesign en una representación semántica canónica, verificable y reutilizable, independientemente del motor de composición?
+
+Son problemas distintos.
+5. Typefi tiene a InDesign como destino de composición
+La arquitectura Typefi gira alrededor de InDesign.
+Su propia documentación indica que la acción Create InDesign document recibe CXML y genera un .indd, pudiendo especificar una plantilla de InDesign y un InDesign Server. Typefi Soporte
+Es decir:
+CXML
+ ↓
+Typefi
+ ↓
+InDesign Server
+ ↓
+INDD
+InDesign es el motor de composición.
+En LexDigital queremos que InDesign sea, en cambio, uno de los posibles orígenes de información editorial.
+Nuestro modelo:
+                 ┌── InDesign
+                 │
+                 ├── Word
+CONTENIDO ───────┼── XML
+                 │
+                 ├── JSON
+                 │
+                 └── otros
+                        │
+                        ▼
+                      LEDM
+                        │
+             ┌──────────┼─────────┐
+             ▼          ▼         ▼
+           XHTML       EPUB      PDF
+Ese cambio es enorme.
+6. El AST de LexDigital no debería ser un CXML de Typefi
+Aquí tenemos que ser especialmente cuidadosos.
+Typefi CXML es un formato de transporte/editorial propio de Typefi.
+Su documentación muestra estructuras como:
+<content>
+    <section type="Chapter">
+        <p>Hello, World.</p>
+    </section>
+</content>
+``` citeturn0search5
+
+
+LexDigital, en cambio, tiene:
+
+```text
+LEDM
+Legal Editorial Domain Model
+y el AST debe representar conceptos del dominio jurídico-editorial, no conceptos de Typefi.
+Por ejemplo, LexDigital puede distinguir:
+Document
+ ├── FrontMatter
+ ├── Title
+ ├── Part
+ ├── Chapter
+ ├── Article
+ │    ├── Paragraph
+ │    ├── Numeral
+ │    └── Literal
+ └── Glossary
+Esto no debería estar condicionado por:
+Typefi
+InDesign
+CXML
+Word
+EPUB
+HTML
+Ese es precisamente el valor de tu arquitectura hexagonal.
+7. Typefi sí demuestra que nuestra arquitectura tiene sentido
+Y aquí aparece la parte realmente interesante.
+Typefi constituye una validación industrial indirecta de una decisión que ya tomaste en LexDigital:
+separar contenido estructurado de composición.
+
+Adobe también reconoce actualmente XML, IDML y scripting como tecnologías de automatización de flujos editoriales. Centro de ayuda de Adobe
+Typefi simplemente lleva esa filosofía a una plataforma industrial.
+Por eso podemos tomar prestadas sus ideas sin adoptar Typefi como dependencia.
+8. La arquitectura Typefi que deberíamos estudiar
+Typefi tiene algo especialmente interesante:
+CONTENT
+   ↓
+CXML
+   ↓
+WORKFLOW
+   ↓
+INDESIGN SERVER
+   ↓
+OUTPUT
+Además, sus workflows están formados por acciones encadenadas. Typefi documenta que sus workflows conectan aplicaciones y que cada acción realiza una tarea concreta, pudiendo pasar datos a acciones posteriores. Typefi Soporte
+Esto es conceptualmente muy cercano a:
+LexDigital Pipeline
+que ya estás construyendo.
+Por ejemplo:
+Input
+ ↓
+Adapter
+ ↓
+Validator
+ ↓
+Compiler
+ ↓
+Renderer
+ ↓
+Output
+La diferencia es que LexDigital puede mantener el dominio jurídico completamente independiente de InDesign.
+9. Comparación directa
+Aspecto	Typefi	LexDigital
+Objetivo principal	Automatizar composición editorial	Normalizar y compilar contenido editorial
+Núcleo	Typefi + InDesign	LEDM + AST
+InDesign	Motor de composición	Adaptador/origen/destino
+XML propio	CXML	LEDM/JSON/AST
+Automatización	Muy alta	Muy alta
+Documentos masivos	Excelente	Objetivo
+InDesign Server	Fundamental	No necesariamente
+Semántica jurídica	Configurable	Parte central del modelo
+Control del AST	Limitado al modelo propio	Total
+Independencia de Adobe	Baja	Alta
+XHTML propio	Posible	Parte del núcleo de salida
+CSS propio	Indirecto/configurable	Control directo
+Arquitectura hexagonal	No es su objetivo	Sí
+Plugin/adapters	Sí, dentro de Typefi	Parte de la arquitectura
+Código abierto	No	Tu sistema puede serlo
+Coste	Comercial	Controlable por proyecto
+Dependencia del proveedor	Alta	Baja
+Modelo de negocio	Plataforma editorial	Motor propio
+
+
+10. ¿Por qué no sustituiría LexDigital por Typefi?
+Hay siete razones principales.
+Razón 1 — Perderíamos control sobre el dominio
+LexDigital no está construyendo simplemente un sistema de paginación.
+Está construyendo un:
+Legal Editorial Domain Model
+
+Ese modelo debe decidir qué es:
+Article
+Paragraph
+Numeral
+Literal
+Heading
+GlossaryTerm
+GlossaryDefinition
+Footnote
+Citation
+CrossReference
+y cómo se relacionan.
+Si sustituimos el núcleo por Typefi, corremos el riesgo de que la estructura editorial termine condicionada por el modelo de la plataforma.
+Eso sería invertir la dependencia:
+LO QUE QUEREMOS
+LEDM
+ ↓
+Adapters
+ ↓
+Typefi/InDesign/etc.
+frente a:
+LO QUE NO QUEREMOS
+Typefi
+ ↓
+modelo Typefi
+ ↓
+LexDigital
+11. Razón 2 — LexDigital quiere ser independiente del renderizador
+Esto es fundamental.
+Nuestro AST debería poder hacer:
+AST
+ ├── XHTML Renderer
+ ├── EPUB Renderer
+ ├── PDF Renderer
+ ├── JSON Renderer
+ ├── accessibility Renderer
+ └── future Renderer
+No queremos:
+AST
+ ↓
+Typefi
+ ↓
+InDesign
+ ↓
+output
+porque entonces Typefi se convertiría en una dependencia arquitectónica central.
+12. Razón 3 — Nuestro problema actual es inverso
+Typefi es extraordinariamente bueno en:
+contenido estructurado
+       ↓
+composición automática
+Pero nosotros tenemos un problema adicional:
+InDesign existente
+       ↓
+descubrir estructura
+       ↓
+validar
+       ↓
+normalizar
+       ↓
+AST
+Es decir:
+LexDigital tiene un problema de extracción forense que Typefi no está diseñado para resolver como núcleo.
+Esto conecta directamente con todo lo que has estado haciendo en E10/E11:
+InDesign
+ ↓
+adaptarInDesign
+ ↓
+AST canónico
+Typefi no sustituye conceptualmente esa operación.
+13. Razón 4 — Queremos recuperar semántica, no solamente producir páginas
+Consideremos:
+ARTÍCULO 15.
+LexDigital quiere llegar a:
+{
+  "type": "article",
+  "number": 15,
+  "children": [...]
+}
+y poder preguntar:
+¿Cuántos artículos hay?
+¿Cuál es el artículo padre?
+¿Qué numeral pertenece al artículo 15?
+¿Qué literales tiene?
+¿Qué referencias cruzadas contiene?
+Eso es una operación de análisis semántico.
+Typefi está optimizado para otra pregunta:
+¿Cómo compongo este contenido dentro de esta plantilla?
+
+Son capas diferentes.
+14. Razón 5 — El pipeline ya existente tiene una inversión importante
+Aquí está probablemente la razón económica más fuerte.
+Ya tienes:
+UXP
+ ↓
+IPC
+ ↓
+Node
+ ↓
+Adapter
+ ↓
+LEDM
+ ↓
+Validators
+ ↓
+Compiler
+ ↓
+XHTML
+Y además ya has demostrado:
+E10 → PASS
+E11 → PASS
+211 paragraphs
+208 canonical nodes
+1117 AST nodes
+y has eliminado problemas como:
+[VACÍO]
+IPC timeout
+style mapping ambiguo
+Por tanto, sustituir todo esto por Typefi no sería una optimización incremental.
+Sería cambiar de arquitectura.
+15. Razón 6 — Typefi es una plataforma, no solamente una biblioteca
+Este punto suele pasarse por alto.
+Typefi proporciona:
+- servidor;
+- workflows;
+- plugins;
+- acciones;
+- integración con InDesign;
+- CXML;
+- herramientas de Word;
+- automatización;
+- soporte;
+- infraestructura empresarial.
+Su documentación actual habla de más de 30 plugins de workflow y de APIs/SDK para ampliar la plataforma. Typefi Soporte
+Eso es una ventaja enorme para una editorial grande.
+Pero también significa:
+estás comprando un ecosistema.
+
+LexDigital tiene otra filosofía:
+estás construyendo un motor que controlas.
+
+16. Razón 7 — Coste y dependencia estratégica
+Typefi es una solución comercial orientada a organizaciones editoriales.
+Su propia web dirige a los clientes a solicitar demostraciones y precios. Typefi
+Para una gran editorial que produce:
+miles de libros
+miles de páginas
+muchas ediciones
+muchos idiomas
+muchos autores
+el coste puede estar perfectamente justificado.
+Pero para tu caso:
+Constitución
++
+legislación
++
+glosario
++
+documentos jurídicos
++
+automatización propia
+la ecuación es diferente.
+El activo estratégico que estás construyendo no es solamente:
+"producir más páginas por hora".
+
+Es:
+poseer el modelo de transformación del contenido jurídico.
+
+Eso tiene mucho más valor a largo plazo.
+17. Hay algo de Typefi que sí copiaría conceptualmente
+Y aquí está, para mí, la parte más importante.
+Typefi utiliza:
+CXML
+como intermedio estructurado.
+Nosotros tenemos:
+LEDM AST
+Por tanto:
+Typefi
+Word/XML
+   ↓
+CXML
+   ↓
+InDesign
+   ↓
+Output
+LexDigital
+Word/InDesign/JSON/XML
+          ↓
+      LEDM AST
+          ↓
+    Validation
+          ↓
+      Compiler
+          ↓
+ ┌────────┼─────────┐
+ ▼        ▼         ▼
+XHTML    EPUB      PDF
+La arquitectura de LexDigital es incluso más desacoplada.
+18. El concepto de "Content XML" nos enseña algo
+Typefi documenta que CXML puede contener:
+- párrafos;
+- caracteres;
+- estilos;
+- tablas;
+- filas;
+- celdas;
+- notas;
+- secciones;
+- elementos flotantes;
+- elementos inline;
+- etc. Typefi Soporte
+Eso confirma algo muy importante para nuestro AST:
+no debemos limitar el AST a una lista plana de párrafos.
+Debe existir una estructura jerárquica.
+Por ejemplo:
+Document
+ │
+ ├── FrontMatter
+ │
+ ├── Title
+ │
+ ├── Part
+ │    │
+ │    └── Chapter
+ │         │
+ │         └── Article
+ │              ├── Paragraph
+ │              ├── Numeral
+ │              │    └── Literal
+ │              └── Footnote
+ │
+ └── Glossary
+Esto es mucho más cercano al tipo de problema que queremos resolver.
+19. Y Typefi confirma que los elementos flotantes no deben considerarse automáticamente errores
+Esto enlaza directamente con la pregunta anterior sobre:
+"estructura de caja caótica".
+
+La documentación de CXML contempla explícitamente elementos:
+fixed
+inline
+floating
+y los representa mediante <context>. Typefi Docs
+Por tanto, nuestra regla anterior:
+"frame independiente = error"
+
+sería demasiado simplista.
+La regla correcta debería ser:
+FRAME INDEPENDIENTE
+       ↓
+¿Tiene función semántica declarada?
+       │
+   ┌───┴────┐
+  SÍ       NO
+  │         │
+válido    WARNING
+Por ejemplo:
+Figura
+Tabla
+Sidebar
+Nota
+Elemento editorial
+pueden ser legítimamente independientes.
+20. Typefi también es interesante para las actualizaciones incrementales
+Esto es especialmente sofisticado.
+Typefi dispone de una acción Update InDesign document que aplica cambios concretos desde CXML a un documento InDesign sin reprocesar necesariamente todo el documento, preservando la integridad general del diseño. Typefi Soporte
+Esto nos da una idea interesante para una futura versión de LexDigital:
+Documento original
+       ↓
+AST V1
+       ↓
+cambio únicamente:
+Article 15
+       ↓
+AST diff
+       ↓
+actualizar únicamente Article 15
+       ↓
+render incremental
+Eso podría ser una evolución posterior del pipeline.
+21. Typefi tampoco elimina la necesidad de una buena estructura
+Este punto es muy importante.
+Sería un error interpretar:
+"Typefi automatiza InDesign, por tanto cualquier documento puede automatizarse."
+
+No.
+Typefi depende de una arquitectura de contenido y plantillas cuidadosamente definidas.
+La propia documentación muestra que para crear un documento InDesign automatizado hay que proporcionar:
+- contenido CXML;
+- plantilla InDesign;
+- configuración;
+- workflows;
+- recursos. Typefi Soporte
+Y su documentación de EPUB describe el flujo:
+Word/XML
+ ↓
+CXML
+ ↓
+XSLT opcional
+ ↓
+InDesign Server
+ ↓
+EPUB
+ ↓
+cleanup
+``` citeturn0search37
+
+
+Por tanto:
+
+**Typefi no reemplaza la disciplina editorial. La industrializa.**
+
+Esto es exactamente lo que deberíamos hacer nosotros.
+
+---
+
+# 22. Lo que deberíamos tomar de Typefi para LexDigital
+
+Yo extraería **ocho principios**.
+
+### 1. Fuente estructurada
+
+```text
+contenido ≠ apariencia
+2. Intermedio canónico
+LEDM AST
+3. Templates
+La plantilla InDesign debe ser un renderer/configuración, no la fuente primaria de semántica.
+4. Workflow declarativo
+prepare
+→ validate
+→ transform
+→ render
+→ validate
+5. Automatización server-side
+Nuestra arquitectura UXP + Node podría evolucionar hacia procesamiento desatendido.
+6. Actualización incremental
+No recompilar todo cuando cambia un único artículo.
+7. Multi-output
+AST
+ ├── XHTML
+ ├── EPUB
+ ├── PDF
+ └── otros
+8. Separación de responsabilidades
+Contenido
+Composición
+Renderizado
+Validación
+Distribución
+23. Donde LexDigital puede ser superior conceptualmente
+No en velocidad bruta de paginación.
+Ahí Typefi es una solución industrial madura.
+Pero LexDigital puede tener ventajas en:
+Semántica jurídica
+Article
+Numeral
+Literal
+Paragraph
+CrossReference
+Definition
+AST controlado
+Tú defines exactamente:
+qué es un nodo
+qué atributos tiene
+qué hijos puede tener
+qué relaciones son válidas
+Independencia
+No dependes de:
+Typefi CXML
+Typefi Server
+Typefi workflows
+Trazabilidad
+Puedes conservar:
+InDesign node
+ ↓
+Adapter
+ ↓
+AST node
+ ↓
+XHTML node
+Testabilidad
+Puedes probar:
+Adapter
+Validator
+Compiler
+Renderer
+independientemente.
+Evolución
+Puedes sustituir:
+InDesign
+sin destruir:
+LEDM
+24. El paralelismo arquitectónico más interesante
+Podemos representarlo así:
+              TYPEFI
+              
+ Word/XML
+    │
+    ▼
+  CXML
+    │
+    ▼
+Workflow Engine
+    │
+    ▼
+InDesign Server
+    │
+    ▼
+  Output
+Mientras que:
+             LEXDIGITAL
+
+InDesign ──┐
+Word ──────┤
+JSON ──────┤
+XML ───────┘
+     │
+     ▼
+Adapters
+     │
+     ▼
+LEDM / AST
+     │
+     ▼
+Validators
+     │
+     ▼
+Compiler
+     │
+     ├──── XHTML
+     ├──── EPUB
+     ├──── PDF
+     └──── otros
+Typefi está orientado principalmente a automatizar la producción.
+LexDigital está orientado a controlar el conocimiento estructural que permite producir.
+25. Por eso mi recomendación cambia ligeramente
+Después de revisar la arquitectura actual de Typefi, mi recomendación sería:
+❌ No:
+"Comprar Typefi para sustituir LexDigital."
+
+❌ Tampoco:
+"Ignorar Typefi porque tenemos nuestro propio sistema."
+
+✅ Sí:
+Utilizar Typefi como benchmark arquitectónico de publicación automatizada industrial.
+
+Es decir, estudiar:
+Typefi
+   │
+   ├── CXML
+   ├── workflows
+   ├── templates
+   ├── InDesign Server
+   ├── actualización incremental
+   ├── elementos complejos
+   └── multi-output
+y preguntarnos:
+¿Cuál de estos conceptos debemos implementar dentro de LexDigital sin importar la dependencia de Typefi?
+
+26. La consecuencia para la arquitectura de LexDigital
+De hecho, después de esta investigación, yo propondría formalizar una nueva capa:
+┌─────────────────────────────────────────────┐
+│              LEXDIGITAL                     │
+│                                             │
+│  INPUTS                                     │
+│  InDesign / Word / JSON / XML               │
+│                 │                           │
+│                 ▼                           │
+│        ┌──────────────────┐                 │
+│        │ ADAPTERS         │                 │
+│        └────────┬─────────┘                 │
+│                 ▼                           │
+│        ┌──────────────────┐                 │
+│        │ LEDM / AST       │  ← núcleo       │
+│        └────────┬─────────┘                 │
+│                 ▼                           │
+│        ┌──────────────────┐                 │
+│        │ VALIDATORS       │                 │
+│        └────────┬─────────┘                 │
+│                 ▼                           │
+│        ┌──────────────────┐                 │
+│        │ COMPILER         │                 │
+│        └────────┬─────────┘                 │
+│                 ▼                           │
+│        ┌──────────────────┐                 │
+│        │ RENDERERS        │                 │
+│        └──────────────────┘                 │
+│                                             │
+└─────────────────────────────────────────────┘
+Y colocar InDesign solamente en los adapters/renderers, nunca en el núcleo.
+Ese es el punto que, para mí, justifica especialmente no sustituir LexDigital por Typefi.
+27. En una frase
+Si tuviera que resumir la diferencia:
+Typefi automatiza extraordinariamente bien la producción editorial utilizando InDesign; LexDigital pretende convertir el contenido editorial en un modelo semántico propio del dominio jurídico y después producir múltiples salidas a partir de ese modelo.
+
+Typefi puede ser un excelente motor de composición industrial.
+Pero convertirlo en el núcleo de LexDigital sería, arquitectónicamente, hacer que:
+LEDM dependa de InDesign/Typefi
+cuando nuestra arquitectura busca exactamente lo contrario:
+InDesign/Typefi
+        ↓
+      Adapter
+        ↓
+       LEDM
+        ↓
+     Outputs
+Y hay una evidencia especialmente fuerte en la propia documentación de Typefi: incluso su arquitectura utiliza CXML como intermediario estructurado antes de llegar a InDesign. Typefi Docs
+Eso significa que la lección que deberíamos extraer de Typefi no es "necesitamos Typefi".
+La lección es:
+"Estamos construyendo correctamente al separar el contenido estructurado de la composición; ahora debemos llevar esa separación de manera rigurosa hasta el extremo de que InDesign sea intercambiable."
+
+Ese sería, en mi opinión, el siguiente nivel arquitectónico de LexDigital.
+
+Sí. A la luz de la arquitectura que ya has construido, **no propondría rehacer LexDigital**. Propondría una **evolución arquitectónica controlada**, tomando de Typefi la separación entre contenido, estructura y composición, pero conservando el núcleo LEDM que ya has desarrollado.
+
+Adobe, de hecho, acaba de reforzar oficialmente esta dirección: su documentación de agosto de 2026 presenta XML, IDML y scripting como tecnologías complementarias para automatización editorial y señala explícitamente que XML separa contenido y diseño, mientras que IDML permite representar y manipular programáticamente documentos InDesign. 
+
+## Mi propuesta: LexDigital 2.0, no LexDigital 2.0 "desde cero"
+
+La evolución que recomiendo es:
+
+```text
+                         FUENTES
+              ┌────────────┼────────────┐
+              │            │            │
+           InDesign       Word         JSON/XML
+              │            │            │
+              ▼            ▼            ▼
+          Adapters / Normalizers
+                     │
+                     ▼
+             ┌────────────────┐
+             │   LEDM / AST    │
+             │  CANONICAL CORE │
+             └───────┬────────┘
+                     │
+          ┌──────────┼──────────┐
+          ▼          ▼          ▼
+       Validator   Compiler   Semantic
+          │          │        Services
+          └──────────┼──────────┘
+                     ▼
+                Renderers
+          ┌──────────┼──────────┐
+          ▼          ▼          ▼
+        XHTML      EPUB        PDF
+```
+
+Pero añadiría **tres capas nuevas**:
+
+```text
+1. Editorial Contract
+2. InDesign Certification Gate
+3. Canonical Intermediate Representation
+```
+
+Estas tres piezas son las que convertirían lo que tienes actualmente en una arquitectura mucho más cercana a un sistema editorial industrial.
+
+---
+
+# 1. No tocaría todavía el núcleo LEDM
+
+Esta es mi primera recomendación y probablemente la más importante.
+
+**No rediseñaría `compilarLexmotor()`.**
+
+Tampoco modificaría ahora:
+
+```text
+src/core/
+validators/
+compiler/
+renderer/
+```
+
+salvo para introducir interfaces mejor definidas.
+
+Tu E10 ya demostró algo muy valioso:
+
+```text
+InDesign
+   ↓
+adaptaInDesign()
+   ↓
+AST canónico
+```
+
+y E11 demostró que:
+
+```text
+211 párrafos
+→ 208 nodos canónicos
+→ 1117 nodos AST totales
+→ XHTML
+```
+
+puede funcionar de forma determinista.
+
+Eso es precisamente lo que debemos **cristalizar**, no reemplazar.
+
+---
+
+# 2. La primera ampliación: Editorial Contract
+
+Yo introduciría inmediatamente:
+
+```text
+docs/
+└── contracts/
+    └── LEXDIGITAL_EDITORIAL_CONTRACT.md
+```
+
+Este documento sería el equivalente conceptual a lo que Typefi consigue mediante su modelo estructurado CXML.
+
+Typefi utiliza CXML como formato intermedio para codificar contenido, y su versión actual contempla explícitamente headings, tablas, notas al pie, referencias cruzadas, listas, imágenes, spans de caracteres, etc. 
+
+Nosotros debemos hacer lo mismo, pero **con LEDM**, no con CXML.
+
+El contrato debe definir:
+
+```text
+¿Qué es un documento?
+¿Qué es un artículo?
+¿Qué es un numeral?
+¿Qué es un literal?
+¿Qué es un párrafo?
+¿Qué es una nota?
+¿Qué es una referencia?
+¿Qué es contenido inline?
+¿Qué es contenido flotante?
+¿Qué es estructura editorial?
+```
+
+Y, sobre todo:
+
+> **qué información es obligatoria antes de que un documento pueda entrar al compilador.**
+
+---
+
+# 3. Segunda ampliación: InDesign Certification Gate
+
+Esta es la pieza que implementaría **inmediatamente**.
+
+Actualmente tienes:
+
+```text
+InDesign
+ ↓
+Adapter
+ ↓
+AST
+```
+
+Yo lo convertiría en:
+
+```text
+InDesign
+ ↓
+INSPECTION
+ ↓
+CERTIFICATION GATE
+ ↓
+Adapter
+ ↓
+AST
+```
+
+Es decir:
+
+```text
+                 INDD
+                  │
+                  ▼
+        ┌──────────────────┐
+        │ InDesign Inspector│
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Certification    │
+        │ Gate              │
+        └────────┬─────────┘
+                 │
+          ┌──────┴──────┐
+          ▼             ▼
+        FAIL           PASS
+          │             │
+          ▼             ▼
+       Report        E10 Adapter
+                        │
+                        ▼
+                      AST
+```
+
+Esto no requiere rediseñar el núcleo.
+
+---
+
+# 4. ¿Qué debería inspeccionar?
+
+Inicialmente seis dimensiones.
+
+## A. Documento
+
+```text
+documentOpen
+documentSaved
+version
+pageCount
+stories
+links
+fonts
+```
+
+## B. Stories
+
+```text
+storyCount
+mainStory
+unthreadedFrames
+oversetText
+emptyStories
+```
+
+## C. Estilos
+
+```text
+paragraphCount
+unstyledParagraphs
+basicParagraphs
+unknownStyles
+characterStyles
+```
+
+## D. Overrides
+
+```text
+overrideParagraphs
+overrideCharacters
+overrideRate
+criticalOverrides
+```
+
+## E. Semántica
+
+```text
+articlesDetected
+articlesStyled
+grepAgreement
+tagAgreement
+unknownSemanticNodes
+```
+
+## F. Recursos
+
+```text
+missingFonts
+missingLinks
+brokenLinks
+```
+
+---
+
+# 5. Y produciría un `ExtractionManifest`
+
+Este sería un cambio muy importante.
+
+Antes de extraer:
+
+```json
+{
+  "document": {
+    "name": "constitucion.indd",
+    "version": "21.3"
+  },
+  "stories": {
+    "count": 1,
+    "overset": 0,
+    "unthreaded": 0
+  },
+  "styles": {
+    "paragraphs": 1325,
+    "unstyled": 0,
+    "unknown": 0
+  },
+  "overrides": {
+    "count": 0,
+    "rate": 0
+  },
+  "semantic": {
+    "articles": 211,
+    "unclassified": 0
+  },
+  "resources": {
+    "missingFonts": 0,
+    "missingLinks": 0
+  },
+  "status": "CERTIFIED"
+}
+```
+
+Y solamente:
+
+```javascript
+if (manifest.status !== 'CERTIFIED') {
+    throw new ExtractionGateError(...);
+}
+```
+
+se permite continuar.
+
+---
+
+# 6. Esto cambia la filosofía del proyecto
+
+Actualmente la filosofía podría resumirse como:
+
+> "Extraigamos y luego descubramos si el documento estaba bien."
+
+La arquitectura nueva sería:
+
+> **"Certifiquemos primero y extraigamos después."**
+
+Eso tiene un enorme impacto positivo en depuración.
+
+Si aparece:
+
+```text
+AST incorrecto
+```
+
+podemos preguntar:
+
+```text
+¿El documento estaba certificado?
+```
+
+Si:
+
+```text
+sí
+```
+
+entonces el problema está probablemente en:
+
+```text
+Adapter
+Core
+Compiler
+Renderer
+```
+
+Si:
+
+```text
+no
+```
+
+no debemos culpar al compilador.
+
+---
+
+# 7. Tercera ampliación: separar "contenido" de "dialecto InDesign"
+
+Esto ya existe parcialmente en E10, pero yo lo formalizaría.
+
+Actualmente:
+
+```text
+adaptaInDesign()
+```
+
+debe convertirse conceptualmente en:
+
+```text
+InDesignDialect
+        ↓
+InDesignAdapter
+        ↓
+CanonicalDocument
+```
+
+Por ejemplo:
+
+```text
+InDesign:
+
+P02_ARTICLE
+"ARTÍCULO 15."
+
+        ↓
+
+Adapter
+
+        ↓
+
+LEDM:
+
+{
+    type: "article",
+    number: "15"
+}
+```
+
+El Core **jamás debería saber que existió `P02_ARTICLE`**.
+
+---
+
+# 8. Crear una representación intermedia canónica
+
+Aquí tomaría directamente la idea más potente de Typefi.
+
+Typefi tiene:
+
+```text
+CXML
+```
+
+Nosotros debemos tener:
+
+```text
+LEDM Canonical Representation
+```
+
+No necesariamente un nuevo formato.
+
+Puede ser exactamente el AST que ya tienes, pero con un contrato formal.
+
+Por ejemplo:
+
+```json
+{
+  "schema": "LEDM",
+  "version": "1.1.0",
+  "document": {
+    "type": "legal-document",
+    "children": [
+      {
+        "type": "article",
+        "id": "article-15",
+        "number": "15",
+        "children": []
+      }
+    ]
+  }
+}
+```
+
+La diferencia es que ahora declaramos:
+
+> **Este JSON es una interfaz pública del sistema.**
+
+No es simplemente el objeto temporal que genera `adaptaInDesign()`.
+
+---
+
+# 9. Esto permitiría introducir una capacidad extraordinariamente útil
+
+Una vez que tienes:
+
+```text
+LEDM Canonical
+```
+
+puedes hacer:
+
+```text
+InDesign
+     ↓
+    LEDM
+     ↓
+    JSON
+```
+
+guardar ese JSON.
+
+Y posteriormente:
+
+```text
+JSON LEDM
+     ↓
+    LEDM
+     ↓
+ XHTML
+```
+
+sin abrir InDesign.
+
+Esto es fundamental.
+
+Significa que InDesign deja de formar parte del proceso de compilación.
+
+---
+
+# 10. Entonces el pipeline quedaría dividido en dos
+
+## Pipeline A — Ingesta
+
+```text
+INDD
+ ↓
+UXP
+ ↓
+Inspector
+ ↓
+Certification Gate
+ ↓
+InDesign Adapter
+ ↓
+LEDM
+ ↓
+guardar canonical.json
+```
+
+## Pipeline B — Producción
+
+```text
+canonical.json
+ ↓
+Validator
+ ↓
+Compiler
+ ↓
+XHTML
+ ↓
+EPUB/PDF/etc.
+```
+
+Y esto es, en mi opinión, **el salto arquitectónico más importante que puedes hacer ahora mismo**.
+
+---
+
+# 11. ¿Por qué es tan importante?
+
+Porque actualmente tienes:
+
+```text
+INDD → AST → XHTML
+```
+
+Yo quiero que tengas:
+
+```text
+             ┌───────────────┐
+             │               │
+          InDesign         Word
+             │               │
+             ▼               ▼
+          Adapter         Adapter
+             │               │
+             └───────┬───────┘
+                     ▼
+                Canonical LEDM
+                     │
+             ┌───────┼────────┐
+             ▼       ▼        ▼
+           HTML     EPUB      PDF
+```
+
+Así, en el futuro puedes incorporar:
+
+```text
+DOCXAdapter
+XMLAdapter
+MarkdownAdapter
+TEIAdapter
+DatabaseAdapter
+```
+
+sin tocar el Core.
+
+Eso es **hexagonalidad real**, no solamente una organización de carpetas.
+
+---
+
+# 12. Y aquí Typefi se convierte en referencia, no dependencia
+
+Typefi demuestra que este modelo es viable industrialmente.
+
+Su CXML es un intermediario y puede alimentar InDesign; además Typefi dispone incluso de una acción para exportar CXML desde INDD y otra para actualizar documentos InDesign a partir de CXML. 
+
+Nosotros podemos adoptar la misma filosofía:
+
+```text
+LEDM
+ ↕
+InDesign
+```
+
+pero sin introducir Typefi:
+
+```text
+LEDM
+ ↕
+InDesign Adapter
+```
+
+---
+
+# 13. Cuarta ampliación: `LEDM → InDesign`
+
+Aquí hay una evolución que todavía no haría como prioridad, pero que **sí diseñaría desde ahora**.
+
+Actualmente:
+
+```text
+InDesign → LEDM
+```
+
+En el futuro:
+
+```text
+LEDM → InDesign
+```
+
+Eso permitiría:
+
+```text
+JSON jurídico
+ ↓
+LEDM
+ ↓
+InDesign
+```
+
+y tendrías un sistema bidireccional:
+
+```text
+         ┌─────────────┐
+         │    LEDM     │
+         └──────┬──────┘
+          ▲      │
+          │      ▼
+      InDesign  InDesign
+      Adapter   Renderer
+```
+
+Esto sería una evolución muy potente.
+
+---
+
+# 14. Pero NO intentaría hacer esto todavía
+
+No empezaría ahora a construir:
+
+```text
+LEDM → INDD
+```
+
+hasta que:
+
+```text
+InDesign → LEDM
+```
+
+esté completamente certificado.
+
+Primero:
+
+```text
+INGESTA
+```
+
+después:
+
+```text
+REGENERACIÓN
+```
+
+Es exactamente la misma lógica que utilizaría un sistema editorial industrial.
+
+---
+
+# 15. Quinta ampliación: snapshots canónicos
+
+Esta sería otra mejora inmediata.
+
+Cada extracción debería generar:
+
+```text
+runs/
+└── 2026-09-01T06-30-00/
+    ├── extraction-manifest.json
+    ├── source-metadata.json
+    ├── canonical-ledm.json
+    ├── audit-report.json
+    ├── xhtml/
+    └── logs/
+```
+
+Y guardar:
+
+```text
+sourceHash
+adapterVersion
+ledmVersion
+compilerVersion
+documentVersion
+timestamp
+```
+
+Ejemplo:
+
+```json
+{
+  "sourceHash": "sha256:...",
+  "adapter": "InDesignAdapter 1.4.0",
+  "ledm": "1.1.0",
+  "compiler": "2.0.0",
+  "status": "CERTIFIED"
+}
+```
+
+Esto convierte cada compilación en un **artefacto reproducible**.
+
+---
+
+# 16. Sexta ampliación: Golden Tests sobre LEDM, no solamente sobre InDesign
+
+Aquí haría una evolución importante respecto de E11.
+
+Actualmente tienes:
+
+```text
+raw fixture
+ ↓
+adapter
+ ↓
+compiler
+ ↓
+XHTML
+```
+
+Mantendría ese test.
+
+Pero agregaría:
+
+```text
+canonical-ledm.json
+ ↓
+compiler
+ ↓
+XHTML
+```
+
+como Golden Test independiente.
+
+Entonces tendrías:
+
+### Golden A
+
+```text
+INDD fixture
+→ Adapter
+→ LEDM
+```
+
+### Golden B
+
+```text
+LEDM fixture
+→ Compiler
+→ XHTML
+```
+
+### Golden C
+
+```text
+INDD fixture
+→ Adapter
+→ LEDM
+→ Compiler
+→ XHTML
+```
+
+Esto separa definitivamente:
+
+```text
+problemas de extracción
+```
+
+de:
+
+```text
+problemas de compilación.
+```
+
+---
+
+# 17. Séptima ampliación: contrato de equivalencia
+
+Aquí puedes aprovechar muchísimo el trabajo E12 que ya has realizado.
+
+En vez de comprobar solamente:
+
+```text
+1117 nodes
+```
+
+podemos establecer:
+
+```text
+AST invariant
+```
+
+Por ejemplo:
+
+```text
+N1:
+todo Article tiene number
+
+N2:
+todo Article puede contener Paragraph
+
+N3:
+todo Literal pertenece a Numeral o Paragraph permitido
+
+N4:
+todo nodo tiene semanticType
+
+N5:
+todo nodo renderizable tiene mapping XHTML
+
+N6:
+ningún nodo tiene [VACÍO]
+
+N7:
+ningún estilo InDesign aparece en el Core
+```
+
+Esto sería mucho más importante que simplemente aumentar el porcentaje de cobertura de Jest.
+
+---
+
+# 18. Octava ampliación: un "Semantic Diff"
+
+Esta es una función que yo pondría en el roadmap.
+
+Supongamos:
+
+```text
+Constitución v1
+```
+
+y después:
+
+```text
+Constitución v2
+```
+
+Podríamos hacer:
+
+```text
+LEDM v1
+   ↕
+semantic diff
+   ↕
+LEDM v2
+```
+
+Resultado:
+
+```text
+Artículo 15
+  texto modificado
+
+Artículo 16
+  sin cambios
+
+Artículo 17
+  numeral 3 añadido
+
+Artículo 18
+  literal b eliminado
+```
+
+Eso abre una posibilidad comercial muy interesante para LexDigital:
+
+**control de versiones jurídicas semánticas**, no solamente comparación de documentos visuales.
+
+---
+
+# 19. Novena ampliación: sustituir el concepto de "estilo" por "evidencia"
+
+Este punto es más avanzado.
+
+Actualmente:
+
+```text
+P02_ARTICLE
+```
+
+es una señal.
+
+Pero podemos tener:
+
+```json
+{
+  "semanticType": "article",
+  "evidence": {
+    "paragraphStyle": "P02_ARTICLE",
+    "grepPattern": "ARTÍCULO\\s+\\d+",
+    "exportTag": "p"
+  }
+}
+```
+
+Entonces el Adapter puede calcular:
+
+```text
+confidence = HIGH
+```
+
+si las tres evidencias coinciden.
+
+Por ejemplo:
+
+```text
+STYLE       → ARTICLE
+GREP        → ARTICLE
+TAG         → ARTICLE
+```
+
+= alta confianza.
+
+Pero:
+
+```text
+STYLE       → BODY
+GREP        → ARTICLE
+TAG         → p
+```
+
+= conflicto.
+
+Eso permitiría que LexDigital deje de ser un sistema basado en:
+
+> "confío en el estilo".
+
+y pase a ser:
+
+> **"corroboro la semántica mediante múltiples evidencias."**
+
+---
+
+# 20. Esto es especialmente importante para documentos heredados
+
+Supongamos un INDD antiguo:
+
+```text
+[Sin estilo]
+ARTÍCULO 15.
+```
+
+El sistema no debería simplemente decir:
+
+```text
+unknown
+```
+
+Podría decir:
+
+```json
+{
+  "detected": "article",
+  "evidence": {
+    "grep": true,
+    "style": false,
+    "tag": false
+  },
+  "confidence": "LOW",
+  "action": "REVIEW"
+}
+```
+
+Eso permitiría crear posteriormente un:
+
+```text
+LexDigital Document Repairer
+```
+
+pero como **herramienta separada del compilador**.
+
+---
+
+# 21. Décima ampliación: separar Repair de Compile
+
+Esto lo considero crucial.
+
+Nunca haría:
+
+```text
+Compiler
+  ↓
+si encuentra error
+  ↓
+repara InDesign
+```
+
+Debe ser:
+
+```text
+             INDD
+              │
+       ┌──────┴──────┐
+       ▼             ▼
+   Inspector       Repairer
+       │             │
+       ▼             ▼
+    Report       INDD limpio
+       │             │
+       └──────┬──────┘
+              ▼
+           Adapter
+              ▼
+             LEDM
+              ▼
+          Compiler
+```
+
+El **Repairer** puede ser agresivo.
+
+El **Compiler** debe ser determinista.
+
+Nunca mezclaría ambos.
+
+---
+
+# 22. ¿Qué herramientas utilizaría?
+
+No compraría Typefi ahora.
+
+Utilizaría:
+
+### Adobe InDesign
+
+Para:
+
+- UXP;
+- XML;
+- IDML;
+- scripting;
+- Preflight;
+- estilos;
+- estructura. 
+
+Adobe mantiene oficialmente XML, IDML y scripts como tecnologías de automatización y además señala InDesign Server como opción para publicación automatizada basada en servidor. 
+
+### UXP
+
+Lo convertiría progresivamente en la capa primaria de integración con InDesign.
+
+Adobe documenta que UXP utiliza V8/ECMAScript moderno frente al ExtendScript basado en ES3. 
+
+Esto coincide directamente con el camino que ya has iniciado.
+
+### Node.js
+
+Mantendría:
+
+```text
+Pipeline
+Core
+Validators
+Compiler
+Tests
+```
+
+fuera de InDesign.
+
+---
+
+# 23. ¿Y ExtendScript?
+
+No lo eliminaría inmediatamente.
+
+Lo pondría como:
+
+```text
+LEGACY / COMPATIBILITY ADAPTER
+```
+
+Mientras que:
+
+```text
+UXP
+```
+
+sería:
+
+```text
+PRIMARY INTEGRATION
+```
+
+Adobe dispone actualmente de guías explícitas para migrar de ExtendScript a UXP. 
+
+Por tanto, no tiene sentido invertir ahora grandes cantidades de código nuevo en una arquitectura exclusivamente ExtendScript.
+
+---
+
+# 24. La estructura de proyecto que propondría
+
+Sin destruir tu proyecto actual:
+
+```text
+proyecto-lexdigital_modular/
+│
+├── src/
+│   │
+│   ├── core/
+│   │   ├── domain/
+│   │   ├── validators/
+│   │   ├── compiler/
+│   │   └── contracts/
+│   │
+│   ├── adapters/
+│   │   ├── indesign/
+│   │   │   ├── adaptarInDesign.js
+│   │   │   ├── InDesignStoryInspector.js
+│   │   │   ├── InDesignStyleInspector.js
+│   │   │   ├── InDesignOverrideInspector.js
+│   │   │   └── InDesignSemanticInspector.js
+│   │   │
+│   │   ├── json/
+│   │   └── xml/
+│   │
+│   ├── certification/
+│   │   ├── ExtractionGate.js
+│   │   ├── ExtractionManifest.js
+│   │   └── CertificationRules.js
+│   │
+│   ├── compiler/
+│   │
+│   └── renderers/
+│
+├── schemas/
+│   ├── ledm.schema.json
+│   └── extraction-manifest.schema.json
+│
+├── fixtures/
+│   ├── indesign/
+│   ├── ledm/
+│   └── expected/
+│
+├── test/
+│   ├── adapters/
+│   ├── certification/
+│   ├── core/
+│   ├── compiler/
+│   └── fixtures/
+│
+└── docs/
+    ├── AST_EDITORIAL_SPECIFICATION.md
+    ├── EDITORIAL_CONTRACT.md
+    ├── EXTRACTION_CONTRACT.md
+    └── INDESIGN_CERTIFICATION.md
+```
+
+---
+
+# 25. No crearía una nueva arquitectura de servidor todavía
+
+Esto también es importante.
+
+Ya tienes:
+
+```text
+LexDigital-UXP-Plugin
+       ↕
+WebSocket
+       ↕
+LexDigital-Pipeline
+```
+
+**Lo conservaría.**
+
+No migraría ahora a:
+
+```text
+InDesign Server
+Docker
+Kubernetes
+microservicios
+colas distribuidas
+```
+
+Eso sería prematuro.
+
+Primero haría que:
+
+```text
+INDD → LEDM → XHTML
+```
+
+sea absolutamente reproducible.
+
+Después:
+
+```text
+InDesign Server
+```
+
+puede convertirse en un nuevo Adapter/Execution Target.
+
+Adobe confirma que InDesign Server comparte la misma base de código de InDesign y está destinado precisamente a flujos de publicación automatizados basados en servidor. 
+
+---
+
+# 26. El roadmap que considero óptimo
+
+Yo lo haría en **cinco fases**, no en una reescritura.
+
+## Fase 1 — Certificación
+
+**Prioridad: inmediata**
+
+Implementar:
+
+```text
+InDesign Inspector
+Extraction Manifest
+Extraction Gate
+```
+
+Resultado:
+
+```text
+INDD → CERTIFIED / REJECTED
+```
+
+---
+
+## Fase 2 — Canonical LEDM
+
+Formalizar:
+
+```text
+LEDM 1.1
+```
+
+y garantizar:
+
+```text
+Adapter → canonical AST
+```
+
+Resultado:
+
+```text
+INDD → LEDM.json
+```
+
+---
+
+## Fase 3 — Compiler independiente
+
+Crear Golden Tests:
+
+```text
+LEDM.json → XHTML
+```
+
+Resultado:
+
+```text
+InDesign ya no es necesario para probar el compilador.
+```
+
+---
+
+## Fase 4 — Reparación editorial
+
+Construir:
+
+```text
+DocumentRepairer
+```
+
+para:
+
+- estilos;
+- overrides;
+- stories;
+- nomenclatura;
+- semántica;
+- etc.
+
+Resultado:
+
+```text
+INDD defectuoso
+ ↓
+Repair
+ ↓
+INDD certificado
+```
+
+---
+
+## Fase 5 — Regeneración
+
+Finalmente:
+
+```text
+LEDM
+ ↓
+InDesign Adapter/Renderer
+ ↓
+INDD
+```
+
+Aquí ya estaríamos entrando realmente en una arquitectura editorial bidireccional.
+
+---
+
+# 27. El resultado final
+
+La arquitectura objetivo sería:
+
+```text
+                         LEXDIGITAL
+                             │
+                ┌────────────┴────────────┐
+                │                         │
+             INGESTA                  GENERACIÓN
+                │                         │
+       ┌────────┼────────┐                │
+       ▼        ▼        ▼                ▼
+   InDesign   Word     XML/JSON         LEDM
+       │        │        │                │
+       ▼        ▼        ▼                │
+     Adapter / Normalizer                  │
+                │                          │
+                └──────────┬───────────────┘
+                           ▼
+                    ┌──────────────┐
+                    │    LEDM      │
+                    │ CANONICAL    │
+                    └──────┬───────┘
+                           │
+                  ┌────────┼────────┐
+                  ▼        ▼        ▼
+              Validator  Compiler  Diff
+                  │        │        │
+                  └────────┼────────┘
+                           ▼
+                       Renderers
+                           │
+                ┌──────────┼──────────┐
+                ▼          ▼          ▼
+              XHTML      EPUB        PDF
+```
+
+---
+
+# 28. Mi decisión concreta
+
+Si este fuera mi proyecto, **no lo rediseñaría desde cero y tampoco compraría Typefi en esta etapa**.
+
+Haría exactamente esto:
+
+### Mantener
+
+```text
+LEDM
+AST
+E10 Adapter
+E11 Golden Test
+Node.js
+UXP
+WebSocket
+Pipeline
+Validators
+Compiler
+```
+
+### Añadir inmediatamente
+
+```text
+1. Extraction Contract
+2. InDesign Inspector
+3. Extraction Gate
+4. Extraction Manifest
+5. Canonical LEDM snapshot
+6. LEDM-only Golden Tests
+```
+
+### Después
+
+```text
+7. Semantic Evidence Engine
+8. Document Repairer
+9. Semantic Diff
+10. LEDM → InDesign
+```
+
+Y dejaría como **fase posterior, no inmediata**:
+
+```text
+11. InDesign Server
+12. procesamiento desatendido
+13. escalamiento de múltiples documentos
+```
+
+---
+
+## La idea central
+
+Typefi nos ha mostrado una arquitectura industrial muy madura donde **el contenido estructurado está separado de la composición**; su CXML actúa como intermediario y puede alimentar InDesign, mientras que Typefi también puede extraer CXML desde documentos InDesign y aplicar actualizaciones específicas sin recomponer necesariamente todo el documento. 
+
+Pero **LexDigital puede llevar esa separación un paso más allá**:
+
+```text
+             TYPEFI
+                │
+          Content XML
+                │
+                ▼
+           InDesign
+                │
+                ▼
+             Output
+```
+
+frente a:
+
+```text
+            LEXDIGITAL
+
+ InDesign ─┐
+ Word ─────┤
+ XML ──────┤
+ JSON ─────┘
+      │
+      ▼
+ ┌───────────────┐
+ │  LEDM / AST   │  ← verdadera fuente canónica
+ └───────┬───────┘
+         │
+    ┌────┼────┐
+    ▼    ▼    ▼
+  XHTML EPUB PDF
+```
+
+**Por eso mi recomendación no es "hacer un Typefi casero".**
+
+Es construir **un núcleo semántico propio que pueda, llegado el momento, utilizar InDesign de la misma manera que Typefi lo utiliza: como un motor de composición intercambiable**.
+
+Y el paso inmediato para conseguirlo no es reescribir el Core: es construir el **`InDesign Certification Gate + Canonical LEDM Snapshot + LEDM-only Golden Test`**. Esa tríada convertiría la arquitectura actual de LexDigital en una plataforma mucho más sólida sin tirar el trabajo E10/E11 que ya está funcionando.
+Sí. **La pregunta es correcta y, de hecho, creo que nos lleva a una conclusión más ambiciosa que la que planteé antes.**
+
+Si podemos demostrar que la información de InDesign que LexDigital necesita para producir su AST **es finita, observable, extraíble y formalizable**, entonces no debemos asumir que Linux tiene que "necesitar InDesign". Podemos preguntarnos:
+
+> **¿Podemos construir en Linux un motor de interpretación de documentos editoriales que reproduzca el subconjunto de información de InDesign que realmente necesita LexDigital?**
+
+La respuesta es **sí, potencialmente**, pero con una precisión fundamental:
+
+> No intentaría replicar *InDesign*. Intentaría replicar **el modelo de evidencia editorial que LexDigital necesita obtener de InDesign**.
+
+Y esa diferencia puede ser enorme.
+
+---
+
+# 1. Hay que separar "data de InDesign" de "InDesign"
+
+InDesign contiene una cantidad gigantesca de información:
+
+```text
+Documento
+├── páginas
+├── spreads
+├── frames
+├── stories
+├── paragraphs
+├── characters
+├── paragraph styles
+├── character styles
+├── object styles
+├── tables
+├── cells
+├── footnotes
+├── hyperlinks
+├── cross references
+├── XML structure
+├── XML tags
+├── export mappings
+├── GREP styles
+├── nested styles
+├── conditions
+├── links
+├── fonts
+├── layers
+├── masters
+├── sections
+├── indexes
+├── TOC
+├── geometry
+└── ...
+```
+
+Pero LexDigital **no necesita necesariamente todo eso**.
+
+Para tu objetivo actual, buena parte de la información relevante podría reducirse a:
+
+```text
+Texto
++
+Orden
++
+Stories
++
+Párrafos
++
+Runs de caracteres
++
+Estilos
++
+Overrides
++
+Tags
++
+Relaciones estructurales
++
+Tablas
++
+Notas
++
+Enlaces
++
+Metadatos
+```
+
+Eso es muchísimo más manejable.
+
+---
+
+# 2. Y Adobe nos da una pista extraordinariamente importante
+
+Adobe mantiene **IDML**, un formato abierto basado en XML.
+
+Adobe dice explícitamente que IDML permite a desarrolladores e integradores:
+
+- crear documentos;
+- modificarlos;
+- desmontar partes;
+- reutilizar componentes;
+- transformarlos mediante XSLT;
+- consultar/modificar mediante XPath/XQuery;
+- y trabajar con documentos InDesign **fuera del contexto de InDesign**. 
+
+Eso es una evidencia muy fuerte para tu hipótesis.
+
+No estamos hablando de ingeniería inversa de un binario `.indd` necesariamente.
+
+Podemos hacer:
+
+```text
+INDD
+ │
+ │ InDesign
+ ▼
+IDML
+ │
+ │ XML estándar
+ ▼
+Linux
+ │
+ ├── parser XML
+ ├── normalizador
+ ├── resolver de relaciones
+ ├── extractor de estilos
+ ├── reconstrucción de stories
+ └── generador LEDM
+```
+
+Y **todo desde Linux después de obtener el IDML**.
+
+---
+
+# 3. De hecho, cambiaría la pregunta
+
+No:
+
+> "¿Cómo hacemos funcionar InDesign en Linux?"
+
+Sino:
+
+> **"¿Cuál es el mínimo conjunto de información que debemos extraer de un documento InDesign para reconstruir el LEDM?"**
+
+Esta pregunta es mucho más interesante.
+
+Y creo que debemos investigarla experimentalmente.
+
+---
+
+# 4. Tenemos tres posibles fuentes
+
+Podemos pensar en tres niveles.
+
+### Nivel A — IDML
+
+```text
+INDD
+ ↓
+IDML
+ ↓
+Linux
+ ↓
+LEDM
+```
+
+### Nivel B — XML etiquetado
+
+```text
+INDD
+ ↓
+XML
+ ↓
+Linux
+ ↓
+LEDM
+```
+
+### Nivel C — exportación específica LexDigital
+
+```text
+INDD
+ ↓
+UXP
+ ↓
+JSON canónico
+ ↓
+Linux
+ ↓
+LEDM
+```
+
+Los tres son posibles, pero tienen propiedades diferentes.
+
+---
+
+# 5. IDML es particularmente interesante
+
+Porque Adobe no lo presenta como un formato meramente de exportación visual.
+
+Adobe explica que IDML fue diseñado precisamente para permitir que desarrolladores modifiquen y reconstruyan documentos InDesign utilizando herramientas XML estándar. 
+
+Además, Adobe actualmente sigue listando IDML como formato de intercambio de InDesign. 
+
+Esto significa que podemos utilizar Linux para hacer:
+
+```text
+IDML parsing
+```
+
+sin depender de:
+
+```text
+Adobe DOM
+UXP
+ExtendScript
+InDesign Server
+```
+
+para la fase de interpretación.
+
+---
+
+# 6. Pero aquí aparece una distinción crucial
+
+IDML puede representar **el documento InDesign**.
+
+Pero nosotros necesitamos representar **el significado editorial**.
+
+Por ejemplo:
+
+```xml
+<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Articulo">
+    ...
+</ParagraphStyleRange>
+```
+
+puede decirnos:
+
+```text
+hay un estilo llamado Articulo
+```
+
+Pero no necesariamente:
+
+```text
+semanticType = article
+```
+
+Eso último es responsabilidad de LexDigital.
+
+Por tanto:
+
+```text
+IDML
+ ↓
+InDesign representation
+ ↓
+LexDigital interpretation
+ ↓
+LEDM
+```
+
+Esto es exactamente lo que queremos.
+
+---
+
+# 7. Y aquí tu trabajo E10 se vuelve todavía más importante
+
+Tu `adaptarInDesign()` actualmente hace:
+
+```text
+Dialect InDesign
+        ↓
+LEDM
+```
+
+Podríamos construir:
+
+```text
+          InDesign dialects
+                 │
+       ┌─────────┴─────────┐
+       ▼                   ▼
+  UXP Adapter          IDML Adapter
+       │                   │
+       └─────────┬─────────┘
+                 ▼
+              LEDM
+```
+
+Es decir:
+
+```text
+InDesignAdapter
+IDMLAdapter
+```
+
+producen **exactamente el mismo contrato**.
+
+Esto sería una prueba extraordinaria de la calidad de tu arquitectura.
+
+---
+
+# 8. El experimento definitivo sería este
+
+Tomamos el mismo documento:
+
+```text
+fragmento.indd
+```
+
+y producimos:
+
+```text
+fragmento.idml
+```
+
+Después:
+
+```text
+INDD
+ ↓
+UXP Adapter
+ ↓
+LEDM_A
+```
+
+y en Linux:
+
+```text
+IDML
+ ↓
+IDML Adapter
+ ↓
+LEDM_B
+```
+
+Finalmente:
+
+```text
+semanticDiff(LEDM_A, LEDM_B)
+```
+
+Si obtenemos:
+
+```text
+LEDM_A ≈ LEDM_B
+```
+
+hemos demostrado algo muy importante:
+
+> **LexDigital no necesita ejecutar InDesign para interpretar el documento; necesita interpretar correctamente la representación estructurada de InDesign.**
+
+---
+
+# 9. ¿Y si conseguimos equivalencia del 100 %?
+
+Entonces cambia completamente la arquitectura.
+
+Podríamos tener:
+
+```text
+                INGESTA
+                   │
+          ┌────────┴────────┐
+          │                 │
+        INDD              IDML
+          │                 │
+      InDesign             Linux
+          │                 │
+         UXP             IDML parser
+          │                 │
+          └────────┬────────┘
+                   ▼
+                 LEDM
+                   │
+                   ▼
+                Linux
+                   │
+             Compiler
+                   │
+          ┌────────┼────────┐
+          ▼        ▼        ▼
+        XHTML     EPUB      PDF
+```
+
+Y **InDesign podría convertirse en una herramienta opcional de preparación/edición**, no en una dependencia de ejecución del motor.
+
+---
+
+# 10. Pero no intentaría replicar toda la API de InDesign
+
+Esto sería un error enorme.
+
+Adobe tiene cientos/miles de conceptos de DOM.
+
+Por ejemplo, la API UXP expone colecciones específicas de estilos de párrafo y carácter, incluyendo búsqueda por nombre e ID. 
+
+No necesitamos reproducir:
+
+```text
+ParagraphStyle.itemByID()
+CharacterStyle.itemByID()
+...
+```
+
+en Linux.
+
+Necesitamos:
+
+```json
+{
+  "style": {
+    "id": "...",
+    "name": "...",
+    "type": "paragraph"
+  }
+}
+```
+
+Porque ese es el nivel de abstracción que necesita LEDM.
+
+---
+
+# 11. Lo mismo ocurre con XML Export Maps
+
+InDesign tiene una estructura formal de mappings:
+
+```text
+Paragraph Style
+      ↓
+XML Tag
+```
+
+La API de InDesign expone estos mappings explícitamente. 
+
+Eso significa que una parte de la información que investigamos durante E12:
+
+```text
+styleExportTagMaps
+```
+
+no es una peculiaridad accidental.
+
+Es una **relación semántica explícita del modelo de InDesign**.
+
+Y podemos reproducirla en nuestro modelo:
+
+```json
+{
+  "style": "P02_ARTICLE",
+  "xmlTag": "article",
+  "semanticType": "article"
+}
+```
+
+---
+
+# 12. Incluso XML ya nos permite reducir muchísimo la dependencia
+
+Adobe explica que el XML exportado desde InDesign puede reutilizar contenido etiquetado conservando su estructura, pero hay una limitación importante: la exportación XML incluye **solo elementos etiquetados**, incluidas las tablas. 
+
+Eso significa:
+
+```text
+XML
+```
+
+es excelente si controlamos la preparación del documento.
+
+Pero:
+
+```text
+IDML
+```
+
+puede ser más interesante para documentos heredados porque representa mucha más información interna del documento.
+
+---
+
+# 13. Por eso yo establecería una jerarquía
+
+## Fuente primaria para documentos controlados
+
+```text
+IDML
+```
+
+## Fuente enriquecida para documentos preparados
+
+```text
+IDML + XML tagging
+```
+
+## Fuente de máxima fidelidad
+
+```text
+UXP / InDesign DOM
+```
+
+Y las tres deberían producir:
+
+```text
+Canonical LEDM
+```
+
+---
+
+# 14. Esto nos permitiría crear un "InDesign Compatibility Layer"
+
+Pero no sería:
+
+> "InDesign para Linux".
+
+Sería:
+
+> **"InDesign Document Compatibility Layer".**
+
+Algo así:
+
+```text
+src/
+└── adapters/
+    ├── indesign/
+    │   └── uxp/
+    │
+    ├── idml/
+    │   ├── parser/
+    │   ├── resolver/
+    │   ├── story/
+    │   ├── styles/
+    │   ├── tables/
+    │   └── exporter/
+    │
+    └── xml/
+```
+
+Y todos:
+
+```text
+             Adapter
+                │
+                ▼
+        Canonical InDesign
+        Representation
+                │
+                ▼
+              LEDM
+```
+
+---
+
+# 15. ¿Qué software necesitamos en Linux?
+
+Aquí viene lo interesante:
+
+**no necesitamos software especializado de Adobe para la fase de interpretación IDML.**
+
+IDML es XML empaquetado.
+
+Por tanto, conceptualmente podemos utilizar:
+
+```text
+ZIP reader
++
+XML parser
++
+XPath
++
+XSLT
++
+XQuery
++
+Node.js
+```
+
+Adobe incluso señala expresamente XPath/XQuery/XSLT como tecnologías utilizables sobre IDML. 
+
+En Node.js podríamos construirlo completamente con librerías estándar del ecosistema.
+
+---
+
+# 16. Pero hay un problema: reconstruir el orden
+
+Este es uno de los puntos donde tu investigación E12 adquiere muchísimo valor.
+
+No basta con leer:
+
+```text
+Stories
+```
+
+Tenemos que reconstruir:
+
+```text
+Story
+  ↓
+Paragraph
+  ↓
+TextRange
+  ↓
+CharacterStyle
+  ↓
+ParagraphStyle
+```
+
+y relacionarlo con:
+
+```text
+TextFrame
+ ↓
+Story
+ ↓
+Page/Spread
+```
+
+Esto es un problema de **resolución de referencias**, no simplemente de parsing XML.
+
+Y Linux puede hacerlo perfectamente.
+
+---
+
+# 17. Otro problema: overrides
+
+Aquí tenemos que ser especialmente cuidadosos.
+
+Tu condición ideal era:
+
+```text
+Overrides ≈ 0 %
+```
+
+Pero si queremos soportar documentos reales, debemos capturar:
+
+```text
+Paragraph Style
++
+Character Style
++
+direct formatting
+```
+
+No solamente:
+
+```text
+styleName
+```
+
+El DOM de InDesign distingue explícitamente estilos de párrafo y carácter y expone propiedades aplicadas a los objetos de texto. 
+
+En IDML deberíamos estudiar qué propiedades efectivas y overrides quedan representados.
+
+---
+
+# 18. Aquí aparece una posible arquitectura incluso mejor
+
+En vez de:
+
+```text
+INDD → AST
+```
+
+podemos hacer:
+
+```text
+INDD
+ ↓
+IDML
+ ↓
+Linux InDesign Compatibility Layer
+ ↓
+Canonical InDesign Data Model
+ ↓
+LEDM
+```
+
+Y ese **Canonical InDesign Data Model** sería una representación intermedia.
+
+Por ejemplo:
+
+```text
+CIDM
+Canonical InDesign Document Model
+```
+
+No es todavía semántico.
+
+Representa:
+
+```text
+Story
+Paragraph
+CharacterRange
+Style
+Override
+Table
+Footnote
+Hyperlink
+Frame
+Order
+```
+
+Después:
+
+```text
+CIDM
+ ↓
+Semantic Interpreter
+ ↓
+LEDM
+```
+
+Esto separa dos problemas:
+
+```text
+1. ¿Qué hizo InDesign?
+2. ¿Qué significa editorialmente?
+```
+
+Y esa separación me parece excelente.
+
+---
+
+# 19. Entonces tendríamos tres modelos
+
+### Modelo 1 — InDesign
+
+```text
+INDD / IDML
+```
+
+### Modelo 2 — CIDM
+
+```text
+Canonical InDesign Document Model
+```
+
+### Modelo 3 — LEDM
+
+```text
+Legal Editorial Domain Model
+```
+
+Así:
+
+```text
+INDD
+ ↓
+IDML
+ ↓
+CIDM
+ ↓
+LEDM
+ ↓
+XHTML / EPUB / PDF
+```
+
+Esto es mucho más limpio que convertir directamente:
+
+```text
+IDML → LEDM
+```
+
+---
+
+# 20. Y CIDM podría convertirse en un proyecto independiente
+
+Aquí veo una oportunidad técnica importante.
+
+Podríamos construir:
+
+> **LexDigital InDesign Compatibility Engine**
+
+que no pretende ser InDesign.
+
+Su función sería:
+
+```text
+leer representación estructurada de InDesign
+        ↓
+normalizarla
+        ↓
+resolver relaciones
+        ↓
+producir CIDM
+```
+
+Entonces LexDigital sería simplemente uno de sus consumidores:
+
+```text
+CIDM
+ ├──→ LEDM
+ ├──→ XHTML
+ ├──→ análisis
+ ├──→ auditoría
+ ├──→ migración
+ └──→ reparación
+```
+
+---
+
+# 21. Pero hay una frontera que no podemos ignorar
+
+Hay cosas que **InDesign calcula**, no simplemente almacena.
+
+Por ejemplo:
+
+```text
+composición tipográfica
+saltos de línea
+justificación
+hyphenation
+line breaking
+overset
+geometría final
+repaginación
+```
+
+Adobe tiene una enorme cantidad de lógica interna para composición.
+
+No asumiría que podemos reproducir eso fielmente simplemente leyendo IDML.
+
+Por ejemplo, la propia API de InDesign contiene numerosas propiedades relacionadas con composición, como guionado, límites de palabras, etc. 
+
+Ahí sí estamos hablando de **motor**, no solamente de datos.
+
+---
+
+# 22. Pero ¿LexDigital necesita ese motor?
+
+Para tu objetivo actual:
+
+**probablemente no.**
+
+Tu objetivo principal es:
+
+```text
+estructura jurídica
+ ↓
+LEDM
+ ↓
+HTML/EPUB
+```
+
+No:
+
+```text
+reproducir exactamente el layout visual de InDesign
+```
+
+Por tanto:
+
+```text
+InDesign Layout Engine
+```
+
+es mucho menos importante que:
+
+```text
+InDesign Semantic Data
+```
+
+Y esa es precisamente la oportunidad.
+
+---
+
+# 23. La arquitectura podría acabar así
+
+```text
+                    DOCUMENTO INDD
+                          │
+                    ┌─────┴─────┐
+                    │           │
+                 InDesign      IDML
+                    │           │
+                   UXP        Linux
+                    │           │
+                    ▼           ▼
+                  ┌───────────────┐
+                  │      CIDM     │
+                  │ Canonical     │
+                  │ InDesign Data │
+                  │ Model         │
+                  └───────┬───────┘
+                          │
+                          ▼
+                    Semantic Mapper
+                          │
+                          ▼
+                    ┌───────────┐
+                    │   LEDM    │
+                    └─────┬─────┘
+                          │
+             ┌────────────┼────────────┐
+             ▼            ▼            ▼
+           XHTML        EPUB          PDF
+```
+
+---
+
+# 24. Esto cambia mi recomendación sobre Linux
+
+Después de tu pregunta, la matizaría:
+
+Antes:
+
+> Linux = plataforma del Core.
+
+Ahora:
+
+> **Linux puede llegar a ser plataforma del Core + plataforma de interpretación de documentos InDesign.**
+
+Y Windows podría quedar reducido a:
+
+```text
+InDesign
+```
+
+cuando sea necesario para:
+
+- editar;
+- preparar;
+- validar;
+- producir IDML;
+- verificar casos límite;
+- componer visualmente.
+
+---
+
+# 25. ¿Podríamos eventualmente procesar un INDD directamente en Linux?
+
+Aquí sería mucho más prudente.
+
+No asumiría que `.indd` puede ser interpretado completamente de forma fiable por herramientas externas.
+
+Adobe sí documenta explícitamente IDML como formato XML abierto para manipulación fuera de InDesign. 
+
+Por tanto, mi objetivo sería:
+
+```text
+INDD → IDML
+```
+
+una sola vez, y después:
+
+```text
+IDML → Linux
+```
+
+para el procesamiento masivo.
+
+No intentaría inicialmente:
+
+```text
+INDD → Linux
+```
+
+mediante ingeniería inversa del formato propietario.
+
+---
+
+# 26. Esto podría reducir muchísimo el papel de InDesign
+
+Imagina este flujo:
+
+```text
+             MAQUETADOR
+                  │
+                  ▼
+              InDesign
+                  │
+                  ▼
+                IDML
+                  │
+                  ▼
+        ┌──────────────────┐
+        │     LINUX        │
+        │                  │
+        │ IDML Parser      │
+        │ CIDM             │
+        │ LEDM             │
+        │ Compiler         │
+        │ Validator        │
+        │ Renderer         │
+        └──────────────────┘
+                  │
+             1000 documentos
+                  │
+                  ▼
+              XHTML/EPUB
+```
+
+InDesign participa en:
+
+```text
+preparación
+```
+
+pero no necesariamente en:
+
+```text
+procesamiento masivo
+```
+
+---
+
+# 27. Y aquí Typefi deja de ser imprescindible conceptualmente
+
+Typefi resuelve un problema industrial utilizando InDesign como motor de composición.
+
+Nosotros podríamos llegar a resolver:
+
+```text
+contenido estructurado
++
+semántica jurídica
++
+transformación
++
+publicación digital
+```
+
+sin utilizar InDesign como motor de ejecución permanente.
+
+La diferencia sería:
+
+```text
+Typefi
+       → automatiza InDesign
+
+LexDigital
+       → interpreta contenido estructurado
+       → genera LEDM
+       → compila
+       → publica
+       → utiliza InDesign cuando aporta valor
+```
+
+---
+
+# 28. Pero necesitamos demostrarlo, no asumirlo
+
+Y aquí propondría **un experimento C13**, antes de modificar arquitectura.
+
+## C13 — InDesign Data Replication Proof of Concept
+
+Tomar un documento representativo.
+
+Por ejemplo:
+
+```text
+fragmento.indd
+```
+
+Generar:
+
+```text
+fragmento.idml
+```
+
+Y extraer desde InDesign mediante UXP:
+
+```text
+EVIDENCE.json
+```
+
+conteniendo:
+
+```text
+stories
+paragraphs
+paragraph styles
+character styles
+text ranges
+overrides
+tables
+footnotes
+links
+XML tags
+export mappings
+order
+IDs
+references
+```
+
+Después construir:
+
+```text
+IDML → CIDM
+```
+
+en Linux.
+
+Finalmente comparar:
+
+```text
+UXP evidence
+       ↕
+Linux CIDM
+```
+
+---
+
+# 29. Las métricas de éxito serían muy concretas
+
+No diría simplemente:
+
+> "parece que funciona".
+
+Definiría:
+
+### Nivel 1
+
+```text
+100 % paragraphs
+```
+
+### Nivel 2
+
+```text
+100 % paragraph styles
+```
+
+### Nivel 3
+
+```text
+100 % character style ranges
+```
+
+### Nivel 4
+
+```text
+100 % story ordering
+```
+
+### Nivel 5
+
+```text
+100 % semantic classifications
+```
+
+### Nivel 6
+
+```text
+100 % LEDM equivalence
+```
+
+### Nivel 7
+
+```text
+100 % XHTML equivalence
+```
+
+No necesariamente byte por byte, sino **semánticamente**.
+
+---
+
+# 30. Y hay una prueba todavía más potente
+
+Tenemos tu Golden Test de 211 párrafos.
+
+Podríamos crear:
+
+```text
+Golden E13
+```
+
+con:
+
+```text
+fragmento.indd
+      │
+      ├── UXP
+      │
+      ▼
+    LEDM-A
+```
+
+y:
+
+```text
+fragmento.idml
+      │
+      ├── Linux
+      │
+      ▼
+    LEDM-B
+```
+
+Después:
+
+```text
+assertSemanticEquivalent(LEDM_A, LEDM_B)
+```
+
+Si pasa:
+
+**hemos demostrado que Linux puede reproducir la extracción semántica de InDesign para ese dominio documental.**
+
+---
+
+# 31. Y después viene lo realmente interesante
+
+No nos limitaríamos a un documento.
+
+Crearíamos una matriz:
+
+```text
+                         UXP    IDML
+Artículo                  ✓       ✓
+Numeral                   ✓       ✓
+Literal                   ✓       ✓
+Subtítulo                 ✓       ✓
+Character Style           ✓       ✓
+Override                  ✓       ?
+Tabla                     ✓       ?
+Nota al pie               ✓       ?
+Hyperlink                 ✓       ?
+Cross-reference           ✓       ?
+Story ordering             ✓       ?
+Anchored object            ✓       ?
+```
+
+Los `?` son precisamente las áreas que debemos investigar.
+
+---
+
+# 32. Mi respuesta final a tu pregunta
+
+**Sí: tu planteamiento es técnicamente correcto y merece convertirse en una línea de investigación prioritaria.**
+
+Pero formularía el objetivo así:
+
+> **No replicar InDesign en Linux. Replicar en Linux el subconjunto observable, determinista y suficiente del modelo de datos de InDesign que LexDigital necesita para construir LEDM.**
+
+Y hay evidencia oficial de Adobe que hace que esta estrategia sea especialmente razonable:
+
+1. **IDML es un formato abierto basado en XML.**
+2. Adobe permite modificar y reconstruir documentos mediante herramientas XML estándar fuera de InDesign. 
+3. Adobe mantiene XML e IDML como formatos de intercambio actuales. 
+4. InDesign puede exportar contenido etiquetado a XML para reutilizarlo en otras aplicaciones. 
+5. La API de InDesign expone formalmente estilos, XML mappings y otros elementos que podemos utilizar como **fuente de verdad para construir nuestro modelo canónico**. 
+
+### Mi nueva arquitectura objetivo sería, por tanto:
+
+```text
+                         ┌───────────────────┐
+                         │    InDesign       │
+                         │  fuente de verdad │
+                         └─────────┬─────────┘
+                                   │
+                            IDML / UXP
+                                   │
+              ┌────────────────────┴──────────────────┐
+              │                                       │
+              ▼                                       ▼
+        UXP Extractor                          IDML Extractor
+        (Windows)                                (Linux)
+              │                                       │
+              └────────────────┬──────────────────────┘
+                               ▼
+                         ┌────────────┐
+                         │    CIDM    │
+                         │ InDesign   │
+                         │ Canonical   │
+                         │ Data Model │
+                         └──────┬─────┘
+                                ▼
+                         ┌────────────┐
+                         │    LEDM    │
+                         └──────┬─────┘
+                                ▼
+                         Linux Compiler
+                                │
+                       ┌────────┼────────┐
+                       ▼        ▼        ▼
+                     XHTML    EPUB      PDF
+```
+
+**Y esto me parece más prometedor que simplemente "migrar LexDigital a Linux".**
+
+Porque permitiría que Linux no sea solamente el servidor del proyecto: **podría convertirse en el verdadero motor editorial independiente de Adobe**, utilizando InDesign como fuente/validador/compositor especializado cuando sea necesario.
+
+El siguiente paso lógico sería diseñar formalmente **C13 — Proof of Concept de replicación de datos InDesign → IDML → Linux → CIDM → LEDM**, tomando como caso de prueba precisamente el documento de 211 párrafos que ya utilizaste en E11/E12. Ahí podríamos determinar empíricamente **qué porcentaje de la información que hoy obtenemos mediante UXP puede reconstruirse únicamente desde IDML**, y qué elementos exigirían mantener una instancia de InDesign.

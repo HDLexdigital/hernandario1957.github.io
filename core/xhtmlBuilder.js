@@ -1,12 +1,12 @@
 /**
- * MÓDULO: xhtmlBuilder.js
+ * MÃ“DULO: xhtmlBuilder.js
  * Constructor XHTML refactorizado que usa:
- *   - fragmentProcesador.js (para estilos de carácter)
- *   - juridicoParser.js (para estructura jurídica)
+ *   - fragmentProcesador.js (para estilos de carÃ¡cter)
+ *   - juridicoParser.js (para estructura jurÃ­dica)
  *   - ariaMapper.js (para accesibilidad ARIA)
  * 
  * ENTRADA: JSON normalizado de InDesign
- * SALIDA: XHTML 1.1 válido con ARIA + accesibilidad
+ * SALIDA: XHTML 1.1 vÃ¡lido con ARIA + accesibilidad
  */
 
 const FragmentProcesador = require('./fragmentProcesador');
@@ -15,7 +15,7 @@ const JuridicoParser = require('./juridicoParser');
 class XHTMLBuilder {
   constructor(config = {}) {
     this.config = {
-      titulo: config.titulo || 'Documento Sin Título',
+      titulo: config.titulo || 'Documento Sin TÃ­tulo',
       idioma: config.idioma || 'es-CO',
       doctype: config.doctype || 'xhtml',
       validar: config.validar !== false,
@@ -37,7 +37,7 @@ class XHTMLBuilder {
   }
 
   /**
-   * Mapeo por defecto de estilos InDesign → elementos HTML
+   * Mapeo por defecto de estilos InDesign â†’ elementos HTML
    */
   mapeoEstilosDefecto() {
     return {
@@ -74,7 +74,7 @@ class XHTMLBuilder {
   }
 
   /**
-   * MÉTODO PRINCIPAL: Construir XHTML desde JSON
+   * MÃ‰TODO PRINCIPAL: Construir XHTML desde JSON
    * @param {Object} jsonData - JSON de InDesign normalizado
    * @returns {Object} { xhtml: string, metadatos: {}, errores: [] }
    */
@@ -82,12 +82,12 @@ class XHTMLBuilder {
     this.erroresValidacion = [];
 
     try {
-      // 1. Extraer información
+      // 1. Extraer informaciÃ³n
       const tokens = this.extraerTokens(jsonData);
       const titulo = this.extraerTitulo(jsonData);
       const autores = this.extraerAutores(jsonData);
 
-      // 2. Analizar estructura jurídica
+      // 2. Analizar estructura jurÃ­dica
       const analisisJuridico = this.juridicoParser.analizarTokens(tokens);
 
       // 3. Construir contenido XHTML
@@ -162,9 +162,9 @@ class XHTMLBuilder {
   }
 
   /**
-   * Extrae título del documento
+   * Extrae tÃ­tulo del documento
    * @param {Object} jsonData - JSON completo
-   * @returns {string} Título del documento
+   * @returns {string} TÃ­tulo del documento
    */
   extraerTitulo(jsonData) {
     if (jsonData.titulo) return jsonData.titulo;
@@ -176,7 +176,7 @@ class XHTMLBuilder {
   }
 
   /**
-   * Extrae información de autores
+   * Extrae informaciÃ³n de autores
    * @param {Object} jsonData - JSON completo
    * @returns {Array} Array de autores
    */
@@ -192,7 +192,7 @@ class XHTMLBuilder {
   /**
    * Construye el contenido HTML desde tokens
    * @param {Array} tokens - Tokens normalizados
-   * @param {Object} analisisJuridico - Análisis de estructura
+   * @param {Object} analisisJuridico - AnÃ¡lisis de estructura
    * @returns {string} HTML del contenido
    */
   construirContenido(tokens, analisisJuridico) {
@@ -205,10 +205,10 @@ class XHTMLBuilder {
       const elementoDetectado = mapaElementosDetectados.get(indice);
       
       if (elementoDetectado) {
-        // Es un elemento jurídico (Artículo, Título, etc.)
+        // Es un elemento jurÃ­dico (ArtÃ­culo, TÃ­tulo, etc.)
         html += this.construirElementoJuridico(token, elementoDetectado);
       } else {
-        // Es un párrafo o elemento normal
+        // Es un pÃ¡rrafo o elemento normal
         html += this.construirParagrafo(token);
       }
     });
@@ -217,13 +217,14 @@ class XHTMLBuilder {
   }
 
   /**
-   * Construye un párrafo normal con fragmentos
-   * @param {Object} token - Token de párrafo
-   * @returns {string} Párrafo HTML
+   * Construye un pÃ¡rrafo normal con fragmentos
+   * @param {Object} token - Token de pÃ¡rrafo
+   * @returns {string} PÃ¡rrafo HTML
    */
   construirParagrafo(token) {
-    const mapeo = this.config.mapeoEstilos[token.estilo] || 
-                  this.config.mapeoEstilos['P01_BODY_BASE'];
+    const mapeo = this.config.mapeoEstilos[token.estilo] ||
+                  this.config.mapeoEstilos['P01_BODY_BASE'] ||
+                  { etiqueta: 'p', clase: token.estilo || 'P01_BODY_BASE', estilo: null, role: null };
 
     const { etiqueta, clase, estilo: estiloCSS, role } = mapeo;
 
@@ -241,7 +242,7 @@ class XHTMLBuilder {
   }
 
   /**
-   * Construye un elemento jurídico (Artículo, Título, etc.)
+   * Construye un elemento jurÃ­dico (ArtÃ­culo, TÃ­tulo, etc.)
    * @param {Object} token - Token del elemento
    * @param {Object} elemento - Elemento detectado
    * @returns {string} Elemento HTML completo
@@ -254,7 +255,7 @@ class XHTMLBuilder {
     // Construir header del elemento
     html += `<article id="${id}" class="elemento-juridico ${tipo}" role="article" aria-labelledby="${id}-head">\n`;
 
-    // Header con número del artículo
+    // Header con nÃºmero del artÃ­culo
     html += `  <header>\n`;
     html += `    <p id="${id}-head" class="${tipo}-numero"><strong>${tipo.charAt(0).toUpperCase() + tipo.slice(1)} ${numero}</strong></p>\n`;
     html += `  </header>\n`;
@@ -265,7 +266,7 @@ class XHTMLBuilder {
     // Procesar fragmentos
     let contenido = this.fragmentProcesador.procesarFragmentos(token);
 
-    // Saltar el texto del número en el contenido (ya está en header)
+    // Saltar el texto del nÃºmero en el contenido (ya estÃ¡ en header)
     const textoSinNumero = token.texto
       .replace(new RegExp(`^${tipo}\\s+${numero}[.\\s]*`, 'i'), '')
       .trim();
@@ -283,9 +284,9 @@ class XHTMLBuilder {
   /**
    * Envuelve el contenido en documento XHTML completo
    * @param {string} contenido - Contenido HTML
-   * @param {string} titulo - Título del documento
+   * @param {string} titulo - TÃ­tulo del documento
    * @param {Array} autores - Autores
-   * @param {Object} analisisJuridico - Análisis de estructura
+   * @param {Object} analisisJuridico - AnÃ¡lisis de estructura
    * @returns {string} Documento XHTML completo
    */
   envolverEnDocumento(contenido, titulo, autores, analisisJuridico) {
@@ -309,10 +310,10 @@ class XHTMLBuilder {
       });
     }
 
-    // Meta descripción
+    // Meta descripciÃ³n
     const descripcion = analisisJuridico.metadatos.porTipo.articulo 
-      ? `Documento jurídico con ${analisisJuridico.metadatos.porTipo.articulo} artículos`
-      : 'Documento jurídico';
+      ? `Documento jurÃ­dico con ${analisisJuridico.metadatos.porTipo.articulo} artÃ­culos`
+      : 'Documento jurÃ­dico';
     xhtml += `  <meta name="description" content="${this.escaparXML(descripcion)}" />\n`;
 
     // CSS por defecto
@@ -346,7 +347,7 @@ class XHTMLBuilder {
   }
 
   /**
-   * Obtiene el DOCTYPE según configuración
+   * Obtiene el DOCTYPE segÃºn configuraciÃ³n
    * @returns {string} DOCTYPE declaration
    */
   obtenerDOCTYPE() {
@@ -386,9 +387,9 @@ class XHTMLBuilder {
   }
 
   /**
-   * Valida XHTML (básico)
+   * Valida XHTML (bÃ¡sico)
    * @param {string} xhtml - XHTML a validar
-   * @returns {boolean} Es válido
+   * @returns {boolean} Es vÃ¡lido
    */
   validarXHTML(xhtml) {
     const validaciones = [
@@ -409,7 +410,7 @@ class XHTMLBuilder {
         }
       },
       {
-        nombre: 'Estructura básica',
+        nombre: 'Estructura bÃ¡sica',
         test: () => /<html[^>]*>[\s\S]*<\/html>/.test(xhtml)
       }
     ];
@@ -419,7 +420,7 @@ class XHTMLBuilder {
         this.erroresValidacion.push({
           tipo: 'validacion_xhtml',
           severidad: 'warning',
-          mensaje: `Validación fallida: ${nombre}`
+          mensaje: `ValidaciÃ³n fallida: ${nombre}`
         });
       }
     });

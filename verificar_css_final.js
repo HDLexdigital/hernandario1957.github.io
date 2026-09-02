@@ -1,0 +1,11 @@
+const fs = require('fs');
+const xhtml = fs.readFileSync('salidaXHTML/decreto252_FINAL.xhtml', 'utf8');
+const tieneColorValido = xhtml.includes('color: "') || xhtml.includes('color: #');
+const tieneValoresRedondeados = !xhtml.includes('1.7638888888888888');
+const tieneEncodingCorrecto = !xhtml.includes('CapÃ');
+console.log('=== VERIFICACION CSS ===');
+console.log('Colores validos:', tieneColorValido);
+console.log('Valores redondeados:', tieneValoresRedondeados);
+console.log('Encoding correcto:', tieneEncodingCorrecto);
+console.log('');
+console.log('Tamano del XHTML:', xhtml.length, 'bytes');

@@ -1,403 +1,139 @@
-/* =======================================================
-   CSS MULTIPLATAFORMA (HTML5, EPUB3, PDF ACCESIBLE)
-   Generado desde InDesign: Constitución-Colombia_a_preparar.indd
-   ======================================================= */
+/* LexDigital Generated CSS */
+/* Documento: fragmento.indd */
 
-:root {
-	font-size: 12pt;
+/* P01_BODY_CONT */
+.estilo-p01-body-cont {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  text-indent: 5.997pt;
+  margin-top: 1.5pt;
+  text-align: left;
 }
 
-/* --- ESTILOS DE PÁRRAFO --- */
-
-.P-rrafo-b-sico {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 11pt;
-	font-size: 0.917rem;
-	color: #000000;
-	text-align: justify;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
+/* P01_BODY_BASE */
+.estilo-p01-body-base {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 3.5pt;
+  text-align: left;
 }
 
-.P01_BODY_BASE {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: justify;
-	margin-top: 0.292em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
+/* P07_INDENT_L1 */
+.estilo-p07-indent-l1 {
+  font-family: "Minion Pro", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  padding-left: 13.406pt;
+  text-indent: -7.761pt;
+  margin-top: 1.5pt;
+  text-align: left;
 }
 
-.P01_BODY_CONT {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: justify;
-	text-indent: 0.500em;
-	margin-top: 0.125em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
+/* P02_TITLE_BASE */
+.estilo-p02-title-base {
+  font-family: "Liberation Serif", serif;
+  font-size: 15pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 3.5pt;
+  text-align: center;
+  font-weight: bold;
 }
 
-.P01_BODY_FIRST {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: justify;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
+/* P02_TITLE_PART */
+.estilo-p02-title-part {
+  font-family: "Georgia Pro", serif;
+  font-size: 24pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  padding-left: 2pt;
+  margin-top: 5pt;
+  margin-bottom: 1pt;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
-.P01_BODY_NO_SENTENCE {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: justify;
-	margin-top: 0.292em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
+/* P02_TITLE_MAIN */
+.estilo-p02-title-main {
+  font-family: "Georgia Pro", serif;
+  font-size: 16pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 5pt;
+  margin-bottom: 1pt;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0054a8;
 }
 
-.P07_INDENT_L1 {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: justify;
-	margin-left: 1.117em;
-	text-indent: -0.647em;
-	margin-top: 0.125em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
+/* P02_TITLE_CHAPTER */
+.estilo-p02-title-chapter {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  margin-top: 4pt;
+  text-align: center;
+  font-weight: bold;
+  color: #d26442;
 }
 
-.P07_INDENT_L1_NONUM {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: justify;
-	margin-left: 1.117em;
-	text-indent: -0.000em;
-	margin-top: 0.125em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
+/* P03_CENTER_NORMAL */
+.estilo-p03-center-normal {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 1.76388888888889pt;
+  margin-bottom: 1.76388888888889pt;
+  text-align: center;
 }
 
-.P07_INDENT_L2 {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: justify;
-	margin-left: 1.705em;
-	text-indent: -0.559em;
-	margin-top: 0.125em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
+/* P03_CENTER_BOLD */
+.estilo-p03-center-bold {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 1.76388888888889pt;
+  margin-bottom: 1.76388888888889pt;
+  text-align: center;
+  font-weight: bold;
 }
 
-.P02_TITLE_BASE {
-	font-family: 'Liberation Serif', sans-serif;
-	font-weight: bold;
-	font-size: 15pt;
-	font-size: 1.250rem;
-	color: #000000;
-	text-align: center;
-	margin-top: 0.292em;
-	orphans: 2;
-	widows: 2;
-	hyphens: none;
-	-webkit-hyphens: none;
-	-epub-hyphens: none;
+/* Caracter: C00_NORMAL */
+.char-c00-normal {
 }
 
-.P02_TITLE_MAIN {
-	font-family: 'Georgia Pro', sans-serif;
-	font-weight: bold;
-	font-size: 16pt;
-	font-size: 1.333rem;
-	color: /* InDesign Color: TITULO Constitucion */;
-	text-align: center;
-	margin-top: 0.417em;
-	margin-bottom: 0.083em;
-	orphans: 2;
-	widows: 2;
-	hyphens: none;
-	-webkit-hyphens: none;
-	-epub-hyphens: none;
+/* Caracter: C01_BOLD */
+.char-c01-bold {
+  font-weight: bold;
+  color: #0054a8;
 }
 
-.P02_TITLE_CHAPTER {
-	font-family: 'Liberation Serif', sans-serif;
-	font-weight: bold;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: /* InDesign Color: Capítulo Constitucion */;
-	text-align: center;
-	margin-top: 0.333em;
-	hyphens: none;
-	-webkit-hyphens: none;
-	-epub-hyphens: none;
+/* Caracter: 00 Normal_char */
+.char-00-normal-char {
 }
 
-.P02_TITLE_PART {
-	font-family: 'Georgia Pro', sans-serif;
-	font-weight: bold;
-	font-size: 24pt;
-	font-size: 2.000rem;
-	color: #000000;
-	text-align: center;
-	margin-left: 0.167em;
-	margin-top: 0.417em;
-	margin-bottom: 0.083em;
-	orphans: 2;
-	widows: 2;
-	hyphens: none;
-	-webkit-hyphens: none;
-	-epub-hyphens: none;
+/* Caracter: TerminoGlosario */
+.char-terminoglosario {
 }
 
-.P02_TITLE_BOOK_SUB {
-	font-family: 'Liberation Serif', sans-serif;
-	font-weight: bold;
-	font-size: 16pt;
-	font-size: 1.333rem;
-	color: /* InDesign Color: TITULO Constitucion */;
-	text-align: center;
-	margin-bottom: 0.833em;
-	orphans: 2;
-	widows: 2;
-	hyphens: none;
-	-webkit-hyphens: none;
-	-epub-hyphens: none;
+/* Caracter: C16_TD_GLOSS */
+.char-c16-td-gloss {
+  color: #d26442;
 }
 
-.P02_TITLE_BOOK {
-	font-family: 'Georgia Pro', sans-serif;
-	font-weight: bold;
-	font-size: 20pt;
-	font-size: 1.667rem;
-	color: /* InDesign Color: TITULO Constitucion */;
-	text-align: center;
-	margin-top: 0.417em;
-	margin-bottom: 0.833em;
-	orphans: 2;
-	widows: 2;
-	hyphens: none;
-	-webkit-hyphens: none;
-	-epub-hyphens: none;
-}
-
-.P03_CENTER_NORMAL {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: center;
-	margin-top: 0.147em;
-	margin-bottom: 0.147em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
-}
-
-.P03_CENTER_BOLD {
-	font-family: 'Liberation Serif', sans-serif;
-	font-weight: bold;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: center;
-	margin-top: 0.147em;
-	margin-bottom: 0.147em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
-}
-
-.P03_OFFICIAL_NAME {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: center;
-	margin-bottom: 0.250em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
-}
-
-.P03_OFFICIAL_ROLE {
-	font-family: 'Liberation Serif', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: center;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
-}
-
-.P05_IDX_ART {
-	font-family: 'Minion Pro', sans-serif;
-	font-size: 14pt;
-	font-size: 1.167rem;
-	color: #000000;
-	text-align: justify;
-	margin-bottom: 0.083em;
-	orphans: 2;
-	widows: 2;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
-}
-
-.P08_GLS-ART {
-	font-family: 'Liberation Sans Narrow', sans-serif;
-	font-weight: bold;
-	font-size: 12pt;
-	font-size: 1.000rem;
-	color: /* InDesign Color: C=75 M=5 Y=100 K=0 */;
-	text-align: left;
-	margin-bottom: 0.167em;
-	orphans: 2;
-	widows: 2;
-	page-break-inside: avoid;
-	break-inside: avoid;
-	page-break-after: avoid;
-	break-after: avoid;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
-}
-
-.P08_GLS_TERM_DD {
-	font-family: 'Liberation Sans Narrow', sans-serif;
-	font-size: 12pt;
-	font-size: 1.000rem;
-	color: #000000;
-	text-align: justify;
-	orphans: 2;
-	widows: 2;
-	page-break-inside: avoid;
-	break-inside: avoid;
-	page-break-after: avoid;
-	break-after: avoid;
-	hyphens: none;
-	-webkit-hyphens: none;
-	-epub-hyphens: none;
-}
-
-.P08_GLS_TERM_DT {
-	font-family: 'Liberation Sans Narrow', sans-serif;
-	font-weight: bold;
-	font-size: 12pt;
-	font-size: 1.000rem;
-	color: /* InDesign Color: Capítulo Constitucion */;
-	text-align: justify;
-	orphans: 2;
-	widows: 2;
-	page-break-inside: avoid;
-	break-inside: avoid;
-	page-break-after: avoid;
-	break-after: avoid;
-	hyphens: auto;
-	-webkit-hyphens: auto;
-	-epub-hyphens: auto;
-}
-
-/* --- ESTILOS DE CARÁCTER --- */
-
-.C00_NORMAL {
-	font-family: 'undefined', sans-serif;
-}
-
-.C01_BOLD {
-	font-family: 'undefined', sans-serif;
-	font-weight: bold;
-	color: /* InDesign Color: TITULO Constitucion */;
-}
-
-.C02_ITALIC {
-	font-family: 'undefined', sans-serif;
-	font-style: italic;
-	color: /* InDesign Color: TITULO Constitucion */;
-}
-
-.05-Hiperlink_char {
-	color: /* InDesign Color: Word_R0_G115_B255 */;
-}
-
-.C12_CROSSREF {
-	font-weight: bold;
-	color: /* InDesign Color: TITULO Constitucion */;
-}
-
-.C03_SUPERSCRIPT {
-	font-family: 'undefined', sans-serif;
-	color: #000000;
-}
-
-.C11_HYPERLINK {
-	color: /* InDesign Color: Rojo RGB */;
-}
-
-.C13_TABNUM_CONTENT {
-	font-family: 'undefined', sans-serif;
-}
-
-.C14_ROMAN_UPPER {
-}
-
-.C15_NARROW_90 {
-	font-family: 'undefined', sans-serif;
-}
-
-.DT_Termino_Glosario {
-	font-family: 'undefined', sans-serif;
-	font-weight: bold;
-	color: #000000;
-}
-
-.SYS_FIX_ARTICLE_NUMBER {
-	color: #000000;
-}
-
+/* ===== RELACIONES GREP ===== */
+/* P01_BODY_BASE -> TerminoGlosario */
+/* P01_BODY_CONT -> TerminoGlosario */
+/* P01_BODY_BASE -> C16_TD_GLOSS */
+/* P01_BODY_CONT -> 00 Normal_char */
+/* P07_INDENT_L1 -> TerminoGlosario */

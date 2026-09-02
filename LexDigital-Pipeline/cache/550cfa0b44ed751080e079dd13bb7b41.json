@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-08-23T17:02:19.887Z",
+  "hash": "550cfa0b44ed751080e079dd13bb7b41",
+  "resultado": {
+    "exito": true,
+    "xhtml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"es-CO\" lang=\"es-CO\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Documento</title>\n</head>\n<body>\n  <h1>Título 4</h1>\n  <p>Contenido del documento 4</p>\n</body>\n</html>",
+    "metadatos": {
+      "titulo": "Documento 4",
+      "fecha": "2026-08-23T17:02:19.886Z",
+      "bytes": 276,
+      "nivelAccesibilidad": "AA",
+      "cache": false
+    }
+  }
+}

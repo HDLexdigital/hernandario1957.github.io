@@ -53,9 +53,38 @@ function extraerDocumentoEstructurado(documento) {
                             ? range.appliedCharacterStyle.name 
                             : (range.appliedCharacterStyleName || "[Ninguno]");
 
+                        // 🚀 MEJORA MASIVA: Atrapamos todos los formatos manuales (Local Overrides)
+                        let esNegritaManual = false;
+                        let esCursivaManual = false;
+                        let esSubrayadoManual = false;
+                        let colorTextoManual = null;
+
+                        try {
+                            // 1. Negrita y Cursiva
+                            if (range.fontStyle) {
+                                const fs = String(range.fontStyle).toLowerCase();
+                                if (fs.match(/bold|black|heavy/i)) esNegritaManual = true;
+                                if (fs.match(/italic|oblique/i)) esCursivaManual = true;
+                            }
+                            // 2. Subrayado (Underline)
+                            if (range.underline === true) {
+                                esSubrayadoManual = true;
+                            }
+                            // 3. Color de texto / resalte
+                            if (range.fillColor && range.fillColor.name && range.fillColor.name !== "None" && range.fillColor.name !== "Black") {
+                                colorTextoManual = range.fillColor.name;
+                            }
+                        } catch(e) {}
+
                         fragmentos.push({
                             texto: range.contents || "",
-                            estiloCaracter: estiloCar
+                            estiloCaracter: estiloCar,
+                            formatoDirecto: { 
+                                negrita: esNegritaManual,
+                                cursiva: esCursivaManual,
+                                subrayado: esSubrayadoManual,
+                                color: colorTextoManual
+                            }
                         });
                     }
                 }
@@ -70,11 +99,10 @@ function extraerDocumentoEstructurado(documento) {
                 }
             } catch (e) {}
 
-            // AÑADIDO: Extracción del texto crudo a nivel de párrafo para el contrato LEDM
             resultado.fragmentos.push({
                 estilo: estiloParrafo,
                 texto: paragraph.contents || "",
-                fragmentos
+                fragmentos: fragmentos
             });
         }
     }

@@ -1,0 +1,320 @@
+/* ============================================================
+   Hoja de estilos para réplica de InDesign
+   Basada en estilos exportados, adaptada a flujo refluible
+   y accesible. Unidades en pt para fidelidad.
+   ============================================================ */
+
+/* --- Fuentes --- */
+@font-face {
+    font-family: "Georgia Pro Cond Semibold";
+    src: url("../../font/GeorgiaPro-CondSemibold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 600;
+    font-stretch: condensed;
+}
+@font-face {
+    font-family: "Liberation Serif";
+    src: url("../../font/LiberationSerif.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face {
+    font-family: "Liberation Serif";
+    src: url("../../font/LiberationSerif-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Minion Pro";
+    src: url("../../font/MinionPro-Regular.otf") format("opentype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* --- Reset básico --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    line-height: 1.5;
+    color: #000000;
+    text-rendering: optimizeSpeed;
+}
+
+/* --- Contenedores de texto básicos (si se usan) --- */
+div.Marco-de-texto-b-sico {
+    border-style: solid;
+}
+
+/* --- Clases de párrafo --- */
+
+/* Título de parte principal (Constitución Política...) */
+.P02_TITLE_PART {
+    font-family: "Georgia Pro Cond Semibold", serif;
+    font-size: 24pt;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
+    text-align: center;
+    color: #4a4a49;  /* gris oscuro */
+    margin: 1.5em 0 0.75em 0;
+    line-height: 1.2;
+}
+
+/* Encabezado centrado en negrita (PREÁMBULO) */
+.P03_CENTER_BOLD {
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 1.2em 0 0.8em 0;
+}
+
+/* Título principal de sección (TÍTULO I, II...) */
+.P02_TITLE_MAIN {
+    font-family: "Georgia Pro Cond Semibold", serif;
+    font-size: 16pt;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
+    text-align: center;
+    color: #0054a8;  /* azul corporativo */
+    margin: 1.5em 0 0.75em 0;
+    line-height: 1.2;
+}
+
+/* Título de capítulo */
+.P02_TITLE_CHAPTER {
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    text-transform: none;  /* respetar mayúsculas del texto */
+    color: #000000;
+    margin: 1.2em 0 0.8em 0;
+}
+
+/* Párrafo base (normalmente con negrita en artículo) */
+.P01_BODY_BASE {
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-weight: bold;
+    font-style: normal;
+    text-align: justify;
+    text-align-last: left;  /* justificado con última línea izquierda */
+    color: #000000;
+    margin: 0.5em 0;
+    line-height: 1.4;
+}
+
+/* Párrafo de continuación (sin negrita) */
+.P01_BODY_CONT {
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-weight: normal;
+    font-style: normal;
+    text-align: justify;
+    text-align-last: left;
+    color: #000000;
+    margin: 0.5em 0;
+    line-height: 1.4;
+}
+
+/* Lista con sangría (P07_INDENT_L1) */
+.P07_INDENT_L1 {
+    font-family: "Minion Pro", serif;
+    font-size: 14pt;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    margin: 0.25em 0 0.25em 2em;
+    line-height: 1.4;
+}
+
+/* --- Clases de carácter (CharOverride) --- */
+
+/* CharOverride-1: Título parte principal (Georgia Cond Semibold 24pt gris) */
+.CharOverride-1 {
+    color: #4a4a49;
+    font-family: "Georgia Pro Cond Semibold", serif;
+    font-size: 24pt;
+    font-style: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* CharOverride-2: Texto negrita Liberation Serif 14pt negro */
+.CharOverride-2 {
+    color: #000000;
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: bold;
+}
+
+/* CharOverride-3: Texto normal Liberation Serif 14pt negro */
+.CharOverride-3 {
+    color: #000000;
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-4: Título principal de sección (Georgia Cond Semibold 16pt azul) */
+.CharOverride-4 {
+    color: #0054a8;
+    font-family: "Georgia Pro Cond Semibold", serif;
+    font-size: 16pt;
+    font-style: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* CharOverride-5: Texto negrita Liberation Serif 14pt azul */
+.CharOverride-5 {
+    color: #0054a8;
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: bold;
+}
+
+/* CharOverride-6: Texto normal Liberation Serif 14pt azul #3954a8 */
+.CharOverride-6 {
+    color: #3954a8;
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-7: Texto negrita Liberation Serif 14pt azul con small-caps */
+.CharOverride-7 {
+    color: #0054a8;
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+/* CharOverride-8: Texto normal Minion Pro 14pt negro */
+.CharOverride-8 {
+    color: #000000;
+    font-family: "Minion Pro", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-9: Texto normal Liberation Serif 14pt azul #1965b1 */
+.CharOverride-9 {
+    color: #1965b1;
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-10: Texto normal Minion Pro 14pt azul #3954a8 */
+.CharOverride-10 {
+    color: #3954a8;
+    font-family: "Minion Pro", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-11: Texto normal Minion Pro 14pt magenta #e6007e */
+.CharOverride-11 {
+    color: #e6007e;
+    font-family: "Minion Pro", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-12: Texto normal Minion Pro 14pt rojo #cd1719 */
+.CharOverride-12 {
+    color: #cd1719;
+    font-family: "Minion Pro", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-13: Texto normal Minion Pro 9pt verde #3fa535 */
+.CharOverride-13 {
+    color: #3fa535;
+    font-family: "Minion Pro", serif;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-14: Texto normal Liberation Serif 9pt verde #3fa535 */
+.CharOverride-14 {
+    color: #3fa535;
+    font-family: "Liberation Serif", serif;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* CharOverride-15: Texto negrita Liberation Serif 14pt azul mayúsculas */
+.CharOverride-15 {
+    color: #0054a8;
+    font-family: "Liberation Serif", serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* --- Estilos para términos del glosario (si se prefiere semántica propia) --- */
+.glossary-term {
+    font-weight: normal;
+    border-bottom: 1px dotted #0054a8;
+    color: #0054a8;
+    cursor: help;
+}
+.glossary-term-alt {
+    font-weight: normal;
+    border-bottom: 1px dashed #0054a8;
+    color: #0054a8;
+    cursor: help;
+}
+
+/* --- Accesibilidad: enfoque visible --- */
+.glossary-term:focus,
+.glossary-term-alt:focus,
+[tabindex]:focus {
+    outline: 2px solid #0054a8;
+    outline-offset: 2px;
+}
+
+/* --- Estilos de impresión para PDF paginado (opcional) --- */
+@page {
+    size: Letter; /* Ajustar al tamaño original si se conoce */
+    margin: 2cm;
+    @top-center {
+        content: "Constitución Política de Colombia";
+        font-family: "Liberation Serif", serif;
+        font-size: 10pt;
+    }
+    @bottom-center {
+        content: counter(page);
+        font-size: 10pt;
+    }
+}

@@ -1,5 +1,6 @@
 ﻿/**
  * Capa Anticorrupción (E10) - InDesign Adapter
+ * Versión corregida para soportar body.stories o body array
  */
 
 'use strict';
@@ -8,67 +9,86 @@ const { TIPOS_VALIDOS } = require('../core/constants/tiposValidos');
 const { reconciliarFronterasFragmentos } = require('./reconciliadorFronteras');
 const { resolverPresentation } = require('./PresentationResolver');
 
+// ============================================================================
+// LIMPIEZA DE TEXTO CENTRALIZADA
+// ============================================================================
+function limpiarTexto(texto) {
+    if (!texto) return '';
+    return texto
+        .replace(/\uFEFF/g, '')                         // BOM
+        .replace(/\r?\n/g, ' ')                         // saltos de línea
+        .replace(/[ \t]+/g, ' ')                        // múltiples espacios
+        .trim();
+}
+
+// ============================================================================
+// ELIMINACIÓN DE DUPLICADOS COMUNES
+// ============================================================================
+function eliminarDuplicados(texto) {
+    let limpio = texto;
+
+    // X(X)
+    limpio = limpio.replace(/^(.+?)\s*\(\s*\1\s*\)\s*(.*)$/, '$1 $2');
+    // X. .(X)
+    limpio = limpio.replace(/^(.+?)\.\s*\(\s*\1\s*\)\s*(.*)$/, '$1 $2');
+    // X()X
+    limpio = limpio.replace(/^(.+?)\(\)\s*\1\s*(.*)$/, '$1 $2');
+
+    return limpio.replace(/[ \t]+/g, ' ').trim();
+}
+
 function adaptarInDesign({ jsonCrudo, semanticMap }) {
     if (!jsonCrudo || typeof jsonCrudo !== 'object') {
         throw new TypeError("jsonCrudo debe ser un objeto válido");
     }
 
-    if (jsonCrudo.tokens !== undefined && !Array.isArray(jsonCrudo.tokens)) {
-        throw new Error('Rechazo E10: "tokens" debe ser un arreglo.');
-    }
+    // =========================================================================
+    // 1. DETECCIÓN DE DIALECTO Y NORMALIZACIÓN DE ESTRUCTURA
+    // =========================================================================
+    let ast = JSON.parse(JSON.stringify(jsonCrudo));
 
-    if (Array.isArray(jsonCrudo.tokens) && Array.isArray(jsonCrudo.contenido)) {
-        throw new Error('Rechazo E10: Dialecto ambiguo. No se permite simultaneidad de "tokens" y "contenido".');
-    }
-
-    let jsonNormalizado = JSON.parse(JSON.stringify(jsonCrudo));
-
-    if (Array.isArray(jsonNormalizado.tokens)) {
-        jsonNormalizado.contenido = jsonNormalizado.tokens.map((token, index) => {
-            const estilo = token.estilo_indesign || token.estilo || '';
-            let tipo = token.tipo;
-
-            if (tipo === 'referencia' || tipo === 'transicion') {
-                throw new Error(`Rechazo E10: El tipo entrante "${tipo}" en el token [${index}] no está permitido.`);
+    // Si el AST tiene 'body' como array de historias (estructura real), aplanar
+    if (Array.isArray(ast.body)) {
+        let parrafos = [];
+        ast.body.forEach(story => {
+            if (story && Array.isArray(story.children)) {
+                parrafos = parrafos.concat(story.children);
             }
-
-            if (tipo === 'titulo') {
-                const tipoResuelto = resolverTipoBase(estilo);
-                if (tipoResuelto !== 'titulo_parte') {
-                    throw new Error(`Rechazo E10: Título en token [${index}] no tiene un estilo compatible con "titulo_parte" (Estilo: ${estilo}).`);
-                }
-                tipo = tipoResuelto;
-            } else if (tipo === 'desconocido' || !tipo) {
-                tipo = resolverTipoBase(estilo);
-                if (!tipo) {
-                    tipo = 'parrafo'; // Fallback seguro en lugar de romper el flujo
-                }
-            }
-
-            const nodoAST = {
-                tipo: tipo,
-                inDesignStyle: estilo,
-                estiloParrafo: estilo,
-                tipoNodo: 'paragraph'
-            };
-
-            if (token.fragmentos && Array.isArray(token.fragmentos)) {
-                nodoAST.fragmentos = JSON.parse(JSON.stringify(token.fragmentos));
-            }
-
-            const texto = token.texto_completo ?? token.texto_limpio ?? token.texto ?? token.content ?? token.contents ?? "";
-            if (texto !== undefined) {
-                nodoAST.texto = texto;
-            }
-
-            return nodoAST;
         });
-        delete jsonNormalizado.tokens;
+        ast.contenido = parrafos;
     }
 
-    const ast = jsonNormalizado;
-    const semMap = semanticMap ? JSON.parse(JSON.stringify(semanticMap)) : { styles: [] };
+    // Si hay 'stories' en el raíz (otro dialecto)
+    if (ast.stories && Array.isArray(ast.stories)) {
+        let parrafos = [];
+        ast.stories.forEach(story => {
+            if (story.children && Array.isArray(story.children)) {
+                parrafos = parrafos.concat(story.children);
+            }
+        });
+        ast.contenido = parrafos;
+    }
 
+    // Normalización de tokens si existen
+    if (Array.isArray(ast.tokens)) {
+        ast.contenido = ast.tokens.map((token) => {
+            // Mapeo básico de tokens a párrafos
+            const nodo = {
+                tipo: token.tipo || 'parrafo',
+                inDesignStyle: token.estilo_indesign || token.estilo || '',
+                estiloParrafo: token.estilo_indesign || token.estilo || '',
+                tipoNodo: 'paragraph',
+                texto: token.texto_completo || token.texto_limpio || token.texto || ''
+            };
+            return nodo;
+        });
+        delete ast.tokens;
+    }
+
+    // =========================================================================
+    // 2. CONSTRUCCIÓN DE PUENTE DE ESTILOS (Style Bridge)
+    // =========================================================================
+    const semMap = semanticMap ? JSON.parse(JSON.stringify(semanticMap)) : { styles: [] };
     const styleBridge = {};
     const diagnostics = {
         valid: true,
@@ -79,14 +99,11 @@ function adaptarInDesign({ jsonCrudo, semanticMap }) {
 
     const mappedParagraphs = new Set();
     const mappedCharacters = new Set();
-    const unmappedP = new Set();
-    const unmappedC = new Set();
 
     if (semMap.styles && Array.isArray(semMap.styles)) {
         semMap.styles.forEach(style => {
             const name = style.originalName;
             const type = style.type;
-
             if (name && style.exportTagging && style.exportTagging.epub) {
                 styleBridge[name] = {
                     className: style.exportTagging.epub.className || null,
@@ -99,123 +116,131 @@ function adaptarInDesign({ jsonCrudo, semanticMap }) {
         });
     }
 
-    // 3. Normalización estructural, Reconciliación e Inyección (Orden Post-Order Seguro)
+    // =========================================================================
+    // 3. PROCESAMIENTO RECURSIVO DE NODOS
+    // =========================================================================
     function procesarNodo(nodo) {
         if (!nodo || typeof nodo !== 'object') return;
 
-        // --- 3.1 Normalización Básica ---
-        const teniaFragmentos = Array.isArray(nodo.fragmentos);
-
-        if (nodo.estilo && !nodo.estiloParrafo) {
-            nodo.estiloParrafo = nodo.estilo;
-            delete nodo.estilo;
-        }
-
-        if (teniaFragmentos) {
-            nodo.contenido = nodo.fragmentos;
-            delete nodo.fragmentos;
-        }
-
-        let textoExtraido = nodo.texto ?? nodo.texto_completo ?? nodo.texto_limpio ?? nodo.textContent ?? nodo.text ?? nodo.contents ?? "";
+        // --- Determinar si es carácter ---
         const esCharacter = nodo.tipoNodo === 'character' || nodo.tipo === 'texto' || nodo.estiloCaracter;
 
-        if (typeof textoExtraido === 'string' && !esCharacter) {
-            textoExtraido = textoExtraido.trim();
+        // --- Extracción de texto desde children (si los hay) ---
+        if (Array.isArray(nodo.children) && nodo.children.length > 0) {
+            const textos = nodo.children
+                .filter(child => child.type === 'text' || child.text !== undefined)
+                .map(child => limpiarTexto(child.text || ''))
+                .filter(text => text !== '');
+
+            if (textos.length > 0) {
+                nodo.texto = textos.join(' ');
+            } else {
+                nodo.texto = '';
+            }
         }
 
-        // Blindaje: si hay texto real, nunca lo marcamos como [VACÍO]
-        nodo.texto = (textoExtraido === "" && !esCharacter) ? "[VACÍO]" : textoExtraido;
+        // Si no hay texto definido todavía, buscar en propiedades directas
+        if (!nodo.texto) {
+            const textoCrudo = nodo.texto_completo ?? nodo.texto_limpio ?? nodo.textContent ?? nodo.contents ?? '';
+            nodo.texto = limpiarTexto(textoCrudo);
+        }
 
+        // --- Limpieza adicional y eliminación de duplicados ---
+        nodo.texto = eliminarDuplicados(nodo.texto);
+
+        // Si tras limpiar queda vacío, marcar como VACÍO para filtrar después
+        if (nodo.texto === '') {
+            nodo.texto = '[VACÍO]';
+        }
+
+        // --- Tipo de nodo ---
         if (!nodo.tipo) {
             nodo.tipo = esCharacter ? 'texto' : 'parrafo';
         }
+        nodo.tipoNodo = esCharacter ? 'character' : 'paragraph';
 
-        if (esCharacter) {
-            nodo.tipoNodo = 'character';
-            nodo.tipo = 'texto';
-        } else {
-            nodo.tipoNodo = 'paragraph';
-        }
-
-        // --- 3.2 Descenso Recursivo (Procesar hijos primero) ---
+        // --- Descenso recursivo sobre contenido ---
         if (Array.isArray(nodo.contenido)) {
             nodo.contenido.forEach(procesarNodo);
         }
 
-        // --- 3.3 Reconciliación de Fronteras Segura ---
+        // --- Reconciliación de fragmentos (si existe) ---
         const nodoReconciliado = reconciliarFronterasFragmentos(nodo);
         Object.assign(nodo, nodoReconciliado);
 
-        // --- 3.4 Identificación de Estilos de InDesign ---
-        let estiloParaPuente = null;
-
+        // --- Identificación de estilo ---
         if (nodo.tipoNodo === 'paragraph') {
-            nodo.inDesignStyle = nodo.inDesignStyle || nodo.estiloParrafo;
-            estiloParaPuente = nodo.inDesignStyle;
-
+            nodo.inDesignStyle = nodo.inDesignStyle || nodo.estiloParrafo || nodo.style || '[Ninguno]';
+            const estiloParaPuente = nodo.inDesignStyle;
             if (estiloParaPuente && estiloParaPuente !== '[Ninguno]' && !mappedParagraphs.has(estiloParaPuente)) {
-                unmappedP.add(estiloParaPuente);
+                diagnostics.unmappedParagraphStyles.push(estiloParaPuente);
             }
-
             if (!nodo.tipo || nodo.tipo === 'parrafo') {
                 const tipoSemantico = resolverTipoBase(estiloParaPuente);
                 if (tipoSemantico) nodo.tipo = tipoSemantico;
             }
-        } else if (nodo.tipoNodo === 'character') {
-            nodo.inDesignStyle = nodo.inDesignStyle || nodo.estiloCaracter;
-            estiloParaPuente = nodo.inDesignStyle;
-            
+        } else {
+            nodo.inDesignStyle = nodo.inDesignStyle || nodo.estiloCaracter || '[Ninguno]';
+            const estiloParaPuente = nodo.inDesignStyle;
             if (estiloParaPuente && estiloParaPuente !== '[Ninguno]' && !mappedCharacters.has(estiloParaPuente)) {
-                unmappedC.add(estiloParaPuente);
+                diagnostics.unmappedCharacterStyles.push(estiloParaPuente);
             }
         }
 
-        // --- 3.5 Inyección Directa y Resolución de Presentation ---
-        if (estiloParaPuente && styleBridge[estiloParaPuente]) {
-            const puente = styleBridge[estiloParaPuente];
-            
+        // --- Inyección de clase y tag desde puente ---
+        const estiloFinal = nodo.inDesignStyle;
+        if (estiloFinal && styleBridge[estiloFinal]) {
+            const puente = styleBridge[estiloFinal];
             if (puente.className) nodo.resolvedClass = puente.className;
             if (puente.tag) nodo.resolvedTag = puente.tag;
-
             const resolvedPresentation = resolverPresentation(puente.presentation);
             if (Object.keys(resolvedPresentation).length > 0) {
                 nodo.resolvedPresentation = resolvedPresentation;
             }
         }
 
-        // --- 3.6 Fallback final ---
         if (!nodo.resolvedTag) {
             nodo.resolvedTag = nodo.tipoNodo === 'paragraph' ? 'p' : 'span';
         }
     }
 
-    // Filtrado seguro: Conservamos todos los nodos que contengan texto real
-    let nodosLimpios = [];
-    let raizIterar = Array.isArray(ast.fragmentos) ? ast.fragmentos : (Array.isArray(ast.contenido) ? ast.contenido : [ast]);
+    // =========================================================================
+    // 4. PROCESAR RAÍCES
+    // =========================================================================
+    let raizIterar = [];
+    if (Array.isArray(ast.contenido)) {
+        raizIterar = ast.contenido;
+    } else if (Array.isArray(ast.body)) {
+        raizIterar = ast.contenido || [];
+    } else {
+        raizIterar = [ast];
+    }
 
+    let nodosLimpios = [];
     raizIterar.forEach(nodoBase => {
         procesarNodo(nodoBase);
-        
-        // Blindaje de filtrado: Solo descartamos si realmente está vacío y no tiene texto alternativo
-        if (nodoBase.tipoNodo === 'paragraph' && nodoBase.texto === '[VACÍO]' && (!nodoBase.contenido || nodoBase.contenido.length === 0)) {
-            return; // Se descarta únicamente si está completamente vacío
+        // Filtrar párrafos vacíos
+        if (nodoBase.tipoNodo === 'paragraph' && nodoBase.texto === '[VACÍO]') {
+            return;
         }
-        
         nodosLimpios.push(nodoBase);
     });
 
     ast.contenido = nodosLimpios;
-    delete ast.fragmentos;
 
-    if (unmappedP.size > 0) {
-        diagnostics.unmappedParagraphStyles = Array.from(unmappedP);
-        diagnostics.unmappedParagraphStyles.forEach(s => diagnostics.warnings.push(`Estilo de párrafo no mapeado: ${s}`));
-    }
+    // Actualizar diagnostics
+    diagnostics.unmappedParagraphStyles = Array.from(new Set(diagnostics.unmappedParagraphStyles));
+    diagnostics.unmappedCharacterStyles = Array.from(new Set(diagnostics.unmappedCharacterStyles));
+    diagnostics.warnings = [
+        ...diagnostics.unmappedParagraphStyles.map(s => `Estilo de párrafo no mapeado: ${s}`),
+        ...diagnostics.unmappedCharacterStyles.map(s => `Estilo de carácter no mapeado: ${s}`)
+    ];
 
-    if (unmappedC.size > 0) {
-        diagnostics.unmappedCharacterStyles = Array.from(unmappedC);
-        diagnostics.unmappedCharacterStyles.forEach(s => diagnostics.warnings.push(`Estilo de carácter no mapeado: ${s}`));
-    }
+    console.log('[FRONTERA 1: ADAPTADOR OUT]', {
+        nodosRaiz: ast.contenido ? ast.contenido.length : 0,
+        primerNodoTieneFragmentos: ast.contenido && ast.contenido[0] ? Array.isArray(ast.contenido[0].fragmentos) : false,
+        muestraPrimerNodo: JSON.stringify(ast.contenido ? ast.contenido[0] : null, null, 2).slice(0, 400)
+    });
 
     return {
         ast,

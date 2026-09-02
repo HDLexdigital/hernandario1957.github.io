@@ -1,0 +1,26 @@
+{
+  "perfil": "constitucion_y_codigos",
+  "reglasContenedores": [
+    {
+      "estiloDisparador": "P02_TITLE_MAIN",
+      "tipoContenedor": "section",
+      "cerrarAnteriores": ["section"],
+      "atributos": { "aria-labelledby": "titulo-i" }
+    }
+  ],
+ "mapeoEstilosParrafo": {
+    "P02_TITLE_PART": { "etiqueta": "h1", "clase": "p02-title-part", "role": "doc-subtitle" },
+    "P02_TITLE_MAIN": { "etiqueta": "h2", "clase": "p02-title-main" },
+    "P02_TITLE_CHAPTER": { "etiqueta": "p", "clase": "p02_title_chapter" },
+    "P03_CENTER_BOLD": { "etiqueta": "p", "clase": "p03-center-bold", "role": "doc-subtitle" },
+    "P03_CENTER_NORMAL": { "etiqueta": "p", "clase": "p03-center-normal" },
+    "P01_BODY_FIRST": { "etiqueta": "p", "clase": "p01-body-first parrafo-justificado" },
+    "P01_BODY_CONT": { "etiqueta": "p", "clase": "p01-body-cont parrafo-justificado" },
+    "P01_BODY_BASE": { "etiqueta": "p", "clase": "p01-body-base parrafo-justificado" }
+}
+  "mapeoEstilosCaracter": {
+    "terminoglosario": { "etiqueta": "span", "clase": "c18-tt-gloss", "atributos": { "role": "term" } },
+    "negrita-resaltado": { "etiqueta": "strong", "clase": "negrita-resaltado" },
+    "c01-bold": { "etiqueta": "strong", "clase": "c01-bold" }
+  }
+}

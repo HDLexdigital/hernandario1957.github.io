@@ -1,5 +1,5 @@
-/**
- * Fachada Pública del Pipeline Modular de LexDigitalHD
+﻿/**
+ * Fachada PÃºblica del Pipeline Modular de LexDigitalHD
  * Contrato C.45 / C.46: Orquestador de Fronteras y Artefacto Estructurado
  * E15.6: PERSISTENCIA CENTRALIZADA (El Core es puro, el Orquestador escribe).
  */
@@ -10,28 +10,28 @@ const path = require('path');
 const { performance } = require('perf_hooks');
 
 const { adaptarInDesign } = require('./adaptadores/InDesignAdapter');
-const { compilarLexmotor } = require('./compiladores/compilarLexmotor');
-const { constructorXHTML } = require('./constructores/constructorXHTML');
+const { compilarLexmotor } = require('./core/compiladores/compilarLexmotor');
+const { constructorXHTML } = require('./core/constructores/constructorXHTML');
 const { ensamblarDocumentoXHTML } = require('./constructores/ensambladorDocumento');
 const { Metricas } = require('./utils/metricas');
 
 function ejecutarPipelineModular(jsonCrudo, opciones = {}) {
     if (!jsonCrudo || typeof jsonCrudo !== 'object' || Array.isArray(jsonCrudo)) {
-        throw new Error("ERR_INVALID_INPUT: El orquestador requiere un jsonCrudo válido.");
+        throw new Error("ERR_INVALID_INPUT: El orquestador requiere un jsonCrudo vÃ¡lido.");
     }
 
     if (!jsonCrudo.tokens && !jsonCrudo.contenido && !jsonCrudo.documento) {
-        throw new Error("ERR_INVALID_INPUT: El jsonCrudo carece de una estructura semántica válida.");
+        throw new Error("ERR_INVALID_INPUT: El jsonCrudo carece de una estructura semÃ¡ntica vÃ¡lida.");
     }
 
     const metricas = new Metricas('Pipeline Modular');
     const tiempoInicio = performance.now();
 
-    // 1. Frontera E10: Adaptación 
+    // 1. Frontera E10: AdaptaciÃ³n 
     const adaptado = adaptarInDesign({ jsonCrudo });
     const astSeguro = adaptado.ast || (adaptado.jsonNormalizado ? adaptado.jsonNormalizado : jsonCrudo);
 
-    // 2. Frontera Core: Compilación (Ahora matemáticamente puro)
+    // 2. Frontera Core: CompilaciÃ³n (Ahora matemÃ¡ticamente puro)
     // Pasamos map paths si existen, para que el Core los cargue (mantenimiento de API E12)
     const compilado = compilarLexmotor(astSeguro, opciones);
     const astCompilado = compilado.ast || astSeguro;
@@ -69,7 +69,7 @@ function ejecutarPipelineModular(jsonCrudo, opciones = {}) {
 
     const tiempoTotal = performance.now() - tiempoInicio;
 
-    // 6. Construcción Estricta del Artefacto Canónico (C.46)
+    // 6. ConstrucciÃ³n Estricta del Artefacto CanÃ³nico (C.46)
     const respuesta = {
         jsonOficial: {
             documento: astCompilado.documento || { titulo: opciones.nombreBase || 'documento_desconocido' },

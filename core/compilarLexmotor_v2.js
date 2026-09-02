@@ -10,7 +10,7 @@
  *   5. xhtmlValidator.js
  * 
  * USO:
- *   const compilador = require('./compilarLexmotor_v2');
+	const compilador = require('./compilarLexmotor_v2.js');
  *   const resultado = compilador.compilarAXHTML(jsonData, opciones);
  */
 

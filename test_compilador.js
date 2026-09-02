@@ -6,15 +6,11 @@
  * 
  * USO:
  *   node test_compilador.js <ruta_json_indesign> [opciones]
- * 
- * EJEMPLOS:
- *   node test_compilador.js ./publicaciones/Constitución_Política_Colombia/documento_req-uxp-1787442259035.json
- *   node test_compilador.js ./documentos/decreto252.json --validar --generar-toc
  */
 
 const fs = require('fs');
 const path = require('path');
-const compilador = require('./compilarLexmotor_v2');
+const compilador = require('./core/compilarLexmotor_v2.js');
 
 // Colores para consola
 const COLORES = {
@@ -32,7 +28,7 @@ const COLORES = {
 async function main() {
   console.log(`${COLORES.AZUL}${'='.repeat(70)}`);
   console.log('TESTING - COMPILADOR LEXDIGITAL V2');
-  console.log('='.repeat(70)}${COLORES.RESET}\n`);
+  console.log(`${'='.repeat(70)}${COLORES.RESET}\n`);
 
   // Parsear argumentos
   const args = process.argv.slice(2);
@@ -97,7 +93,7 @@ async function main() {
     // RESUMEN FINAL
     console.log(`\n${COLORES.VERDE}${'='.repeat(70)}`);
     console.log('✓ TESTING COMPLETADO EXITOSAMENTE');
-    console.log('='.repeat(70)}${COLORES.RESET}\n`);
+    console.log(`${'='.repeat(70)}${COLORES.RESET}\n`);
 
     process.exit(0);
 
@@ -261,8 +257,8 @@ ${COLORES.AZUL}USO:${COLORES.RESET}
 
 ${COLORES.AZUL}OPCIONES:${COLORES.RESET}
   --no-validar           No validar XHTML (más rápido)
-  --no-toc              No generar tabla de contenidos
-  --nivel AA|A|AAA      Nivel de accesibilidad (default: AA)
+  --no-toc               No generar tabla de contenidos
+  --nivel AA|A|AAA       Nivel de accesibilidad (default: AA)
   --output <directorio> Directorio de salida (default: ./output)
 
 ${COLORES.AZUL}EJEMPLOS:${COLORES.RESET}

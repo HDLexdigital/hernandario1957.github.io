@@ -1,17 +1,17 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 const { adaptarInDesign } = require('../adaptadores/InDesignAdapter');
-const { compilarLexmotor } = require('../compiladores/compilarLexmotor');
+const { compilarLexmotor } = require('../core/compiladores/compilarLexmotor');
 const { validateCSSCoverage } = require('../validadores/validarCSSCoverage');
 
 /**
- * Adaptador de Ejecución CLI de Lexmotor (F11) - Versión Industrial Blindada
+ * Adaptador de EjecuciÃ³n CLI de Lexmotor (F11) - VersiÃ³n Industrial Blindada
  * Traduce argumentos estrictos e interfaces de archivo a llamadas controladas 
- * del núcleo, blindando los códigos de salida y previniendo colisiones o path traversal.
+ * del nÃºcleo, blindando los cÃ³digos de salida y previniendo colisiones o path traversal.
  */
 async function ejecutarCLI(args) {
     try {
-        // 1. Parsing y validación estricta de argumentos (F11.4 -> Código 1)
+        // 1. Parsing y validaciÃ³n estricta de argumentos (F11.4 -> CÃ³digo 1)
         if (!args || args[0] !== 'compile') {
             return 1;
         }
@@ -44,15 +44,15 @@ async function ejecutarCLI(args) {
             return 1;
         }
 
-        // Protección 1: Sanitización estricta contra Path Traversal en --name
+        // ProtecciÃ³n 1: SanitizaciÃ³n estricta contra Path Traversal en --name
         if (nameFlag && !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(nameFlag)) {
             return 1;
         }
 
-        // Resolución del nombre base de salida
+        // ResoluciÃ³n del nombre base de salida
         const nombreBase = nameFlag || path.parse(inputFlag).name;
 
-        // 2. Validación de lectura y parseo de entrada (F11.2, F11.3 -> Código 2)
+        // 2. ValidaciÃ³n de lectura y parseo de entrada (F11.2, F11.3 -> CÃ³digo 2)
         if (!fs.existsSync(inputFlag) || !fs.existsSync(mapFlag) || !fs.existsSync(cssFlag)) {
             return 2;
         }
@@ -66,7 +66,7 @@ async function ejecutarCLI(args) {
             return 2;
         }
 
-        // 3. Invocación y Gatekeeper de la Capa Anticorrupción E10 (Código 3)
+        // 3. InvocaciÃ³n y Gatekeeper de la Capa AnticorrupciÃ³n E10 (CÃ³digo 3)
         let adaptacion;
         try {
             adaptacion = adaptarInDesign({ jsonCrudo, semanticMap });
@@ -83,13 +83,13 @@ async function ejecutarCLI(args) {
             fs.mkdirSync(outputFlag, { recursive: true });
         }
 
-        // Protección 2: Aislamiento por nombreBase para evitar colisiones concurrentes
+        // ProtecciÃ³n 2: Aislamiento por nombreBase para evitar colisiones concurrentes
         const mapOutput = path.join(outputFlag, `${nombreBase}.semantic_map.json`);
         const profilePath = path.join(outputFlag, `${nombreBase}.profile_map.json`);
         fs.writeFileSync(mapOutput, JSON.stringify(adaptacion.semanticMap));
         fs.writeFileSync(profilePath, '{}');
 
-        // 4. Compilación del Núcleo E1–E9 (Código 4)
+        // 4. CompilaciÃ³n del NÃºcleo E1â€“E9 (CÃ³digo 4)
         let resultadoLexmotor;
         try {
             resultadoLexmotor = await compilarLexmotor(adaptacion.ast, {
@@ -101,7 +101,7 @@ async function ejecutarCLI(args) {
             return 4;
         }
 
-        // 5. Validación de XHTML y Cobertura contra el CSS REAL (Código 5)
+        // 5. ValidaciÃ³n de XHTML y Cobertura contra el CSS REAL (CÃ³digo 5)
         try {
             const diagnosticoCSS = validateCSSCoverage(resultadoLexmotor.xhtml, cssContent);
             if (!diagnosticoCSS.valid || diagnosticoCSS.missingClasses.length > 0) {
@@ -111,7 +111,7 @@ async function ejecutarCLI(args) {
             return 5;
         }
 
-        // 6. Persistencia Nominal Canónica (Garantiza --name o fallback al nombre de entrada)
+        // 6. Persistencia Nominal CanÃ³nica (Garantiza --name o fallback al nombre de entrada)
         try {
             const rutaSalida = path.join(outputFlag, `${nombreBase}.xhtml`);
             fs.writeFileSync(rutaSalida, resultadoLexmotor.xhtml, 'utf8');

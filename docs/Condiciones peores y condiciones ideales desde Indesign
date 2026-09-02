@@ -1,0 +1,19 @@
+Condiciones ideales para la extracción y compilación en InDesign
+
+Disciplina estricta de estilos: Uso exclusivo y riguroso de Estilos de Párrafo y Estilos de Carácter nativos para toda la jerarquía tipográfica, manteniendo los overrides (formato manual directo) en un 0% o por debajo del umbral del 5%.
+
+Flujo de historias limpio y lineal: Cadenas de texto (stories) ordenadas secuencialmente de principio a fin, sin marcos de texto flotantes desconectados, hilos rotos o cajas superpuestas que alteren el orden lógico del DOM.
+
+Nomenclatura semántica predecible: Títulos, capítulos y artículos estructurados con patrones de texto consistentes que faciliten la evaluación instantánea del motor GREP externo.
+
+Entorno de hardware dedicado: Ejecución sobre almacenamiento SSD local con suficiente RAM disponible para que ExtendScript procese la serialización del AST sin competir con recursos de red o procesos pesados en segundo plano.
+
+Peores condiciones que degradan o bloquean el proceso
+
+Abuso masivo de formato manual (Overrides): Documentos donde los maquetadores modifican tamaño, interlineado, negritas o colores directamente sobre el texto seleccionado sin crear estilos, lo que desborda la capacidad del script de extracción y rompe la consistencia del CSS generado.
+
+Estructura de caja caótica: Documentos construidos mediante marcos de texto independientes y sueltos en lugar de un flujo continuo, generando saltos impredecibles en el orden de los nodos del árbol sintáctico.
+
+Uso indiscriminado del estilo base: Párrafos enteros configurados con [Sin estilo] o [Basic Paragraph Style], obligando al motor a adivinar la semántica y provocando que la clasificación GREP falle o clasifique erróneamente el contenido jurídico.
+
+Saturación del hilo principal de InDesign: Archivos .indd extremadamente pesados con miles de notas al pie anidadas, tablas complejas o gráficos vinculados defectuosos que bloquean el motor ES3 y provocan tiempos de espera agotados (timeout) o congelamiento total de la aplicación.

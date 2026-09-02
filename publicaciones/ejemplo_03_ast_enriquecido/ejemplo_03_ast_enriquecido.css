@@ -1,0 +1,581 @@
+/* CSS CONSOLIDADO: NATIVO + LEXCODEX MASTER */
+
+/* --- ESTILOS NATIVOS (InDesign Fallback) --- */
+/* LexDigital Generated CSS (Nativo sin prefijos) */
+/* Documento: Fragmento.indd */
+
+/* portadilla */
+.portadilla {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* pagina-legal */
+.pagina-legal {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* introduccion */
+.introduccion {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* tabla-contenidos */
+.tabla-contenidos {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* titulo-obra */
+.titulo-obra {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* titulo-nivel2 */
+.titulo-nivel2 {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* titulo-nivel3 */
+.titulo-nivel3 {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* titulo-nivel4 */
+.titulo-nivel4 {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* articulo */
+.articulo {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* nota-al-pie */
+.nota-al-pie {
+  font-family: "Minion Pro", serif;
+  font-size: 8pt;
+  line-height: 1.2;
+  padding-left: 4.93888888888889pt;
+  text-indent: -4.93888888888889pt;
+  text-align: left;
+}
+
+/* inciso */
+.inciso {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* paragrafo */
+.paragrafo {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* glosario */
+.glosario {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* termino */
+.termino {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* definicion */
+.definicion {
+  font-family: "Minion Pro", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* P01_BODY_BASE */
+.p01-body-base {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 3.5pt;
+  text-align: left;
+}
+
+/* P01_BODY_CONT */
+.p01-body-cont {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  text-indent: 5.997pt;
+  margin-top: 1.5pt;
+  text-align: left;
+}
+
+/* P01_BODY_FIRST */
+.p01-body-first {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  text-align: left;
+}
+
+/* P07_INDENT_L1 */
+.p07-indent-l1 {
+  font-family: "Minion Pro", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  padding-left: 13.406pt;
+  text-indent: -7.761pt;
+  margin-top: 1.5pt;
+  text-align: left;
+}
+
+/* P07_INDENT_L2 */
+.p07-indent-l2 {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  padding-left: 20.461pt;
+  text-indent: -6.703pt;
+  margin-top: 1.5pt;
+  text-align: left;
+}
+
+/* P07_INDENT_L1_NONUM */
+.p07-indent-l1-nonum {
+  font-family: "Minion Pro", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  padding-left: 13.406pt;
+  text-indent: -0.00044444444445pt;
+  margin-top: 1.5pt;
+  text-align: left;
+}
+
+/* P02_TITLE_BASE */
+.p02-title-base {
+  font-family: "Liberation Serif", serif;
+  font-size: 15pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 3.5pt;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* P02_TITLE_PART */
+.p02-title-part {
+  font-family: "Georgia Pro", serif;
+  font-size: 24pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  padding-left: 2pt;
+  margin-top: 5pt;
+  margin-bottom: 1pt;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* P02_TITLE_MAIN */
+.p02-title-main {
+  font-family: "Georgia Pro", serif;
+  font-size: 16pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 5pt;
+  margin-bottom: 1pt;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0054a8;
+}
+
+/* P02_TITLE_CHAPTER */
+.p02-title-chapter {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  margin-top: 4pt;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #d26442;
+}
+
+/* P03_CENTER_NORMAL */
+.p03-center-normal {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 1.76388888888889pt;
+  margin-bottom: 1.76388888888889pt;
+  text-align: center;
+}
+
+/* P03_CENTER_BOLD */
+.p03-center-bold {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 1.76388888888889pt;
+  margin-bottom: 1.76388888888889pt;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 1 Cuerpo de texto PORTO */
+.1-cuerpo-de-texto-porto {
+  font-family: "Arial", serif;
+  font-size: 11pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  margin-top: 2pt;
+  text-align: left;
+}
+
+/* 1.3 Pie de pagina */
+.1-3-pie-de-pagina {
+  font-family: "Arial", serif;
+  font-size: 8.5pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  padding-left: 5.7pt;
+  text-indent: -5.7pt;
+  text-align: left;
+}
+
+/* 1.1 Cuerpo de texto siguiente */
+.1-1-cuerpo-de-texto-siguiente {
+  font-family: "Arial", serif;
+  font-size: 11pt;
+  line-height: 1.2;
+  letter-spacing: 0.008em;
+  text-indent: 6pt;
+  text-align: left;
+}
+
+/* 2.1 Titulo  */
+.2-1-titulo- {
+  font-family: "Helvetica Neue LT Std", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  letter-spacing: 0.020em;
+  margin-top: 3pt;
+  margin-bottom: 1pt;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* 2.6 Texto_Adopta_Por_la_cual */
+.2-6-texto-adopta-por-la-cual {
+  font-family: "Helvetica Neue LT Std", serif;
+  font-size: 12pt;
+  line-height: 1.2;
+  letter-spacing: 0.020em;
+  margin-top: 8pt;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* 2.4 Libro */
+.2-4-libro {
+  font-family: "Helvetica Neue LT Std", serif;
+  font-size: 21pt;
+  line-height: 1.2;
+  letter-spacing: 0.020em;
+  margin-top: 3pt;
+  margin-bottom: 1pt;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* 2.5 Subtitulo Libro */
+.2-5-subtitulo-libro {
+  font-family: "Helvetica Neue LT Std", serif;
+  font-size: 16pt;
+  line-height: 1.2;
+  letter-spacing: 0.020em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* 2.2 Capitulo */
+.2-2-capitulo {
+  font-family: "Arial", serif;
+  font-size: 11pt;
+  line-height: 1.2;
+  margin-top: 1pt;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* 2.3 Sección  */
+.2-3-secci-n- {
+  font-family: "Arial", serif;
+  font-size: 11pt;
+  line-height: 1.2;
+  margin-top: 1pt;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Caracter: superindice */
+.superindice {
+}
+
+/* Caracter: C00_NORMAL */
+.c00-normal {
+}
+
+/* Caracter: C01_BOLD */
+.c01-bold {
+  font-weight: bold;
+  color: #0054a8;
+}
+
+/* Caracter: C18_TT_GLOSS */
+.c18-tt-gloss {
+  color: #3954a8;
+}
+
+/* Caracter: C12_CROSSREF */
+.c12-crossref {
+  color: #d26442;
+}
+
+/* Caracter: negrita-resaltado */
+.negrita-resaltado {
+}
+
+/* Caracter: referencia-legal */
+.referencia-legal {
+}
+
+/* Caracter: termino-comillas */
+.termino-comillas {
+}
+
+/* Caracter: 09 super */
+.09-super {
+}
+
+/* Caracter: 01 PORTO bold */
+.01-porto-bold {
+  font-weight: bold;
+}
+
+/* Caracter: Arial_Bold */
+.arial-bold {
+  font-weight: bold;
+}
+
+/* Caracter: SuperScript */
+.superscript {
+}
+
+/* Caracter: Romanos_a_mayuscula */
+.romanos-a-mayuscula {
+}
+
+
+
+/* --- ESTILOS MAESTROS (LexCodex) --- */
+/* ==========================================================================
+   LEXCODEX - HOJA DE ESTILOS OPTIMIZADA, VALIDADA Y SEMÃNTICA
+   ========================================================================== */
+
+/* --------------------------------------------
+   1. RESET Y BASE
+   -------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Liberation Serif", "Georgia", "Times New Roman", serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000000;
+    background: #ffffff;
+    max-width: 75ch;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+/* --------------------------------------------
+   2. TÃTULOS (Escala jerÃ¡rquica accesible)
+   -------------------------------------------- */
+/* DESPUÃ‰S: Agregamos .p02-title-part y .p02-title-base */
+h1, .titulo-principal, .p02-title-main, .p02-title-part, .p02-title-base {
+    font-family: "Georgia Pro", "Georgia", serif;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 1.3;
+    text-align: center;
+    margin: 24px 0 12px 0;
+    color: #004080;
+    background-color: rgba(0, 64, 128, 0.05);
+    padding: 12px 16px;
+}
+
+/* TÃ­tulos de CapÃ­tulo y PreÃ¡mbulos */
+h2, .capitulo, .p02-title-chapter, .p02-title-book, .preambulo, [class*="title-chapter"], [class*="preambulo"] {
+    font-family: "Liberation Serif", "Georgia", serif;
+    font-weight: bold;
+    font-size: 19px;
+    text-align: center;
+    margin: 20px 0 10px 0;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+/* Subsecciones o tÃ­tulos internos */
+h3, .seccion, .p02-title-section, [class*="title-section"] {
+    font-family: "Minion Pro", "Georgia", serif;
+    font-weight: bold;
+    font-size: 17px;
+    text-align: left;
+    margin: 16px 0 8px 0;
+    color: #004080;
+}
+
+/* --------------------------------------------
+   3. ESTILOS DE PÃRRAFO Y BLOQUES DE TEXTO
+   -------------------------------------------- */
+p, .cuerpo-texto, .p01-body-base, .p01-body-first, .p01-body-cont, .p01-body-base.parrafo-justificado, .p01-body-cont.parrafo-justificado {
+    font-family: "Liberation Serif", "Georgia", serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000000;
+    text-align: justify;
+    hyphens: auto;
+    margin-top: 0;
+    margin-bottom: 0.75em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Primer pÃ¡rrafo (sin sangrÃ­a) */
+.p01-body-first, .cuerpo-primero {
+    text-indent: 0;
+}
+
+/* PÃ¡rrafo de continuaciÃ³n (con sangrÃ­a accesible) */
+.p01-body-cont, .cuerpo-siguiente {
+    text-indent: 24px;
+    margin-top: 8px;
+}
+
+/* --------------------------------------------
+   4. ESTILOS CENTRADOS Y ESPECIALES
+   -------------------------------------------- */
+.texto-centrado-normal, .p03-center-normal {
+    font-family: "Liberation Serif", serif;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.008em;
+    color: #000000;
+    text-align: center;
+    margin: 16px 0;
+    text-indent: 0;
+    hyphens: auto;
+    display: inline;
+}
+
+.texto-centrado-bold, .p03-center-bold, .p03_center_bold {
+    font-family: "Liberation Serif", serif;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+    margin: 20px 0;
+    color: #000000;
+    letter-spacing: 0.008em;
+    text-indent: 0;
+    hyphens: auto;
+}
+
+/* --------------------------------------------
+   5. ESTILOS DE CARÃCTER (Inline, Glosario y ARIA)
+   -------------------------------------------- */
+.c18-tt-gloss, [role="term"] {
+    font-style: italic;
+    font-size: inherit;
+    color: #004080 !important;
+    background-color: rgba(0, 64, 128, 0.08);
+    padding: 2px 5px;
+    border-radius: 3px;
+    cursor: help;
+}
+
+[role="term"]:focus, 
+[role="term"]:hover {
+    outline: 2px solid #004080;
+    outline-offset: 2px;
+}
+
+.negrita-resaltado, .c01_bold, strong {
+    font-weight: bold;
+    font-size: inherit;
+}
+
+/* Asegurar herencia estricta de tamaÃ±o en elementos internos */
+.p01-body-base strong,
+.p01-body-base span,
+.p01-body-first strong,
+.p01-body-first span,
+.p01-body-cont strong,
+.p01-body-cont span {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+Mostrando .
+

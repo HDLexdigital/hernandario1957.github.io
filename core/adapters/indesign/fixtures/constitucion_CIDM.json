@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "model": "CIDM-1.0",
+    "source": {
+      "type": "INDESIGN",
+      "id": "Constitucion_CO.indd"
+    },
+    "createdAt": "2026-09-01T15:38:00Z",
+    "provenance": {
+      "extractor": "LexCore_Extract.jsx",
+      "version": "1.0.0"
+    }
+  },
+  "styles": {
+    "paragraph": {
+      "style-p-titulo-capitulo": {
+        "id": "style-p-titulo-capitulo",
+        "name": "TITULO_CAPITULO",
+        "properties": { "nativeName": "TITULO_CAPITULO" }
+      },
+      "style-p-articulo": {
+        "id": "style-p-articulo",
+        "name": "ARTICULO_CUERPO",
+        "properties": { "nativeName": "ARTICULO_CUERPO" }
+      }
+    },
+    "character": {
+      "style-c-negrita": {
+        "id": "style-c-negrita",
+        "name": "NEGRITA",
+        "properties": { "nativeName": "NEGRITA" }
+      }
+    }
+  },
+  "stories": [
+    {
+      "storyId": "story-001",
+      "order": 1,
+      "paragraphs": [
+        {
+          "paragraphId": "story-001-p0001",
+          "order": 1,
+          "text": "TÍTULO I\nDE LOS PRINCIPIOS FUNDAMENTALES",
+          "styleId": "style-p-titulo-capitulo",
+          "fragments": [
+            { "text": "TÍTULO I\nDE LOS PRINCIPIOS FUNDAMENTALES", "characterStyleId": null }
+          ]
+        },
+        {
+          "paragraphId": "story-001-p0002",
+          "order": 2,
+          "text": "Artículo 1. Colombia es un Estado social de derecho, organizado en forma de República unitaria, descentralizada, con autonomía de sus entidades territoriales, democrática, participativa y pluralista, fundada en el respeto de la dignidad humana, en el trabajo y la solidaridad de las personas que la integran y en la prevalencia del interés general.",
+          "styleId": "style-p-articulo",
+          "fragments": [
+            { "text": "Artículo 1. ", "characterStyleId": "style-c-negrita" },
+            { "text": "Colombia es un Estado social de derecho, organizado en forma de República unitaria, descentralizada, con autonomía de sus entidades territoriales, democrática, participativa y pluralista, fundada en el respeto de la dignidad humana, en el trabajo y la solidaridad de las personas que la integran y en la prevalencia del interés general.", "characterStyleId": null }
+          ]
+        },
+        {
+          "paragraphId": "story-001-p0003",
+          "order": 3,
+          "text": "Artículo 2. Son fines esenciales del Estado: servir a la comunidad, promover la prosperidad general y garantizar la efectividad de los principios, derechos y deberes consagrados en la Constitución...",
+          "styleId": "style-p-articulo",
+          "fragments": [
+            { "text": "Artículo 2. ", "characterStyleId": "style-c-negrita" },
+            { "text": "Son fines esenciales del Estado: servir a la comunidad, promover la prosperidad general y garantizar la efectividad de los principios, derechos y deberes consagrados en la Constitución...", "characterStyleId": null }
+          ]
+        }
+      ]
+    }
+  ]
+}

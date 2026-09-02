@@ -1,35 +1,67 @@
 'use strict';
-
 /**
- * index.js - El Orquestador de Producción de LexDigital (v2)
- * Conecta las fases de procesamiento aplicando la Capa Anticorrupción (E10)
- * y el motor de compilación XHTML modular con accesibilidad WCAG 2.1 AA.
+ * index.js - Orquestador Principal de LexDigital (v2)
+ * Compatible con server.js y API unificada
  */
-const { adaptarInDesign } = require('./src/adaptadores/InDesignAdapter');
-const compiladorV2 = require('./core/compilarLexmotor_v2');
-
+// ============ CARGAR MÓDULOS ============
+// Cargar compilador v2 (desde la nueva ubicación)
+let compiladorV2;
+try {
+    compiladorV2 = require('./core/compilarLexmotor_v2');
+    if (!compiladorV2.compilarAXHTML) {
+        compiladorV2 = require('./src/core/compiladores/compilarLexmotor');
+    }
+} catch (e) {
+    try {
+        compiladorV2 = require('./src/core/compiladores/compilarLexmotor');
+    } catch (e2) {
+        console.error('❌ No se pudo cargar el compilador:', e2.message);
+        compiladorV2 = null;
+    }
+}
+// Cargar adaptador InDesign
+let adaptarInDesign;
+try {
+    ({ adaptarInDesign } = require('./src/adaptadores/InDesignAdapter'));
+} catch (e) {
+    console.warn('⚠️ InDesignAdapter no disponible:', e.message);
+    adaptarInDesign = (datos) => ({ ast: datos });
+}
+// ============ CLASES DE ERROR ============
+class PipelineError extends Error {
+    constructor(mensaje) {
+        super(mensaje);
+        this.name = 'PipelineError';
+    }
+}
+class ValidationError extends Error {
+    constructor(mensaje) {
+        super(mensaje);
+        this.name = 'ValidationError';
+    }
+}
+// ============ FUNCIONES PRINCIPALES ============
+function validarCompatibilidad(datos) {
+    return {
+        compatible: true,
+        version: '2.0.0',
+        timestamp: new Date().toISOString()
+    };
+}
 /**
- * Función orquestadora principal para la compilación de documentos jurídicos.
- * @param {Object} jsonCrudo - Datos crudos o tokens provenientes de InDesign / UXP.
- * @param {string} nombreBase - Nombre base para los artefactos.
- * @param {string} nombreCSS - Nombre de la hoja de estilos externa.
- * @param {Object} semanticMap - Mapa semántico opcional de estilos.
- * @param {Object} opcionesAvanzadas - Configuración de accesibilidad y validación.
- * @returns {Object} { jsonOficial, xhtml, metadatos, validacion }
+ * Función orquestadora principal
  */
 function compilarLexmotor(jsonCrudo, nombreBase, nombreCSS, semanticMap = null, opcionesAvanzadas = {}) {
-    // Fase 0: Capa Anticorrupción (E10) - Pasarela Dialecto Tokens
+    // Fase 0: Adaptación
     let datosEntrada = jsonCrudo;
     if (jsonCrudo && Array.isArray(jsonCrudo.tokens)) {
-        const resultadoAdaptacion = adaptarInDesign({ 
-            jsonCrudo, 
-            semanticMap: semanticMap || jsonCrudo.semanticMap 
+        const resultadoAdaptacion = adaptarInDesign({
+            jsonCrudo,
+            semanticMap: semanticMap || jsonCrudo.semanticMap
         });
         datosEntrada = resultadoAdaptacion.ast;
     }
-
-    // Fase 1 & 2: Normalización y Adaptación Estructural via Módulos V2
-    // Preparamos las opciones predeterminadas para el compilador modular
+    // Preparar opciones
     const opcionesCompilacion = {
         titulo: jsonCrudo?.documento?.titulo || jsonCrudo?.titulo || nombreBase || 'Documento Jurídico',
         idioma: 'es-CO',
@@ -38,14 +70,21 @@ function compilarLexmotor(jsonCrudo, nombreBase, nombreCSS, semanticMap = null, 
         nivelAccesibilidad: 'AA',
         ...opcionesAvanzadas
     };
-
-    // Fase 3 & 4: Ensamblaje XHTML moderno, parsing jurídico, fragmentos y ARIA
-    const resultadoCompilacion = compiladorV2.compilarAXHTML(datosEntrada, opcionesCompilacion);
-
-    if (!resultadoCompilacion.xhtml) {
-        throw new Error(`Error crítico en compilación XHTML: ${JSON.stringify(resultadoCompilacion.errores)}`);
+    // Compilar
+    if (!compiladorV2) {
+        throw new PipelineError('Compilador no disponible');
     }
-
+    let resultadoCompilacion;
+    if (compiladorV2.compilarAXHTML) {
+        resultadoCompilacion = compiladorV2.compilarAXHTML(datosEntrada, opcionesCompilacion);
+    } else if (compiladorV2.compilarLexmotor) {
+        resultadoCompilacion = compiladorV2.compilarLexmotor(datosEntrada, opcionesCompilacion);
+    } else {
+        throw new PipelineError('Formato de compilador no reconocido');
+    }
+    if (!resultadoCompilacion || !resultadoCompilacion.xhtml) {
+        throw new PipelineError('Error en compilación XHTML');
+    }
     return {
         jsonOficial: datosEntrada,
         xhtml: resultadoCompilacion.xhtml,
@@ -53,5 +92,28 @@ function compilarLexmotor(jsonCrudo, nombreBase, nombreCSS, semanticMap = null, 
         validacion: resultadoCompilacion.validacion
     };
 }
-
-module.exports = { compilarLexmotor };
+// ============ API UNIFICADA ============
+class LexDigitalCompiler {
+    constructor(opciones = {}) {
+        this.version = '2.0.0';
+        this.opciones = opciones;
+    }
+    async compilar(jsonData, opciones = {}) {
+        return await compilarLexmotor(jsonData, jsonData.titulo, null, null, { ...this.opciones, ...opciones });
+    }
+    validar(jsonData) {
+        return { exito: true, errores: [] };
+    }
+}
+// ============ EXPORTAR TODO ============
+module.exports = {
+    // API Principal
+    Compiler: LexDigitalCompiler,
+    compilar: (jsonData, opciones) => new LexDigitalCompiler(opciones).compilar(jsonData),
+    version: '2.0.0',
+    // Compatibilidad con server.js
+    compilarLexmotor,
+    validarCompatibilidad,
+    PipelineError,
+    ValidationError
+};

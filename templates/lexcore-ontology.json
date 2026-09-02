@@ -1,0 +1,70 @@
+{
+  "$schema": "https://lexdigital.com/schemas/lexcore-ontology-v3.1.json",
+  "version": "3.1.0",
+  "descripcion": "Ontología maestra estructurada para compilación jurídica determinista de LexDigitalHD",
+  "politicaGobernanza": {
+    "modoEstricto": true,
+    "abortarEnEstiloHuerfano": true,
+    "forzarMapeoExportacion": true
+  },
+  "catalogoEstilos": {
+    "parrafos": [
+      {
+        "nombre": "P01_BODY_BASE",
+        "etiquetaHtml": "p",
+        "claseCss": "p01-body-base",
+        "ariaRole": "paragraph",
+        "ariaLevel": null,
+        "epubType": "bodymatter",
+        "pdfTag": "P"
+      },
+      {
+        "nombre": "P02_TITLE_CHAPTER",
+        "etiquetaHtml": "h2",
+        "claseCss": "p02-title-chapter",
+        "ariaRole": "heading",
+        "ariaLevel": 2,
+        "epubType": "chapter",
+        "pdfTag": "H2"
+      },
+      {
+        "nombre": "articulo",
+        "etiquetaHtml": "article",
+        "claseCss": "articulo",
+        "ariaRole": "article",
+        "ariaLevel": null,
+        "epubType": "seml:article",
+        "pdfTag": "P"
+      },
+      {
+        "nombre": "paragrafo",
+        "etiquetaHtml": "aside",
+        "claseCss": "paragrafo",
+        "ariaRole": "doc-notice",
+        "ariaLevel": null,
+        "epubType": "notice",
+        "pdfTag": "P"
+      }
+    ],
+    "caracteres": [
+      {
+        "nombre": "C01_ENFASIS",
+        "etiquetaHtml": "em",
+        "claseCss": "c01-enfasis",
+        "ariaRole": null,
+        "ariaLevel": null,
+        "epubType": "seml:emphasis",
+        "pdfTag": "Span"
+      },
+      {
+        "nombre": "C02_LEGAL_REF",
+        "etiquetaHtml": "cite",
+        "claseCss": "c02-legal-ref",
+        "ariaRole": "doc-biblioref",
+        "ariaLevel": null,
+        "epubType": "biblioentry",
+        "pdfTag": "Span"
+      }
+    ]
+  }
+}

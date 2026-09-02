@@ -1,0 +1,24 @@
+proyecto-lexdigital_modular/
+│
+├── templates/                             📂 [Configuración y Manifiestos SSOT]
+│   └── lexcore-ontology.json             ✨ (Componente I: Ontología maestra)
+│
+├── indesign/                              📂 [Scripts de Adobe InDesign / ExtendScript]
+│   ├── LexCore_Sync.jsx                  ✨ (Componente II: Sincronizador ontológico)
+│   ├── LexCore_ExtraerAST.jsx            ✨ (Componente III: Extractor y AST enriquecido - Próximo)
+│   └── polyfills/
+│       └── json2.jsx                     ⚙️ (Librería de serialización JSON para ES3)
+│
+├── backend/                               📂 [Motor de Compilación Backend - Node.js]
+│   ├── compiler-engine.js                ⚙️ (Componente IV: Compilador determinista)
+│   └── compilar.js                       ⚙️ (Orquestador principal de la Fase 1 a Fase Final)
+│
+├── MisJSON/                               📂 [Artifacts, Manifiestos y ASTs Generados]
+│   ├── estilos_certificados.json         📊 (Payload generado por pre-flight)
+│   ├── reporte_certificacion_corpus.json 📊 (Reporte de auditoría canónica)
+│   └── ast_corpus_enriquecido.json       📊 (Árbol de Sintaxis Abstracta extraído del .indd)
+│
+└── dist/                                  📂 [Resultados de Producción Final]
+    ├── xhtml/                            🌐 (Archivos XHTML validados)
+    ├── epub/                             📚 (Paquetes EPUB3 accesibles)
+    └── pdf/                              📄 (Documentos PDF/UA certificados)
