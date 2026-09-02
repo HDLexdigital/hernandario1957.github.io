@@ -19,12 +19,19 @@
       {
         "nodeId": "story-001-b001",
         "type": "title",
-        "content": [ { "type": "text", "value": "Título del capítulo" } ]
+        "children": [ { "type": "text", "text": "Título del capítulo" } ]
       },
       {
         "nodeId": "story-001-b002",
         "type": "paragraph",
-        "content": [ { "type": "strong", "value": "Colombia es un Estado social de derecho..." } ]
+        "children": [
+          {
+            "type": "strong",
+            "children": [
+              { "type": "text", "text": "Colombia es un Estado social de derecho..." }
+            ]
+          }
+        ]
       }
     ]
   }

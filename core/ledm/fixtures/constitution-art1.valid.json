@@ -8,11 +8,6 @@
       "id": "CO-CONST-1991-v1.0.0",
       "number": 1,
       "status": "CURRENT"
-    },
-    "dates": {
-      "promulgation": "1991-07-07",
-      "publication": "1991-07-07",
-      "effectiveFrom": "1991-07-07"
     }
   },
   "provenance": {
@@ -36,28 +31,21 @@
       {
         "nodeId": "CO-CONST-T1-C1-ART1",
         "type": "article",
-        "number": "1",
         "children": [
           {
             "nodeId": "CO-CONST-T1-C1-ART1-P1",
             "type": "paragraph",
             "children": [
-              { "type": "text", "value": "Colombia es un " },
+              { "type": "text", "text": "Colombia es un " },
               {
                 "type": "emphasis",
                 "children": [
-                  { "type": "text", "value": "Estado social de derecho" }
+                  { "type": "text", "text": "Estado social de derecho" }
                 ]
               }
             ]
           }
-        ],
-        "relations": {
-          "references": ["CO-LAW-134-1994-ART3"],
-          "amends": [],
-          "repeals": [],
-          "develops": []
-        }
+        ]
       }
     ]
   }

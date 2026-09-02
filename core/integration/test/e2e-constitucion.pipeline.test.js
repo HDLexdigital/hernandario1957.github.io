@@ -41,7 +41,7 @@ describe('E2E CONSTITUCIÓN → CIDM → LEDM → HTML', () => {
   test('E2E-003: fidelidad textual CIDM → LEDM', () => {
     const ledm = compileCIDMToLEDM(cidmFixture);
     const textosOriginales = cidmFixture.stories
-      .flatMap(story => story.paragraphs.map(p => p.text));
+      .flatMap(story => story.blocks.map(b => b.text));
     const textosLedm = ledm.structure.blocks.map(block => extractNodeText(block));
     expect(textosLedm).toEqual(textosOriginales);
   });
@@ -85,6 +85,6 @@ describe('E2E CONSTITUCIÓN → CIDM → LEDM → HTML', () => {
     expect($('header').length).toBeGreaterThan(0);
     expect($('nav[aria-label="Navegación del documento"]').length).toBe(1);
     expect($('main').length).toBe(1);
-    expect($('article').length).toBeGreaterThan(0);
+    expect($('p').length).toBeGreaterThan(0);
   });
 });
