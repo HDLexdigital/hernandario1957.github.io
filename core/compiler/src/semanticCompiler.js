@@ -126,8 +126,12 @@ function compile(cidm) {
                 throw new Error(`Pérdida de fidelidad textual en bloque ${item.blockId || item.paragraphId}`);
             }
 
+            // Normalizar nodeId a mayúsculas para cumplir contrato web
+            const rawNodeId = item.blockId || item.paragraphId;
+            const nodeId = String(rawNodeId).toUpperCase();
+
             ledm.structure.blocks.push({
-                nodeId: item.blockId || item.paragraphId,
+                nodeId: nodeId,
                 type: blockType,
                 children: children
             });

@@ -23,6 +23,7 @@ function renderNode(node) {
     if (node.type === 'text') return escapeHtml(node.text || '');
     const content = (node.children || []).map(renderNode).join('');
     if (node.type === 'strong') return `<strong>${content}</strong>`;
+    if (node.type === 'emphasis') return `<em>${content}</em>`;
     return content;
 }
 
@@ -88,7 +89,7 @@ function generateSectionXhtml(section, sectionIndex) {
 function generateNavXhtml(sections) {
     const items = sections.map((section, index) => {
         const padded = String(index + 1).padStart(3, '0');
-        const href = `section-${padded}.xhtml`;
+        const href = `xhtml/section-${padded}.xhtml`;
         const label = section.titleBlock
             ? escapeHtml(extractNodeText(section.titleBlock).substring(0, 80))
             : `Sección ${index + 1}`;
@@ -169,7 +170,11 @@ async function generateEpub(ledm) {
     if (!ledm || ledm.meta?.model !== 'LEDM-2.0' || !Array.isArray(ledm.structure?.blocks)) {
         throw new Error('LEDM inválido para generación EPUB');
     }
-    const blocks = ledm.structure.blocks;
+
+    // Congelar el LEDM para evitar mutaciones accidentales entre generaciones
+    const ledmFrozen = JSON.parse(JSON.stringify(ledm));
+
+    const blocks = ledmFrozen.structure.blocks;
     if (blocks.length === 0) throw new Error('LEDM sin bloques');
 
     const sections = chunkLedmIntoSections(blocks);
@@ -177,7 +182,7 @@ async function generateEpub(ledm) {
 
     zip.file('mimetype', MIMETYPE, { compression: 'STORE', date: FIXED_DATE });
     zip.file('META-INF/container.xml', generateContainer(), { date: FIXED_DATE });
-    zip.file('OEBPS/content.opf', generateOpf(ledm, sections.length), { date: FIXED_DATE });
+    zip.file('OEBPS/content.opf', generateOpf(ledmFrozen, sections.length), { date: FIXED_DATE });
     zip.file('OEBPS/nav.xhtml', generateNavXhtml(sections), { date: FIXED_DATE });
     zip.file('OEBPS/css/publication.css', generateCss(), { date: FIXED_DATE });
 

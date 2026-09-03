@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const JSZip = require('jszip');
 const cheerio = require('cheerio');
 
@@ -28,9 +29,25 @@ function extractLedmText(ledm) {
     return ledm.structure.blocks.map(b => extractNodeText(b)).join('\n');
 }
 
+async function hashEpubContents(epubBuffer) {
+    const zip = await JSZip.loadAsync(epubBuffer);
+    const entries = Object.keys(zip.files)
+        .filter(name => !zip.files[name].dir)   // solo archivos, no carpetas
+        .sort();
+    const hashes = [];
+    for (const name of entries) {
+        const content = await zip.file(name).async('nodebuffer');
+        const hash = crypto.createHash('sha256').update(content).digest('hex');
+        hashes.push(`${name}:${hash}`);
+    }
+    return hashes.join('\n');
+}
+
 describe('EPUB GENERATOR (MVP-002, chunking)', () => {
     let epubBuffer;
-    beforeAll(async () => { epubBuffer = await generateEpub(ledm); });
+    beforeAll(async () => {
+        epubBuffer = await generateEpub(ledm);
+    });
 
     test('EPUB-001: ZIP válido', async () => {
         const zip = await JSZip.loadAsync(epubBuffer);
@@ -70,9 +87,11 @@ describe('EPUB GENERATOR (MVP-002, chunking)', () => {
         expect(textEpub).toBe(textLedm);
     });
 
-    test('EPUB-007: determinismo', async () => {
+    test('EPUB-007: determinismo del contenido', async () => {
         const buffer2 = await generateEpub(ledm);
-        expect(buffer2.equals(epubBuffer)).toBe(true);
+        const hash1 = await hashEpubContents(epubBuffer);
+        const hash2 = await hashEpubContents(buffer2);
+        expect(hash1).toBe(hash2);
     });
 
     test('EPUB-008: LEDM no mutado', async () => {

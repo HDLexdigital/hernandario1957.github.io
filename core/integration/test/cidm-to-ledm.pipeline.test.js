@@ -40,7 +40,7 @@ describe('CIDM-TO-LEDM-PIPELINE', () => {
         const idsOriginales = cidmFixture.stories
             .flatMap(story => story.blocks.map(b => b.blockId));
         const idsLedm = ledm.structure.blocks.map(b => b.nodeId);
-        expect(idsLedm).toEqual(idsOriginales);
+        expect(idsLedm).toEqual(idsOriginales.map(id => id.toUpperCase()));
     });
 
     test('INT-003: texto normativo conservado exactamente', () => {

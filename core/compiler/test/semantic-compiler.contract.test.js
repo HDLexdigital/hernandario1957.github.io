@@ -56,7 +56,7 @@ describe('SEMANTIC-COMPILER-001', () => {
     test('orden preservado', () => {
         const ledm = compile(cidmFixture);
         const ids = ledm.structure.blocks.map(b => b.nodeId);
-        expect(ids).toEqual(['story-001-b0001', 'story-001-b0002']);
+        expect(ids).toEqual(['STORY-001-B0001', 'STORY-001-B0002']);
     });
 
     test('identidad/provenance preservada', () => {

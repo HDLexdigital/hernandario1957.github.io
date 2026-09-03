@@ -19,7 +19,7 @@
     "style-p-p07_indent_l1_nonum": { "semanticType": "paragraph" },
     "style-p-p03_center_normal": { "semanticType": "paragraph" },
     "style-p-p02_title_book": { "semanticType": "title" },
-    "style-p-p05_idx_art": { "semanticType": "paragraph" },
+    "style-p-p05_idx_art": { "semanticType": "article" },
     "style-p-p08_gls_term_dt": { "semanticType": "paragraph" },
     "style-p-p08_gls_term_dd": { "semanticType": "paragraph" },
     "style-p-p08_gls-art": { "semanticType": "paragraph" }

@@ -1,4 +1,27 @@
+# Dependencias
+node_modules/
+
+# Artefactos de build y cobertura
+public/
+coverage/
+
+# Archivos generados
+*.epub
+*.zip
+
+# Herramientas descargadas localmente
+epubcheck-5.2.1/
+epubcheck.zip
+
+# Scripts de diagnóstico temporales
+diagnostico-ids.js
+list-types.js
+
+# Archivos temporales
 .tmp.driveupload/
-publication_full.epub
 debug-a11y.js
 measure-ledm-full.js
+
+# Logs
+logs/
+*.log
