@@ -18,7 +18,7 @@
     "test:e2e": "jest test/integration/e2e.pipeline.test.js --detectOpenHandles",
     "test:coverage": "jest --coverage --coverageDirectory='coverage'",
     "test:watch": "jest --watch",
-    "audit:core": "powershell -ExecutionPolicy Bypass -File ./tools/verificar_core.ps1",
+    "audit:core": "node scripts/verificar_core.js",
     "ci:local": "npm run audit:core && npm run test:core:all",
     "ci:a11y": "jest core/integration/test/a11y-audit.test.js --config jest.config.js --verbose",
     "ci:epub": "jest core/integration/test/e2e-full-constitution.test.js --config jest.config.js --verbose && node scripts/epubcheck.js publication_full.epub",

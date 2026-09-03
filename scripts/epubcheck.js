@@ -21,7 +21,6 @@ function descargar(url, destino, redirects = 0) {
         const file = fs.createWriteStream(destino);
         https.get(url, response => {
             if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
-                // Seguir redirección
                 const nuevaUrl = new URL(response.headers.location, url).toString();
                 file.close(() => {
                     fs.unlink(destino, () => {
@@ -50,7 +49,7 @@ async function main() {
         const zipPath = path.join(CACHE_DIR, ZIP_NAME);
         await descargar(`${BASE_URL}/${ZIP_NAME}`, zipPath);
         console.log('📦 Extrayendo...');
-        execSync(`powershell -Command "Expand-Archive -Path '${zipPath}' -DestinationPath '${CACHE_DIR}' -Force"`, { stdio: 'inherit' });
+        execSync(`unzip -o "${zipPath}" -d "${CACHE_DIR}"`, { stdio: 'inherit' });
         console.log('✅ EPUBCheck descargado y extraído.');
     } else {
         console.log('📦 EPUBCheck ya está en caché.');
