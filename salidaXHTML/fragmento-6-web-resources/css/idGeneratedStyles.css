@@ -1,0 +1,209 @@
+body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote, figure {
+	margin:0;
+	padding:0;
+	border-width:0;
+}
+body {
+	-epub-hyphens:auto;
+}
+div.Marco-de-texto-b-sico {
+	border-style:solid;
+}
+p.p01-body-cont {
+	color:#000000;
+	font-family:"Liberation Serif", serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.35;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:10px;
+	orphans:2;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:justify;
+	text-align-last:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:2;
+}
+p.cuerpo-siguiente {
+	color:#000000;
+	font-family:"Liberation Serif", serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.35;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:4px;
+	orphans:2;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:justify;
+	text-align-last:left;
+	text-decoration:none;
+	text-indent:17px;
+	text-transform:none;
+	widows:2;
+}
+p.sangria-n1 {
+	color:#000000;
+	font-family:"Minion Pro", serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.35;
+	margin-bottom:0;
+	margin-left:38px;
+	margin-right:0;
+	margin-top:4px;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:-22px;
+	text-transform:none;
+	widows:1;
+}
+h2.capitulo {
+	-epub-hyphens:none;
+	color:#0054a8;
+	font-family:"Liberation Serif", serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	line-height:1.35;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:11px;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:center;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+h1.titulo {
+	-epub-hyphens:none;
+	background-color:#f5f5f5;
+	color:#0054a8;
+	font-family:"Georgia Pro Cond Semibold", serif;
+	font-size:16px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:600;
+	line-height:1.35;
+	margin-bottom:3px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:14px;
+	orphans:2;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:center;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:uppercase;
+	widows:2;
+}
+h1.p02-title-main {
+	-epub-hyphens:none;
+	background-color:#cce3ff;
+	color:#4a4a49;
+	font-family:"Georgia Pro Cond Semibold", serif;
+	font-size:24px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:600;
+	line-height:1.35;
+	margin-bottom:3px;
+	margin-left:6px;
+	margin-right:0;
+	margin-top:14px;
+	orphans:2;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:center;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:uppercase;
+	widows:2;
+}
+p.texto-centrado-bold {
+	color:#000000;
+	font-family:"Liberation Serif", serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	line-height:1.35;
+	margin-bottom:5px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:5px;
+	orphans:2;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:center;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:2;
+}
+p.texto-centrado-normal {
+	color:#000000;
+	font-family:"Liberation Serif", serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.35;
+	margin-bottom:5px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:5px;
+	orphans:2;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:center;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:2;
+}
+span.normal-char {
+	font-family:"Liberation Serif", serif;
+	font-style:normal;
+	font-weight:normal;
+}
+strong.bold-char {
+	color:#0054a8;
+	font-family:"Liberation Serif", serif;
+	font-style:normal;
+	font-weight:bold;
+}
+dt.definition {
+	color:#0054a8;
+	font-family:"Liberation Serif", serif;
+	font-style:normal;
+	font-weight:normal;
+}
+span.glosario {
+	color:#000000;
+}
+strong.CharOverride-1, span.CharOverride-1 {
+	color:#0054a8;
+}

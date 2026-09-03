@@ -41,7 +41,12 @@
           "order": 1,
           "text": "Título del capítulo",
           "styleId": "style-p-title",
-          "fragments": []
+          "fragments": [
+            {
+              "text": "Título del capítulo",
+              "characterStyleId": null
+            }
+          ]
         },
         {
           "blockId": "story-001-b0002",

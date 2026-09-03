@@ -18,9 +18,11 @@
     "test:e2e": "jest test/integration/e2e.pipeline.test.js --detectOpenHandles",
     "test:coverage": "jest --coverage --coverageDirectory='coverage'",
     "test:watch": "jest --watch",
+    "audit:core": "powershell -ExecutionPolicy Bypass -File ./tools/verificar_core.ps1",
+    "ci:local": "npm run audit:core && npm run test:core:all",
     "ci:a11y": "jest core/integration/test/a11y-audit.test.js --config jest.config.js --verbose",
     "ci:epub": "jest core/integration/test/e2e-full-constitution.test.js --config jest.config.js --verbose && epubcheck publication_full.epub",
-    "ci:all": "npm run test:core:all && npm run ci:epub",
+    "ci:all": "npm run ci:local && npm run ci:epub",
     "start": "node src/index.js",
     "pipeline": "node LexDigital-Pipeline/server.js",
     "verify": "node scripts/verificar-estructura.js"

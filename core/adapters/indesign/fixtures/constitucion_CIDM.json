@@ -16,13 +16,28 @@
       "order": 1,
       "blocks": [
         {
-          "blockId": "story-001-b0001", "order": 1,
-          "text": "Título del capítulo", "styleId": "style-p-title", "fragments": []
+          "blockId": "story-001-b0001",
+          "order": 1,
+          "text": "Título del capítulo",
+          "styleId": "style-p-title",
+          "fragments": [
+            {
+              "text": "Título del capítulo",
+              "characterStyleId": null
+            }
+          ]
         },
         {
-          "blockId": "story-001-b0002", "order": 2,
-          "text": "Colombia es un Estado social de derecho...", "styleId": "style-p-body",
-          "fragments": [ { "text": "Colombia es un Estado social de derecho...", "characterStyleId": "style-c-bold" } ]
+          "blockId": "story-001-b0002",
+          "order": 2,
+          "text": "Colombia es un Estado social de derecho...",
+          "styleId": "style-p-body",
+          "fragments": [
+            {
+              "text": "Colombia es un Estado social de derecho...",
+              "characterStyleId": "style-c-bold"
+            }
+          ]
         }
       ]
     }

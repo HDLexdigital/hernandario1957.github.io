@@ -1,0 +1,634 @@
+@charset "UTF-8";
+
+/* 
+=============================================================================
+  HOJA DE ESTILOS PRINCIPAL — CONSTITUCIÓN DE COLOMBIA (RESPONSIVA)
+  Generada el: 27 de agosto de 2026
+  Versión: 2.0 (Adaptada para Escritorio y Dispositivos Móviles)
+=============================================================================
+*/
+
+/* VARIABLES DE COLOR */
+:root {
+  --color-black: #000000;
+  --color-titulo-constitucion: #0054a8;
+  --color-capitulo-constitucion: #2c5e8a;
+  --color-sombra-titulo: #e8eaf6;
+  --color-azul-borgona: #8a1538;
+  --color-verde-glosario: #2e7d32;
+  --color-hipervinculo: #0000ee;
+  --color-gris-texto: #4a4a49;
+}
+
+/* RESET BÁSICO Y MEJORAS DE RENDERIZADO MÓVIL */
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: var(--color-black);
+  font-family: "Liberation Serif", "Minion Pro", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* TIPOGRAFÍAS DE INESIGN */
+@font-face {
+	font-family: "Georgia Pro Cond Semibold";
+	font-style: normal;
+	font-weight: 600;
+	font-stretch: condensed;
+	src: url("../../font/GeorgiaPro-CondSemibold.ttf");
+}
+@font-face {
+	font-family: "Liberation Serif";
+	font-style: normal;
+	font-weight: normal;
+	src: url("../../font/LiberationSerif.ttf");
+}
+@font-face {
+	font-family: "Liberation Serif";
+	font-style: normal;
+	font-weight: bold;
+	src: url("../../font/LiberationSerif-Bold.ttf");
+}
+@font-face {
+	font-family: "Minion Pro";
+	font-style: normal;
+	font-weight: normal;
+	src: url("../../font/MinionPro-Regular.otf");
+}
+
+/* RESET ESTRUCTURAL DE BLOQUES */
+div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote, figure {
+	margin: 0;
+	padding: 0;
+	border-width: 0;
+	text-rendering: optimizeSpeed;
+}
+
+div > svg {
+	position: absolute;
+}
+
+div.Marco-de-texto-b-sico {
+	border-style: solid;
+}
+
+p.ParaOverride-1 {
+	line-height: 1;
+	white-space: nowrap;
+}
+
+/* --- CLASES DE SOBREESCRITURA ADAPTADAS A MÓVIL --- */
+span.CharOverride-1 {
+	color: var(--color-gris-texto);
+	font-family: "Georgia Pro Cond Semibold", serif;
+	font-size: 6vw; /* Fluido para móviles */
+	font-style: normal;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+span.CharOverride-2 {
+	color: var(--color-black);
+	font-family: "Liberation Serif", serif;
+	font-size: 4.5vw;
+	font-style: normal;
+	font-weight: bold;
+}
+
+span.CharOverride-3 {
+	color: var(--color-black);
+	font-family: "Liberation Serif", serif;
+	font-size: 4.5vw;
+	font-style: normal;
+	font-weight: normal;
+}
+
+span.CharOverride-4 {
+	color: var(--color-titulo-constitucion);
+	font-family: "Georgia Pro Cond Semibold", serif;
+	font-size: 5vw;
+	font-style: normal;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+span.CharOverride-5 {
+	color: var(--color-titulo-constitucion);
+	font-family: "Liberation Serif", serif;
+	font-size: 4.5vw;
+	font-style: normal;
+	font-weight: bold;
+}
+
+span.CharOverride-6 {
+	color: var(--color-titulo-constitucion);
+	font-family: "Liberation Serif", serif;
+	font-size: 4.5vw;
+	font-style: normal;
+	font-weight: normal;
+}
+
+span.CharOverride-7 {
+	color: var(--color-black);
+	font-family: "Minion Pro", serif;
+	font-size: 4.5vw;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* --- CONTENEDORES RESPONSIVOS (EVITAN DESBORDE EN SMARTPHONES) --- */
+#_idContainer000, 
+#_idContainer001, 
+#_idContainer002, #_idContainer003, #_idContainer005, #_idContainer007, #_idContainer008, #_idContainer009, #_idContainer010, #_idContainer011, #_idContainer012, #_idContainer014,
+#_idContainer004, 
+#_idContainer006, 
+#_idContainer013 {
+	width: 100% !important;
+	max-width: 100vw;
+	height: auto !important;
+	min-height: 100vh;
+	position: relative !important;
+	transform: none !important;
+	left: 0 !important;
+	top: 0 !important;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* 
+-----------------------------------------------------------------------------
+  ESTILOS NATIVOS DE PÁRRAFO Y CARÁCTER (SISTEMA LEXDIGITAL)
+-----------------------------------------------------------------------------
+*/
+
+.ningun-estilo-de-parrafo, .parrafo-basico {
+    font-family: "Minion Pro", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: common-ligatures;
+}
+
+.volver-glosario {
+    font-family: "Minion Pro", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 9pt;
+    line-height: 1.333;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: common-ligatures;
+}
+
+.p08-gls-term-dd {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.15;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: common-ligatures;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.p08-gls-term-dt {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.15;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-capitulo-constitucion);
+    text-decoration: none;
+    margin-top: 2pt;
+    margin-bottom: 0;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: common-ligatures;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+.p01-body-base, .p01-body-cont, .p01-body-first, .p01-body-no-sentence {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 3.5pt;
+    margin-bottom: 0;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: none;
+}
+
+.p01-body-cont {
+    text-indent: 5.997pt;
+    margin-top: 1.5pt;
+}
+
+.p07-indent-l1 {
+    font-family: "Minion Pro", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 1.5pt;
+    margin-bottom: 0;
+    text-indent: -7.761pt;
+    margin-left: 13.406pt;
+    margin-right: 0;
+    font-variant-ligatures: common-ligatures;
+}
+
+.p07-indent-l1-nonum {
+    font-family: "Minion Pro", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 1.5pt;
+    margin-bottom: 0;
+    text-indent: -0.000444pt;
+    margin-left: 13.406pt;
+    margin-right: 0;
+    font-variant-ligatures: common-ligatures;
+}
+
+.p07-indent-l2 {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 1.5pt;
+    margin-bottom: 0;
+    text-indent: -6.703pt;
+    margin-left: 20.461pt;
+    margin-right: 0;
+    font-variant-ligatures: none;
+}
+
+.p02-title-base {
+    font-family: "Liberation Serif", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: center;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 3.5pt;
+    margin-bottom: 0;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: none;
+}
+
+.p02-title-main {
+    font-family: "Georgia Pro Cond Semibold", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-titulo-constitucion);
+    text-decoration: none;
+    margin-top: 5pt;
+    margin-bottom: 1pt;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: none;
+    background-color: var(--color-sombra-titulo);
+    padding-top: 2pt;
+    padding-bottom: 1pt;
+    border-bottom: 2pt dotted var(--color-black);
+}
+
+.p02-title-chapter {
+    font-family: "Liberation Serif", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: none;
+    color: var(--color-capitulo-constitucion);
+    text-decoration: none;
+    margin-top: 4pt;
+    margin-bottom: 0;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: common-ligatures;
+    border-bottom: 1pt dotted var(--color-black);
+}
+
+.p02-title-part {
+    font-family: "Georgia Pro Cond Semibold", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-azul-borgona);
+    text-decoration: none;
+    margin-top: 5pt;
+    margin-bottom: 1pt;
+    text-indent: 0;
+    margin-left: 2pt;
+    margin-right: 0;
+    font-variant-ligatures: none;
+    background-color: var(--color-sombra-titulo);
+    padding-top: 2pt;
+    padding-bottom: 1pt;
+    border-bottom: 2pt dotted var(--color-black);
+}
+
+.p02-title-book-sub, .p02-title-book {
+    font-family: "Liberation Serif", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-titulo-constitucion);
+    text-decoration: none;
+    margin-top: 0;
+    margin-bottom: 10pt;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: none;
+    border-top: 1pt solid var(--color-black);
+}
+
+.p02-title-book {
+    font-family: "Georgia Pro Cond Semibold", serif;
+    font-size: 20pt;
+    margin-top: 5pt;
+    border-top: none;
+}
+
+.p03-center-normal, .p03-center-bold {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: center;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 1.763pt;
+    margin-bottom: 1.763pt;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: none;
+}
+
+.p03-center-bold {
+    font-weight: 700;
+}
+
+.p03-official-name, .p03-official-role {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 0;
+    margin-bottom: 3pt;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: none;
+}
+
+.p03-official-role {
+    text-transform: none;
+    margin-bottom: 0;
+}
+
+.p05-idx-art {
+    font-family: "Minion Pro", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35;
+    letter-spacing: 0.008em;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-black);
+    text-decoration: none;
+    margin-top: 0;
+    margin-bottom: 1pt;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: none;
+}
+
+.p08-gls-art {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.15;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: none;
+    color: var(--color-verde-glosario);
+    text-decoration: none;
+    margin-top: 2pt;
+    margin-bottom: 2pt;
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-variant-ligatures: common-ligatures;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+/* CARACTERES */
+.ninguno, .glosario {
+    /* Sin propiedades restrictivas */
+}
+
+.char-00-normal-char, .char-c00-normal {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.char-01-bold-char, .char-c01-bold {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--color-titulo-constitucion);
+}
+
+.char-05-hiperlink-char {
+    text-decoration: underline;
+    color: rgba(0,0,0,0.9);
+}
+
+.char-c02-italic {
+    font-family: "Liberation Serif", serif;
+    font-style: italic;
+    color: var(--color-titulo-constitucion);
+}
+
+.char-c03-superscript {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 400;
+    vertical-align: super;
+    font-size: smaller;
+    text-decoration: underline;
+    color: var(--color-black);
+}
+
+.char-c12-crossref {
+    font-style: normal;
+    font-weight: 400;
+    color: rgba(44,94,138,0.9);
+}
+
+.char-c13-tabnum-content, .char-c15-narrow-90 {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.char-c14-roman-upper {
+    text-transform: uppercase;
+}
+
+.char-c16-td-gloss {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--color-capitulo-constitucion);
+}
+
+.char-c17-artlink {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--color-verde-glosario);
+}
+
+.char-terminoglosario {
+    text-decoration: none;
+    color: var(--color-black);
+}
+
+.char-flecha {
+    font-family: "Wingdings", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--color-verde-glosario);
+}
+
+.char-hipervinculo {
+    text-decoration: underline;
+    color: var(--color-hipervinculo);
+}
+
+.char-referencia-articulo {
+    color: rgba(44,94,138,0.9);
+}
+
+.char-sys-fix-article-number, .char-strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--color-black);
+}

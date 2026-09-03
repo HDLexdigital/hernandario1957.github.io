@@ -1,0 +1,17 @@
+{"timestamp":"2026-08-23T17:00:25.762Z","nivel":"INFO","mensaje":"Logger inicializado en: H:\\LexDigital\\Recursos\\AUTOMATIZAR INDESIGN\\proyecto-lexdigital_modular\\LexDigital-Pipeline\\logs\\pipeline-2026-08-23.log"}
+{"timestamp":"2026-08-23T17:00:25.770Z","nivel":"INFO","mensaje":"Prueba de logger"}
+{"timestamp":"2026-08-23T17:00:25.771Z","nivel":"WARN","mensaje":"Esto es una advertencia"}
+{"timestamp":"2026-08-23T17:00:25.773Z","nivel":"ERROR","mensaje":"Esto es un error"}
+{"timestamp":"2026-08-23T17:00:25.774Z","nivel":"DEBUG","mensaje":"Esto es debug"}
+{"timestamp":"2026-08-23T17:00:25.774Z","nivel":"INFO","mensaje":"⚙️ Compilando documento","tipo":"compilacion","titulo":"Test","parrafos":5}
+{"timestamp":"2026-08-23T17:00:25.776Z","nivel":"INFO","mensaje":"📨 Request recibido","tipo":"ipc","requestId":"req-123"}
+{"timestamp":"2026-08-23T17:02:19.843Z","nivel":"INFO","mensaje":"Logger inicializado en: H:\\LexDigital\\Recursos\\AUTOMATIZAR INDESIGN\\proyecto-lexdigital_modular\\LexDigital-Pipeline\\logs\\pipeline-2026-08-23.log"}
+{"timestamp":"2026-08-23T17:02:19.849Z","nivel":"INFO","mensaje":"Iniciando procesamiento batch: 5 documentos"}
+{"timestamp":"2026-08-23T17:02:19.850Z","nivel":"INFO","mensaje":"Procesando lote 1/2 (3 documentos)"}
+{"timestamp":"2026-08-23T17:02:19.881Z","nivel":"INFO","mensaje":"✅ Documento 1 procesado correctamente"}
+{"timestamp":"2026-08-23T17:02:19.881Z","nivel":"INFO","mensaje":"✅ Documento 2 procesado correctamente"}
+{"timestamp":"2026-08-23T17:02:19.882Z","nivel":"INFO","mensaje":"✅ Documento 3 procesado correctamente"}
+{"timestamp":"2026-08-23T17:02:19.883Z","nivel":"INFO","mensaje":"Procesando lote 2/2 (2 documentos)"}
+{"timestamp":"2026-08-23T17:02:19.889Z","nivel":"INFO","mensaje":"✅ Documento 4 procesado correctamente"}
+{"timestamp":"2026-08-23T17:02:19.890Z","nivel":"INFO","mensaje":"✅ Documento 5 procesado correctamente"}
+{"timestamp":"2026-08-23T17:02:19.891Z","nivel":"INFO","mensaje":"Batch completado: 5/5 exitosos en 42ms"}
