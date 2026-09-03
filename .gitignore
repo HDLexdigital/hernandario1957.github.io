@@ -24,4 +24,11 @@ measure-ledm-full.js
 
 # Logs
 logs/
-*.log
+*.lognode_modules/
+*.pub
+*.gpg
+
+node_modules/
+*.pub
+*.gpg
+LED23en33*
