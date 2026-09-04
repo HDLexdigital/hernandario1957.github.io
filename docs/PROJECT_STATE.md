@@ -151,3 +151,9 @@
 - Test contractual: 13/13 passed
 - Implementación CSS: pendiente.
 - Fase: contrato congelado, listo para derivar implementación.
+
+## Integración MVP-009 en EpubGenerator
+
+- base.css inyectado en CSS del EPUB.
+- Tokens --ld-* disponibles.
+- Pruebas EPUB pasando.
