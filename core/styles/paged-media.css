@@ -1,0 +1,43 @@
+/**
+ * core/styles/paged-media.css
+ * Reglas de Paged Media compartidas (A4, márgenes, control de rupturas y numeración).
+ */
+
+@page {
+  size: A4;
+  margin: 25mm 20mm 25mm 30mm;
+
+  @bottom-center {
+    content: counter(page);
+    font-family: var(--ld-font-family-body, 'Noto Serif', serif);
+    font-size: 9pt;
+    color: var(--ld-color-text-muted, #595959);
+  }
+}
+
+@page :first {
+  @bottom-center { content: normal; }
+}
+
+.ld-articulo-header,
+h1, h2, h3, h4, h5, h6 {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.ld-articulo-cuerpo,
+p {
+  orphans: 2;
+  widows: 2;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.ld-nivel-libro {
+  break-before: page;
+  page-break-before: page;
+}
+
+.ld-articulo {
+  margin-bottom: 4mm;
+}

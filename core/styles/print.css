@@ -1,0 +1,24 @@
+/**
+ * core/styles/print.css
+ * Overrides específicos para salida Print-Ready (PDF/X-1a).
+ */
+
+@page {
+  marks: crop cross;
+  bleed: 3mm;
+}
+
+:root {
+  --ld-color-text-primary: cmyk(0%, 0%, 0%, 100%);
+  --ld-color-bg-primary: cmyk(0%, 0%, 0%, 0%);
+  --ld-color-accent: cmyk(45%, 22%, 0%, 69%);
+  --ld-color-text-muted: cmyk(0%, 0%, 0%, 65%);
+  --ld-color-border: cmyk(0%, 0%, 0%, 45%);
+}
+
+body,
+.ld-articulo-cuerpo,
+p,
+span {
+  color: cmyk(0%, 0%, 0%, 100%) !important;
+}
