@@ -132,7 +132,7 @@ git diff --cached --name-only
 
 ## MVP-009 — Design System Base
 
-- Estado: borrador v0.3.0-draft validado (13/13 tests).
+- Estado: borrador `v0.3.0-draft` validado (13/13 tests).
 - Taxonomía semántica definida.
 - Implementación CSS pendiente.
-- No congelado a v1.0.0.
+- No congelado a `v1.0.0`.
