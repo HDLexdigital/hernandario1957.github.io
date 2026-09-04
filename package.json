@@ -22,10 +22,13 @@
     "ci:local": "npm run audit:core && npm run test:core:all",
     "ci:a11y": "jest core/integration/test/a11y-audit.test.js --config jest.config.js --verbose",
     "ci:epub": "jest core/integration/test/e2e-full-constitution.test.js --config jest.config.js --verbose && node scripts/epubcheck.js publication_full.epub",
-    "ci:all": "npm run ci:local && npm run ci:epub && npm run ci:web",
+    "ci:all": "npm run ci:local && npm run ci:epub && npm run ci:web && npm run ci:pdf",
     "build:web": "node scripts/build-web.js",
     "preview:web": "npx serve public",
     "ci:web": "npm run build:web && npx jest core/web/test --runInBand",
+    "build:pdf": "node scripts/build-pdf-full.js",
+    "validate:pdfua": "node scripts/validate-pdfua.js output/experiment-weasyprint-ua-full.pdf",
+    "ci:pdf": "npm run build:pdf && npm run validate:pdfua",
     "start": "node src/index.js",
     "pipeline": "node LexDigital-Pipeline/server.js",
     "verify": "node scripts/verificar-estructura.js"
@@ -41,7 +44,8 @@
     "fs-extra": "^11.4.0",
     "jsdom": "^24.1.3",
     "jszip": "^3.10.1",
-    "puppeteer": "^25.9.0",
+    "pagedjs": "^0.4.3",
+    "puppeteer": "^25.10.0",
     "yauzl": "^3.4.0"
   },
   "devDependencies": {
