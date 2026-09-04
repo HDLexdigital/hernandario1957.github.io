@@ -86,3 +86,15 @@ Rutas previstas:
 - **Ruta premium:** Prince (coste comercial, PDF/X nativo, tipografía superior).
 
 El contrato permanece agnóstico al motor y fija requisitos de salida, no herramientas obligatorias.
+
+## 9. Nota sobre economía temporal
+
+La restricción de coste monetario no es permanente.  
+Por ello, el motor definitivo de MVP-008 se evaluará en la fase de implementación.
+
+Rutas previstas:
+
+- **Ruta base:** WeasyPrint + Ghostscript (coste 0, suficiente para flujos editoriales).
+- **Ruta premium:** Prince (coste comercial, PDF/X nativo, tipografía superior).
+
+El contrato permanece agnóstico al motor y fija requisitos de salida, no herramientas obligatorias.
