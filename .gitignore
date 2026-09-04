@@ -32,3 +32,21 @@ node_modules/
 *.pub
 *.gpg
 LED23en33*
+
+# Artefactos de salida
+output/
+*.pdf
+*.png
+*.html
+*.zip
+*.epub
+scripts/veraPDF-library-1.30.2/
+
+# Código fuente de veraPDF descargado por error
+scripts/veraPDF-library-1.30.2/
+
+# Otros ya existentes
+node_modules/
+public/
+coverage/
+epubcheck-5.2.1/

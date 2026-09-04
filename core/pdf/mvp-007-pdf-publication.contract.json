@@ -1,0 +1,67 @@
+{
+  "contract": "MVP-007-PDFPublication",
+  "version": "1.0.0",
+  "description": "Contrato de publicación PDF accesible para LEDM 2.0",
+  "allowedBlockTypes": ["title", "article", "paragraph"],
+  "allowedInlineTypes": ["strong", "emphasis", "text"],
+  "pagination": {
+    "format": "A4",
+    "margins": {
+      "top": "25mm",
+      "bottom": "25mm",
+      "inner": "30mm",
+      "outer": "20mm"
+    },
+    "widowControl": true,
+    "orphanControl": true,
+    "breakInsideAvoid": ["article"]
+  },
+  "fidelity": {
+    "preserveText": true,
+    "preserveOrder": true,
+    "preserveNodeIds": true,
+    "mutateLedm": false
+  },
+  "staticElements": {
+    "runningHeader": {
+      "enabled": true,
+      "source": "currentTitle",
+      "separator": " — "
+    },
+    "folio": {
+      "enabled": true,
+      "position": "bottom-outer"
+    },
+    "footnotes": {
+      "enabled": true,
+      "rule": "future-ledm"
+    }
+  },
+  "metadata": {
+    "title": "ledm.structure.title",
+    "creator": "LexDigitalHD",
+    "language": "es-CO",
+    "marked": true
+  },
+  "bookmarks": {
+    "enabled": true,
+    "source": "ledm.structure.blocks",
+    "nodeIdAsKey": true,
+    "visibleText": "derived-from-ledm"
+  },
+  "validation": {
+    "pdfua": {
+      "tool": "verapdf",
+      "profile": "PDFUA-1",
+      "required": true
+    },
+    "text": {
+      "tool": "pdftotext",
+      "compareWithLedm": true
+    },
+    "metadata": {
+      "tool": "pdfinfo",
+      "check": ["Title", "Language", "Marked"]
+    }
+  }
+}

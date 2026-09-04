@@ -27,7 +27,7 @@ function normalizarBlocks(blocks) {
         if (!nodeId) {
             nodeId = `BLOCK-${String(contador++).padStart(4, '0')}`;
         } else {
-            nodeId = String(nodeId).toUpperCase(); // solo mayúsculas, sin eliminar caracteres
+            nodeId = String(nodeId).toUpperCase();
         }
         validarNodeId(nodeId);
         if (vistos.has(nodeId)) {
@@ -51,13 +51,22 @@ function renderContentNode(node) {
     }
 }
 
+function renderChild(node) {
+    if (!node) return '';
+    const blockTypes = ['title', 'article', 'paragraph'];
+    if (blockTypes.includes(node.type)) {
+        return renderBlock(node);
+    }
+    return renderContentNode(node);
+}
+
 function renderBlock(block, depth = 1) {
     if (!contract.allowedBlockTypes.includes(block.type)) {
         throw new Error(`Tipo de bloque no permitido: ${block.type}`);
     }
 
     const nodeId = validarNodeId(block.nodeId);
-    const content = (block.children || []).map(renderContentNode).join('');
+    const content = (block.children || []).map(renderChild).join('');
 
     switch (block.type) {
         case 'title': {
@@ -82,7 +91,7 @@ function extractText(node) {
 function generateStaticIndex(ledm) {
     const blocks = normalizarBlocks(ledm.structure.blocks);
     const index = [];
-    for (const block of blocks) {
+    const walk = (block) => {
         if (block.type === 'title' || block.type === 'article') {
             const text = extractText(block);
             index.push({
@@ -91,16 +100,20 @@ function generateStaticIndex(ledm) {
                 text
             });
         }
-    }
+        (block.children || []).forEach(child => {
+            if (child && child.type && ['title', 'article', 'paragraph'].includes(child.type)) {
+                walk(child);
+            }
+        });
+    };
+    blocks.forEach(walk);
     return index;
 }
 
 function generateNav(ledm) {
     const blocks = normalizarBlocks(ledm.structure.blocks);
     const items = [];
-    let depth = 1;
-
-    for (const block of blocks) {
+    const walk = (block, depth) => {
         if (block.type === 'title') {
             const nodeId = block.nodeId;
             const label = extractText(block);
@@ -108,23 +121,24 @@ function generateNav(ledm) {
             items.push(`<li><a href="#${escapeHtml(nodeId)}">${escapeHtml(label)}</a></li>`);
             depth = Math.min(depth + 1, 6);
         }
-    }
-
+        (block.children || []).forEach(child => {
+            if (child && child.type && ['title', 'article', 'paragraph'].includes(child.type)) {
+                walk(child, depth);
+            }
+        });
+    };
+    blocks.forEach(block => walk(block, 1));
     return `<nav aria-label="${escapeHtml(contract.indexRules.navLabel)}"><ul>${items.join('')}</ul></nav>`;
 }
 
 function renderHtml(ledm) {
-    // Normalizar bloques una sola vez y usar la copia para todo
     const blocks = normalizarBlocks(ledm.structure.blocks);
     let bodyContent = '';
-    let depth = 1;
     let sectionOpen = false;
 
-    for (const block of blocks) {
+    const renderSection = (block, depth) => {
         if (block.type === 'title') {
-            if (sectionOpen) {
-                bodyContent += '</section>\n';
-            }
+            if (sectionOpen) bodyContent += '</section>\n';
             const nodeId = validarNodeId(block.nodeId);
             bodyContent += `<section aria-labelledby="${escapeHtml(nodeId)}">\n`;
             bodyContent += renderBlock(block, depth);
@@ -133,20 +147,17 @@ function renderHtml(ledm) {
         } else {
             bodyContent += renderBlock(block, depth);
         }
-    }
+    };
 
-    if (sectionOpen) {
-        bodyContent += '</section>\n';
-    }
+    blocks.forEach(block => renderSection(block, 1));
+    if (sectionOpen) bodyContent += '</section>\n';
 
-    // Reutilizar blocks normalizados para nav e índice
     const ledmNormalizado = { ...ledm, structure: { ...ledm.structure, blocks } };
     const nav = generateNav(ledmNormalizado);
     const staticIndex = generateStaticIndex(ledmNormalizado);
 
     const meta = ledm.meta || {};
     const title = escapeHtml(ledm.structure?.title || 'Documento');
-
     const metaTags = `
     <meta name="model" content="${escapeHtml(meta.model || '')}">
     <meta name="jurisdiction" content="${escapeHtml(meta.jurisdiction || '')}">
