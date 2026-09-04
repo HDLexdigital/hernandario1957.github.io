@@ -123,3 +123,17 @@
   - alcance anti-scope creep
 - Implementación CSS: aún no iniciada.
 - No se crea tag; sigue siendo borrador.
+
+## Estado MVP-009 (v0.3.0-draft + taxonomía)
+
+- Contrato: core/styles/mvp-009-design-system.contract.json
+- Versión: 0.3.0-draft
+- Taxonomía semántica: core/styles/SEMANTIC_TAXONOMY.md
+- Test contractual: 13/13 passed
+- Estado: diseño y especificación contractual.
+- Implementación CSS: en pausa, no iniciada.
+- Próxima acción: tercera auditoría y eventual v1.0.0
+
+## Estado MVP-009 (v0.3.0-draft + taxonomía)
+...
+- Implementación CSS: en pausa, no iniciada.

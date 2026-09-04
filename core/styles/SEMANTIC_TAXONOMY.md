@@ -1,7 +1,3 @@
-cd ~/proyecto-lexdigital
-
-# 1. Crear documento de taxonomía semántica
-cat > core/styles/SEMANTIC_TAXONOMY.md << 'EOF'
 # 🏛️ Taxonomía Semántica de Estilos — LexDigitalHD
 
 **Módulo:** `core/styles`
