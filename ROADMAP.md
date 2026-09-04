@@ -82,3 +82,5 @@ core/styles/
 ├── print.css          # variante para PDF/imprenta
 └── PagedMedia.css     # reglas @page, folios, sangrías
 
+
+| MVP-009 | Design System Base | 🧪 Borrador 0.2.0-draft validado |

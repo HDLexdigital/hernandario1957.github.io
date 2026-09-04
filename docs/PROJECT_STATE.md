@@ -92,3 +92,19 @@
 - Conversión: Ghostscript produce PDF/X-1a correcto.
 - Validación básica: `pdfinfo` y `pdffonts` confirman A4, CMYK y fuentes embebidas.
 - Pendiente opcional: certificación externa PDF/X-1a y ajustes tipográficos finos.
+
+## Estado MVP-009 (Design System Base)
+
+- Contrato: `core/styles/mvp-009-design-system.contract.json`
+- Versión: `0.2.0-draft`
+- Test contractual: `core/styles/test/design-system.contract.test.js`
+- Resultado: 8/8 tests passed
+- Implementación CSS: aún no iniciada
+- Decisiones incorporadas de auditoría:
+  - separación tokens vs perfiles de salida
+  - color dual sRGB/CMYK
+  - negro puro K=100% para texto de imprenta
+  - unidades por medio
+  - fallbacks tipográficos y line-height
+  - `paged-media.css` en kebab-case
+  - invariantes de no mutación del LEDM
