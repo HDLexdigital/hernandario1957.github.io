@@ -11,7 +11,7 @@
 | MVP-005 | CI/CD + EPUBCheck + axe-core | ✅ Completado |
 | MVP-006 | Publicación Web | ✅ Completado |
 | MVP-007 | PDF Accesible (PDF/UA) | ✅ Completado |
-| MVP-008 | Print-Ready PDF | 📋 Planificado |
+| MVP-008 | Print-Ready PDF | ✅ Completado |
 
 ## MVP-008 — Print-Ready PDF
 
@@ -60,3 +60,25 @@ Planificado, no iniciado.
 1. Cerrar MVP-007 con evidencia `veraPDF` verde.
 2. Consolidar el renderer PDF accesible.
 3. Abrir MVP-008 reutilizando la misma arquitectura, solo cambiando la capa de CSS y las validaciones.
+
+## MVP-009 — Design System Base (Propuesta)
+
+### Objetivo
+
+Incorporar una hoja de estilo predefinida como base o plantilla común para afectar la presentación de HTML, EPUB y PDF, manteniendo la separación entre contenido semántico (LEDM) y presentación visual.
+
+### Estado
+
+📋 Propuesto, no iniciado.
+
+### Ubicación prevista
+
+```text
+core/styles/
+├── tokens.json        # colores, fuentes, tamaños, espaciados
+├── base.css           # hoja base editorial
+├── web.css            # variante para pantalla
+├── epub.css           # variante para EPUB
+├── print.css          # variante para PDF/imprenta
+└── PagedMedia.css     # reglas @page, folios, sangrías
+

@@ -74,3 +74,12 @@
 - Flujo base implementado: WeasyPrint genera PDF base A4 con fuentes incrustadas.
 - Conversión a PDF/X-1a mediante Ghostscript validada.
 - Pendiente: certificación externa opcional y ajustes tipográficos finos.
+
+## Estado MVP-008
+
+- Contrato: `core/print/mvp-008-print-publication.contract.json`
+- Test contractual: `core/print/test/print-publication.contract.test.js`
+- Flujo base: WeasyPrint genera PDF base A4 con fuentes incrustadas.
+- Conversión: Ghostscript produce PDF/X-1a correcto.
+- Validación básica: `pdfinfo` y `pdffonts` confirman A4, CMYK y fuentes embebidas.
+- Pendiente opcional: certificación externa PDF/X-1a y ajustes tipográficos finos.
