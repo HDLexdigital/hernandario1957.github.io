@@ -1,6 +1,7 @@
 'use strict';
 
 const contract = require('./mvp-006-web-publication.contract.json');
+const { loadBaseCss } = require('../styles/loadBaseCss');
 
 function escapeHtml(value) {
     return String(value)
@@ -162,8 +163,13 @@ function renderHtml(ledm) {
     <meta name="model" content="${escapeHtml(meta.model || '')}">
     <meta name="jurisdiction" content="${escapeHtml(meta.jurisdiction || '')}">
     <meta name="documentId" content="${escapeHtml(meta.documentId || '')}">`;
-
+    const baseCss = loadBaseCss();
     return `<!DOCTYPE html>
+    <title>${title}</title>
+        <style>
+${baseCss}
+    </style>
+    <script type="application/json" id="static-index">
 <html lang="es-CO">
 <head>
     <meta charset="UTF-8">
