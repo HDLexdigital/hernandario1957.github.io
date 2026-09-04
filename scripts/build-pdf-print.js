@@ -2,7 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
+const { renderHtml } = require('../core/web/WebRenderer');
 
 const RAIZ = path.join(__dirname, '..');
 const CIDM_PATH = path.join(RAIZ, 'core', 'integration', 'fixtures', 'authentic', 'CIDM_real.json');
@@ -18,45 +19,30 @@ function main() {
     fs.writeFileSync(LEDM_TMP, JSON.stringify(ledm, null, 2), 'utf8');
     console.log(`✅ LEDM guardado en ${LEDM_TMP}`);
 
-    console.log('🧪 Generando HTML con CSS Paged Media para imprenta...');
-    const { renderHtml } = require('../core/web/WebRenderer');
+    console.log('🧪 Generando HTML con bundles de imprenta...');
     const html = renderHtml(ledm);
-
-    const cssPrint = `
-        @page {
-            size: A4;
-            margin: 25mm 20mm 25mm 30mm;
-            @top-center {
-                content: string(currentTitle);
-            }
-            @bottom-right {
-                content: counter(page);
-            }
-        }
-        article {
-            break-inside: avoid;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            break-after: avoid;
-        }
-        p {
-            orphans: 2;
-            widows: 2;
-        }
-    `;
-
-    const htmlConCss = html.replace(
-        '</head>',
-        `<style>${cssPrint}</style>\n</head>`
-    );
+    const htmlSinNav = html.replace(/<nav[^>]*>[\s\S]*?<\/nav>/g, '');
 
     fs.mkdirSync(path.dirname(HTML_PRINT), { recursive: true });
-    fs.writeFileSync(HTML_PRINT, htmlConCss, 'utf8');
+    fs.writeFileSync(HTML_PRINT, htmlSinNav, 'utf8');
     console.log('💾 HTML de imprenta guardado.');
 
+    const baseCss = path.join(RAIZ, 'core', 'styles', 'base.css');
+    const pagedMediaCss = path.join(RAIZ, 'core', 'styles', 'paged-media.css');
+    const printCss = path.join(RAIZ, 'core', 'styles', 'print.css');
+
+    const args = [
+        '-s', baseCss,
+        '-s', pagedMediaCss,
+        '-s', printCss,
+        HTML_PRINT,
+        PDF_BASE
+    ];
+
     console.log('🖨️ Generando PDF base con WeasyPrint...');
-    execSync(`weasyprint "${HTML_PRINT}" "${PDF_BASE}"`, { stdio: 'inherit' });
-    console.log(`✅ PDF base generado en ${PDF_BASE}`);
+    execFileSync('weasyprint', args, { stdio: 'inherit' });
+
+    console.log(`✅ PDF base generado en: ${PDF_BASE}`);
 }
 
 try {
