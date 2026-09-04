@@ -108,3 +108,18 @@
   - fallbacks tipográficos y line-height
   - `paged-media.css` en kebab-case
   - invariantes de no mutación del LEDM
+
+## Estado MVP-009 (v0.3.0-draft)
+
+- Contrato: `core/styles/mvp-009-design-system.contract.json`
+- Test contractual: `core/styles/test/design-system.contract.test.js`
+- Resultado: 13/13 tests passed
+- Incorpora recomendaciones de segunda auditoría:
+  - separación `pdf-ua` vs `print`
+  - bundles CSS por perfil
+  - unidades por perfil y magnitud
+  - reglas editoriales de paginación
+  - política de clases semánticas
+  - alcance anti-scope creep
+- Implementación CSS: aún no iniciada.
+- No se crea tag; sigue siendo borrador.

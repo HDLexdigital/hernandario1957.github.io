@@ -83,4 +83,4 @@ core/styles/
 └── PagedMedia.css     # reglas @page, folios, sangrías
 
 
-| MVP-009 | Design System Base | 🧪 Borrador 0.2.0-draft validado |
+| MVP-009 | Design System Base | 🧪 Borrador 0.3.0-draft validado |

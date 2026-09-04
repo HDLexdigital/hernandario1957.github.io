@@ -3,19 +3,21 @@
 const contract = require('../mvp-009-design-system.contract.json');
 
 describe('MVP-009 Design System Base Contract', () => {
-    test('El contrato declara los principios e invariantes', () => {
-        expect(contract.principles.separationOfConcerns).toBe(true);
-        expect(contract.principles.reusability).toBe(true);
-        expect(contract.principles.accessibility).toBe(true);
-        expect(contract.principles.noLedmMutation).toBe(true);
-        expect(contract.invariants.length).toBeGreaterThan(0);
-        expect(contract.invariants).toContain('Inline styles are forbidden');
+    test('El contrato declara la versión 0.3.0-draft', () => {
+        expect(contract.version).toBe('0.3.0-draft');
     });
 
-    test('Los colores están separados por medio: pantalla y imprenta', () => {
+    test('El alcance evita convertirse en MVP universal', () => {
+        expect(contract.scope).toContain('does not mutate LEDM');
+        expect(contract.scope).toContain('does not certify output format conformance');
+    });
+
+    test('Los colores separan representación sRGB y CMYK', () => {
         expect(contract.tokens.colors.screen.primaryText).toMatch(/^#/);
         expect(contract.tokens.colors.print.primaryText).toMatch(/cmyk/);
         expect(contract.tokens.colors.print.primaryText).toBe('cmyk(0%, 0%, 0%, 100%)');
+        expect(contract.tokens.colors.representation.screen).toBe('sRGB');
+        expect(contract.tokens.colors.representation.print).toBe('CMYK production value');
     });
 
     test('La tipografía define tamaños separados para web e imprenta', () => {
@@ -29,28 +31,54 @@ describe('MVP-009 Design System Base Contract', () => {
         expect(contract.tokens.typography.fonts.mono).toContain('monospace');
     });
 
-    test('La página define tamaño A4 explícito', () => {
+    test('La página define tamaño A4 y márgenes explícitos', () => {
         expect(contract.tokens.page.size).toBe('A4');
-        expect(contract.tokens.page.bleed).toBe('3mm');
+        expect(contract.tokens.page.margin.top).toBe('25mm');
+        expect(contract.tokens.page.margin.left).toBe('30mm');
     });
 
-    test('Los archivos de estilo usan kebab-case consistente', () => {
-        expect(contract.validation.requiredFiles).toEqual(
-            expect.arrayContaining(['base.css', 'web.css', 'epub.css', 'print.css', 'paged-media.css'])
-        );
-        expect(contract.cssArchitecture.order).toContain('paged-media.css');
-    });
+    test('Los perfiles de salida separan pdf-ua y print', () => {
+        expect(contract.outputProfiles['pdf-ua'].colors).toBe('screen');
+        expect(contract.outputProfiles['pdf-ua'].bleed).toBe('0mm');
+        expect(contract.outputProfiles['pdf-ua'].marks).toEqual([]);
 
-    test('La validación exige resolución de tokens y no mutación del LEDM', () => {
-        expect(contract.validation.tokenResolution).toBe(true);
-        expect(contract.validation.noLedmMutation).toBe(true);
-        expect(contract.validation.contrastValidation).toBe(true);
-    });
-
-    test('Los perfiles de salida asignan colores y tamaños por medio', () => {
-        expect(contract.outputProfiles.web.colors).toBe('screen');
         expect(contract.outputProfiles.print.colors).toBe('print');
-        expect(contract.outputProfiles.web.sizes).toBe('web');
-        expect(contract.outputProfiles.print.sizes).toBe('print');
+        expect(contract.outputProfiles.print.bleed).toBe('3mm');
+        expect(contract.outputProfiles.print.marks).toContain('crop');
+    });
+
+    test('Las unidades están diferenciadas por perfil', () => {
+        expect(contract.outputProfiles.web.units.typography).toBe('rem');
+        expect(contract.outputProfiles.print.units.typography).toBe('pt');
+        expect(contract.outputProfiles.print.units.page).toBe('mm');
+    });
+
+    test('La arquitectura CSS define bundles por formato', () => {
+        expect(contract.cssArchitecture.bundles.web).toEqual(['base.css', 'web.css']);
+        expect(contract.cssArchitecture.bundles['pdf-ua']).toEqual(['base.css', 'paged-media.css']);
+        expect(contract.cssArchitecture.bundles.print).toEqual(['base.css', 'paged-media.css', 'print.css']);
+    });
+
+    test('Las reglas editoriales de paginación están definidas', () => {
+        expect(contract.rules.keepHeadingsWithNext).toBe(true);
+        expect(contract.rules.widowsAndOrphansMinimum).toBeGreaterThanOrEqual(2);
+        expect(contract.rules.hyphenationLanguage).toBe('es');
+    });
+
+    test('La jerarquía de headings no es impuesta por el Design System', () => {
+        expect(contract.rules.headingHierarchy.designSystemConsumes).toBe(true);
+        expect(contract.rules.headingHierarchy.designSystemImposes).toBe(false);
+    });
+
+    test('Las clases semánticas prohíben identificadores de InDesign', () => {
+        expect(contract.rules.semanticClassNames.source).toBe('LEDM semantic role');
+        expect(contract.rules.semanticClassNames.forbidden).toContain('InDesign style name');
+    });
+
+    test('La validación exige integridad de fuentes y no mutación', () => {
+        expect(contract.validation.fontEmbeddingValidation).toBe(true);
+        expect(contract.validation.noLedmMutation).toBe(true);
+        expect(contract.validation.tokenResolution).toBe(true);
+        expect(contract.validation.noTokenDrift).toBe(true);
     });
 });

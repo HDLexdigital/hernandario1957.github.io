@@ -1,7 +1,8 @@
 {
   "contract": "MVP-009-DesignSystemBase",
-  "version": "0.2.0-draft",
+  "version": "0.3.0-draft",
   "description": "Contrato base para un sistema de diseño editorial compartido entre Web, EPUB y PDF",
+  "scope": "MVP-009 defines reusable presentation and output contracts; it does not define editorial semantics, does not mutate LEDM, and does not certify output format conformance.",
   "principles": {
     "separationOfConcerns": true,
     "reusability": true,
@@ -14,7 +15,8 @@
     "Semantic meaning is independent of presentation",
     "Output profiles may override presentation tokens but not semantic identity",
     "Inline styles are forbidden",
-    "All required tokens must resolve"
+    "All required tokens must resolve",
+    "Presentation identifiers MUST NOT be used as semantic identifiers"
   ],
   "tokens": {
     "colors": {
@@ -31,6 +33,10 @@
         "accent": "cmyk(45%, 22%, 0%, 69%)",
         "muted": "cmyk(0%, 0%, 0%, 65%)",
         "border": "cmyk(0%, 0%, 0%, 45%)"
+      },
+      "representation": {
+        "screen": "sRGB",
+        "print": "CMYK production value"
       }
     },
     "typography": {
@@ -78,31 +84,65 @@
     },
     "page": {
       "size": "A4",
-      "margin": "25mm 20mm 25mm 30mm",
-      "bleed": "3mm",
-      "marks": ["crop", "cross"]
+      "margin": {
+        "top": "25mm",
+        "right": "20mm",
+        "bottom": "25mm",
+        "left": "30mm"
+      }
     }
   },
   "outputProfiles": {
     "web": {
       "colors": "screen",
       "sizes": "web",
-      "units": "rem"
+      "units": {
+        "typography": "rem",
+        "spacing": "rem"
+      },
+      "paged": false
     },
     "epub": {
       "colors": "screen",
       "sizes": "web",
-      "units": "rem"
+      "units": {
+        "typography": "rem",
+        "spacing": "rem"
+      },
+      "paged": false
+    },
+    "pdf-ua": {
+      "colors": "screen",
+      "sizes": "print",
+      "units": {
+        "typography": "pt",
+        "page": "mm",
+        "spacing": "mm"
+      },
+      "paged": true,
+      "bleed": "0mm",
+      "marks": []
     },
     "print": {
       "colors": "print",
       "sizes": "print",
-      "units": "pt/mm"
+      "units": {
+        "typography": "pt",
+        "page": "mm",
+        "spacing": "mm"
+      },
+      "paged": true,
+      "bleed": "3mm",
+      "marks": ["crop", "cross"]
     }
   },
   "cssArchitecture": {
-    "base": "base.css",
-    "order": ["base.css", "web.css", "epub.css", "print.css", "paged-media.css"],
+    "bundles": {
+      "web": ["base.css", "web.css"],
+      "epub": ["base.css", "epub.css"],
+      "pdf-ua": ["base.css", "paged-media.css"],
+      "print": ["base.css", "paged-media.css", "print.css"]
+    },
     "overrides": {
       "allowed": true,
       "scope": "output-profiles-only",
@@ -112,28 +152,46 @@
   "rules": {
     "forbiddenInlineStyles": true,
     "fontsMustBeEmbeddable": true,
+    "fontEmbedding": {
+      "required": true,
+      "note": "Licensing must be verified per output"
+    },
     "contrast": {
       "normalTextMinimum": 4.5,
       "largeTextMinimum": 3.0,
       "nonTextMinimum": 3.0,
       "method": "WCAG"
     },
-    "headingHierarchy": true,
-    "noContentDecoration": true,
-    "semanticClassNames": true
+    "headingHierarchy": {
+      "source": "LEDM structure",
+      "designSystemConsumes": true,
+      "designSystemImposes": false
+    },
+    "keepHeadingsWithNext": true,
+    "widowsAndOrphansMinimum": 2,
+    "hyphenationLanguage": "es",
+    "noContentDecoration": {
+      "allowed": false,
+      "scope": "semantic-content"
+    },
+    "semanticClassNames": {
+      "source": "LEDM semantic role",
+      "forbidden": ["InDesign style name"]
+    }
   },
   "validation": {
     "requiredFiles": [
       "base.css",
       "web.css",
       "epub.css",
-      "print.css",
-      "paged-media.css"
+      "paged-media.css",
+      "print.css"
     ],
     "requiredTokens": ["colors", "typography", "spacing", "page"],
     "tokenResolution": true,
     "noTokenDrift": true,
     "contrastValidation": true,
+    "fontEmbeddingValidation": true,
     "noLedmMutation": true
   }
 }
