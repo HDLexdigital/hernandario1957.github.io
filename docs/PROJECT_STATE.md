@@ -157,3 +157,10 @@
 - base.css inyectado en CSS del EPUB.
 - Tokens --ld-* disponibles.
 - Pruebas EPUB pasando.
+
+## Integración MVP-009 en PDFs
+
+- HTML plano para PDF/UA.
+- Bundles CSS conectados correctamente.
+- Validación PDF/UA: PASS ua1.
+- Pendiente validación PDF/X-1a final con Ghostscript.
