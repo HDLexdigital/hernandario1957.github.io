@@ -83,4 +83,4 @@ core/styles/
 └── PagedMedia.css     # reglas @page, folios, sangrías
 
 
-| MVP-009 | Design System Base | 🧪 0.3.0-draft + taxonomía semántica |
+| MVP-009 | Design System Base | ✅ 1.0.0 congelado |

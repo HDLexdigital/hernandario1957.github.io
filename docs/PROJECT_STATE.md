@@ -143,3 +143,11 @@
 - Estado: diseño y especificación contractual.
 - Implementación CSS: en pausa, no iniciada.
 - Próxima acción: tercera auditoría y eventual v1.0.0
+## Estado MVP-009 (v1.0.0 congelado)
+
+- Contrato: core/styles/mvp-009-design-system.contract.json
+- Versión: 1.0.0
+- Taxonomía semántica: core/styles/SEMANTIC_TAXONOMY.md
+- Test contractual: 13/13 passed
+- Implementación CSS: pendiente.
+- Fase: contrato congelado, listo para derivar implementación.
