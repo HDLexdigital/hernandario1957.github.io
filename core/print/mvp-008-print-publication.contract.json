@@ -1,0 +1,71 @@
+{
+  "contract": "MVP-008-PrintPublication",
+  "version": "1.0.0",
+  "description": "Contrato de publicación PDF para imprenta tradicional a partir de LEDM 2.0",
+  "motorPolicy": "evaluate-at-implementation",
+  "candidateMotors": [
+    {
+      "name": "WeasyPrint + Ghostscript",
+      "cost": "zero",
+      "pdfx": "post-process",
+      "typography": "good"
+    },
+    {
+      "name": "Prince",
+      "cost": "commercial",
+      "pdfx": "native",
+      "typography": "excellent"
+    }
+  ],
+  "outputStandard": {
+    "profiles": ["pdfx1a", "pdfx4"],
+    "default": "pdfx1a"
+  },
+  "pageGeometry": {
+    "mediaBox": "A4",
+    "bleedBox": { "margin": "3mm" },
+    "trimBox": { "width": "210mm", "height": "297mm" },
+    "cropBox": { "use": "trimBox" },
+    "marks": {
+      "crop": true,
+      "cross": true,
+      "registration": true,
+      "colorBars": true
+    }
+  },
+  "colorManagement": {
+    "sourceProfile": "sRGB",
+    "targetProfile": "FOGRA39",
+    "iccEmbed": true,
+    "textBlack": { "mode": "pure", "c": 0, "m": 0, "y": 0, "k": 100 },
+    "richBlack": { "allowed": true, "default": { "c": 60, "m": 40, "y": 40, "k": 100 } }
+  },
+  "resolution": {
+    "continuousTone": 300,
+    "lineArt": 1200,
+    "unit": "dpi"
+  },
+  "fonts": {
+    "embed": true,
+    "subset": true,
+    "allowedTypes": ["TTF", "OTF", "WOFF", "WOFF2"],
+    "forbidden": ["Type1"]
+  },
+  "fidelity": {
+    "preserveText": true,
+    "preserveOrder": true,
+    "preserveNodeIds": true,
+    "mutateLedm": false
+  },
+  "validation": {
+    "minimum": {
+      "syntax": true,
+      "fontsEmbedded": true,
+      "colorMode": "cmyk",
+      "pageCount": true,
+      "metadata": true
+    },
+    "preferredTool": "evaluate-at-implementation",
+    "externalCertification": "optional"
+  }
+}

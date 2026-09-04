@@ -10,7 +10,7 @@
 
 ## Estado global
 - MVP-001 a MVP-006: cerrados.
-- MVP-007: PDF Accesible — **cerrado** con validación PDF/UA-1 superada.
+- MVP-007: PDF Accesible — **cerrado con validación PDF/UA-1 PASS reproducible**.
 - MVP-008: planificado (Print-Ready PDF).
 
 ## Evidencias actuales
@@ -18,12 +18,12 @@
 - PDF WeasyPrint generado con 290 páginas A4.
 - PDF con Tagged: yes y Metadata Stream: yes.
 - Fidelidad textual casi exacta; diferencia de 1 guion decorativo.
-- `veraPDF 1.30.1` CLI localizado y funcional.
 - `npm run ci:pdf` finaliza con `✅ PDF/UA-1 PASS`.
+- Tag `v0.4.0-pdf` alineado al commit final.
 
 ## Siguiente acción exacta
-1. Hacer commit del cierre de MVP-007.
-2. Evaluar creación de tag solo tras revisión del commit.
+1. Revisar `ROADMAP.md` y docs para confirmar que MVP-007 figure como cerrado.
+2. Planificar formalmente MVP-008.
 
 ## Decisiones vigentes
 - Linux Mint como entorno principal para el core.
@@ -67,3 +67,10 @@
 - Toda acción definitiva nace del chat principal.
 - Al terminar una sesión, actualizar este archivo.
 - No compartir tokens, claves privadas ni credenciales.
+
+## Estado MVP-008
+- Contrato creado: `core/print/mvp-008-print-publication.contract.json`
+- Test contractual: `core/print/test/print-publication.contract.test.js`
+- Flujo base implementado: WeasyPrint genera PDF base A4 con fuentes incrustadas.
+- Conversión a PDF/X-1a mediante Ghostscript validada.
+- Pendiente: certificación externa opcional y ajustes tipográficos finos.

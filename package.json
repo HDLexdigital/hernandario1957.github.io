@@ -31,7 +31,10 @@
     "ci:pdf": "npm run build:pdf && npm run validate:pdfua",
     "start": "node src/index.js",
     "pipeline": "node LexDigital-Pipeline/server.js",
-    "verify": "node scripts/verificar-estructura.js"
+    "verify": "node scripts/verificar-estructura.js",
+    "build:print": "node scripts/build-pdf-print.js",
+    "convert:pdfx1a": "bash scripts/convert-pdfx1a.sh output/experiment-print-base.pdf output/experiment-print-pdfx1a.pdf",
+    "ci:print": "npm run build:print && npm run convert:pdfx1a"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.11",
