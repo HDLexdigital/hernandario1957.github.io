@@ -2,6 +2,7 @@
 
 const JSZip = require('jszip');
 const { extractNodeText } = require('../compiler/src/semanticCompiler');
+const { loadBaseCss } = require('../styles/loadBaseCss');
 
 const MIMETYPE = 'application/epub+zip';
 const FIXED_DATE = new Date('1980-01-01T00:00:00Z');
@@ -159,7 +160,10 @@ function generateContainer() {
 }
 
 function generateCss() {
-    return `body { font-family: serif; }
+    const baseCss = loadBaseCss();
+    return `${baseCss}
+
+body { font-family: var(--ld-font-family-body, serif); }
 article { margin: 1rem 0; }
 h1 { font-size: 1.5em; }
 strong { font-weight: bold; }
@@ -171,7 +175,6 @@ async function generateEpub(ledm) {
         throw new Error('LEDM inválido para generación EPUB');
     }
 
-    // Congelar el LEDM para evitar mutaciones accidentales entre generaciones
     const ledmFrozen = JSON.parse(JSON.stringify(ledm));
 
     const blocks = ledmFrozen.structure.blocks;
