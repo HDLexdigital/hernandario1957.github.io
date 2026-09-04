@@ -4,7 +4,7 @@ const contract = require('../mvp-009-design-system.contract.json');
 
 describe('MVP-009 Design System Base Contract', () => {
     test('El contrato declara la versión 0.3.0-draft', () => {
-        expect(contract.version).toBe('0.3.0-draft');
+        expect(contract.version).toBe('1.0.0');
     });
 
     test('El alcance evita convertirse en MVP universal', () => {
