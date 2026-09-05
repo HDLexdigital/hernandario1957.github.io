@@ -48,7 +48,6 @@ describe('MVP-009 CSS Bundles Experimental', () => {
     test('print.css define colores CMYK y no incluye marcas problemáticas', () => {
         const css = fs.readFileSync(path.join(stylesDir, 'print.css'), 'utf8');
         expect(css).toMatch(/cmyk/);
-        // Marcas y sangrado se eliminaron para evitar conflictos con Ghostscript
         expect(css).not.toContain('marks: crop cross');
         expect(css).not.toContain('bleed: 3mm');
     });
