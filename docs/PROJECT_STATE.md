@@ -178,3 +178,11 @@
 - Conversión Ghostscript exitosa.
 - Página A4, PDF 1.3.
 - Pendiente confirmación de fuentes embebidas.
+
+## Cierre experimental MVP-009 en PDFs
+
+- PDF/UA: PASS ua1.
+- PDF/X-1a: generación exitosa con Ghostscript.
+- Fuentes embebidas: Noto-Serif y Noto-Serif-Bold.
+- Geometría A4 correcta.
+- Pendiente únicamente limpieza de advertencias MCID en revisión posterior.
