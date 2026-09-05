@@ -48,6 +48,12 @@ async function hashEpubContents(epubBuffer) {
 function runAxeOnHtml(html) {
     return new Promise((resolve, reject) => {
         const dom = new JSDOM(html, { url: 'http://localhost/' });
+
+        // Mock para evitar errores de canvas en JSDOM
+        if (dom.window.HTMLCanvasElement && !dom.window.HTMLCanvasElement.prototype.getContext) {
+            dom.window.HTMLCanvasElement.prototype.getContext = function () { return null; };
+        }
+
         global.window = dom.window;
         global.document = dom.window.document;
         const root = dom.window.document.documentElement;
