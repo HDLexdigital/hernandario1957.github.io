@@ -34,7 +34,9 @@
     "verify": "node scripts/verificar-estructura.js",
     "build:print": "node scripts/build-pdf-print.js",
     "convert:pdfx1a": "bash scripts/convert-pdfx1a.sh output/experiment-print-base.pdf output/experiment-print-pdfx1a.pdf",
-    "ci:print": "npm run build:print && npm run convert:pdfx1a"
+    "ci:print": "npm run build:print && npm run convert:pdfx1a",
+    "publish": "node scripts/publish.js",
+    "ci:publish": "node scripts/publish.js && jest core/publishing/test --runInBand"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.11",
