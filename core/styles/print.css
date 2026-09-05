@@ -3,11 +3,6 @@
  * Overrides específicos para salida Print-Ready (PDF/X-1a).
  */
 
-@page {
-  marks: crop cross;
-  bleed: 3mm;
-}
-
 :root {
   --ld-color-text-primary: cmyk(0%, 0%, 0%, 100%);
   --ld-color-bg-primary: cmyk(0%, 0%, 0%, 0%);

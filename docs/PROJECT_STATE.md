@@ -171,3 +171,10 @@
 - Bundles CSS conectados correctamente.
 - Validación PDF/UA: PASS ua1.
 - Pendiente validación PDF/X-1a final con Ghostscript.
+
+## Validación PDF/X-1a
+
+- PDF base regenerado sin bleed/marks conflictivos.
+- Conversión Ghostscript exitosa.
+- Página A4, PDF 1.3.
+- Pendiente confirmación de fuentes embebidas.
