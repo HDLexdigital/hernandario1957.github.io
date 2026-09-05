@@ -186,3 +186,10 @@
 - Fuentes embebidas: Noto-Serif y Noto-Serif-Bold.
 - Geometría A4 correcta.
 - Pendiente únicamente limpieza de advertencias MCID en revisión posterior.
+
+## MVP-009 CERRADO
+
+- Design System Base v1.0.0
+- Integración definitiva por bundles
+- v1.0.0-integration
+- Nested MCID aceptado como no bloqueante
