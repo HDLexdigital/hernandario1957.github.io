@@ -5,11 +5,10 @@ const path = require('path');
 const express = require('express');
 
 const app = express();
-const PORT = process.env.API_PORT || 3000;
 
 const RAIZ = path.join(__dirname, '..', '..');
-const INDICE_PATH = path.join(RAIZ, 'public', 'indice.json');
-const MANIFEST_PATH = path.join(RAIZ, 'public', 'manifest.json');
+const INDICE_PATH = process.env.API_INDICE_PATH || path.join(RAIZ, 'public', 'indice.json');
+const MANIFEST_PATH = process.env.API_MANIFEST_PATH || path.join(RAIZ, 'public', 'manifest.json');
 
 function leerJson(ruta) {
     if (!fs.existsSync(ruta)) return null;
@@ -71,8 +70,11 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'internal_server_error' });
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 API MVP-011 escuchando en http://localhost:${PORT}`);
-});
+if (require.main === module) {
+    const PORT = process.env.API_PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`🚀 API MVP-011 escuchando en http://localhost:${PORT}`);
+    });
+}
 
 module.exports = app;
