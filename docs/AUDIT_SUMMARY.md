@@ -141,3 +141,12 @@ git diff --cached --name-only
 - TrimBox/BleedBox: Ghostscript revierte a PDF normal.
 - No bloquea la distribución programática.
 - La conformidad estricta PDF/X-1a sigue siendo responsabilidad de MVP-008.
+
+## MVP-010 — Publicación y Distribución Web Automática
+
+- Contrato validado: 0.1.0-draft.
+- Orquestador real implementado.
+- Artefactos generados: Web, EPUB, PDF/UA y PDF/X-1a.
+- Manifiesto e índice generados con checksums.
+- Workflow de GitHub Pages preparado.
+- Nota: advertencia de Ghostscript sobre TrimBox/BleedBox documentada como no bloqueante.

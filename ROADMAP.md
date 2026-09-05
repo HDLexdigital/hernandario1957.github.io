@@ -84,3 +84,4 @@ core/styles/
 
 
 | MVP-009 | Design System Base | ✅ 1.0.0 congelado |
+| MVP-010 | Publicación y Distribución Web Automática | ✅ Completado |

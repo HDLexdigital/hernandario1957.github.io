@@ -193,3 +193,15 @@
 - Integración definitiva por bundles
 - v1.0.0-integration
 - Nested MCID aceptado como no bloqueante
+
+## Estado MVP-010 — Publicación y Distribución Web Automática
+
+- Contrato: core/publishing/mvp-010-publishing.contract.json
+- Versión: 0.1.0-draft
+- Tests contractuales: 4/4 passed
+- Tests de orquestador real: 3/3 passed
+- Orquestador: scripts/publish.js
+- Publicación de la Constitución: scripts/publish-constitucion.js
+- Workflow de GitHub Pages: .github/workflows/pages.yml
+- CI core: 151 tests passed localmente
+- Estado: CI local verde, pendiente confirmación visual en Actions remoto.
