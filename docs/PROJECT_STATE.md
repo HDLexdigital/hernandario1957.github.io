@@ -214,3 +214,16 @@
 - Resultado: 5/5 tests passed
 - Implementación del servidor HTTP: aún no iniciada
 - Próxima acción: diseñar servidor API de solo lectura
+
+## Implementación MVP-011 — API de Consulta del Corpus Jurídico
+
+- Servidor: core/api/server.js (Express, solo lectura)
+- Script: start:api
+- Endpoints GET implementados:
+  - /api/v1/status
+  - /api/v1/index
+  - /api/v1/document/:id
+  - /api/v1/node/:nodeId
+- Test de integración: core/api/test/mvp-011-api.server.test.js
+- Resultado: 5/5 tests passed
+- Persistencia: basada en indice.json y manifest.json, sin base de datos
