@@ -205,3 +205,12 @@
 - Workflow de GitHub Pages: .github/workflows/pages.yml
 - CI core: 151 tests passed localmente
 - Estado: CI local verde, pendiente confirmación visual en Actions remoto.
+
+## Estado MVP-011 — API de Consulta del Corpus Jurídico
+
+- Contrato: core/api/mvp-011-api.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/api/test/mvp-011-api.contract.test.js
+- Resultado: 5/5 tests passed
+- Implementación del servidor HTTP: aún no iniciada
+- Próxima acción: diseñar servidor API de solo lectura

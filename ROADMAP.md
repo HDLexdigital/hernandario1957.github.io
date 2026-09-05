@@ -85,3 +85,5 @@ core/styles/
 
 | MVP-009 | Design System Base | ✅ 1.0.0 congelado |
 | MVP-010 | Publicación y Distribución Web Automática | ✅ Completado |
+
+| MVP-011 | API de Consulta del Corpus Jurídico | 🧪 Contrato 0.1.0-draft |

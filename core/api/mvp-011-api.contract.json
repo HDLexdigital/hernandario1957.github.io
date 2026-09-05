@@ -1,0 +1,106 @@
+{
+  "contract": "MVP-011-API",
+  "version": "0.1.0-draft",
+  "description": "Contrato de la API de consulta de solo lectura para el corpus jurídico LEDM",
+  "principles": {
+    "readOnly": true,
+    "stateless": true,
+    "deterministicResponses": true,
+    "jsonPayloadsOnly": true,
+    "noDatabaseRequired": true
+  },
+  "server": {
+    "protocol": "HTTP",
+    "defaultPort": 3000,
+    "corsEnabled": true
+  },
+  "endpoints": [
+    {
+      "path": "/api/v1/status",
+      "method": "GET",
+      "description": "Retorna el estado de salud y versión de la API y el corpus",
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "status": "string",
+          "corpusVersion": "string",
+          "timestamp": "string"
+        },
+        "required": [
+          "status",
+          "corpusVersion"
+        ]
+      }
+    },
+    {
+      "path": "/api/v1/index",
+      "method": "GET",
+      "description": "Retorna el índice general de normas derivado de indice.json",
+      "responseSchema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "documentId": "string",
+            "title": "string",
+            "url": "string",
+            "nodeId": "string"
+          },
+          "required": [
+            "documentId",
+            "title",
+            "url",
+            "nodeId"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/api/v1/document/:id",
+      "method": "GET",
+      "description": "Retorna los metadatos y rutas de artefactos de un documento específico",
+      "parameters": [
+        "id"
+      ],
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "documentId": "string",
+          "title": "string",
+          "artifacts": "array"
+        },
+        "required": [
+          "documentId",
+          "title",
+          "artifacts"
+        ]
+      }
+    },
+    {
+      "path": "/api/v1/node/:nodeId",
+      "method": "GET",
+      "description": "Consulta un nodo semántico específico dentro del corpus",
+      "parameters": [
+        "nodeId"
+      ],
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "nodeId": "string",
+          "content": "object"
+        },
+        "required": [
+          "nodeId",
+          "content"
+        ]
+      }
+    }
+  ],
+  "errorHandling": {
+    "standardFormat": true,
+    "codes": {
+      "404": "Recurso no encontrado en el corpus",
+      "500": "Error interno del servidor de consulta"
+    }
+  }
+}
