@@ -136,3 +136,8 @@ git diff --cached --name-only
 - Taxonomía semántica definida.
 - Implementación CSS pendiente.
 - No congelado a `v1.0.0`.
+## Orquestador MVP-010 — Advertencia Ghostscript
+
+- TrimBox/BleedBox: Ghostscript revierte a PDF normal.
+- No bloquea la distribución programática.
+- La conformidad estricta PDF/X-1a sigue siendo responsabilidad de MVP-008.

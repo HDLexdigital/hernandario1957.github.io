@@ -3,13 +3,12 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
-const { compile, extractNodeText } = require('../core/compiler/src/semanticCompiler');
+const { extractNodeText } = require('../core/compiler/src/semanticCompiler');
 
 const RAIZ = path.join(__dirname, '..');
-const CIDM_PATH = path.join(RAIZ, 'core', 'integration', 'fixtures', 'authentic', 'CIDM_real.json');
-const LEDM_TMP = '/tmp/ledm-print-full.json';
+const DEFAULT_LEDM = path.join(RAIZ, 'core', 'compiler', 'fixtures', 'ledm-expected.json');
+const DEFAULT_OUTPUT = path.join(RAIZ, 'output', 'experiment-print-base.pdf');
 const HTML_PRINT = path.join(RAIZ, 'output', 'debug-print.html');
-const PDF_BASE = path.join(RAIZ, 'output', 'experiment-print-base.pdf');
 
 function escapeHtml(value) {
     return String(value)
@@ -23,7 +22,6 @@ function escapeHtml(value) {
 function generarHtmlPlano(ledm) {
     const bloques = ledm.structure.blocks || [];
     let body = '';
-
     for (const block of bloques) {
         const text = extractNodeText(block);
         switch (block.type) {
@@ -40,7 +38,6 @@ function generarHtmlPlano(ledm) {
                 body += `<p>${escapeHtml(text)}</p>\n`;
         }
     }
-
     return `<!DOCTYPE html>
 <html lang="es-CO">
 <head>
@@ -56,11 +53,11 @@ ${body}
 }
 
 function main() {
-    console.log('📄 Generando LEDM desde CIDM real...');
-    const cidm = JSON.parse(fs.readFileSync(CIDM_PATH, 'utf8'));
-    const ledm = compile(cidm);
-    fs.writeFileSync(LEDM_TMP, JSON.stringify(ledm, null, 2), 'utf8');
-    console.log(`✅ LEDM guardado en ${LEDM_TMP}`);
+    const ledmPath = process.argv[2] || DEFAULT_LEDM;
+    const outputPath = process.argv[3] || DEFAULT_OUTPUT;
+
+    console.log(`📄 Leyendo LEDM desde: ${path.basename(ledmPath)}`);
+    const ledm = JSON.parse(fs.readFileSync(ledmPath, 'utf8'));
 
     console.log('🧪 Generando HTML plano para imprenta...');
     const html = generarHtmlPlano(ledm);
@@ -78,12 +75,12 @@ function main() {
         '-s', pagedMediaCss,
         '-s', printCss,
         HTML_PRINT,
-        PDF_BASE
+        outputPath
     ];
 
     console.log('🖨️ Generando PDF base con WeasyPrint...');
     execFileSync('weasyprint', args, { stdio: 'inherit' });
-    console.log(`✅ PDF base generado en: ${PDF_BASE}`);
+    console.log(`✅ PDF base generado en: ${outputPath}`);
 }
 
 try {
