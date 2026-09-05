@@ -37,7 +37,8 @@
     "ci:print": "npm run build:print && npm run convert:pdfx1a",
     "publish": "node scripts/publish.js",
     "ci:publish": "npm run publish:constitucion && jest core/publishing/test --runInBand",
-    "publish:constitucion": "node scripts/publish-constitucion.js"
+    "publish:constitucion": "node scripts/publish-constitucion.js",
+    "start:api": "node core/api/server.js"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.11",
