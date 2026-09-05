@@ -49,4 +49,4 @@ scripts/veraPDF-library-1.30.2/
 node_modules/
 public/
 coverage/
-epubcheck-5.2.1/
+epubcheck-5.2.1/tmp-ledm.json

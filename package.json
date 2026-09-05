@@ -36,7 +36,8 @@
     "convert:pdfx1a": "bash scripts/convert-pdfx1a.sh output/experiment-print-base.pdf output/experiment-print-pdfx1a.pdf",
     "ci:print": "npm run build:print && npm run convert:pdfx1a",
     "publish": "node scripts/publish.js",
-    "ci:publish": "node scripts/publish.js && jest core/publishing/test --runInBand"
+    "ci:publish": "npm run publish:constitucion && jest core/publishing/test --runInBand",
+    "publish:constitucion": "node scripts/publish-constitucion.js"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.11",
