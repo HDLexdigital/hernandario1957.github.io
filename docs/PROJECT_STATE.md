@@ -235,3 +235,19 @@
 - Endpoint API: GET /api/v1/search?q=...
 - Integrado en core/api/server.js
 - API previa: 5/5 tests passed
+
+
+## Consolidación final del ciclo de consulta
+
+- MVP-010: Publicación y distribución automática.
+- MVP-011: API de consulta de solo lectura.
+- MVP-012: Motor de búsqueda interna estática.
+- Estado: consolidado y etiquetado.
+
+
+## Consolidación final del ciclo de consulta
+
+- MVP-010: Publicación y distribución automática.
+- MVP-011: API de consulta de solo lectura.
+- MVP-012: Motor de búsqueda interna estática.
+- Estado: consolidado y etiquetado.

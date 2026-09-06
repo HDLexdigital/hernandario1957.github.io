@@ -150,3 +150,29 @@ git diff --cached --name-only
 - Manifiesto e índice generados con checksums.
 - Workflow de GitHub Pages preparado.
 - Nota: advertencia de Ghostscript sobre TrimBox/BleedBox documentada como no bloqueante.
+
+
+## Consolidación MVP-010 / MVP-011 / MVP-012
+
+- MVP-010 Publicación y Distribución Web Automática: ✅
+- MVP-011 API de Consulta del Corpus Jurídico: ✅
+- MVP-012 Motor de Búsqueda Interna: ✅
+- Arquitectura: solo lectura, stateless, sin base de datos.
+- Índices precalculados y búsqueda determinista.
+- Tags:
+  - v1.0.0-publishing
+  - v1.0.0-api
+  - v1.0.0-search
+
+
+## Consolidación MVP-010 / MVP-011 / MVP-012
+
+- MVP-010 Publicación y Distribución Web Automática: ✅
+- MVP-011 API de Consulta del Corpus Jurídico: ✅
+- MVP-012 Motor de Búsqueda Interna: ✅
+- Arquitectura: solo lectura, stateless, sin base de datos.
+- Índices precalculados y búsqueda determinista.
+- Tags:
+  - v1.0.0-publishing
+  - v1.0.0-api
+  - v1.0.0-search
