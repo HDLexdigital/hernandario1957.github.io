@@ -92,4 +92,4 @@ core/styles/
 
 | MVP-013 | Publicación Multi-Documento Programática | ✅ Implementado |
 
-| MVP-014 | Catálogo y Versionado de Publicaciones | 🧪 Contrato 0.1.0-draft |
+| MVP-014 | Catálogo y Versionado de Publicaciones | ✅ Implementado |

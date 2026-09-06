@@ -274,3 +274,10 @@
 - Test contractual: core/catalog/test/mvp-014-catalog.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-014 — Catálogo y Versionado
+
+- Generador de catálogo: scripts/build-catalog.js
+- Test de integración: core/catalog/test/catalog.builder.test.js
+- Resultado: 3/3 tests passed
+- Catálogo generado: public/catalogo.json
