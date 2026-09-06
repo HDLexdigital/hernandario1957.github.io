@@ -307,3 +307,11 @@
 - Protegido por API Key
 - Solo lectura, sin base de datos
 - Tests: contrato 3/3, middleware 3/3
+
+
+## Consolidación General MVP-010 → MVP-016
+
+- Estado: ciclo completo cerrado.
+- Validación: suite integral en verde.
+- Tags individuales: publishing, api, search, multi-publish, catalog, auth, admin.
+- Pendiente: tag maestro v1.0.0-consolidated-admin.

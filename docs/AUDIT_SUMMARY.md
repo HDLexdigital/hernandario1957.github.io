@@ -248,3 +248,21 @@ Todo el sistema es:
 - PDF/UA-1 PASS.
 - Repositorio limpio.
 - Tags históricos aplicados.
+
+
+---
+
+## Consolidación General MVP-010 → MVP-016
+
+- MVP-010 Publicación y Distribución Web Automática: ✅
+- MVP-011 API de Consulta del Corpus Jurídico: ✅
+- MVP-012 Motor de Búsqueda Interna: ✅
+- MVP-013 Publicación Multi-Documento Programática: ✅
+- MVP-014 Catálogo y Versionado de Publicaciones: ✅
+- MVP-015 Control de acceso / API Keys: ✅
+- MVP-016 Panel de Administración y Estado: ✅
+
+- Suite completa validada.
+- Documentación central actualizada.
+- Tags individuales aplicados.
+- Punto de restauración maestro pendiente de tag.
