@@ -27,14 +27,31 @@ beforeAll(async () => {
     process.env.LEX_API_KEY = 'test-key-123';
     process.env.API_PORT = '3125';
 
-    const serverScript = path.join(__dirname, '..', 'server.js');
+    const serverScript = path.join(__dirname, '..', '..', 'api', 'server.js');
     server = spawn('node', [serverScript], {
         env: { ...process.env },
-        stdio: 'ignore'
+        stdio: ['ignore', 'pipe', 'pipe']
     });
 
+    let stderr = '';
+    server.stderr.on('data', chunk => { stderr += chunk.toString(); });
+
     baseUrl = 'http://127.0.0.1:3125';
-    await new Promise(resolve => setTimeout(resolve, 800));
+
+    // Esperar a que el servidor esté listo o fallar tras 5s
+    await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+            reject(new Error('Servidor no arrancó. stderr: ' + stderr));
+        }, 5000);
+
+        const interval = setInterval(() => {
+            http.get(baseUrl + '/api/v1/status', { headers: { 'x-api-key': 'test-key-123' } }, res => {
+                clearInterval(interval);
+                clearTimeout(timeout);
+                resolve();
+            }).on('error', () => {});
+        }, 200);
+    });
 });
 
 afterAll(() => {
