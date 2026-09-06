@@ -331,3 +331,13 @@
 - Test contractual: core/deploy/test/mvp-017-deploy.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-017 — Workflow de Despliegue Público
+
+- Workflow: .github/workflows/deploy.yml
+- Proveedor: GitHub Pages
+- Rama: feat/mvp-004
+- Directorio de artefactos: public
+- Dominio configurable: digitalhd.com
+- HTTPS requerido
+- Despliegue estático, sin base de datos
