@@ -266,3 +266,17 @@ Todo el sistema es:
 - Documentación central actualizada.
 - Tags individuales aplicados.
 - Punto de restauración maestro pendiente de tag.
+
+
+---
+
+## Métricas finales de consolidación
+
+- Suite principal core: 30/30 suites, 187/187 tests.
+- Suite API/Admin/Auth: 1/1 suite, 6/6 tests.
+- Suite Web/Estilos: 3/3 suites, 25/25 tests.
+- PDF/UA-1: PASS.
+- PDF/X-1a: generación exitosa con Ghostscript.
+- Advertencias no bloqueantes:
+  - Nested MCID en PDF/UA.
+  - TrimBox/BleedBox en imprenta.
