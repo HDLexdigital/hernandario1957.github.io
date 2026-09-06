@@ -298,3 +298,12 @@
 - Test contractual: core/admin/test/mvp-016-admin.contract.test.js
 - Resultado: 3/3 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-016 — Panel de Administración y Estado
+
+- Router de administración: core/admin/server-admin.js
+- Endpoint de estado: GET /api/v1/admin/status
+- Dashboard HTML: GET /admin
+- Protegido por API Key
+- Solo lectura, sin base de datos
+- Tests: contrato 3/3, middleware 3/3
