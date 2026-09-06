@@ -1,0 +1,52 @@
+{
+  "contract": "MVP-013-MultiPublish",
+  "version": "0.1.0-draft",
+  "description": "Contrato para la publicación programática de múltiples documentos LEDM en un mismo sitio estático",
+  "principles": {
+    "readOnly": true,
+    "deterministic": true,
+    "multiDocument": true,
+    "perDocumentManifest": true,
+    "globalIndex": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "input": {
+    "type": "directorio de documentos LEDM",
+    "minDocuments": 1,
+    "accept": ["json"],
+    "path": "publicaciones"
+  },
+  "output": {
+    "root": "public",
+    "perDocument": "public/<documentId>/",
+    "globalIndex": "public/indice-general.json"
+  },
+  "perDocument": {
+    "required": [
+      "index.html",
+      "manifest.json",
+      "indice.json"
+    ],
+    "optional": [
+      "documento.epub",
+      "documento-ua.pdf",
+      "documento-print.pdf"
+    ]
+  },
+  "globalIndex": {
+    "fields": [
+      "documentId",
+      "title",
+      "nodeId",
+      "url"
+    ]
+  },
+  "validation": {
+    "requireAllDocuments": true,
+    "requireGlobalIndex": true,
+    "requirePerDocumentManifest": true,
+    "requireChecksums": true,
+    "failOnMissing": true
+  }
+}

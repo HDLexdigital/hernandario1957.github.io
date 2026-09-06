@@ -251,3 +251,11 @@
 - MVP-011: API de consulta de solo lectura.
 - MVP-012: Motor de búsqueda interna estática.
 - Estado: consolidado y etiquetado.
+
+## Estado MVP-013 — Publicación Multi-Documento Programática
+
+- Contrato: core/multi-publish/mvp-013-multi-publish.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/multi-publish/test/mvp-013-multi-publish.contract.test.js
+- Resultado: 5/5 tests passed
+- Implementación: pendiente

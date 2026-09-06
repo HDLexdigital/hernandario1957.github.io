@@ -89,3 +89,5 @@ core/styles/
 | MVP-011 | API de Consulta del Corpus Jurídico | ✅ Implementada |
 
 | MVP-012 | Motor de Búsqueda Interna | ✅ Implementado |
+
+| MVP-013 | Publicación Multi-Documento Programática | 🧪 Contrato 0.1.0-draft |
