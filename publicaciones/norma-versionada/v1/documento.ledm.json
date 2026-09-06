@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "model": "LEDM-2.0",
+    "jurisdiction": "CO",
+    "corpusId": "NORMA-VERSIONADA",
+    "documentId": "NORMA-VERSIONADA",
+    "version": {
+      "id": "v1",
+      "number": 1,
+      "status": "CURRENT"
+    }
+  },
+  "structure": {
+    "type": "law",
+    "title": "Norma Versionada v1",
+    "blocks": [
+      {
+        "nodeId": "NORMA-VERSIONADA-v1-T1",
+        "type": "title",
+        "children": [
+          {
+            "type": "text",
+            "text": "Norma Versionada v1"
+          }
+        ]
+      },
+      {
+        "nodeId": "NORMA-VERSIONADA-v1-ART1",
+        "type": "article",
+        "children": [
+          {
+            "nodeId": "NORMA-VERSIONADA-v1-ART1-P1",
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "text": "Contenido original de la norma en su primera versión."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "sourceType": "TEST",
+    "sourceId": "fixture-versionado",
+    "retrievedAt": "2026-01-01T00:00:00Z",
+    "transformationsApplied": [
+      {
+        "id": "test",
+        "version": "1.0.0"
+      }
+    ]
+  },
+  "integrity": {
+    "sourceHash": {
+      "algorithm": "SHA-256",
+      "value": ""
+    },
+    "contentHash": {
+      "algorithm": "SHA-256",
+      "value": ""
+    },
+    "ledmHash": {
+      "algorithm": "SHA-256",
+      "value": ""
+    }
+  }
+}
