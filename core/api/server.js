@@ -10,6 +10,9 @@ const RAIZ = path.join(__dirname, '..', '..');
 const INDICE_PATH = process.env.API_INDICE_PATH || path.join(RAIZ, 'public', 'indice.json');
 const MANIFEST_PATH = process.env.API_MANIFEST_PATH || path.join(RAIZ, 'public', 'manifest.json');
 const SEARCH_INDEX_PATH = process.env.API_SEARCH_INDEX_PATH || path.join(RAIZ, 'public', 'search-index.json');
+const CATALOGO_PATH = process.env.API_CATALOGO_PATH || path.join(RAIZ, 'public', 'catalogo.json');
+
+const API_KEY = process.env.LEX_API_KEY || '';
 
 function normalizar(texto) {
     return String(texto || '')
@@ -25,6 +28,21 @@ function leerJson(ruta) {
     if (!fs.existsSync(ruta)) return null;
     return JSON.parse(fs.readFileSync(ruta, 'utf8'));
 }
+
+// Middleware de API Key
+app.use((req, res, next) => {
+    const apiKey = req.headers['x-api-key'];
+
+    if (!API_KEY) {
+        return res.status(500).json({ error: 'api_key_not_configured' });
+    }
+
+    if (!apiKey || apiKey !== API_KEY) {
+        return res.status(401).json({ error: 'unauthorized' });
+    }
+
+    next();
+});
 
 app.use(express.json());
 
@@ -96,6 +114,14 @@ app.get('/api/v1/search', (req, res) => {
     });
 });
 
+app.get('/api/v1/catalog', (req, res) => {
+    const catalogo = leerJson(CATALOGO_PATH);
+    if (!catalogo) {
+        return res.status(404).json({ error: 'catalog_not_found' });
+    }
+    res.json(catalogo);
+});
+
 app.use((req, res) => {
     res.status(404).json({ error: 'resource_not_found' });
 });
@@ -108,7 +134,7 @@ app.use((err, req, res, next) => {
 if (require.main === module) {
     const PORT = process.env.API_PORT || 3000;
     app.listen(PORT, () => {
-        console.log(`🚀 API MVP-011+MVP-012 escuchando en http://localhost:${PORT}`);
+        console.log(`🚀 API MVP-011+012+013+015 escuchando en http://localhost:${PORT}`);
     });
 }
 
