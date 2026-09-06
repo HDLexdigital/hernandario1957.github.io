@@ -15,6 +15,7 @@ beforeAll(async () => {
 
     const indicePath = path.join(tmpDir, 'indice.json');
     const manifestPath = path.join(tmpDir, 'manifest.json');
+    const searchIndexPath = path.join(tmpDir, 'search-index.json');
 
     const indice = [
         {
@@ -41,30 +42,38 @@ beforeAll(async () => {
 
     fs.writeFileSync(indicePath, JSON.stringify(indice));
     fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+    fs.writeFileSync(searchIndexPath, JSON.stringify([]));
 
     process.env.API_INDICE_PATH = indicePath;
     process.env.API_MANIFEST_PATH = manifestPath;
-    process.env.API_PORT = '0';
+    process.env.API_SEARCH_INDEX_PATH = searchIndexPath;
+    process.env.LEX_API_KEY = 'test-api-key';
+    process.env.API_PORT = '3126';
 
-    const serverScript = path.join(__dirname, '..', 'server.js');
-    const child = spawn('node', [serverScript], {
-        env: { ...process.env },
-        stdio: 'ignore'
-    });
-
-    // Esperar un poco a que arranque. Mejor: capturar salida con puerto, pero para prueba simple, esperar 800ms.
-    await new Promise(resolve => setTimeout(resolve, 800));
-
-    // El servidor imprime el puerto, pero como stdio ignore, no podemos leerlo. Entonces usamos puerto fijo alternativo.
-    child.kill();
-    process.env.API_PORT = '3123';
+    const serverScript = path.join(__dirname, '..', '..', 'api', 'server.js');
     server = spawn('node', [serverScript], {
         env: { ...process.env },
-        stdio: 'ignore'
+        stdio: ['ignore', 'pipe', 'pipe']
     });
 
-    baseUrl = 'http://127.0.0.1:3123';
-    await new Promise(resolve => setTimeout(resolve, 800));
+    let stderr = '';
+    server.stderr.on('data', chunk => { stderr += chunk.toString(); });
+
+    baseUrl = 'http://127.0.0.1:3126';
+
+    await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+            reject(new Error('Servidor no arrancó. stderr: ' + stderr));
+        }, 5000);
+
+        const interval = setInterval(() => {
+            http.get(baseUrl + '/api/v1/status', { headers: { 'x-api-key': 'test-api-key' } }, res => {
+                clearInterval(interval);
+                clearTimeout(timeout);
+                resolve();
+            }).on('error', () => {});
+        }, 200);
+    });
 });
 
 afterAll(() => {
@@ -74,11 +83,14 @@ afterAll(() => {
 
 function get(path) {
     return new Promise((resolve, reject) => {
-        http.get(baseUrl + path, res => {
+        const req = http.get(baseUrl + path, {
+            headers: { 'x-api-key': 'test-api-key' }
+        }, res => {
             let data = '';
             res.on('data', chunk => data += chunk);
             res.on('end', () => resolve({ status: res.statusCode, body: JSON.parse(data || '{}') }));
-        }).on('error', reject);
+        });
+        req.on('error', reject);
     });
 }
 
