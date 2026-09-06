@@ -281,3 +281,12 @@
 - Test de integración: core/catalog/test/catalog.builder.test.js
 - Resultado: 3/3 tests passed
 - Catálogo generado: public/catalogo.json
+
+## Implementación MVP-015 — Control de acceso / API Keys
+
+- Middleware de API Key en core/api/server.js
+- Header: x-api-key
+- Variable de entorno: LEX_API_KEY
+- Respuesta 401: { error: "unauthorized" }
+- Test de contrato: 4/4
+- Test de middleware: 3/3

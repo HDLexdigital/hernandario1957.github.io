@@ -93,3 +93,5 @@ core/styles/
 | MVP-013 | Publicación Multi-Documento Programática | ✅ Implementado |
 
 | MVP-014 | Catálogo y Versionado de Publicaciones | ✅ Implementado |
+
+| MVP-015 | Control de acceso / API Keys | ✅ Implementado |
