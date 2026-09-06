@@ -176,3 +176,59 @@ git diff --cached --name-only
   - v1.0.0-publishing
   - v1.0.0-api
   - v1.0.0-search
+
+
+---
+
+## Resumen Ejecutivo Final — LexDigitalHD 2.0
+
+### Estado general
+
+| MVP | Título | Estado |
+|---|---|---|
+| MVP-001 | CIDM 1.0 | ✅ Cerrado |
+| MVP-002 | LEDM 2.0 | ✅ Cerrado |
+| MVP-003 | Semantic Compiler | ✅ Cerrado |
+| MVP-004 | Constitución completa + EPUB | ✅ Cerrado |
+| MVP-005 | CI/CD + EPUBCheck + axe-core | ✅ Cerrado |
+| MVP-006 | Publicación Web | ✅ Cerrado |
+| MVP-007 | PDF Accesible PDF/UA-1 | ✅ Cerrado |
+| MVP-008 | Print-Ready PDF PDF/X-1a | ✅ Cerrado |
+| MVP-009 | Design System Base | ✅ Integrado |
+| MVP-010 | Publicación y Distribución Web Automática | ✅ Cerrado |
+| MVP-011 | API de Consulta del Corpus Jurídico | ✅ Cerrado |
+| MVP-012 | Motor de Búsqueda Interna | ✅ Cerrado |
+
+### Consolidación reciente
+
+- MVP-010: orquestador real y workflow de GitHub Pages.
+- MVP-011: API Express de solo lectura.
+- MVP-012: búsqueda estática precalculada.
+
+### Evidencia
+
+- Suite general del core en verde.
+- API: 5/5 tests passed.
+- Estilos: 23/23.
+- Publicación: 7/7.
+- PDF/UA: PASS ua1.
+- PDF/X-1a: generación exitosa con Ghostscript.
+
+### Tags
+
+- v1.0.0-publishing
+- v1.0.0-api
+- v1.0.0-search
+- v1.0.0-consolidated
+
+### Arquitectura resultante
+
+LEDM 2.0 → Renderers → Publicación estática → API de consulta → Búsqueda interna
+
+Todo el sistema es:
+
+- solo lectura;
+- stateless;
+- sin bases de datos;
+- con índices precalculados;
+- reproducible y auditable.
