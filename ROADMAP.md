@@ -97,3 +97,5 @@ core/styles/
 | MVP-015 | Control de acceso / API Keys | ✅ Implementado |
 
 | MVP-016 | Panel de Administración y Estado | ✅ Implementado |
+
+| MVP-017 | Integración con Dominio Definitivo y Despliegue Público | 🧪 Contrato 0.1.0-draft |

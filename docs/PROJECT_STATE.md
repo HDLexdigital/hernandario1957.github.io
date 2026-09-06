@@ -315,3 +315,11 @@
 - Validación: suite integral en verde.
 - Tags individuales: publishing, api, search, multi-publish, catalog, auth, admin.
 - Pendiente: tag maestro v1.0.0-consolidated-admin.
+
+## Estado MVP-017 — Integración con Dominio Definitivo y Despliegue Público
+
+- Contrato: core/deploy/mvp-017-deploy.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/deploy/test/mvp-017-deploy.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente
