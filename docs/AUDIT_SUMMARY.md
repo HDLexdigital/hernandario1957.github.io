@@ -232,3 +232,19 @@ Todo el sistema es:
 - sin bases de datos;
 - con índices precalculados;
 - reproducible y auditable.
+
+
+---
+
+## Cierre final consolidado
+
+- MVP-010 Publicación y Distribución Web Automática: ✅
+- MVP-011 API de Consulta del Corpus Jurídico: ✅
+- MVP-012 Motor de Búsqueda Interna: ✅
+- MVP-013 Publicación Multi-Documento Programática: ✅
+- MVP-014 Catálogo y Versionado de Publicaciones: ✅
+
+- Suite general validada.
+- PDF/UA-1 PASS.
+- Repositorio limpio.
+- Tags históricos aplicados.
