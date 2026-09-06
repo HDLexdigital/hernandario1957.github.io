@@ -259,3 +259,10 @@
 - Test contractual: core/multi-publish/test/mvp-013-multi-publish.contract.test.js
 - Resultado: 5/5 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-013 — Publicación Multi-Documento
+
+- Orquestador: scripts/publish-multi.js
+- Fixture: publicaciones/documento-a y documento-b
+- Test de integración: core/multi-publish/test/multi-publish.orchestrator.test.js
+- Resultado: 4/4 tests passed

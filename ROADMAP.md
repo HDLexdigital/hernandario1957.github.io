@@ -90,4 +90,4 @@ core/styles/
 
 | MVP-012 | Motor de Búsqueda Interna | ✅ Implementado |
 
-| MVP-013 | Publicación Multi-Documento Programática | 🧪 Contrato 0.1.0-draft |
+| MVP-013 | Publicación Multi-Documento Programática | ✅ Implementado |
