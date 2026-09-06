@@ -266,3 +266,11 @@
 - Fixture: publicaciones/documento-a y documento-b
 - Test de integración: core/multi-publish/test/multi-publish.orchestrator.test.js
 - Resultado: 4/4 tests passed
+
+## Estado MVP-014 — Catálogo y Versionado de Publicaciones
+
+- Contrato: core/catalog/mvp-014-catalog.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/catalog/test/mvp-014-catalog.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente

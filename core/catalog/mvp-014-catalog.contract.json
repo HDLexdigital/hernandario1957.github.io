@@ -1,0 +1,50 @@
+{
+  "contract": "MVP-014-Catalog",
+  "version": "0.1.0-draft",
+  "description": "Contrato para la gestión de catálogos y versionado de publicaciones jurídicas en LexDigitalHD",
+  "principles": {
+    "readOnly": true,
+    "stateless": true,
+    "deterministic": true,
+    "versionedPublication": true,
+    "globalCatalog": true,
+    "perVersionManifest": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "structure": {
+    "inputDirectory": "publicaciones/",
+    "outputDirectory": "public/",
+    "catalogOutput": "public/catalogo.json"
+  },
+  "requirements": {
+    "requireGlobalCatalog": true,
+    "requireVersionedPath": true,
+    "requireVersionManifest": true,
+    "requireVersionIndex": true,
+    "requireUniqueVersionId": true
+  },
+  "responseSchema": {
+    "catalog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "documentId",
+          "versions"
+        ]
+      }
+    }
+  }
+}
