@@ -341,3 +341,10 @@
 - Dominio configurable: digitalhd.com
 - HTTPS requerido
 - Despliegue estático, sin base de datos
+
+## Cierre MVP-017 — Despliegue Público
+
+- Workflow de GitHub Pages implementado.
+- Integración con dominio configurable lista.
+- HTTPS requerido por contrato.
+- Estado: código completado; configuración DNS/PAGES pendiente en consola de GitHub.
