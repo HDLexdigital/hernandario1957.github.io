@@ -290,3 +290,11 @@
 - Respuesta 401: { error: "unauthorized" }
 - Test de contrato: 4/4
 - Test de middleware: 3/3
+
+## Estado MVP-016 — Panel de Administración y Estado
+
+- Contrato: core/admin/mvp-016-admin.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/admin/test/mvp-016-admin.contract.test.js
+- Resultado: 3/3 tests passed
+- Implementación: pendiente

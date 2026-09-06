@@ -95,3 +95,5 @@ core/styles/
 | MVP-014 | Catálogo y Versionado de Publicaciones | ✅ Implementado |
 
 | MVP-015 | Control de acceso / API Keys | ✅ Implementado |
+
+| MVP-016 | Panel de Administración y Estado | 🧪 Contrato 0.1.0-draft |
