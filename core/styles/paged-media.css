@@ -1,36 +1,32 @@
 /**
  * core/styles/paged-media.css
- * Versión mínima para diagnóstico PDF/UA.
+ * Reglas de Paged Media compartidas (A4, márgenes, control de rupturas y numeración).
  */
 
 @page {
   size: A4;
   margin: 25mm 20mm 25mm 30mm;
 }
-cd ~/proyecto-lexdigital
 
-cat > core/styles/paged-media.css << 'EOF'
-/**
- * core/styles/paged-media.css
- * Versión mínima para diagnóstico PDF/UA.
- */
-
-@page {
-  size: A4;
-  margin: 25mm 20mm 25mm 30mm;cd ~/proyecto-lexdigital
-
-cat > core/styles/paged-media.css << 'EOF'
-/**
- * core/styles/paged-media.css
- * Versión mínima para diagnóstico PDF/UA.
- */
-
-@page {
-  size: A4;
-  margin: 25mm 20mm 25mm 30mm;
+.ld-articulo-header,
+h1, h2, h3, h4, h5, h6 {
+  break-after: avoid;
+  page-break-after: avoid;
 }
-EOF
 
-# Confirmar que no hay @bottom-center ni content
-grep -n "@bottom-center\|content:" core/styles/paged-media.css
+.ld-articulo-cuerpo,
+p {
+  orphans: 2;
+  widows: 2;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.ld-nivel-libro {
+  break-before: page;
+  page-break-before: page;
+}
+
+.ld-articulo {
+  margin-bottom: 4mm;
 }
