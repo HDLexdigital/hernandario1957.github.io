@@ -29,8 +29,7 @@ function leerJson(ruta) {
     return JSON.parse(fs.readFileSync(ruta, 'utf8'));
 }
 
-// Middleware de API Key
-app.use((req, res, next) => {
+const authMiddleware = (req, res, next) => {
     const apiKey = req.headers['x-api-key'];
 
     if (!API_KEY) {
@@ -42,9 +41,10 @@ app.use((req, res, next) => {
     }
 
     next();
-});
+};
 
 app.use(express.json());
+app.use(authMiddleware);
 
 app.get('/api/v1/status', (req, res) => {
     const manifest = leerJson(MANIFEST_PATH);
@@ -122,6 +122,10 @@ app.get('/api/v1/catalog', (req, res) => {
     res.json(catalogo);
 });
 
+// Integración del panel de administración
+const { createAdminRouter } = require('../admin/server-admin');
+app.use(createAdminRouter(authMiddleware));
+
 app.use((req, res) => {
     res.status(404).json({ error: 'resource_not_found' });
 });
@@ -134,7 +138,7 @@ app.use((err, req, res, next) => {
 if (require.main === module) {
     const PORT = process.env.API_PORT || 3000;
     app.listen(PORT, () => {
-        console.log(`🚀 API MVP-011+012+013+015 escuchando en http://localhost:${PORT}`);
+        console.log(`🚀 API MVP-011+012+013+015+016 escuchando en http://localhost:${PORT}`);
     });
 }
 
