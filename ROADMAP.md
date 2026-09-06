@@ -87,3 +87,5 @@ core/styles/
 | MVP-010 | Publicación y Distribución Web Automática | ✅ Completado |
 
 | MVP-011 | API de Consulta del Corpus Jurídico | ✅ Implementada |
+
+| MVP-012 | Motor de Búsqueda Interna | ✅ Implementado |

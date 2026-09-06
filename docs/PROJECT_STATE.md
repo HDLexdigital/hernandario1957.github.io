@@ -227,3 +227,11 @@
 - Test de integración: core/api/test/mvp-011-api.server.test.js
 - Resultado: 5/5 tests passed
 - Persistencia: basada en indice.json y manifest.json, sin base de datos
+
+## Implementación MVP-012 — Motor de Búsqueda Interna
+
+- Generador de índice: scripts/build-search-index.js
+- Índice: public/search-index.json
+- Endpoint API: GET /api/v1/search?q=...
+- Integrado en core/api/server.js
+- API previa: 5/5 tests passed
