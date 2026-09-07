@@ -2,8 +2,8 @@
   "id": "MVP-045",
   "title": "Validador de enlaces externos en artefactos públicos",
   "description": "Escanea todos los HTML públicos y verifica el estado HTTP de los enlaces absolutos externos, excluyendo dominios internos y rutas de API.",
-  "version": "0.1.0-draft",
-  "status": "draft",
+  "version": "1.0.0",
+  "status": "implemented",
   "created": "2026-09-07",
   "module": "core/external-links",
   "acceptance_criteria": [
@@ -27,5 +27,6 @@
     "La verificación HTTP depende de disponibilidad de red externa.",
     "Posibles falsos positivos por redirecciones o rate limiting.",
     "El reporte puede quedar desactualizado si no se regenera en cada despliegue."
-  ]
+  ],
+  "updated": "2026-09-07"
 }
