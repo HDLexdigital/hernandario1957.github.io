@@ -837,10 +837,22 @@
 
 ---
 
-## Apertura MVP-046 — Panel público de enlaces externos
+## Cierre MVP-046 — Panel público de enlaces externos
 
 - Contrato: core/public-external-links/mvp-046-public-external-links.contract.json
-- Versión: 0.1.0-draft
+- Versión: 1.0.0
 - Test contractual: 6/6 passed
-- Estado: contrato creado, implementación pendiente
-- Pausa de estabilidad suspendida temporalmente.
+- Test del generador: 4/4 passed
+- Estado: implementado y validado
+- Dashboard: public/external-links.html
+- Enlace añadido en public/nav.html
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-046
+
+- Estado: repositorio congelado en v1.0.0-public-external-links.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
+- Próximo retorno: apertura de MVP-047 o ajuste de producción.
