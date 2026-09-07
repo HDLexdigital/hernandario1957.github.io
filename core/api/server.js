@@ -138,6 +138,17 @@ app.get('/api/v1/public/timeline/:documentId', (req, res) => {
     res.json(timeline);
 });
 
+
+// Métricas públicas de compilación (MVP-027)
+app.get('/api/v1/public/build-metrics', (req, res) => {
+    const metricsPath = process.env.METRICS_PATH || path.join(RAIZ, 'public', 'build-metrics.json');
+    const metrics = leerJson(metricsPath);
+    if (!metrics) {
+        return res.status(404).json({ error: 'metrics_not_found' });
+    }
+    res.json(metrics);
+});
+
 // ========== RUTAS PRIVADAS (requieren API Key) ==========
 app.use(authMiddleware);
 
