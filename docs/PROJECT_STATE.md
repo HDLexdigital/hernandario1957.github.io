@@ -658,3 +658,11 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-036 o ajuste de producción.
+
+## Estado MVP-036 — Exportación de colección en formato NDJSON
+
+- Contrato: core/collection-ndjson/mvp-036-collection-ndjson.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/collection-ndjson/test/mvp-036-collection-ndjson.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente

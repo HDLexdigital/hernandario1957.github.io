@@ -1,0 +1,29 @@
+{
+  "contract": "MVP-036-CollectionNDJSON",
+  "version": "0.1.0-draft",
+  "description": "Exportación de colección pública en formato NDJSON",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "file": "public/collection-export.ndjson"
+  },
+  "source": {
+    "catalog": "public/catalogo.json"
+  },
+  "format": "ndjson",
+  "lineSchema": {
+    "type": "object",
+    "required": [
+      "documentId",
+      "title",
+      "versionId",
+      "createdAt",
+      "url"
+    ]
+  }
+}
