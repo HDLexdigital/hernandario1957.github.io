@@ -1,0 +1,31 @@
+{
+  "contract": "MVP-035-PublicSearchAdvanced",
+  "version": "0.1.0-draft",
+  "description": "Panel público estático de búsqueda avanzada con filtros por documento, versión y texto",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/search-advanced.html",
+    "data": "public/search-index.json"
+  },
+  "filters": {
+    "allowed": [
+      "documentId",
+      "versionId",
+      "text"
+    ],
+    "inputTypes": {
+      "documentId": "text",
+      "versionId": "text",
+      "text": "text"
+    }
+  },
+  "source": {
+    "searchIndex": "public/search-index.json"
+  }
+}

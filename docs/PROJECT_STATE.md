@@ -630,3 +630,12 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-035 o ajuste de producción.
+
+## Estado MVP-035 — Panel público de búsqueda avanzada en HTML
+
+- Contrato: core/public-search-advanced/mvp-035-public-search-advanced.contract.json
+- Versión: 0.1.0-draft
+- Dashboard: public/search-advanced.html
+- Consume: public/search-index.json
+- Filtros: documentId, versionId, text
+- Resultado: 5/5 tests passed
