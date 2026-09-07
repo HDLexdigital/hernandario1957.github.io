@@ -106,4 +106,4 @@ core/styles/
 
 | MVP-020 | Sitemap e indexación estática | ✅ Implementado |
 
-| MVP-021 | API de metadatos públicos sin autenticación | 🧪 Contrato 0.1.0-draft |
+| MVP-021 | API de metadatos públicos sin autenticación | ✅ Implementado |

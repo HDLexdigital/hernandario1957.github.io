@@ -407,3 +407,12 @@
 - Test contractual: core/public-api/test/mvp-021-public-api.contract.test.js
 - Resultado: 3/3 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-021 — API de metadatos públicos
+
+- Endpoints:
+  - GET /api/v1/public/catalog
+  - GET /api/v1/public/document/:id
+- Sin autenticación, solo metadatos.
+- Integrados en core/api/server.js
+- Pruebas de API existentes: 17/17
