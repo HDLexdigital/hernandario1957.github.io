@@ -474,3 +474,11 @@
 - Orden ascendente por createdAt
 - Integrado en core/api/server.js
 - Pruebas de API/Auth en verde
+
+## Estado MVP-026 — Feed RSS/Atom estático
+
+- Contrato: core/feed/mvp-026-feed.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/feed/test/mvp-026-feed.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente

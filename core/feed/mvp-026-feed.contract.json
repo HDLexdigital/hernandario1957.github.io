@@ -1,0 +1,27 @@
+{
+  "contract": "MVP-026-Feed",
+  "version": "0.1.0-draft",
+  "description": "Feed RSS estático de novedades para sindicación",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "file": "public/feed.xml",
+    "format": "rss",
+    "version": "2.0"
+  },
+  "source": {
+    "novedades": "public/novedades.json"
+  },
+  "items": {
+    "title": "title",
+    "link": "url",
+    "description": "title",
+    "pubDate": "createdAt",
+    "guid": "url"
+  }
+}
