@@ -736,3 +736,10 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-040 o ajuste de producción.
+
+## Implementación MVP-040 — Panel público de navegación
+
+- Generador: scripts/build-public-nav.js
+- Dashboard: public/nav.html
+- Centraliza enlaces a todos los dashboards públicos
+- Pruebas: contrato 3/3, builder 1/1

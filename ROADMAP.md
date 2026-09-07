@@ -32,3 +32,5 @@
 | MVP-038 | Panel público de exportaciones | ✅ Implementado |
 
 | MVP-039 | Panel público de colección | ✅ Implementado |
+
+| MVP-040 | Panel público de navegación | ✅ Implementado |
