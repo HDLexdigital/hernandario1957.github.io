@@ -424,3 +424,11 @@
 - Test contractual: core/health/test/mvp-022-health.contract.test.js
 - Resultado: 3/3 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-022 — Healthcheck Público
+
+- Endpoint: GET /api/v1/health
+- Sin autenticación
+- Respuesta: status, version, timestamp
+- Integrado en core/api/server.js
+- Pruebas de API/Auth existentes en verde

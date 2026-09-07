@@ -108,4 +108,4 @@ core/styles/
 
 | MVP-021 | API de metadatos públicos sin autenticación | ✅ Implementado |
 
-| MVP-022 | Healthcheck público | 🧪 Contrato 0.1.0-draft |
+| MVP-022 | Healthcheck público | ✅ Implementado |
