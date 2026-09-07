@@ -1,0 +1,30 @@
+{
+  "id": "MVP-046",
+  "title": "Panel público de enlaces externos",
+  "description": "Dashboard HTML que muestra el reporte de enlaces externos generado por MVP-045.",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-07",
+  "module": "core/public-external-links",
+  "acceptance_criteria": [
+    "El generador crea public/external-links.html sin depender de rutas privadas.",
+    "El dashboard consume public/external-links-report.json.",
+    "Muestra estado global OK o ERROR.",
+    "Lista URLs, estado HTTP y archivos de origen si el reporte contiene items.",
+    "Se añade un enlace a external-links.html en public/nav.html.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/external-links.html",
+    "scripts/build-public-external-links.js",
+    "core/public-external-links/test/mvp-046-public-external-links.builder.test.js"
+  ],
+  "dependencies": [
+    "public/external-links-report.json",
+    "public/nav.html"
+  ],
+  "risks": [
+    "Posible ausencia de external-links-report.json si no se ha ejecutado el generador previamente.",
+    "El dashboard no debe exponer datos sensibles de auditoría."
+  ]
+}
