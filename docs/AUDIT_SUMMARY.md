@@ -300,3 +300,15 @@ Todo el sistema es:
 - Read-Only & Stateless.
 - No Database.
 - Zero LEDM Mutation.
+
+
+---
+
+## Cierre MVP-027 — Métricas públicas de compilación
+
+- Contrato: core/build-metrics/mvp-027-build-metrics.contract.json
+- Versión: 0.1.0-draft
+- Generador: scripts/build-metrics.js
+- Endpoint: GET /api/v1/public/build-metrics
+- Resultado: 4/4 tests passed
+- Métricas: totalDocuments, totalVersions, coreVersion, ledmVersion, checksum

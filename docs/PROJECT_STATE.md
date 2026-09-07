@@ -515,3 +515,9 @@
 - Endpoint: GET /api/v1/public/build-metrics
 - Basado en catalogo.json
 - Pruebas de API/Auth en verde
+
+## Cierre MVP-027 — Métricas públicas de compilación
+
+- Generador implementado y endpoint público verificado.
+- Métricas estáticas basadas en catálogo.
+- Tag v1.0.0-build-metrics aplicado.
