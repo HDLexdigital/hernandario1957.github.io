@@ -13,6 +13,7 @@ const SEARCH_INDEX_PATH = process.env.API_SEARCH_INDEX_PATH || path.join(RAIZ, '
 const CATALOGO_PATH = process.env.API_CATALOGO_PATH || path.join(RAIZ, 'public', 'catalogo.json');
 
 const API_KEY = process.env.LEX_API_KEY || '';
+const { createAuditLogger } = require('../audit/audit-logger');
 
 function normalizar(texto) {
     return String(texto || '')
@@ -44,6 +45,8 @@ const authMiddleware = (req, res, next) => {
 };
 
 app.use(express.json());
+app.use(createAuditLogger());
+
 app.use(authMiddleware);
 
 app.get('/api/v1/status', (req, res) => {
