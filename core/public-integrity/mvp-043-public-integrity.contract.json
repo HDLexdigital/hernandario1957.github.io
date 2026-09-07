@@ -2,8 +2,8 @@
   "id": "MVP-043",
   "title": "Panel público de integridad y auditoría",
   "description": "Dashboard HTML que muestra el estado del reporte de integridad y métricas de compilación.",
-  "version": "0.1.0-draft",
-  "status": "draft",
+  "version": "1.0.0",
+  "status": "implemented",
   "created": "2026-09-07",
   "module": "core/public-integrity",
   "acceptance_criteria": [
@@ -27,5 +27,6 @@
   "risks": [
     "Posible ausencia de integrity-report.json si no se ha ejecutado el generador previamente.",
     "Datos sensibles de auditoría no deben exponerse; solo estado público."
-  ]
+  ],
+  "updated": "2026-09-07"
 }

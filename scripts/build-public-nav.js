@@ -13,7 +13,8 @@ const links = [
     { href: 'global-timeline.html', label: 'Línea de Tiempo Global' },
     { href: 'metrics.html', label: 'Métricas' },
     { href: 'exports.html', label: 'Exportaciones' },
-    { href: 'collection.html', label: 'Colección Completa' }
+    { href: 'collection.html', label: 'Colección Completa' },
+    { href: 'integrity.html', label: 'Integridad' }
 ];
 
 const linksHtml = links.map(link => {

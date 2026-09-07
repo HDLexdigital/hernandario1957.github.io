@@ -37,4 +37,4 @@
 
 | MVP-041 | Panel público de portada (Home estático) | ✅ Implementado |
 | MVP-042 | Validador de integridad de artefactos públicos | ✅ Implementado |
-| MVP-043 | Panel público de integridad y auditoría | 🧪 Contrato 0.1.0-draft |
+| MVP-043 | Panel público de integridad y auditoría | ✅ Implementado |

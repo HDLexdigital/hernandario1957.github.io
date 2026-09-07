@@ -798,10 +798,22 @@
 
 ---
 
-## Apertura MVP-043 — Panel público de integridad y auditoría
+## Cierre MVP-043 — Panel público de integridad y auditoría
 
 - Contrato: core/public-integrity/mvp-043-public-integrity.contract.json
-- Versión: 0.1.0-draft
+- Versión: 1.0.0
 - Test contractual: 6/6 passed
-- Estado: contrato creado, implementación pendiente
-- Pausa de estabilidad suspendida temporalmente.
+- Test del generador: 4/4 passed
+- Estado: implementado y validado
+- Dashboard: public/integrity.html
+- Enlace añadido en public/nav.html
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-043
+
+- Estado: repositorio congelado en v1.0.0-public-integrity.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
+- Próximo retorno: apertura de MVP-044 o ajuste de producción.
