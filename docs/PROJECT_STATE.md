@@ -867,3 +867,13 @@
 - Salida: public/anchors.json
 - Endpoint público: GET /api/v1/public/anchors (pendiente de integrar)
 - Estado: implementado y validado
+
+## Estado MVP-047 — Anchors
+
+- Contrato: core/anchors/mvp-047-anchors.contract.json
+- Versión: 0.1.0-draft → 1.0.0
+- Test contractual: 6/6 passed
+- Generador: scripts/build-anchors.js
+- Salida: public/anchors.json
+- Endpoint público: GET /api/v1/public/anchors (pendiente de integrar)
+- Estado: implementado y validado
