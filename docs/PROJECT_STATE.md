@@ -604,3 +604,12 @@
 - Test contractual: core/collection-export/test/mvp-033-collection-export.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-033
+
+- Estado: repositorio congelado en v1.0.0-collection-export.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-034 o ajuste de producción.
