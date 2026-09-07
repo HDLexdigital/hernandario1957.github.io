@@ -684,3 +684,21 @@
 - Test contractual: core/public-search-relevance/test/mvp-037-public-search-relevance.contract.test.js
 - Resultado: 3/3 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-037 — Panel público de búsqueda con relevancia
+
+- Generador: scripts/build-public-search-relevance.js
+- Dashboard: public/search-relevance.html
+- Consume: public/search-index.json
+- Relevancia: frecuencia de términos, insensible a mayúsculas y acentos
+- Pruebas: contrato 3/3, builder 1/1
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-037
+
+- Estado: repositorio congelado en v1.0.0-public-search-relevance.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-038 o ajuste de producción.
