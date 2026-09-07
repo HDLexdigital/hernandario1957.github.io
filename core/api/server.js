@@ -115,6 +115,17 @@ app.get('/api/v1/public/search', (req, res) => {
     });
 });
 
+
+// Novedades públicas (MVP-024)
+app.get('/api/v1/public/novedades', (req, res) => {
+    const novedadesPath = process.env.NOVEDADES_PATH || path.join(RAIZ, 'public', 'novedades.json');
+    const novedades = leerJson(novedadesPath);
+    if (!novedades) {
+        return res.status(404).json({ error: 'novedades_not_found' });
+    }
+    res.json(novedades);
+});
+
 // ========== RUTAS PRIVADAS (requieren API Key) ==========
 app.use(authMiddleware);
 
