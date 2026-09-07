@@ -1,0 +1,21 @@
+{
+  "contract": "MVP-019-Docs",
+  "version": "0.1.0-draft",
+  "description": "Contrato de validación para la consolidación final de documentación y manual operativo",
+  "principles": {
+    "purelyDocumentary": true,
+    "noCodeMutation": true,
+    "noDatabase": true,
+    "deterministicStructure": true
+  },
+  "requiredFiles": [
+    "docs/MANUAL_OPERATIVO.md",
+    "docs/PROJECT_STATE.md",
+    "docs/AUDIT_SUMMARY.md",
+    "ROADMAP.md"
+  ],
+  "validation": {
+    "requireAllFilesPresent": true,
+    "failOnMissingDocs": true
+  }
+}

@@ -365,3 +365,11 @@
 - API Key hasheada (SHA-256 truncado)
 - Integrado en core/api/server.js
 - Tests: contrato 4/4, logger 3/3
+
+## Estado MVP-019 — Consolidación Final de Documentación
+
+- Contrato: core/docs/mvp-019-docs.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/docs/test/mvp-019-docs.contract.test.js
+- Resultado: 2/2 tests passed
+- Implementación: pendiente de redacción completa del manual
