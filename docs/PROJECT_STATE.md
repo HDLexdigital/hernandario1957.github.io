@@ -521,3 +521,11 @@
 - Generador implementado y endpoint público verificado.
 - Métricas estáticas basadas en catálogo.
 - Tag v1.0.0-build-metrics aplicado.
+
+## Estado MVP-028 — Línea de tiempo global consolidada
+
+- Contrato: core/global-timeline/mvp-028-global-timeline.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/global-timeline/test/mvp-028-global-timeline.contract.test.js
+- Resultado: 5/5 tests passed
+- Implementación: pendiente

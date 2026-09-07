@@ -1,0 +1,32 @@
+{
+  "contract": "MVP-028-GlobalTimeline",
+  "version": "0.1.0-draft",
+  "description": "Línea de tiempo global consolidada de todo el corpus jurídico",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "static": "public/global-timeline.json",
+    "endpoint": "/api/v1/public/global-timeline",
+    "method": "GET",
+    "auth": false
+  },
+  "source": {
+    "timelines": "public/timeline/*.json"
+  },
+  "sort": {
+    "field": "createdAt",
+    "order": "desc"
+  },
+  "fields": [
+    "documentId",
+    "versionId",
+    "createdAt",
+    "title",
+    "url"
+  ]
+}

@@ -8,3 +8,5 @@
 | MVP-026 | Feed RSS/Atom estático | ✅ Implementado |
 
 | MVP-027 | Métricas públicas de compilación | ✅ Implementado |
+
+| MVP-028 | Línea de tiempo global consolidada | 🧪 Contrato 0.1.0-draft |
