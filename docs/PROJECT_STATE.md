@@ -587,3 +587,12 @@
 - Dashboard: public/search.html
 - Consume: public/search-index.json
 - Resultado: 4/4 tests passed
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-032
+
+- Estado: repositorio congelado en v1.0.0-public-search-html.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-033 o ajuste de producción.
