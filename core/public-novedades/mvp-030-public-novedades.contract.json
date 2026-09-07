@@ -1,0 +1,19 @@
+{
+  "contract": "MVP-030-PublicNovedades",
+  "version": "0.1.0-draft",
+  "description": "Panel público estático de novedades jurídicas",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/novedades.html",
+    "data": "public/novedades.json"
+  },
+  "source": {
+    "novedades": "public/novedades.json"
+  }
+}

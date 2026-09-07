@@ -562,3 +562,12 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-030 o ajuste de producción.
+
+## Estado MVP-030 — Panel público de novedades en HTML
+
+- Contrato: core/public-novedades/mvp-030-public-novedades.contract.json
+- Versión: 0.1.0-draft
+- Dashboard: public/novedades.html
+- Consume: public/novedades.json
+- Resultado: 5/5 tests passed
+- Implementación: pendiente de tag final

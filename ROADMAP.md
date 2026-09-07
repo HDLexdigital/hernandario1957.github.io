@@ -12,3 +12,5 @@
 | MVP-028 | Línea de tiempo global consolidada | ✅ Implementado |
 
 | MVP-029 | Panel público de métricas | ✅ Implementado |
+
+| MVP-030 | Panel público de novedades en HTML | 🧪 Contrato 0.1.0-draft |
