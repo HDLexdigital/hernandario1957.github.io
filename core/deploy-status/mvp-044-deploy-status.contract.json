@@ -2,8 +2,8 @@
   "id": "MVP-044",
   "title": "Panel público de estado del despliegue",
   "description": "Dashboard y JSON público que consolida información del último build, commit e integridad del sitio.",
-  "version": "0.1.0-draft",
-  "status": "draft",
+  "version": "1.0.0",
+  "status": "implemented",
   "created": "2026-09-07",
   "module": "core/deploy-status",
   "acceptance_criteria": [
@@ -30,5 +30,6 @@
   "risks": [
     "La información de commit depende de git; en CI puede no estar disponible.",
     "Datos sensibles del entorno no deben exponerse."
-  ]
+  ],
+  "updated": "2026-09-07"
 }

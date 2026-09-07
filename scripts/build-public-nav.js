@@ -14,7 +14,8 @@ const links = [
     { href: 'metrics.html', label: 'Métricas' },
     { href: 'exports.html', label: 'Exportaciones' },
     { href: 'collection.html', label: 'Colección Completa' },
-    { href: 'integrity.html', label: 'Integridad' }
+    { href: 'integrity.html', label: 'Integridad' },
+    { href: 'deploy-status.html', label: 'Estado del Despliegue' }
 ];
 
 const linksHtml = links.map(link => {
