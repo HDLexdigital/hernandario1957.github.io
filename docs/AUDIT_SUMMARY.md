@@ -312,3 +312,23 @@ Todo el sistema es:
 - Endpoint: GET /api/v1/public/build-metrics
 - Resultado: 4/4 tests passed
 - Métricas: totalDocuments, totalVersions, coreVersion, ledmVersion, checksum
+
+
+---
+
+## MVP-027 — Métricas públicas de compilación
+
+- Contrato: core/build-metrics/mvp-027-build-metrics.contract.json
+- Versión: 0.1.0-draft
+- Generador: scripts/build-metrics.js
+- Salida estática: public/build-metrics.json
+- Endpoint: GET /api/v1/public/build-metrics
+- Resultado contractual: 4/4 tests passed
+- Métricas incluidas:
+  - generatedAt
+  - totalDocuments
+  - totalVersions
+  - coreVersion
+  - ledmVersion
+  - checksum
+- Estado: implementado y validado.
