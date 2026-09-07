@@ -499,3 +499,11 @@
 - Estado: repositorio congelado en v1.0.0-feed.
 - Actividad: solo documentación y auditoría externa.
 - Próximo retorno: apertura de MVP-027 o ajuste externo de infraestructura.
+
+## Estado MVP-027 — Métricas públicas de compilación
+
+- Contrato: core/build-metrics/mvp-027-build-metrics.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/build-metrics/test/mvp-027-build-metrics.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente

@@ -6,3 +6,5 @@
 | MVP-025 | Línea de tiempo de versiones por documento | ✅ Implementado |
 
 | MVP-026 | Feed RSS/Atom estático | ✅ Implementado |
+
+| MVP-027 | Métricas públicas de compilación | 🧪 Contrato 0.1.0-draft |
