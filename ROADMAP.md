@@ -7,4 +7,4 @@
 
 | MVP-026 | Feed RSS/Atom estático | ✅ Implementado |
 
-| MVP-027 | Métricas públicas de compilación | 🧪 Contrato 0.1.0-draft |
+| MVP-027 | Métricas públicas de compilación | ✅ Implementado |

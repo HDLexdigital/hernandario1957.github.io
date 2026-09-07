@@ -507,3 +507,11 @@
 - Test contractual: core/build-metrics/test/mvp-027-build-metrics.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-027 — Métricas públicas de compilación
+
+- Generador: scripts/build-metrics.js
+- Salida: public/build-metrics.json
+- Endpoint: GET /api/v1/public/build-metrics
+- Basado en catalogo.json
+- Pruebas de API/Auth en verde
