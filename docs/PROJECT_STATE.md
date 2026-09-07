@@ -389,3 +389,13 @@
 - Test contractual: core/sitemap/test/mvp-020-sitemap.contract.test.js
 - Resultado: 3/3 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-020 — Sitemap e indexación estática
+
+- Generador: scripts/build-sitemap.js
+- Salidas: public/sitemap.xml y public/robots.txt
+- Basado en catalogo.json
+- Pruebas:
+  - Contrato: 3/3
+  - Builder: 2/2
+- Estado: implementado y validado.
