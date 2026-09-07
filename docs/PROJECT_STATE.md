@@ -571,3 +571,11 @@
 - Consume: public/novedades.json
 - Resultado: 5/5 tests passed
 - Implementación: pendiente de tag final
+
+## Estado MVP-031 — Línea de tiempo global en HTML
+
+- Contrato: core/global-timeline-html/mvp-031-global-timeline-html.contract.json
+- Versión: 0.1.0-draft
+- Dashboard: public/global-timeline.html
+- Consume: public/global-timeline.json
+- Resultado: 5/5 tests passed

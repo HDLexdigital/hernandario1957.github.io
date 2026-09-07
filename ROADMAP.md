@@ -14,3 +14,5 @@
 | MVP-029 | Panel público de métricas | ✅ Implementado |
 
 | MVP-030 | Panel público de novedades en HTML | 🧪 Contrato 0.1.0-draft |
+
+| MVP-031 | Línea de tiempo global en HTML | 🧪 Contrato 0.1.0-draft |
