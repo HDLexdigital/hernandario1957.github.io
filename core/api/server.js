@@ -140,6 +140,14 @@ app.get('/api/v1/public/timeline/:documentId', (req, res) => {
 
 
 // Métricas públicas de compilación (MVP-027)
+app.get('/api/v1/public/integrity', (req, res) => {
+    const reportPath = path.join(process.cwd(), 'public', 'integrity-report.json');
+    if (!fs.existsSync(reportPath)) {
+        return res.status(404).json({ error: 'report not found' });
+    }
+    res.json(JSON.parse(fs.readFileSync(reportPath, 'utf8')));
+});
+
 app.get('/api/v1/public/build-metrics', (req, res) => {
     const metricsPath = process.env.METRICS_PATH || path.join(RAIZ, 'public', 'build-metrics.json');
     const metrics = leerJson(metricsPath);

@@ -2,8 +2,8 @@
   "id": "MVP-042",
   "title": "Validador de integridad de artefactos públicos",
   "description": "Verifica que todos los artefactos públicos generados estén presentes, sean válidos y no contengan referencias rotas.",
-  "version": "0.1.0-draft",
-  "status": "draft",
+  "version": "1.0.0",
+  "status": "implemented",
   "created": "2026-09-07",
   "module": "core/integrity",
   "acceptance_criteria": [
@@ -28,5 +28,6 @@
   "risks": [
     "Posibles falsos positivos en referencias generadas dinámicamente por fetch().",
     "Enlaces absolutos externos deben ser excluidos del análisis local."
-  ]
+  ],
+  "updated": "2026-09-07"
 }

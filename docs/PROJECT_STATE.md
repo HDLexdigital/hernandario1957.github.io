@@ -785,10 +785,22 @@
 
 ---
 
-## Apertura MVP-042 — Validador de integridad de artefactos públicos
+## Cierre MVP-042 — Validador de integridad de artefactos públicos
 
 - Contrato: core/integrity/mvp-042-integrity.contract.json
-- Versión: 0.1.0-draft
+- Versión: 1.0.0
 - Test contractual: 6/6 passed
-- Estado: contrato creado, implementación pendiente
-- Pausa de estabilidad suspendida temporalmente.
+- Test del generador: 4/4 passed
+- Estado: implementado y validado
+- Reporte: public/integrity-report.json
+- Endpoint: GET /api/v1/public/integrity
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-042
+
+- Estado: repositorio congelado en v1.0.0-integrity.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-043 o ajuste de producción.
