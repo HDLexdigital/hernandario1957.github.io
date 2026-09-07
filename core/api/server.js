@@ -47,6 +47,39 @@ const authMiddleware = (req, res, next) => {
 app.use(express.json());
 app.use(createAuditLogger());
 
+// ========== RUTAS PÚBLICAS SIN AUTENTICACIÓN (MVP-021) ==========
+app.get('/api/v1/public/catalog', (req, res) => {
+    const catalogo = leerJson(CATALOGO_PATH);
+    if (!catalogo) {
+        return res.status(404).json({ error: 'catalog_not_found' });
+    }
+
+    const resumen = catalogo.map(doc => ({
+        documentId: doc.documentId,
+        versions: doc.versions || []
+    }));
+
+    res.json(resumen);
+});
+
+app.get('/api/v1/public/document/:id', (req, res) => {
+    const catalogo = leerJson(CATALOGO_PATH);
+    if (!catalogo) {
+        return res.status(404).json({ error: 'catalog_not_found' });
+    }
+
+    const doc = catalogo.find(entry => entry.documentId === req.params.id);
+    if (!doc) {
+        return res.status(404).json({ error: 'document_not_found' });
+    }
+
+    res.json({
+        documentId: doc.documentId,
+        versions: doc.versions || []
+    });
+});
+
+// ========== RUTAS PRIVADAS (requieren API Key) ==========
 app.use(authMiddleware);
 
 app.get('/api/v1/status', (req, res) => {
@@ -129,39 +162,6 @@ app.get('/api/v1/catalog', (req, res) => {
 const { createAdminRouter } = require('../admin/server-admin');
 app.use(createAdminRouter(authMiddleware));
 
-
-// Endpoints públicos de metadatos (MVP-021)
-app.get('/api/v1/public/catalog', (req, res) => {
-    const catalogo = leerJson(CATALOGO_PATH);
-    if (!catalogo) {
-        return res.status(404).json({ error: 'catalog_not_found' });
-    }
-
-    const resumen = catalogo.map(doc => ({
-        documentId: doc.documentId,
-        versions: doc.versions || []
-    }));
-
-    res.json(resumen);
-});
-
-app.get('/api/v1/public/document/:id', (req, res) => {
-    const catalogo = leerJson(CATALOGO_PATH);
-    if (!catalogo) {
-        return res.status(404).json({ error: 'catalog_not_found' });
-    }
-
-    const doc = catalogo.find(entry => entry.documentId === req.params.id);
-    if (!doc) {
-        return res.status(404).json({ error: 'document_not_found' });
-    }
-
-    res.json({
-        documentId: doc.documentId,
-        versions: doc.versions || []
-    });
-});
-
 app.use((req, res) => {
     res.status(404).json({ error: 'resource_not_found' });
 });
@@ -174,7 +174,7 @@ app.use((err, req, res, next) => {
 if (require.main === module) {
     const PORT = process.env.API_PORT || 3000;
     app.listen(PORT, () => {
-        console.log(`🚀 API MVP-011+012+013+015+016 escuchando en http://localhost:${PORT}`);
+        console.log(`🚀 API MVP-011+012+013+015+016+021 escuchando en http://localhost:${PORT}`);
     });
 }
 
