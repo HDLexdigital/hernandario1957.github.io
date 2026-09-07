@@ -1,0 +1,19 @@
+{
+  "contract": "MVP-039-PublicCollection",
+  "version": "0.1.0-draft",
+  "description": "Panel público estático que muestra la colección completa del corpus",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/collection.html",
+    "data": "public/collection-export.json"
+  },
+  "source": {
+    "collection": "public/collection-export.json"
+  }
+}

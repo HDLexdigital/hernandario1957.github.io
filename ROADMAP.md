@@ -30,3 +30,5 @@
 | MVP-037 | Panel público de búsqueda con relevancia | ✅ Implementado |
 
 | MVP-038 | Panel público de exportaciones | ✅ Implementado |
+
+| MVP-039 | Panel público de colección | ✅ Implementado |

@@ -719,3 +719,10 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-039 o ajuste de producción.
+
+## Implementación MVP-039 — Panel público de colección
+
+- Generador: scripts/build-public-collection.js
+- Dashboard: public/collection.html
+- Consume: public/collection-export.json
+- Pruebas: contrato 3/3, builder 1/1
