@@ -753,3 +753,10 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-041 o ajuste de producción.
+
+## Implementación MVP-041 — Panel público de portada (Home estático)
+
+- Generador: scripts/build-public-home.js
+- Dashboard: public/index.html
+- Integra navegación y métricas resumidas
+- Pruebas: contrato 4/4, builder 1/1

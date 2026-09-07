@@ -34,3 +34,5 @@
 | MVP-039 | Panel público de colección | ✅ Implementado |
 
 | MVP-040 | Panel público de navegación | ✅ Implementado |
+
+| MVP-041 | Panel público de portada (Home estático) | ✅ Implementado |
