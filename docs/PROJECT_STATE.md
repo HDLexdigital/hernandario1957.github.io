@@ -416,3 +416,11 @@
 - Sin autenticación, solo metadatos.
 - Integrados en core/api/server.js
 - Pruebas de API existentes: 17/17
+
+## Estado MVP-022 — Healthcheck Público
+
+- Contrato: core/health/mvp-022-health.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/health/test/mvp-022-health.contract.test.js
+- Resultado: 3/3 tests passed
+- Implementación: pendiente
