@@ -758,3 +758,189 @@ LexDigitalHD 2.0 es un motor editorial jurídico desarrollado bajo disciplina *c
 ### Estado de Congelación (Code Freeze)
 
 El sistema queda sellado en el tag `v1.0.0-collection-csv`. Toda actividad subsecuente queda limitada a la configuración del dominio `digitalhd.com` en GitHub Pages y a la revisión por parte de la mesa de auditoría externa.
+
+---
+
+# Resumen Ejecutivo Actualizado — LexDigitalHD 2.0
+
+## 1. Contexto
+
+LexDigitalHD es un motor editorial jurídico basado en **LEDM 2.0**, desarrollado con disciplina **contract-first**.
+
+- Linux Mint como entorno principal del core.
+- Windows 11 solo para extracción desde InDesign.
+- Cada MVP define contrato JSON + pruebas antes de implementar.
+- El chat principal centraliza decisiones definitivas.
+- Los auditores externos emiten observaciones, no modifican repositorio.
+
+## 2. Estado de los MVP
+
+| MVP | Título | Estado |
+| --- | --- | --- |
+| MVP-001 | CIDM 1.0 | ✅ Cerrado |
+| MVP-002 | LEDM 2.0 | ✅ Cerrado |
+| MVP-003 | Semantic Compiler | ✅ Cerrado |
+| MVP-004 | Constitución completa + EPUB | ✅ Cerrado |
+| MVP-005 | CI/CD + EPUBCheck + axe-core | ✅ Cerrado |
+| MVP-006 | Publicación Web | ✅ Cerrado |
+| MVP-007 | PDF Accesible PDF/UA-1 | ✅ Cerrado |
+| MVP-008 | Print-Ready PDF PDF/X-1a | ✅ Cerrado |
+| MVP-009 | Design System Base | ✅ Integrado |
+| MVP-010 | Publicación y Distribución Web Automática | ✅ Cerrado |
+| MVP-011 | API de Consulta del Corpus Jurídico | ✅ Cerrado |
+| MVP-012 | Motor de Búsqueda Interna | ✅ Cerrado |
+| MVP-013 | Publicación Multi-Documento Programática | ✅ Cerrado |
+| MVP-014 | Catálogo y Versionado de Publicaciones | ✅ Cerrado |
+| MVP-015 | Control de acceso / API Keys | ✅ Cerrado |
+| MVP-016 | Panel de Administración y Estado | ✅ Cerrado |
+| MVP-017 | Integración con Dominio Definitivo y Despliegue Público | ✅ Implementado |
+| MVP-018 | Registro de auditoría basado en archivos | ✅ Cerrado |
+| MVP-019 | Consolidación Final de Documentación | ✅ Cerrado |
+| MVP-020 | Sitemap e indexación estática | ✅ Cerrado |
+| MVP-021 | API de metadatos públicos sin autenticación | ✅ Cerrado |
+| MVP-022 | Healthcheck público | ✅ Cerrado |
+| MVP-023 | Búsqueda pública simplificada | ✅ Cerrado |
+| MVP-024 | API de novedades/actualizaciones | ✅ Cerrado |
+| MVP-025 | Línea de tiempo de versiones por documento | ✅ Cerrado |
+| MVP-026 | Feed RSS/Atom estático | ✅ Cerrado |
+| MVP-027 | Métricas públicas de compilación | ✅ Cerrado |
+| MVP-028 | Línea de tiempo global consolidada | ✅ Cerrado |
+| MVP-029 | Panel público de métricas | ✅ Cerrado |
+| MVP-030 | Panel público de novedades en HTML | ✅ Cerrado |
+| MVP-031 | Línea de tiempo global en HTML | ✅ Cerrado |
+| MVP-032 | Panel público de búsqueda en HTML | ✅ Cerrado |
+| MVP-033 | Exportación de colección pública en JSON | ✅ Cerrado |
+| MVP-034 | Exportación de colección en CSV | ✅ Cerrado |
+| MVP-035 | Panel público de búsqueda avanzada en HTML | ✅ Cerrado |
+
+## 3. Evidencia reciente
+
+- Suite principal core: **30/30 suites, 187/187 tests**.
+- Suite API/Admin/Auth: **1/1 suite, 6/6 tests**.
+- Suite Web/Estilos: **3/3 suites, 25/25 tests**.
+- Logger de auditoría: **3/3 tests**.
+- Auth/API tras integración: **17/17 tests**.
+- Sitemap: **contrato 3/3, builder 2/2**.
+- Public API: **contrato 3/3, endpoints manuales verificados**.
+- Healthcheck: **contrato 3/3, endpoint manual verificado**.
+- Public Search: **contrato 3/3, implementado y validado manualmente**.
+- Novedades: **contrato 4/4, generador e endpoint implementados**.
+- Timeline por documento: **contrato 4/4, generador e endpoint implementados**.
+- Feed RSS: **contrato 4/4, builder 2/2**.
+- Build Metrics: **contrato 4/4, generador e endpoint implementados**.
+- Global Timeline: **contrato 5/5, generador e endpoint implementados**.
+- Public Metrics Dashboard: **contrato 3/3, dashboard 3/3**.
+- Public Novedades Dashboard: **contrato 3/3, builder 1/1**.
+- Global Timeline HTML: **contrato 3/3, builder 1/1**.
+- Public Search HTML: **contrato 3/3, builder 1/1**.
+- Collection Export JSON: **contrato 4/4, builder 2/2**.
+- Collection Export CSV: **contrato 3/3, builder 2/2**.
+- Public Search Advanced: **contrato 4/4, builder 1/1**.
+- PDF/UA-1: **PASS** con advertencias Nested MCID no bloqueantes.
+- PDF/X-1a: generación exitosa con Ghostscript.
+- Repositorio limpio y sincronizado.
+
+## 4. Tags históricos
+
+- v1.0.0-publishing
+- v1.0.0-api
+- v1.0.0-search
+- v1.0.0-multi-publish
+- v1.0.0-catalog
+- v1.0.0-auth
+- v1.0.0-admin
+- v1.0.0-consolidated-admin
+- v1.0.0-deploy
+- v1.0.0-audit
+- v1.0.0-docs
+- v1.0.0-sitemap
+- v1.0.0-public-api
+- v1.0.0-health
+- v1.0.0-public-search
+- v1.0.0-novedades
+- v1.0.0-timeline
+- v1.0.0-feed
+- v1.0.0-build-metrics
+- v1.0.0-global-timeline
+- v1.0.0-public-metrics
+- v1.0.0-public-novedades
+- v1.0.0-global-timeline-html
+- v1.0.0-public-search-html
+- v1.0.0-collection-export
+- v1.0.0-collection-csv
+- v1.0.0-public-search-advanced
+
+## 5. Arquitectura resultante
+
+```text
+LEDM 2.0
+   ↓
+Renderers
+   ↓
+Publicación estática simple y multi-documento
+   ↓
+Catálogo y versionado
+   ↓
+API de consulta + búsqueda interna
+   ↓
+Control de acceso por API Key
+   ↓
+Panel de administración
+   ↓
+Registro de auditoría append-only
+   ↓
+Documentación operativa
+   ↓
+Despliegue público estático + sitemap
+   ↓
+API pública de metadatos
+   ↓
+Healthcheck público
+   ↓
+Búsqueda pública simplificada
+   ↓
+API de novedades/actualizaciones
+   ↓
+Línea de tiempo de versiones por documento
+   ↓
+Feed RSS/Atom estático
+   ↓
+Métricas públicas de compilación
+   ↓
+Línea de tiempo global consolidada
+   ↓
+Panel público de métricas
+   ↓
+Panel público de novedades en HTML
+   ↓
+Línea de tiempo global en HTML
+   ↓
+Panel público de búsqueda en HTML
+   ↓
+Exportación de colección pública en JSON
+   ↓
+Exportación de colección en CSV
+   ↓
+Panel público de búsqueda avanzada en HTML
+```
+
+Propiedades: solo lectura, stateless, sin bases de datos, índices precalculados, checksums verificables, determinismo, trazabilidad sin PII, suite web pública estática completa, exportaciones JSON y CSV, búsqueda avanzada con filtros por documento, versión y texto.
+
+## 6. Pendientes externos
+
+- Configuración de GitHub Pages: Source: GitHub Actions, Custom domain: digitalhd.com, DNS en proveedor, Enforce HTTPS.
+- Advertencias no bloqueantes: Nested MCID en PDF/UA, TrimBox/BleedBox en imprenta.
+
+## 7. Próximos candidatos
+
+- MVP-036 — Feed Atom alternativo
+- MVP-036 — Sitemap por secciones
+- MVP-036 — Panel público de búsqueda semántica
+- MVP-036 — Exportación de colección en formato NDJSON
+
+## 8. Reglas para auditores
+
+- No modificar repositorio.
+- No ejecutar comandos.
+- Solo observaciones técnicas.
+- Toda decisión final se toma en el chat principal.

@@ -639,3 +639,12 @@
 - Consume: public/search-index.json
 - Filtros: documentId, versionId, text
 - Resultado: 5/5 tests passed
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-035
+
+- Estado: repositorio congelado en v1.0.0-public-search-advanced.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-036 o ajuste de producción.
