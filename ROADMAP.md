@@ -39,3 +39,4 @@
 | MVP-042 | Validador de integridad de artefactos públicos | ✅ Implementado |
 | MVP-043 | Panel público de integridad y auditoría | ✅ Implementado |
 | MVP-044 | Panel público de estado del despliegue | ✅ Implementado |
+| MVP-045 | Validador de enlaces externos en artefactos públicos | 🧪 Contrato 0.1.0-draft |

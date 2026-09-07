@@ -824,9 +824,10 @@
 
 ---
 
-## Pausa de Estabilidad Definitiva — post MVP-044
+## Apertura MVP-045 — Validador de enlaces externos en artefactos públicos
 
-- Estado: repositorio congelado en v1.0.0-deploy-status.
-- Actividad permitida: solo auditoría externa y configuración de infraestructura.
-- Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
-- Próximo retorno: apertura de MVP-045 o ajuste de producción.
+- Contrato: core/external-links/mvp-045-external-links.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: 6/6 passed
+- Estado: contrato creado, implementación pendiente
+- Pausa de estabilidad suspendida temporalmente.

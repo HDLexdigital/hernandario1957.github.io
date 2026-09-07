@@ -1,0 +1,31 @@
+{
+  "id": "MVP-045",
+  "title": "Validador de enlaces externos en artefactos públicos",
+  "description": "Escanea todos los HTML públicos y verifica el estado HTTP de los enlaces absolutos externos, excluyendo dominios internos y rutas de API.",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-07",
+  "module": "core/external-links",
+  "acceptance_criteria": [
+    "El generador recorre todos los archivos HTML en public/ y extrae enlaces absolutos externos.",
+    "Se excluyen dominios internos (lexdigitalhd.com, github.io) y rutas /api/.",
+    "Se realiza verificación HTTP asíncrona con timeout configurable.",
+    "Se genera public/external-links-report.json con URL, estado HTTP, origen y estado OK/ERROR/TIMEOUT.",
+    "Existe un endpoint público GET /api/v1/public/external-links que devuelve el reporte sin autenticación.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/external-links-report.json",
+    "scripts/build-external-links-report.js",
+    "core/external-links/test/mvp-045-external-links.builder.test.js"
+  ],
+  "dependencies": [
+    "public/*.html",
+    "core/api/server.js"
+  ],
+  "risks": [
+    "La verificación HTTP depende de disponibilidad de red externa.",
+    "Posibles falsos positivos por redirecciones o rate limiting.",
+    "El reporte puede quedar desactualizado si no se regenera en cada despliegue."
+  ]
+}
