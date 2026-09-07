@@ -6,6 +6,33 @@ const path = require('path');
 const corePath = path.join(__dirname, '..', 'core');
 const errores = [];
 
+const EXPECTED_DIRS = [
+  'accessibility',
+  'adapters',
+  'admin',
+  'api',
+  'audit',
+  'auth',
+  'catalog',
+  'cidm',
+  'compiler',
+  'deploy',
+  'docs',
+  'epub',
+  'integration',
+  'ledm',
+  'multi-publish',
+  'pdf',
+  'print',
+  'publishing',
+  'public-api',
+  'search',
+  'sitemap',
+  'styles',
+  'tools',
+  'web'
+];
+
 function resultado(mensaje, esError) {
     if (esError) {
         console.log(`[X] ${mensaje}`);
@@ -17,19 +44,27 @@ function resultado(mensaje, esError) {
 
 function verificarEstructura() {
     console.log('\n=== NIVEL 1: ESTRUCTURA ===');
-    const esperados = [
-        'accessibility', 'adapters', 'cidm', 'compiler',
-        'epub', 'integration', 'ledm', 'tools', 'web'
-    ];
-    for (const dir of esperados) {
+
+    for (const dir of EXPECTED_DIRS) {
         const ruta = path.join(corePath, dir);
         resultado(`Directorio base verificado: core/${dir}`, !fs.existsSync(ruta));
     }
 
-    // Detección de anomalías
+    // Detectar directorios inesperados
+    const actualDirs = fs.readdirSync(corePath, { withFileTypes: true })
+        .filter(entry => entry.isDirectory())
+        .map(entry => entry.name)
+        .filter(name => !['node_modules', 'test'].includes(name));
+
+    for (const dir of actualDirs) {
+        if (!EXPECTED_DIRS.includes(dir)) {
+            resultado(`Directorio inesperado: core/${dir}`, true);
+        }
+    }
+
+    // Anomalías estructurales
     const anomalias = [];
     const walk = (dir) => {
-        if (!fs.existsSync(dir)) return;
         for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
             const full = path.join(dir, entry.name);
             if (entry.isDirectory()) {
@@ -48,7 +83,6 @@ function verificarJson() {
     console.log('\n=== NIVEL 2: SINTAXIS JSON ===');
     const jsonFiles = [];
     const walk = (dir) => {
-        if (!fs.existsSync(dir)) return;
         for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
             const full = path.join(dir, entry.name);
             if (entry.isDirectory()) walk(full);
