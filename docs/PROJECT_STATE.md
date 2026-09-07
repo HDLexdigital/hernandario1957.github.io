@@ -490,3 +490,12 @@
 - Formato: RSS 2.0
 - Basado en public/novedades.json
 - Tests: contrato 4/4, builder 2/2
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-026
+
+- Estado: repositorio congelado en v1.0.0-feed.
+- Actividad: solo documentación y auditoría externa.
+- Próximo retorno: apertura de MVP-027 o ajuste externo de infraestructura.
