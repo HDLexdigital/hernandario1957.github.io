@@ -41,3 +41,4 @@
 | MVP-044 | Panel público de estado del despliegue | ✅ Implementado |
 | MVP-045 | Validador de enlaces externos en artefactos públicos | ✅ Implementado |
 | MVP-046 | Panel público de enlaces externos | ✅ Implementado |
+| MVP-047 | Validador de anclas internas en artefactos públicos | 🧪 Contrato 0.1.0-draft |

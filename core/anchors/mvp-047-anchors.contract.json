@@ -1,0 +1,30 @@
+{
+  "id": "MVP-047",
+  "title": "Validador de anclas internas en artefactos públicos",
+  "description": "Escanea los HTML públicos y verifica que los enlaces con ancla apunten a elementos id/name existentes en el archivo destino.",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-07",
+  "module": "core/anchors",
+  "acceptance_criteria": [
+    "El generador recorre todos los archivos HTML en public/ y extrae enlaces internos con ancla.",
+    "Para cada enlace con ancla, verifica que el destino exista y contenga el id o name correspondiente.",
+    "Se excluyen enlaces externos y rutas de API.",
+    "Se genera public/anchors-report.json con archivo origen, enlace, destino, ancla y estado OK/ERROR.",
+    "Existe un endpoint público GET /api/v1/public/anchors que devuelve el reporte sin autenticación.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/anchors-report.json",
+    "scripts/build-anchors-report.js",
+    "core/anchors/test/mvp-047-anchors.builder.test.js"
+  ],
+  "dependencies": [
+    "public/*.html",
+    "core/api/server.js"
+  ],
+  "risks": [
+    "Posibles falsos positivos por IDs generados dinámicamente con JavaScript.",
+    "Enlaces con ancla vacía (#) deben excluirse para evitar ruido."
+  ]
+}

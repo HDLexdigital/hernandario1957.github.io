@@ -850,9 +850,10 @@
 
 ---
 
-## Pausa de Estabilidad Definitiva — post MVP-046
+## Apertura MVP-047 — Validador de anclas internas en artefactos públicos
 
-- Estado: repositorio congelado en v1.0.0-public-external-links.
-- Actividad permitida: solo auditoría externa y configuración de infraestructura.
-- Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
-- Próximo retorno: apertura de MVP-047 o ajuste de producción.
+- Contrato: core/anchors/mvp-047-anchors.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: 6/6 passed
+- Estado: contrato creado, implementación pendiente
+- Pausa de estabilidad suspendida temporalmente.
