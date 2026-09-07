@@ -529,3 +529,11 @@
 - Test contractual: core/global-timeline/test/mvp-028-global-timeline.contract.test.js
 - Resultado: 5/5 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-028 — Línea de tiempo global consolidada
+
+- Generador: scripts/build-global-timeline.js
+- Salida: public/global-timeline.json
+- Endpoint: GET /api/v1/public/global-timeline
+- Basado en public/timeline/*.json
+- Pruebas de API/Auth en verde
