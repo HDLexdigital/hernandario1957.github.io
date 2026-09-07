@@ -356,3 +356,12 @@
 - Test contractual: core/audit/test/mvp-018-audit.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-018 — Registro de auditoría
+
+- Logger: core/audit/audit-logger.js
+- Formato: JSONL append-only
+- Directorio: logs/audit
+- API Key hasheada (SHA-256 truncado)
+- Integrado en core/api/server.js
+- Tests: contrato 4/4, logger 3/3

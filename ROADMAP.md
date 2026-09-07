@@ -100,4 +100,4 @@ core/styles/
 
 | MVP-017 | Integración con Dominio Definitivo y Despliegue Público | ✅ Implementado |
 
-| MVP-018 | Registro de auditoría basado en archivos | 🧪 Contrato 0.1.0-draft |
+| MVP-018 | Registro de auditoría basado en archivos | ✅ Implementado |
