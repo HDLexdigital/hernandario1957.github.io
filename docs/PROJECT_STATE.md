@@ -432,3 +432,11 @@
 - Respuesta: status, version, timestamp
 - Integrado en core/api/server.js
 - Pruebas de API/Auth existentes en verde
+
+## Implementación MVP-023 — Búsqueda pública simplificada
+
+- Endpoint: GET /api/v1/public/search?q=...
+- Sin autenticación
+- Consume search-index.json
+- Integrado en core/api/server.js
+- Pruebas de API/Auth existentes en verde
