@@ -457,3 +457,11 @@
 - Orden descendente por createdAt, límite 20
 - Integrado en core/api/server.js
 - Pruebas de API/Auth en verde
+
+## Estado MVP-025 — Línea de tiempo de versiones por documento
+
+- Contrato: core/timeline/mvp-025-timeline.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/timeline/test/mvp-025-timeline.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente
