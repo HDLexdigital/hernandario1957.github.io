@@ -545,3 +545,10 @@
 - Test contractual: core/public-metrics/test/mvp-029-public-metrics.contract.test.js
 - Resultado: 3/3 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-029 — Panel público de métricas
+
+- Dashboard: public/metrics.html
+- Consume build-metrics.json y global-timeline.json
+- Sin acceso a rutas privadas
+- Pruebas: contrato 3/3, dashboard 3/3
