@@ -676,3 +676,11 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-037 o ajuste de producción.
+
+## Estado MVP-037 — Panel público de búsqueda con relevancia
+
+- Contrato: core/public-search-relevance/mvp-037-public-search-relevance.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/public-search-relevance/test/mvp-037-public-search-relevance.contract.test.js
+- Resultado: 3/3 tests passed
+- Implementación: pendiente

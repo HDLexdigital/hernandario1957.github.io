@@ -26,3 +26,5 @@
 | MVP-035 | Panel público de búsqueda avanzada en HTML | 🧪 Contrato 0.1.0-draft |
 
 | MVP-036 | Exportación de colección en formato NDJSON | 🧪 Contrato 0.1.0-draft |
+
+| MVP-037 | Panel público de búsqueda con relevancia | 🧪 Contrato 0.1.0-draft |
