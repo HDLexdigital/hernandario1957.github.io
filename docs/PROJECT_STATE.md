@@ -781,3 +781,14 @@
 - HTTPS: operativo
 - Apex redirige a www mediante 301
 - Core sin cambios
+
+
+---
+
+## Apertura MVP-042 — Validador de integridad de artefactos públicos
+
+- Contrato: core/integrity/mvp-042-integrity.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: 6/6 passed
+- Estado: contrato creado, implementación pendiente
+- Pausa de estabilidad suspendida temporalmente.
