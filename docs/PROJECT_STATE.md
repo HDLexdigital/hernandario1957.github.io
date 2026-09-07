@@ -482,3 +482,11 @@
 - Test contractual: core/feed/test/mvp-026-feed.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-026 — Feed RSS/Atom estático
+
+- Generador: scripts/build-feed.js
+- Salida: public/feed.xml
+- Formato: RSS 2.0
+- Basado en public/novedades.json
+- Tests: contrato 4/4, builder 2/2

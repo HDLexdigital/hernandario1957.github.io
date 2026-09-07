@@ -5,4 +5,4 @@
 
 | MVP-025 | Línea de tiempo de versiones por documento | ✅ Implementado |
 
-| MVP-026 | Feed RSS/Atom estático | 🧪 Contrato 0.1.0-draft |
+| MVP-026 | Feed RSS/Atom estático | ✅ Implementado |
