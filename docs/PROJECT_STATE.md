@@ -702,3 +702,10 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-038 o ajuste de producción.
+
+## Implementación MVP-038 — Panel público de exportaciones
+
+- Generador: scripts/build-public-exports.js
+- Dashboard: public/exports.html
+- Centraliza: JSON, CSV, NDJSON, feed, sitemap, build-metrics
+- Pruebas: contrato 4/4, builder 1/1
