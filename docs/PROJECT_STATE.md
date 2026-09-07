@@ -348,3 +348,11 @@
 - Integración con dominio configurable lista.
 - HTTPS requerido por contrato.
 - Estado: código completado; configuración DNS/PAGES pendiente en consola de GitHub.
+
+## Estado MVP-018 — Registro de auditoría basado en archivos
+
+- Contrato: core/audit/mvp-018-audit.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/audit/test/mvp-018-audit.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente
