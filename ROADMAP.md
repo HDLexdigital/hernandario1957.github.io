@@ -103,3 +103,5 @@ core/styles/
 | MVP-018 | Registro de auditoría basado en archivos | ✅ Implementado |
 
 | MVP-019 | Consolidación Final de Documentación | ✅ Implementado |
+
+| MVP-020 | Sitemap e indexación estática | 🧪 Contrato 0.1.0-draft |

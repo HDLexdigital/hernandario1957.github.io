@@ -381,3 +381,11 @@
 - Test contractual: core/docs/test/mvp-019-docs.contract.test.js
 - Resultado: 2/2 tests passed
 - Estado: manual completo y versionado.
+
+## Estado MVP-020 — Sitemap e indexación estática
+
+- Contrato: core/sitemap/mvp-020-sitemap.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/sitemap/test/mvp-020-sitemap.contract.test.js
+- Resultado: 3/3 tests passed
+- Implementación: pendiente

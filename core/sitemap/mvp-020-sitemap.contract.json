@@ -1,0 +1,21 @@
+{
+  "contract": "MVP-020-Sitemap",
+  "version": "0.1.0-draft",
+  "description": "Contrato para generación de sitemap.xml y robots.txt estáticos",
+  "principles": {
+    "static": true,
+    "readOnly": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "sitemap": "public/sitemap.xml",
+    "robots": "public/robots.txt"
+  },
+  "validation": {
+    "requireSitemap": true,
+    "requireRobots": true,
+    "requireValidXml": true,
+    "failOnMissing": true
+  }
+}
