@@ -1,0 +1,31 @@
+{
+  "id": "MVP-043",
+  "title": "Panel público de integridad y auditoría",
+  "description": "Dashboard HTML que muestra el estado del reporte de integridad y métricas de compilación.",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-07",
+  "module": "core/public-integrity",
+  "acceptance_criteria": [
+    "El generador crea public/integrity.html sin depender de rutas privadas.",
+    "El dashboard consume public/integrity-report.json y public/build-metrics.json.",
+    "Muestra un resumen visual con estado OK o ERROR.",
+    "Lista los artefactos con roturas si el estado es ERROR.",
+    "Se añade un enlace a integrity.html en public/nav.html.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/integrity.html",
+    "scripts/build-public-integrity.js",
+    "core/public-integrity/test/mvp-043-public-integrity.builder.test.js"
+  ],
+  "dependencies": [
+    "public/integrity-report.json",
+    "public/build-metrics.json",
+    "public/nav.html"
+  ],
+  "risks": [
+    "Posible ausencia de integrity-report.json si no se ha ejecutado el generador previamente.",
+    "Datos sensibles de auditoría no deben exponerse; solo estado público."
+  ]
+}
