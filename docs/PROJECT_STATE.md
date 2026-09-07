@@ -709,3 +709,13 @@
 - Dashboard: public/exports.html
 - Centraliza: JSON, CSV, NDJSON, feed, sitemap, build-metrics
 - Pruebas: contrato 4/4, builder 1/1
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-038
+
+- Estado: repositorio congelado en v1.0.0-public-exports.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-039 o ajuste de producción.
