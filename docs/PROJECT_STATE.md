@@ -621,3 +621,12 @@
 - Consume: public/catalogo.json
 - URLs con barra final
 - Pruebas: contrato 3/3, builder 2/2
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-034
+
+- Estado: repositorio congelado en v1.0.0-collection-csv.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-035 o ajuste de producción.

@@ -698,3 +698,63 @@ Propiedades: solo lectura, stateless, sin bases de datos, índices precalculados
 ## 9. Firma
 
 Susana de Magalhães Oliveira
+
+---
+
+## Resumen Ejecutivo Actualizado — post MVP-034
+
+LexDigitalHD 2.0 es un motor editorial jurídico desarrollado bajo disciplina *contract-first*, *stateless* y *zero-database*.
+
+- Entornos: Linux Mint (core/compilación) y Windows 11 (extracción InDesign).
+- Garantías: 100% estático, solo lectura, checksums SHA-256 precalculados y cero registro de PII.
+- Gobernanza: resoluciones tomadas en el chat principal; auditores operan en modo solo lectura.
+
+### Cobertura de Hitos (MVP-001 al MVP-034)
+
+| MVP | Título | Estado |
+| --- | --- | --- |
+| MVP-001 | CIDM 1.0 | ✅ Cerrado |
+| MVP-002 | LEDM 2.0 | ✅ Cerrado |
+| MVP-003 | Semantic Compiler | ✅ Cerrado |
+| MVP-004 | Constitución completa + EPUB | ✅ Cerrado |
+| MVP-005 | CI/CD + EPUBCheck + axe-core | ✅ Cerrado |
+| MVP-006 | Publicación Web | ✅ Cerrado |
+| MVP-007 | PDF Accesible PDF/UA-1 | ✅ Cerrado |
+| MVP-008 | Print-Ready PDF PDF/X-1a | ✅ Cerrado |
+| MVP-009 | Design System Base | ✅ Integrado |
+| MVP-010 | Publicación y Distribución Web Automática | ✅ Cerrado |
+| MVP-011 | API de Consulta del Corpus Jurídico | ✅ Cerrado |
+| MVP-012 | Motor de Búsqueda Interna | ✅ Cerrado |
+| MVP-013 | Publicación Multi-Documento Programática | ✅ Cerrado |
+| MVP-014 | Catálogo y Versionado de Publicaciones | ✅ Cerrado |
+| MVP-015 | Control de acceso / API Keys | ✅ Cerrado |
+| MVP-016 | Panel de Administración y Estado | ✅ Cerrado |
+| MVP-017 | Integración con Dominio Definitivo y Despliegue | ✅ Implementado |
+| MVP-018 | Registro de auditoría basado en archivos | ✅ Cerrado |
+| MVP-019 | Consolidación Final de Documentación | ✅ Cerrado |
+| MVP-020 | Sitemap e indexación estática | ✅ Cerrado |
+| MVP-021 | API de metadatos públicos sin autenticación | ✅ Cerrado |
+| MVP-022 | Healthcheck público | ✅ Cerrado |
+| MVP-023 | Búsqueda pública simplificada | ✅ Cerrado |
+| MVP-024 | API de novedades/actualizaciones | ✅ Cerrado |
+| MVP-025 | Línea de tiempo de versiones por documento | ✅ Cerrado |
+| MVP-026 | Feed RSS/Atom estático | ✅ Cerrado |
+| MVP-027 | Métricas públicas de compilación | ✅ Cerrado |
+| MVP-028 | Línea de tiempo global consolidada | ✅ Cerrado |
+| MVP-029 | Panel público de métricas | ✅ Cerrado |
+| MVP-030 | Panel público de novedades en HTML | ✅ Cerrado |
+| MVP-031 | Línea de tiempo global en HTML | ✅ Cerrado |
+| MVP-032 | Panel público de búsqueda en HTML | ✅ Cerrado |
+| MVP-033 | Exportación de colección pública en JSON | ✅ Cerrado |
+| MVP-034 | Exportación de colección en CSV | ✅ Cerrado |
+
+### Estado de la Suite de Pruebas
+
+- Core & Integración: 30/30 suites, 187/187 tests PASS.
+- API / Auth / Admin: 1/1 suite, 6/6 tests PASS.
+- Web & Layouts: 3/3 suites, 25/25 tests PASS.
+- Logger & Exportadores: verificaciones contractuales y builders validados en verde.
+
+### Estado de Congelación (Code Freeze)
+
+El sistema queda sellado en el tag `v1.0.0-collection-csv`. Toda actividad subsecuente queda limitada a la configuración del dominio `digitalhd.com` en GitHub Pages y a la revisión por parte de la mesa de auditoría externa.
