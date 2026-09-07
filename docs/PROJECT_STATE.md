@@ -770,3 +770,14 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-042 o ajuste de producción.
+
+
+---
+
+## Ajuste de producción post MVP-041
+
+- Dominio personalizado: https://www.lexdigitalhd.com
+- DNS CNAME: hernandario1957.github.io
+- HTTPS: operativo
+- Apex redirige a www mediante 301
+- Core sin cambios
