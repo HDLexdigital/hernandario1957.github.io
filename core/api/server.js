@@ -47,7 +47,17 @@ const authMiddleware = (req, res, next) => {
 app.use(express.json());
 app.use(createAuditLogger());
 
-// ========== RUTAS PÚBLICAS SIN AUTENTICACIÓN (MVP-021) ==========
+// ========== RUTAS PÚBLICAS SIN AUTENTICACIÓN ==========
+// Healthcheck (MVP-022)
+app.get('/api/v1/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        version: '1.0.0',
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Metadatos públicos (MVP-021)
 app.get('/api/v1/public/catalog', (req, res) => {
     const catalogo = leerJson(CATALOGO_PATH);
     if (!catalogo) {
@@ -174,7 +184,7 @@ app.use((err, req, res, next) => {
 if (require.main === module) {
     const PORT = process.env.API_PORT || 3000;
     app.listen(PORT, () => {
-        console.log(`🚀 API MVP-011+012+013+015+016+021 escuchando en http://localhost:${PORT}`);
+        console.log(`🚀 API MVP-011+012+013+015+016+021+022 escuchando en http://localhost:${PORT}`);
     });
 }
 
