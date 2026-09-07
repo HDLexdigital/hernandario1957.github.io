@@ -726,3 +726,13 @@
 - Dashboard: public/collection.html
 - Consume: public/collection-export.json
 - Pruebas: contrato 3/3, builder 1/1
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-039
+
+- Estado: repositorio congelado en v1.0.0-public-collection.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-040 o ajuste de producción.
