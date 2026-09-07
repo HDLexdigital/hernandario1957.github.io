@@ -613,3 +613,11 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-034 o ajuste de producción.
+
+## Implementación MVP-034 — Exportación de colección en CSV
+
+- Generador: scripts/build-collection-export-csv.js
+- Salida: public/collection-export.csv
+- Consume: public/catalogo.json
+- URLs con barra final
+- Pruebas: contrato 3/3, builder 2/2

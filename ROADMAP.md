@@ -20,3 +20,5 @@
 | MVP-032 | Panel público de búsqueda en HTML | 🧪 Contrato 0.1.0-draft |
 
 | MVP-033 | Exportación de colección pública en JSON | 🧪 Contrato 0.1.0-draft |
+
+| MVP-034 | Exportación de colección en CSV | ✅ Implementado |

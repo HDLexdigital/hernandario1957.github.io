@@ -1,0 +1,26 @@
+{
+  "contract": "MVP-034-CollectionCSV",
+  "version": "0.1.0-draft",
+  "description": "Exportación de colección pública en formato CSV",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "file": "public/collection-export.csv"
+  },
+  "source": {
+    "catalog": "public/catalogo.json"
+  },
+  "delimiter": ",",
+  "columns": [
+    "documentId",
+    "title",
+    "versionId",
+    "createdAt",
+    "url"
+  ]
+}
