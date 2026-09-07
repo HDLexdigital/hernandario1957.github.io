@@ -440,3 +440,11 @@
 - Consume search-index.json
 - Integrado en core/api/server.js
 - Pruebas de API/Auth existentes en verde
+
+## Estado MVP-024 — API de novedades/actualizaciones
+
+- Contrato: core/novedades/mvp-024-novedades.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/novedades/test/mvp-024-novedades.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente

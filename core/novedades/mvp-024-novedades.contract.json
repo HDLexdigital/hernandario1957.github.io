@@ -1,0 +1,34 @@
+{
+  "contract": "MVP-024-Novedades",
+  "version": "0.1.0-draft",
+  "description": "API de novedades y actualizaciones del catálogo jurídico",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "static": "public/novedades.json",
+    "endpoint": "/api/v1/public/novedades",
+    "method": "GET",
+    "auth": false
+  },
+  "source": {
+    "catalog": "public/catalogo.json",
+    "manifests": "public/<documentId>/manifest.json"
+  },
+  "sort": {
+    "field": "createdAt",
+    "order": "desc"
+  },
+  "limit": 20,
+  "fields": [
+    "documentId",
+    "title",
+    "versionId",
+    "createdAt",
+    "url"
+  ]
+}
