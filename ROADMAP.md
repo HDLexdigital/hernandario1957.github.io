@@ -18,3 +18,5 @@
 | MVP-031 | Línea de tiempo global en HTML | 🧪 Contrato 0.1.0-draft |
 
 | MVP-032 | Panel público de búsqueda en HTML | 🧪 Contrato 0.1.0-draft |
+
+| MVP-033 | Exportación de colección pública en JSON | 🧪 Contrato 0.1.0-draft |

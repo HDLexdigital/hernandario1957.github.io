@@ -596,3 +596,11 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
 - Próximo retorno: apertura de MVP-033 o ajuste de producción.
+
+## Estado MVP-033 — Exportación de colección pública en JSON
+
+- Contrato: core/collection-export/mvp-033-collection-export.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/collection-export/test/mvp-033-collection-export.contract.test.js
+- Resultado: 4/4 tests passed
+- Implementación: pendiente
