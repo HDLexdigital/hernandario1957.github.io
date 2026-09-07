@@ -1,0 +1,23 @@
+{
+  "contract": "MVP-029-PublicMetrics",
+  "version": "0.1.0-draft",
+  "description": "Panel público estático que consume métricas y línea de tiempo global",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/metrics.html",
+    "data": [
+      "public/build-metrics.json",
+      "public/global-timeline.json"
+    ]
+  },
+  "source": {
+    "metrics": "public/build-metrics.json",
+    "globalTimeline": "public/global-timeline.json"
+  }
+}

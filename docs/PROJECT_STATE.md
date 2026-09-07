@@ -537,3 +537,11 @@
 - Endpoint: GET /api/v1/public/global-timeline
 - Basado en public/timeline/*.json
 - Pruebas de API/Auth en verde
+
+## Estado MVP-029 — Panel público de métricas
+
+- Contrato: core/public-metrics/mvp-029-public-metrics.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/public-metrics/test/mvp-029-public-metrics.contract.test.js
+- Resultado: 3/3 tests passed
+- Implementación: pendiente
