@@ -465,3 +465,12 @@
 - Test contractual: core/timeline/test/mvp-025-timeline.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-025 — Línea de tiempo de versiones por documento
+
+- Generador: scripts/build-timeline.js
+- Salida: public/timeline/<documentId>.json
+- Endpoint: GET /api/v1/public/timeline/:documentId
+- Orden ascendente por createdAt
+- Integrado en core/api/server.js
+- Pruebas de API/Auth en verde
