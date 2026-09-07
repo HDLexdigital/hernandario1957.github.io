@@ -666,3 +666,13 @@
 - Test contractual: core/collection-ndjson/test/mvp-036-collection-ndjson.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-036
+
+- Estado: repositorio congelado en v1.0.0-collection-ndjson.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-037 o ajuste de producción.
