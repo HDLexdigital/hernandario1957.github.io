@@ -126,6 +126,18 @@ app.get('/api/v1/public/novedades', (req, res) => {
     res.json(novedades);
 });
 
+
+// Línea de tiempo pública (MVP-025)
+app.get('/api/v1/public/timeline/:documentId', (req, res) => {
+    const timelineDir = process.env.TIMELINE_DIR || path.join(RAIZ, 'public', 'timeline');
+    const timelinePath = path.join(timelineDir, req.params.documentId + '.json');
+    const timeline = leerJson(timelinePath);
+    if (!timeline) {
+        return res.status(404).json({ error: 'timeline_not_found' });
+    }
+    res.json(timeline);
+});
+
 // ========== RUTAS PRIVADAS (requieren API Key) ==========
 app.use(authMiddleware);
 
