@@ -129,6 +129,39 @@ app.get('/api/v1/catalog', (req, res) => {
 const { createAdminRouter } = require('../admin/server-admin');
 app.use(createAdminRouter(authMiddleware));
 
+
+// Endpoints públicos de metadatos (MVP-021)
+app.get('/api/v1/public/catalog', (req, res) => {
+    const catalogo = leerJson(CATALOGO_PATH);
+    if (!catalogo) {
+        return res.status(404).json({ error: 'catalog_not_found' });
+    }
+
+    const resumen = catalogo.map(doc => ({
+        documentId: doc.documentId,
+        versions: doc.versions || []
+    }));
+
+    res.json(resumen);
+});
+
+app.get('/api/v1/public/document/:id', (req, res) => {
+    const catalogo = leerJson(CATALOGO_PATH);
+    if (!catalogo) {
+        return res.status(404).json({ error: 'catalog_not_found' });
+    }
+
+    const doc = catalogo.find(entry => entry.documentId === req.params.id);
+    if (!doc) {
+        return res.status(404).json({ error: 'document_not_found' });
+    }
+
+    res.json({
+        documentId: doc.documentId,
+        versions: doc.versions || []
+    });
+});
+
 app.use((req, res) => {
     res.status(404).json({ error: 'resource_not_found' });
 });
