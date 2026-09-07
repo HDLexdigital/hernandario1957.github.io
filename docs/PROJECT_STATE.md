@@ -552,3 +552,13 @@
 - Consume build-metrics.json y global-timeline.json
 - Sin acceso a rutas privadas
 - Pruebas: contrato 3/3, dashboard 3/3
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-029
+
+- Estado: repositorio congelado en v1.0.0-public-metrics.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en digitalhd.com.
+- Próximo retorno: apertura de MVP-030 o ajuste de producción.

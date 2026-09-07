@@ -332,3 +332,16 @@ Todo el sistema es:
   - ledmVersion
   - checksum
 - Estado: implementado y validado.
+
+
+---
+
+## Resumen Ejecutivo — LexDigitalHD 2.0 (post MVP-029)
+
+- Cobertura: MVP-001 → MVP-029
+- Estado: 29/29 cerrados
+- Arquitectura: estática, stateless, zero-database, solo lectura
+- Tags aplicados: 29 tags históricos
+- Evidencia: suites core, API, estilos, auth, feed, metrics en verde
+- Dashboard público: public/metrics.html
+- Tag de cierre: v1.0.0-public-metrics
