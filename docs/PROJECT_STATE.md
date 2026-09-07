@@ -579,3 +579,11 @@
 - Dashboard: public/global-timeline.html
 - Consume: public/global-timeline.json
 - Resultado: 5/5 tests passed
+
+## Estado MVP-032 — Panel público de búsqueda en HTML
+
+- Contrato: core/public-search-html/mvp-032-public-search-html.contract.json
+- Versión: 0.1.0-draft
+- Dashboard: public/search.html
+- Consume: public/search-index.json
+- Resultado: 4/4 tests passed
