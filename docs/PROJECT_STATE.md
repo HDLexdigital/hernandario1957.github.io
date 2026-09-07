@@ -399,3 +399,11 @@
   - Contrato: 3/3
   - Builder: 2/2
 - Estado: implementado y validado.
+
+## Estado MVP-021 — API de metadatos públicos sin autenticación
+
+- Contrato: core/public-api/mvp-021-public-api.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: core/public-api/test/mvp-021-public-api.contract.test.js
+- Resultado: 3/3 tests passed
+- Implementación: pendiente
