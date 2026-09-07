@@ -48,6 +48,7 @@ app.use(express.json());
 app.use(createAuditLogger());
 
 // ========== RUTAS PÚBLICAS SIN AUTENTICACIÓN ==========
+
 // Healthcheck (MVP-022)
 app.get('/api/v1/health', (req, res) => {
     res.json({
@@ -86,6 +87,31 @@ app.get('/api/v1/public/document/:id', (req, res) => {
     res.json({
         documentId: doc.documentId,
         versions: doc.versions || []
+    });
+});
+
+// Búsqueda pública simplificada (MVP-023)
+app.get('/api/v1/public/search', (req, res) => {
+    const q = normalizar(req.query.q || '');
+    const limit = parseInt(req.query.limit, 10) || 20;
+
+    if (q.length < 2) {
+        return res.status(400).json({ error: 'query_too_short' });
+    }
+
+    const searchIndex = leerJson(SEARCH_INDEX_PATH);
+    if (!searchIndex) {
+        return res.status(404).json({ error: 'search_index_not_found' });
+    }
+
+    const resultados = searchIndex
+        .filter(item => item.text.includes(q))
+        .slice(0, limit);
+
+    res.json({
+        query: req.query.q,
+        count: resultados.length,
+        results: resultados
     });
 });
 
@@ -184,7 +210,7 @@ app.use((err, req, res, next) => {
 if (require.main === module) {
     const PORT = process.env.API_PORT || 3000;
     app.listen(PORT, () => {
-        console.log(`🚀 API MVP-011+012+013+015+016+021+022 escuchando en http://localhost:${PORT}`);
+        console.log(`🚀 API MVP-011+012+013+015+016+021+022+023 escuchando en http://localhost:${PORT}`);
     });
 }
 
