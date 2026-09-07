@@ -448,3 +448,12 @@
 - Test contractual: core/novedades/test/mvp-024-novedades.contract.test.js
 - Resultado: 4/4 tests passed
 - Implementación: pendiente
+
+## Implementación MVP-024 — API de novedades/actualizaciones
+
+- Generador: scripts/build-novedades.js
+- Salida: public/novedades.json
+- Endpoint: GET /api/v1/public/novedades
+- Orden descendente por createdAt, límite 20
+- Integrado en core/api/server.js
+- Pruebas de API/Auth en verde
