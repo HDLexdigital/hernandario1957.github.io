@@ -149,6 +149,17 @@ app.get('/api/v1/public/build-metrics', (req, res) => {
     res.json(metrics);
 });
 
+
+// Línea de tiempo global (MVP-028)
+app.get('/api/v1/public/global-timeline', (req, res) => {
+    const globalTimelinePath = process.env.GLOBAL_TIMELINE_PATH || path.join(RAIZ, 'public', 'global-timeline.json');
+    const globalTimeline = leerJson(globalTimelinePath);
+    if (!globalTimeline) {
+        return res.status(404).json({ error: 'global_timeline_not_found' });
+    }
+    res.json(globalTimeline);
+});
+
 // ========== RUTAS PRIVADAS (requieren API Key) ==========
 app.use(authMiddleware);
 
