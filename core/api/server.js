@@ -278,7 +278,16 @@ app.use((err, req, res, next) => {
 
 if (require.main === module) {
     const PORT = process.env.API_PORT || 3000;
-    app.listen(PORT, () => {
+    app.get('/api/v1/public/audit-summary', (req, res) => {
+    const summaryPath = path.join(process.cwd(), 'public', 'audit-summary.json');
+    if (!fs.existsSync(summaryPath)) {
+        return res.status(404).json({ error: 'audit summary not found' });
+    }
+    res.json(JSON.parse(fs.readFileSync(summaryPath, 'utf8')));
+});
+
+
+app.listen(PORT, () => {
         console.log(`🚀 API MVP-011+012+013+015+016+021+022+023 escuchando en http://localhost:${PORT}`);
     });
 }
