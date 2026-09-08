@@ -1,0 +1,32 @@
+{
+  "id": "MVP-050",
+  "title": "Panel público de auditoría consolidada",
+  "description": "Dashboard HTML que muestra el resumen ejecutivo de auditoría y el estado de los validadores de integridad, enlaces externos y anclas internas.",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-08",
+  "module": "core/public-audit",
+  "acceptance_criteria": [
+    "El generador crea public/audit.html sin depender de rutas privadas.",
+    "El dashboard consume public/audit-summary.json.",
+    "Muestra estado global OK o ERROR.",
+    "Muestra tarjetas individuales para integridad, enlaces externos y anclas.",
+    "Incluye totales de artefactos y errores por categoría.",
+    "Incluye enlaces directos a integrity.html, external-links.html y anchors.html.",
+    "Se añade un enlace a audit.html en public/nav.html.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/audit.html",
+    "scripts/build-public-audit.js",
+    "core/public-audit/test/mvp-050-public-audit.builder.test.js"
+  ],
+  "dependencies": [
+    "public/audit-summary.json",
+    "public/nav.html"
+  ],
+  "risks": [
+    "Posible ausencia de audit-summary.json si no se ha ejecutado el generador previamente.",
+    "El dashboard no debe exponer datos sensibles de auditoría."
+  ]
+}

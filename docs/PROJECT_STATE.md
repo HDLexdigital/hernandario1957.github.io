@@ -894,9 +894,10 @@
 
 ---
 
-## Pausa de Estabilidad Definitiva — post MVP-049
+## Apertura MVP-050 — Panel público de auditoría consolidada
 
-- Estado: repositorio congelado en v1.0.0-audit-summary.
-- Actividad permitida: solo auditoría externa y configuración de infraestructura.
-- Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
-- Próximo retorno: apertura de MVP-050 o ajuste de producción.
+- Contrato: core/public-audit/mvp-050-public-audit.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: 6/6 passed
+- Estado: contrato creado, implementación pendiente
+- Pausa de estabilidad suspendida temporalmente.
