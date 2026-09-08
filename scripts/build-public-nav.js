@@ -16,7 +16,8 @@ const links = [
     { href: 'collection.html', label: 'Colección Completa' },
     { href: 'integrity.html', label: 'Integridad' },
     { href: 'deploy-status.html', label: 'Estado del Despliegue' },
-    { href: 'external-links.html', label: 'Enlaces Externos' }
+    { href: 'external-links.html', label: 'Enlaces Externos' },
+    { href: 'anchors.html', label: 'Anclas Internas' }
 ];
 
 const linksHtml = links.map(link => {

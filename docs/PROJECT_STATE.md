@@ -877,3 +877,13 @@
 - Salida: public/anchors.json
 - Endpoint público: GET /api/v1/public/anchors (pendiente de integrar)
 - Estado: implementado y validado
+
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-048
+
+- Estado: repositorio congelado en v1.0.0-public-anchors.
+- Actividad permitida: solo auditoría externa y configuración de infraestructura.
+- Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
+- Próximo retorno: apertura de MVP-049 o ajuste de producción.
