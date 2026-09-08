@@ -1,0 +1,30 @@
+{
+  "id": "MVP-048",
+  "title": "Panel público de anclas internas",
+  "description": "Dashboard HTML que muestra el reporte de anclas internas generado por MVP-047.",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-08",
+  "module": "core/public-anchors",
+  "acceptance_criteria": [
+    "El generador crea public/anchors.html sin depender de rutas privadas.",
+    "El dashboard consume public/anchors-report.json.",
+    "Muestra estado global OK o ERROR.",
+    "Lista las anclas validadas con archivo origen, enlace, destino y estado.",
+    "Se añade un enlace a anchors.html en public/nav.html.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/anchors.html",
+    "scripts/build-public-anchors.js",
+    "core/public-anchors/test/mvp-048-public-anchors.builder.test.js"
+  ],
+  "dependencies": [
+    "public/anchors-report.json",
+    "public/nav.html"
+  ],
+  "risks": [
+    "Posible ausencia de anchors-report.json si no se ha ejecutado el generador previamente.",
+    "El dashboard no debe exponer datos sensibles de auditoría."
+  ]
+}
