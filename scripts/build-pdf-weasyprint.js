@@ -64,7 +64,6 @@ function generarPdfConWeasyPrint(ledm, outputPath) {
     const pagedMediaCss = path.join(RAIZ, 'core', 'styles', 'paged-media.css');
 
     const args = [
-        '--pdf-variant', 'pdf/ua-1',
         '-s', baseCss,
         '-s', pagedMediaCss,
         HTML_INTERMEDIO,
