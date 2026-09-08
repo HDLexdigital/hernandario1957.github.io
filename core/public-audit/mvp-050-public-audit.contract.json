@@ -2,8 +2,8 @@
   "id": "MVP-050",
   "title": "Panel público de auditoría consolidada",
   "description": "Dashboard HTML que muestra el resumen ejecutivo de auditoría y el estado de los validadores de integridad, enlaces externos y anclas internas.",
-  "version": "0.1.0-draft",
-  "status": "draft",
+  "version": "1.0.0",
+  "status": "implemented",
   "created": "2026-09-08",
   "module": "core/public-audit",
   "acceptance_criteria": [
@@ -28,5 +28,6 @@
   "risks": [
     "Posible ausencia de audit-summary.json si no se ha ejecutado el generador previamente.",
     "El dashboard no debe exponer datos sensibles de auditoría."
-  ]
+  ],
+  "updated": "2026-09-08"
 }

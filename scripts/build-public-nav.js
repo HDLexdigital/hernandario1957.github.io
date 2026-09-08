@@ -17,7 +17,8 @@ const links = [
     { href: 'integrity.html', label: 'Integridad' },
     { href: 'deploy-status.html', label: 'Estado del Despliegue' },
     { href: 'external-links.html', label: 'Enlaces Externos' },
-    { href: 'anchors.html', label: 'Anclas Internas' }
+    { href: 'anchors.html', label: 'Anclas Internas' },
+    { href: 'audit.html', label: 'Auditoría Consolidada' }
 ];
 
 const linksHtml = links.map(link => {

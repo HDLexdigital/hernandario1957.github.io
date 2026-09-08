@@ -44,4 +44,4 @@
 | MVP-047 | Validador de anclas internas en artefactos públicos | 🧪 Contrato 0.1.0-draft |
 | MVP-048 | Panel público de anclas internas | ✅ Implementado |
 | MVP-049 | Endpoint de resumen ejecutivo de auditoría | ✅ Implementado |
-| MVP-050 | Panel público de auditoría consolidada | 🧪 Contrato 0.1.0-draft |
+| MVP-050 | Panel público de auditoría consolidada | ✅ Implementado |
