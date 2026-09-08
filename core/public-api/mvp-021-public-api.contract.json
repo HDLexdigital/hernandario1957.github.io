@@ -1,0 +1,31 @@
+{
+  "contract": "MVP-021-PublicAPI",
+  "version": "0.1.0-draft",
+  "description": "API pública de metadatos del catálogo, sin autenticación",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "endpoints": [
+    {
+      "path": "/api/v1/public/catalog",
+      "method": "GET",
+      "auth": false,
+      "description": "Catálogo resumido de documentos y versiones"
+    },
+    {
+      "path": "/api/v1/public/document/:id",
+      "method": "GET",
+      "auth": false,
+      "description": "Metadatos públicos de un documento"
+    }
+  ],
+  "validation": {
+    "requireCatalog": true,
+    "requireDocumentSummary": true,
+    "failOnMissing": true
+  }
+}

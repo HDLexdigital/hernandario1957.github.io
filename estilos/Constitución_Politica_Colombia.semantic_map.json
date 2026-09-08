@@ -1,0 +1,71 @@
+{
+  "document": "Constitución Política de la República de Colombia",
+  "exportDate": "2026-08-12",
+  "version": "1.0",
+  "styles": [
+    {
+      "originalName": "P02_TITLE_PART",
+      "styleGroup": "02_TITULOS",
+      "type": "paragraph",
+      "exportTagging": {
+        "epub": { "tag": "h1", "className": "p02-title-part", "attributes": null }
+      }
+    },
+    {
+      "originalName": "P03_CENTER_BOLD",
+      "styleGroup": "03_ESTILOS_ADICIONALES",
+      "type": "paragraph",
+      "exportTagging": {
+        "epub": { "tag": "p", "className": "texto-centrado-bold", "attributes": null }
+      }
+    },
+    {
+      "originalName": "P02_TITLE_MAIN",
+      "styleGroup": "02_TITULOS",
+      "type": "paragraph",
+      "exportTagging": {
+        "epub": { "tag": "h1", "className": "titulo", "attributes": null }
+      }
+    },
+    {
+      "originalName": "P02_TITLE_CHAPTER",
+      "styleGroup": "02_TITULOS",
+      "type": "paragraph",
+      "exportTagging": {
+        "epub": { "tag": "h2", "className": "capitulo", "attributes": null }
+      }
+    },
+    {
+      "originalName": "P01_BODY_BASE",
+      "styleGroup": "01_Cuerpo de texto",
+      "type": "paragraph",
+      "exportTagging": {
+        "epub": { "tag": "p", "className": "p01-body-base", "attributes": null }
+      }
+    },
+    {
+      "originalName": "P01_BODY_CONT",
+      "styleGroup": "01_Cuerpo de texto",
+      "type": "paragraph",
+      "exportTagging": {
+        "epub": { "tag": "p", "className": "cuerpo-siguiente", "attributes": null }
+      }
+    },
+    {
+      "originalName": "P07_INDENT_L1",
+      "styleGroup": "01_Cuerpo de texto",
+      "type": "paragraph",
+      "exportTagging": {
+        "epub": { "tag": "p", "className": "sangria-n1", "attributes": null }
+      }
+    },
+    {
+      "originalName": "TerminoGlosario",
+      "styleGroup": "A medida V",
+      "type": "character",
+      "exportTagging": {
+        "epub": { "tag": "span", "className": "glosario", "attributes": null }
+      }
+    }
+  ]
+}

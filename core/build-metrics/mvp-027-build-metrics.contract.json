@@ -1,0 +1,30 @@
+{
+  "contract": "MVP-027-BuildMetrics",
+  "version": "0.1.0-draft",
+  "description": "Métricas públicas de compilación del corpus jurídico",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "file": "public/build-metrics.json",
+    "endpoint": "/api/v1/public/build-metrics",
+    "method": "GET",
+    "auth": false
+  },
+  "fields": [
+    "generatedAt",
+    "totalDocuments",
+    "totalVersions",
+    "coreVersion",
+    "ledmVersion",
+    "checksum"
+  ],
+  "source": {
+    "catalog": "public/catalogo.json",
+    "manifest": "public/manifest.json"
+  }
+}

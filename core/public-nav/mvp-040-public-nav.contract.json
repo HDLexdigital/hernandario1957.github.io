@@ -1,0 +1,28 @@
+{
+  "contract": "MVP-040-PublicNav",
+  "version": "0.1.0-draft",
+  "description": "Panel público de navegación que centraliza los enlaces a los dashboards y exportaciones",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/nav.html",
+    "links": [
+      "search.html",
+      "search-advanced.html",
+      "search-relevance.html",
+      "novedades.html",
+      "global-timeline.html",
+      "metrics.html",
+      "exports.html",
+      "collection.html"
+    ]
+  },
+  "source": {
+    "links": "public/nav.html"
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "contract": "MVP-009-DesignSystemBase",
+  "version": "1.0.0",
+  "description": "Contrato base para un sistema de diseño editorial compartido entre Web, EPUB y PDF",
+  "scope": "MVP-009 defines reusable presentation and output contracts; it does not define editorial semantics, does not mutate LEDM, and does not certify output format conformance.",
+  "principles": {
+    "separationOfConcerns": true,
+    "reusability": true,
+    "accessibility": true,
+    "noLedmMutation": true,
+    "contractFirst": true
+  },
+  "invariants": [
+    "LEDM is never mutated by the design system",
+    "Semantic meaning is independent of presentation",
+    "Output profiles may override presentation tokens but not semantic identity",
+    "Inline styles are forbidden",
+    "All required tokens must resolve",
+    "Presentation identifiers MUST NOT be used as semantic identifiers"
+  ],
+  "tokens": {
+    "colors": {
+      "screen": {
+        "primaryText": "#1a1a1a",
+        "background": "#ffffff",
+        "accent": "#2c3e50",
+        "muted": "#595959",
+        "border": "#767676"
+      },
+      "print": {
+        "primaryText": "cmyk(0%, 0%, 0%, 100%)",
+        "background": "cmyk(0%, 0%, 0%, 0%)",
+        "accent": "cmyk(45%, 22%, 0%, 69%)",
+        "muted": "cmyk(0%, 0%, 0%, 65%)",
+        "border": "cmyk(0%, 0%, 0%, 45%)"
+      },
+      "representation": {
+        "screen": "sRGB",
+        "print": "CMYK production value"
+      }
+    },
+    "typography": {
+      "fonts": {
+        "body": "'Noto Serif', Georgia, serif",
+        "heading": "'Noto Serif', Georgia, serif",
+        "mono": "'DejaVu Sans Mono', monospace"
+      },
+      "weights": {
+        "regular": 400,
+        "bold": 700
+      },
+      "lineHeights": {
+        "base": 1.5,
+        "heading": 1.2,
+        "tight": 1.15
+      },
+      "sizes": {
+        "web": {
+          "base": "1rem",
+          "h1": "1.75rem",
+          "h2": "1.4rem",
+          "h3": "1.2rem",
+          "h4": "1.05rem",
+          "h5": "1rem",
+          "h6": "0.95rem",
+          "small": "0.85rem"
+        },
+        "print": {
+          "base": "10pt",
+          "h1": "18pt",
+          "h2": "14pt",
+          "h3": "12pt",
+          "h4": "10.5pt",
+          "h5": "10pt",
+          "h6": "9.5pt",
+          "small": "8.5pt"
+        }
+      }
+    },
+    "spacing": {
+      "unit": "0.5rem",
+      "paragraphGap": "0.75rem",
+      "sectionMargin": "2rem"
+    },
+    "page": {
+      "size": "A4",
+      "margin": {
+        "top": "25mm",
+        "right": "20mm",
+        "bottom": "25mm",
+        "left": "30mm"
+      }
+    }
+  },
+  "outputProfiles": {
+    "web": {
+      "colors": "screen",
+      "sizes": "web",
+      "units": {
+        "typography": "rem",
+        "spacing": "rem"
+      },
+      "paged": false
+    },
+    "epub": {
+      "colors": "screen",
+      "sizes": "web",
+      "units": {
+        "typography": "rem",
+        "spacing": "rem"
+      },
+      "paged": false
+    },
+    "pdf-ua": {
+      "colors": "screen",
+      "sizes": "print",
+      "units": {
+        "typography": "pt",
+        "page": "mm",
+        "spacing": "mm"
+      },
+      "paged": true,
+      "bleed": "0mm",
+      "marks": []
+    },
+    "print": {
+      "colors": "print",
+      "sizes": "print",
+      "units": {
+        "typography": "pt",
+        "page": "mm",
+        "spacing": "mm"
+      },
+      "paged": true,
+      "bleed": "3mm",
+      "marks": [
+        "crop",
+        "cross"
+      ]
+    }
+  },
+  "cssArchitecture": {
+    "bundles": {
+      "web": [
+        "base.css",
+        "web.css"
+      ],
+      "epub": [
+        "base.css",
+        "epub.css"
+      ],
+      "pdf-ua": [
+        "base.css",
+        "paged-media.css"
+      ],
+      "print": [
+        "base.css",
+        "paged-media.css",
+        "print.css"
+      ]
+    },
+    "overrides": {
+      "allowed": true,
+      "scope": "output-profiles-only",
+      "prohibited": [
+        "component-styles-overriding-global-tokens"
+      ]
+    }
+  },
+  "rules": {
+    "forbiddenInlineStyles": true,
+    "fontsMustBeEmbeddable": true,
+    "fontEmbedding": {
+      "required": true,
+      "note": "Licensing must be verified per output"
+    },
+    "contrast": {
+      "normalTextMinimum": 4.5,
+      "largeTextMinimum": 3,
+      "nonTextMinimum": 3,
+      "method": "WCAG"
+    },
+    "headingHierarchy": {
+      "source": "LEDM structure",
+      "designSystemConsumes": true,
+      "designSystemImposes": false
+    },
+    "keepHeadingsWithNext": true,
+    "widowsAndOrphansMinimum": 2,
+    "hyphenationLanguage": "es",
+    "noContentDecoration": {
+      "allowed": false,
+      "scope": "semantic-content"
+    },
+    "semanticClassNames": {
+      "source": "LEDM semantic role",
+      "forbidden": [
+        "InDesign style name"
+      ]
+    }
+  },
+  "validation": {
+    "requiredFiles": [
+      "base.css",
+      "web.css",
+      "epub.css",
+      "paged-media.css",
+      "print.css"
+    ],
+    "requiredTokens": [
+      "colors",
+      "typography",
+      "spacing",
+      "page"
+    ],
+    "tokenResolution": true,
+    "noTokenDrift": true,
+    "contrastValidation": true,
+    "fontEmbeddingValidation": true,
+    "noLedmMutation": true
+  }
+}

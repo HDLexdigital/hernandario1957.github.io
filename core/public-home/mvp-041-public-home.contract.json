@@ -1,0 +1,24 @@
+{
+  "contract": "MVP-041-PublicHome",
+  "version": "0.1.0-draft",
+  "description": "Página de portada estática que integra navegación, métricas y accesos directos",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/index.html"
+  },
+  "source": {
+    "metrics": "public/build-metrics.json",
+    "nav": "public/nav.html"
+  },
+  "sections": [
+    "hero",
+    "metrics",
+    "navigation"
+  ]
+}

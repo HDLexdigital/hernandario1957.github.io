@@ -1,0 +1,18 @@
+:root {
+  --ld-color-text-primary: #1a1a1a;
+  --ld-color-bg-primary: #ffffff;
+  --ld-color-accent: #2c3e50;
+  --ld-color-muted: #595959;
+  --ld-color-border: #767676;
+
+  --ld-font-family-body: 'Noto Serif', Georgia, serif;
+  --ld-font-family-heading: 'Noto Serif', Georgia, serif;
+  --ld-font-family-mono: 'DejaVu Sans Mono', monospace;
+
+  --ld-font-size-base: 1rem;
+  --ld-line-height-base: 1.5;
+
+  --ld-spacing-unit: 0.5rem;
+  --ld-spacing-paragraph-gap: 0.75rem;
+  --ld-spacing-section-margin: 2rem;
+}

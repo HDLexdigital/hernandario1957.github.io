@@ -1,0 +1,20 @@
+{
+  "documento": {
+    "titulo": "Documento Legal",
+    "totalNodos": 2
+  },
+  "contenido": [
+    {
+      "id": 0,
+      "estiloOriginal": "titulo",
+      "tipo": "texto_cuerpo",
+      "texto": "Art�culo 1"
+    },
+    {
+      "id": 1,
+      "estiloOriginal": "parrafo",
+      "tipo": "texto_cuerpo",
+      "texto": "Contenido de prueba"
+    }
+  ]
+}

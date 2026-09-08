@@ -1,0 +1,47 @@
+{
+  "contract": "MVP-016-Admin",
+  "version": "0.1.0-draft",
+  "description": "Contrato para panel de administración y estado del corpus publicado",
+  "principles": {
+    "readOnly": true,
+    "protectedByApiKey": true,
+    "noDatabase": true,
+    "noLedmMutation": true,
+    "deterministic": true,
+    "singlePageDashboard": true
+  },
+  "endpoints": {
+    "status": {
+      "path": "/api/v1/admin/status",
+      "method": "GET",
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "catalog": "object",
+          "documents": "array",
+          "searchIndex": "object",
+          "timestamp": "string"
+        },
+        "required": [
+          "catalog",
+          "documents",
+          "searchIndex",
+          "timestamp"
+        ]
+      }
+    },
+    "dashboard": {
+      "path": "/admin",
+      "method": "GET",
+      "type": "html",
+      "protected": true
+    }
+  },
+  "validation": {
+    "requireApiKey": true,
+    "requireCatalog": true,
+    "requireManifests": true,
+    "requireSearchIndex": true,
+    "failOnMissing": true
+  }
+}

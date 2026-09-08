@@ -1,0 +1,19 @@
+{
+  "contract": "MVP-032-PublicSearchHTML",
+  "version": "0.1.0-draft",
+  "description": "Panel público estático en HTML para búsqueda sobre índice precalculado",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/search.html",
+    "data": "public/search-index.json"
+  },
+  "source": {
+    "searchIndex": "public/search-index.json"
+  }
+}

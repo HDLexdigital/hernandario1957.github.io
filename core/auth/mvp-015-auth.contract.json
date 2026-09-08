@@ -1,0 +1,34 @@
+{
+  "contract": "MVP-015-Auth",
+  "version": "0.1.0-draft",
+  "description": "Contrato para control de acceso básico de la API mediante API Keys",
+  "principles": {
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "singleKeyPolicy": true,
+    "envConfig": true,
+    "noLedmMutation": true
+  },
+  "auth": {
+    "type": "api-key",
+    "header": "x-api-key",
+    "environmentVariable": "LEX_API_KEY",
+    "required": true,
+    "allowStatusWithoutKey": false
+  },
+  "responses": {
+    "unauthorized": {
+      "status": 401,
+      "body": {
+        "error": "unauthorized"
+      }
+    }
+  },
+  "validation": {
+    "requireApiKey": true,
+    "rejectMissingKey": true,
+    "rejectInvalidKey": true,
+    "standardErrorFormat": true
+  }
+}

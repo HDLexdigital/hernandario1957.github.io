@@ -1,0 +1,37 @@
+{
+  "contract": "MVP-006-WebPublication",
+  "version": "1.0.0",
+  "description": "Contrato de publicación web para LEDM 2.0",
+  "allowedBlockTypes": ["title", "article", "paragraph"],
+  "allowedInlineTypes": ["strong", "emphasis", "text"],
+  "semanticMapping": {
+    "title": { "tag": "h1", "role": "heading", "ariaLevelFromDepth": true, "sectionWrapper": true },
+    "article": { "tag": "article", "role": "article" },
+    "paragraph": { "tag": "p" },
+    "strong": { "tag": "strong" },
+    "emphasis": { "tag": "em" },
+    "text": { "tag": null }
+  },
+  "identifierRules": {
+    "source": "nodeId",
+    "htmlAttribute": "id",
+    "regex": "^[A-Z][A-Z0-9_-]*$",
+    "unique": true,
+    "urlTemplate": "/{documentId}#{nodeId}"
+  },
+  "hierarchyRules": {
+    "titleDefinesSection": true,
+    "sectionTag": "section",
+    "ariaLabelledBy": true,
+    "noLevelJumps": true
+  },
+  "indexRules": {
+    "navLabel": "Índice sistemático",
+    "listType": "ul",
+    "headingLevelsFromDepth": true
+  },
+  "searchExposure": {
+    "metaTags": ["model", "jurisdiction", "documentId"],
+    "staticIndex": ["title", "nodeId", "text"]
+  }
+}

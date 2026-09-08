@@ -1,0 +1,29 @@
+{
+  "contract": "MVP-033-CollectionExport",
+  "version": "0.1.0-draft",
+  "description": "Exportación consolidada de la colección pública en un único JSON estático",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "file": "public/collection-export.json"
+  },
+  "source": {
+    "catalog": "public/catalogo.json",
+    "timeline": "public/global-timeline.json",
+    "metrics": "public/build-metrics.json"
+  },
+  "schema": {
+    "type": "object",
+    "required": [
+      "exportedAt",
+      "catalog",
+      "timeline",
+      "metrics"
+    ]
+  }
+}

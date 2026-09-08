@@ -1,0 +1,35 @@
+{
+  "id": "MVP-044",
+  "title": "Panel público de estado del despliegue",
+  "description": "Dashboard y JSON público que consolida información del último build, commit e integridad del sitio.",
+  "version": "1.0.0",
+  "status": "implemented",
+  "created": "2026-09-07",
+  "module": "core/deploy-status",
+  "acceptance_criteria": [
+    "El generador crea public/deploy-status.json con información del último commit, rama y fecha.",
+    "El generador crea public/deploy-status.html accesible sin autenticación.",
+    "El dashboard muestra estado de integridad OK o ERROR.",
+    "El dashboard incluye enlace a integrity.html y build-metrics.json.",
+    "Se añade un enlace a deploy-status.html en public/nav.html.",
+    "Existe un endpoint público GET /api/v1/public/deploy-status.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/deploy-status.json",
+    "public/deploy-status.html",
+    "scripts/build-deploy-status.js",
+    "core/deploy-status/test/mvp-044-deploy-status.builder.test.js"
+  ],
+  "dependencies": [
+    "public/build-metrics.json",
+    "public/integrity-report.json",
+    "public/nav.html",
+    "core/api/server.js"
+  ],
+  "risks": [
+    "La información de commit depende de git; en CI puede no estar disponible.",
+    "Datos sensibles del entorno no deben exponerse."
+  ],
+  "updated": "2026-09-07"
+}

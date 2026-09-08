@@ -1,0 +1,52 @@
+const { construirEstructura } = require('../../src/core/constructorXHTML');
+
+describe('Constructor XHTML y Semántica EPUB3', () => {
+    const documentoMock = { titulo: 'Constitución de Prueba' };
+
+    test('1. Genera estructura base con CSS externo (etiqueta link)', () => {
+        const tokens = [
+            { tipo: 'texto_cuerpo', texto: 'Hola mundo', claseLegal: 'texto_cuerpo' }
+        ];
+        
+        // Al pasar '' como cssCrudoOriginal, fuerza el fallback a CSS externo
+        const html = construirEstructura(tokens, documentoMock, 'estilos.css', '');
+        
+        expect(html).toContain('<title>Constitución de Prueba</title>');
+        expect(html).toContain('<link rel="stylesheet" href="estilos.css" />');
+        expect(html).toContain('<p class="texto_cuerpo">Hola mundo</p>');
+    });
+
+    test('2. Genera estructura con CSS en línea (etiqueta style)', () => {
+        const tokens = [];
+        
+        // Al pasar un string de CSS, fuerza la inyección de <style>
+        const html = construirEstructura(tokens, documentoMock, 'estilos.css', 'body { margin: 0; }');
+        
+        expect(html).toContain('<style>');
+        expect(html).not.toContain('<link rel="stylesheet"');
+    });
+
+    test('3. Mapea correctamente roles y etiquetas EPUB3 según el catálogo', () => {
+        // Le enviamos un token de cada "familia" para ejecutar todos los cases del switch
+        const tokens = [
+            { tipo: 'preliminar_portada', texto: 'Portada', claseLegal: 'portada' },
+            { tipo: 'libro', texto: 'Libro I', claseLegal: 'libro' },
+            { tipo: 'articulo', texto: 'Art. 1', claseLegal: 'articulo' },
+            { tipo: 'inciso', texto: 'a)', claseLegal: 'inciso' } // Default fallback
+        ];
+
+        const html = construirEstructura(tokens, documentoMock);
+
+        // Verificamos familia Preliminares -> <section>
+        expect(html).toContain('<section class="portada" role="doc-preface">Portada</section>');
+        
+        // Verificamos familia Jerarquía Alta -> <h2>
+        expect(html).toContain('<h2 class="libro" role="heading" aria-level="2">Libro I</h2>');
+        
+        // Verificamos familia Artículos -> <p role="doc-section">
+        expect(html).toContain('<p class="articulo" role="doc-section">Art. 1</p>');
+        
+        // Verificamos Default -> <p>
+        expect(html).toContain('<p class="inciso">a)</p>');
+    });
+});

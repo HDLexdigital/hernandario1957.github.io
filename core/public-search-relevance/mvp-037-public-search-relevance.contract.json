@@ -1,0 +1,24 @@
+{
+  "contract": "MVP-037-PublicSearchRelevance",
+  "version": "0.1.0-draft",
+  "description": "Panel público de búsqueda con ordenamiento por relevancia simple",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/search-relevance.html",
+    "data": "public/search-index.json"
+  },
+  "ranking": {
+    "method": "term-frequency",
+    "caseInsensitive": true,
+    "accentInsensitive": true
+  },
+  "source": {
+    "searchIndex": "public/search-index.json"
+  }
+}

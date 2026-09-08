@@ -1,0 +1,295 @@
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
+
+const app = express();
+
+const RAIZ = path.join(__dirname, '..', '..');
+const INDICE_PATH = process.env.API_INDICE_PATH || path.join(RAIZ, 'public', 'indice.json');
+const MANIFEST_PATH = process.env.API_MANIFEST_PATH || path.join(RAIZ, 'public', 'manifest.json');
+const SEARCH_INDEX_PATH = process.env.API_SEARCH_INDEX_PATH || path.join(RAIZ, 'public', 'search-index.json');
+const CATALOGO_PATH = process.env.API_CATALOGO_PATH || path.join(RAIZ, 'public', 'catalogo.json');
+
+const API_KEY = process.env.LEX_API_KEY || '';
+const { createAuditLogger } = require('../audit/audit-logger');
+
+function normalizar(texto) {
+    return String(texto || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function leerJson(ruta) {
+    if (!fs.existsSync(ruta)) return null;
+    return JSON.parse(fs.readFileSync(ruta, 'utf8'));
+}
+
+const authMiddleware = (req, res, next) => {
+    const apiKey = req.headers['x-api-key'];
+
+    if (!API_KEY) {
+        return res.status(500).json({ error: 'api_key_not_configured' });
+    }
+
+    if (!apiKey || apiKey !== API_KEY) {
+        return res.status(401).json({ error: 'unauthorized' });
+    }
+
+    next();
+};
+
+app.use(express.json());
+app.use(createAuditLogger());
+
+// ========== RUTAS PÚBLICAS SIN AUTENTICACIÓN ==========
+
+// Healthcheck (MVP-022)
+app.get('/api/v1/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        version: '1.0.0',
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Metadatos públicos (MVP-021)
+app.get('/api/v1/public/catalog', (req, res) => {
+    const catalogo = leerJson(CATALOGO_PATH);
+    if (!catalogo) {
+        return res.status(404).json({ error: 'catalog_not_found' });
+    }
+
+    const resumen = catalogo.map(doc => ({
+        documentId: doc.documentId,
+        versions: doc.versions || []
+    }));
+
+    res.json(resumen);
+});
+
+app.get('/api/v1/public/document/:id', (req, res) => {
+    const catalogo = leerJson(CATALOGO_PATH);
+    if (!catalogo) {
+        return res.status(404).json({ error: 'catalog_not_found' });
+    }
+
+    const doc = catalogo.find(entry => entry.documentId === req.params.id);
+    if (!doc) {
+        return res.status(404).json({ error: 'document_not_found' });
+    }
+
+    res.json({
+        documentId: doc.documentId,
+        versions: doc.versions || []
+    });
+});
+
+// Búsqueda pública simplificada (MVP-023)
+app.get('/api/v1/public/search', (req, res) => {
+    const q = normalizar(req.query.q || '');
+    const limit = parseInt(req.query.limit, 10) || 20;
+
+    if (q.length < 2) {
+        return res.status(400).json({ error: 'query_too_short' });
+    }
+
+    const searchIndex = leerJson(SEARCH_INDEX_PATH);
+    if (!searchIndex) {
+        return res.status(404).json({ error: 'search_index_not_found' });
+    }
+
+    const resultados = searchIndex
+        .filter(item => item.text.includes(q))
+        .slice(0, limit);
+
+    res.json({
+        query: req.query.q,
+        count: resultados.length,
+        results: resultados
+    });
+});
+
+
+// Novedades públicas (MVP-024)
+app.get('/api/v1/public/novedades', (req, res) => {
+    const novedadesPath = process.env.NOVEDADES_PATH || path.join(RAIZ, 'public', 'novedades.json');
+    const novedades = leerJson(novedadesPath);
+    if (!novedades) {
+        return res.status(404).json({ error: 'novedades_not_found' });
+    }
+    res.json(novedades);
+});
+
+
+// Línea de tiempo pública (MVP-025)
+app.get('/api/v1/public/timeline/:documentId', (req, res) => {
+    const timelineDir = process.env.TIMELINE_DIR || path.join(RAIZ, 'public', 'timeline');
+    const timelinePath = path.join(timelineDir, req.params.documentId + '.json');
+    const timeline = leerJson(timelinePath);
+    if (!timeline) {
+        return res.status(404).json({ error: 'timeline_not_found' });
+    }
+    res.json(timeline);
+});
+
+
+// Métricas públicas de compilación (MVP-027)
+app.get('/api/v1/public/external-links', (req, res) => {
+    const reportPath = path.join(process.cwd(), 'public', 'external-links-report.json');
+    if (!fs.existsSync(reportPath)) {
+        return res.status(404).json({ error: 'report not found' });
+    }
+    res.json(JSON.parse(fs.readFileSync(reportPath, 'utf8')));
+});
+
+app.get('/api/v1/public/deploy-status', (req, res) => {
+    const reportPath = path.join(process.cwd(), 'public', 'deploy-status.json');
+    if (!fs.existsSync(reportPath)) {
+        return res.status(404).json({ error: 'deploy status not found' });
+    }
+    res.json(JSON.parse(fs.readFileSync(reportPath, 'utf8')));
+});
+
+app.get('/api/v1/public/integrity', (req, res) => {
+    const reportPath = path.join(process.cwd(), 'public', 'integrity-report.json');
+    if (!fs.existsSync(reportPath)) {
+        return res.status(404).json({ error: 'report not found' });
+    }
+    res.json(JSON.parse(fs.readFileSync(reportPath, 'utf8')));
+});
+
+app.get('/api/v1/public/build-metrics', (req, res) => {
+    const metricsPath = process.env.METRICS_PATH || path.join(RAIZ, 'public', 'build-metrics.json');
+    const metrics = leerJson(metricsPath);
+    if (!metrics) {
+        return res.status(404).json({ error: 'metrics_not_found' });
+    }
+    res.json(metrics);
+});
+
+
+// Línea de tiempo global (MVP-028)
+app.get('/api/v1/public/global-timeline', (req, res) => {
+    const globalTimelinePath = process.env.GLOBAL_TIMELINE_PATH || path.join(RAIZ, 'public', 'global-timeline.json');
+    const globalTimeline = leerJson(globalTimelinePath);
+    if (!globalTimeline) {
+        return res.status(404).json({ error: 'global_timeline_not_found' });
+    }
+    res.json(globalTimeline);
+});
+
+// ========== RUTAS PRIVADAS (requieren API Key) ==========
+app.use(authMiddleware);
+
+app.get('/api/v1/status', (req, res) => {
+    const manifest = leerJson(MANIFEST_PATH);
+    res.json({
+        status: 'ok',
+        corpusVersion: manifest?.version || 'unknown',
+        timestamp: new Date().toISOString()
+    });
+});
+
+app.get('/api/v1/index', (req, res) => {
+    const indice = leerJson(INDICE_PATH);
+    if (!indice) {
+        return res.status(404).json({ error: 'index_not_found' });
+    }
+    res.json(indice);
+});
+
+app.get('/api/v1/document/:id', (req, res) => {
+    const manifest = leerJson(MANIFEST_PATH);
+    if (!manifest || manifest.documentId !== req.params.id) {
+        return res.status(404).json({ error: 'document_not_found' });
+    }
+    res.json({
+        documentId: manifest.documentId,
+        title: manifest.documentId,
+        artifacts: manifest.artifacts || []
+    });
+});
+
+app.get('/api/v1/node/:nodeId', (req, res) => {
+    const indice = leerJson(INDICE_PATH);
+    if (!indice) {
+        return res.status(404).json({ error: 'index_not_found' });
+    }
+    const nodo = indice.find(entry => entry.nodeId === req.params.nodeId);
+    if (!nodo) {
+        return res.status(404).json({ error: 'node_not_found' });
+    }
+    res.json({
+        nodeId: nodo.nodeId,
+        content: nodo
+    });
+});
+
+app.get('/api/v1/search', (req, res) => {
+    const q = normalizar(req.query.q || '');
+    const limit = parseInt(req.query.limit, 10) || 20;
+
+    if (q.length < 2) {
+        return res.status(400).json({ error: 'query_too_short' });
+    }
+
+    const searchIndex = leerJson(SEARCH_INDEX_PATH);
+    if (!searchIndex) {
+        return res.status(404).json({ error: 'search_index_not_found' });
+    }
+
+    const resultados = searchIndex
+        .filter(item => item.text.includes(q))
+        .slice(0, limit);
+
+    res.json({
+        query: req.query.q,
+        count: resultados.length,
+        results: resultados
+    });
+});
+
+app.get('/api/v1/catalog', (req, res) => {
+    const catalogo = leerJson(CATALOGO_PATH);
+    if (!catalogo) {
+        return res.status(404).json({ error: 'catalog_not_found' });
+    }
+    res.json(catalogo);
+});
+
+// Integración del panel de administración
+const { createAdminRouter } = require('../admin/server-admin');
+app.use(createAdminRouter(authMiddleware));
+
+app.use((req, res) => {
+    res.status(404).json({ error: 'resource_not_found' });
+});
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({ error: 'internal_server_error' });
+});
+
+if (require.main === module) {
+    const PORT = process.env.API_PORT || 3000;
+    app.get('/api/v1/public/audit-summary', (req, res) => {
+    const summaryPath = path.join(process.cwd(), 'public', 'audit-summary.json');
+    if (!fs.existsSync(summaryPath)) {
+        return res.status(404).json({ error: 'audit summary not found' });
+    }
+    res.json(JSON.parse(fs.readFileSync(summaryPath, 'utf8')));
+});
+
+
+app.listen(PORT, () => {
+        console.log(`🚀 API MVP-011+012+013+015+016+021+022+023 escuchando en http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;

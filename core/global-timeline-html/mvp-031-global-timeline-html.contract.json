@@ -1,0 +1,19 @@
+{
+  "contract": "MVP-031-GlobalTimelineHTML",
+  "version": "0.1.0-draft",
+  "description": "Panel estático en HTML para visualizar la línea de tiempo global",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/global-timeline.html",
+    "data": "public/global-timeline.json"
+  },
+  "source": {
+    "globalTimeline": "public/global-timeline.json"
+  }
+}

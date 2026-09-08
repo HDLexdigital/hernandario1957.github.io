@@ -1,0 +1,53 @@
+{
+  "contract": "MVP-012-Search",
+  "version": "0.1.0-draft",
+  "description": "Contrato para el motor de búsqueda interna del corpus jurídico LEDM",
+  "principles": {
+    "readOnly": true,
+    "stateless": true,
+    "deterministic": true,
+    "jsonOnly": true,
+    "noDatabase": true,
+    "prebuiltIndex": true
+  },
+  "index": {
+    "source": [
+      "public/indice.json",
+      "public/manifest.json"
+    ],
+    "output": "public/search-index.json",
+    "fields": [
+      "documentId",
+      "title",
+      "nodeId",
+      "text"
+    ]
+  },
+  "search": {
+    "endpoint": "/api/v1/search",
+    "method": "GET",
+    "parameters": {
+      "q": "string",
+      "limit": "number"
+    },
+    "responseSchema": {
+      "type": "object",
+      "properties": {
+        "query": "string",
+        "results": "array",
+        "count": "number"
+      },
+      "required": [
+        "query",
+        "results",
+        "count"
+      ]
+    }
+  },
+  "validation": {
+    "requireIndex": true,
+    "requireResults": true,
+    "maxResultsDefault": 20,
+    "minQueryLength": 2
+  }
+}

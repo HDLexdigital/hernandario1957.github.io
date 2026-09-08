@@ -1,0 +1,19 @@
+{
+  "documento": {
+    "titulo": "Prueba LexDigital Pipeline"
+  },
+  "contenido": [
+    {
+      "tipo": "preliminar_portada",
+      "texto": "PRUEBA DEL PIPELINE LEXDIGITAL"
+    },
+    {
+      "tipo": "articulo",
+      "texto": "Artículo 1. Este es un documento de prueba."
+    },
+    {
+      "tipo": "parrafo",
+      "texto": "Contenido de prueba para verificar la compilación."
+    }
+  ]
+}

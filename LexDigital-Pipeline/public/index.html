@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexDigitalHD - Panel de Control</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #f4f6f8;
+            color: #333;
+        }
+        h1 {
+            color: #111;
+            border-bottom: 2px solid #0078d4;
+            padding-bottom: 10px;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        input[type="file"], select {
+            display: block;
+            margin-top: 5px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005a9e;
+        }
+        #logs {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid #ccc;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>LexDigitalHD - Panel de Control Editorial</h1>
+        <p>Selecciona tu documento JSON y el formato de salida deseado.</p>
+        
+        <div class="input-group">
+            <label for="inputArchivo"><b>Seleccionar documento JSON:</b></label>
+            <input type="file" id="inputArchivo" accept=".json">
+        </div>
+
+        <div class="input-group">
+            <label for="selectFormato"><b>Formato de Salida:</b></label>
+            <select id="selectFormato">
+                <option value="pdf">PDF Accesible (Puppeteer)</option>
+                <option value="xhtml">XHTML Estructurado</option>
+                <option value="json">JSON Normalizado / Corregido</option>
+            </select>
+        </div>
+
+        <button id="btnProcesar">Procesar y Compilar</button>
+        
+        <div id="logs">&gt; Esperando instrucciones del sistema...</div>
+    </div>
+
+    <script>
+        document.getElementById('btnProcesar').onclick = async () => {
+            const inputArchivo = document.getElementById('inputArchivo');
+            const selectFormato = document.getElementById('selectFormato');
+            const logsDiv = document.getElementById('logs');
+
+            if (inputArchivo.files.length === 0) {
+                alert("Por favor, selecciona un archivo JSON primero.");
+                return;
+            }
+
+            const archivo = inputArchivo.files[0];
+            const formatoSeleccionado = selectFormato.value;
+            
+            logsDiv.innerHTML += `<p>📂 Leyendo archivo local: <b>${archivo.name}</b> (Formato: ${formatoSeleccionado.toUpperCase()})...</p>`;
+
+            try {
+			const contenidoTexto = await archivo.text();
+				// Limpia el carácter BOM invisible y cualquier espacio en blanco al inicio
+			const textoLimpio = contenidoTexto.replace(/^\uFEFF/, '').trim();
+			const jsonDatos = JSON.parse(textoLimpio);
+
+                logsDiv.innerHTML += `<p>⚙️ Enviando datos al pipeline...</p>`;
+
+                // Enviamos tanto los datos como el formato de salida elegido
+                const respuesta = await fetch('/api/pipeline/procesar-json', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        datos: jsonDatos,
+                        outputFormat: formatoSeleccionado
+                    })
+                });
+
+                const resultado = await respuesta.json();
+
+                if (resultado.success) {
+                    logsDiv.innerHTML += `<p style="color: #4ec9b0;">✅ ${resultado.mensaje} — Archivo generado: <b>${resultado.archivoSalida}</b></p>`;
+                } else {
+                    logsDiv.innerHTML += `<p style="color: #f44747;">❌ Error: ${resultado.error}</p>`;
+                }
+            } catch (error) {
+                logsDiv.innerHTML += `<p style="color: #f44747;">❌ Error: ${error.message}</p>`;
+            }
+
+            logsDiv.scrollTop = logsDiv.scrollHeight;
+        };
+    </script>
+</body>
+</html>

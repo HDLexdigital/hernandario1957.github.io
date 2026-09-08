@@ -1,0 +1,76 @@
+/* CSS DINÁMICO EXTRAÍDO DEL DOCUMENTO - LEXDIGITALHD */
+
+.p02-title-part {
+  font-family: "Georgia Pro Cond Semibold", sans-serif;
+  font-size: 24pt;
+  color: Black;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 5mm;
+  margin-bottom: 1mm;
+  margin-left: 2mm;
+}
+
+.p03-center-normal {
+  font-family: "Liberation Serif Regular", sans-serif;
+  font-size: 14pt;
+  color: Black;
+  text-align: center;
+  margin-top: 1.7638888888888888mm;
+  margin-bottom: 1.7638888888888888mm;
+}
+
+.p03-center-bold {
+  font-family: "Liberation Serif Bold", sans-serif;
+  font-size: 14pt;
+  font-weight: bold;
+  color: Black;
+  text-align: center;
+  margin-top: 1.7638888888888888mm;
+  margin-bottom: 1.7638888888888888mm;
+}
+
+.p01-body-first {
+  font-family: "Liberation Serif Regular", sans-serif;
+  font-size: 14pt;
+  color: Black;
+  text-align: justify;
+}
+
+.p01-body-cont {
+  font-family: "Liberation Serif Regular", sans-serif;
+  font-size: 14pt;
+  color: Black;
+  text-align: center;
+  margin-top: 1.5mm;
+}
+
+.p02-title-main {
+  font-family: "Georgia Pro Cond Semibold", sans-serif;
+  font-size: 16pt;
+  color: TITULO Constitucion;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 5mm;
+  margin-bottom: 1mm;
+}
+
+.p01-body-base {
+  font-family: "Liberation Serif Bold", sans-serif;
+  font-size: 14pt;
+  font-weight: bold;
+  color: TITULO Constitucion;
+  text-align: justify;
+  margin-top: 3.5mm;
+}
+
+.p02-title-chapter {
+  font-family: "Liberation Serif Bold", sans-serif;
+  font-size: 14pt;
+  font-weight: bold;
+  color: Capítulo Constitucion;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 4mm;
+}
+

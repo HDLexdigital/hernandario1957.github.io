@@ -1,0 +1,30 @@
+{
+  "contract": "MVP-017-Deploy",
+  "version": "0.1.0-draft",
+  "description": "Contrato para integración con dominio definitivo y despliegue público estático",
+  "principles": {
+    "staticDeployment": true,
+    "readOnly": true,
+    "noDatabase": true,
+    "noLedmMutation": true,
+    "httpsRequired": true,
+    "domainConfigurable": true
+  },
+  "domain": {
+    "primary": "digitalhd.com",
+    "www": "www.digitalhd.com"
+  },
+  "deployment": {
+    "provider": "github-pages",
+    "artifactDirectory": "public",
+    "workflow": ".github/workflows/deploy.yml",
+    "branch": "feat/mvp-004"
+  },
+  "validation": {
+    "requireArtifactDirectory": true,
+    "requireWorkflow": true,
+    "requireDomainConfig": true,
+    "requireHttps": true,
+    "failOnMissing": true
+  }
+}

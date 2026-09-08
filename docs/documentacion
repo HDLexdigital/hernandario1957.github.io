@@ -1,0 +1,159 @@
+---
+
+### Archivo 2: `docs/operations/O3-Operational-Evidence-Audit.md`
+*(Copia todo el contenido a continuación, pégalo en Notepad++ y guárdalo como `O3-Operational-Evidence-Audit.md` en la carpeta `docs/operations/`)*
+
+```markdown
+# O3 — Operational Evidence Audit (La Pregunta Maestra)
+**Estado:** 🟢 CERTIFIED / FROZEN  
+
+---
+
+## 1. Propósito y Alcance
+
+O3 define el protocolo técnico y la metodología de auditoría forense retrospectiva para LexDigitalHD. Su propósito es materializar en la práctica la pregunta maestra del sistema:
+
+> **«¿Podemos demostrar, ante cualquier auditoría futura, exactamente qué ocurrió durante cada ejecución de producción?»**
+
+---
+
+## 2. El Principio de Evidencia Soberana
+
+Bajo el régimen operacional, una ejecución no es confiable porque el sistema declare que fue correcta, sino porque **conserva evidencia suficiente para demostrar por qué fue correcta**. Ninguna afirmación administrativa sustituye al rastro criptográfico persistido.
+
+---
+
+## 3. Protocolo de Reconstrucción Retrospectiva (`audit-execution.js`)
+
+Dado únicamente un identificador de trabajo o de ejecución (`jobIdentity` o `executionId`), cualquier auditor externo o interno debe poder reconstruir el linaje completo navegando por la evidencia persistida en O1.1:
+
+```text
+jobIdentity / executionId
+    │
+    ├── 1. ¿Qué entrada recibió?            ➔ identities/input.json (inputHash)
+    ├── 2. ¿Qué AST produjo?               ➔ identities/ast.json
+    ├── 3. ¿Qué Projection Plan utilizó?   ➔ identities/projection-plan.json
+    ├── 4. ¿Qué comandos fueron enviados?  ➔ rendering/commands.json
+    ├── 5. ¿Qué respondió InDesign?        ➔ rendering/mutations.json & read-back.json
+    ├── 6. ¿Qué artefacto produjo?         ➔ governance/artifact-manifest.json
+    ├── 7. ¿Qué hashes obtuvo?             ➔ governance/reproducibility-certificate.json
+    ├── 8. ¿Quién autorizó el release?     ➔ governance/release-decision.json
+    └── 9. ¿Cuál fue el veredicto final?   ➔ governance/production-corpus-certificate.json
+Si cualquiera de estos eslabones falta o no coincide con su hash canónico, la auditoría marca la ejecución como no verificable, impidiendo su promoción a producción.
+
+
+---
+
+### Archivo 3: `docs/operations/O4-Release-Distribution.md`
+*(Copia todo el contenido a continuación, pégalo en Notepad++ y guárdalo como `O4-Release-Distribution.md` en la carpeta `docs/operations/`)*
+
+```markdown
+# O4 — Release and Distribution Operations
+**Estado:** 🟢 CERTIFIED / FROZEN  
+
+---
+
+## 1. Propósito y Alcance
+
+O4 establece las reglas de gobernanza y control para la promoción y distribución de los artefactos generados por LexDigitalHD. Su objetivo primordial es evitar que un operador humano salte los controles institucionales mediante copias manuales de archivos.
+
+---
+
+## 2. Aislamiento de Estratos
+
+Las transiciones entre entornos y estados no son automáticas ni implícitas; cada una requiere una decisión explícita y su respectiva evidencia contractual:
+
+```text
+CERTIFIED
+    │  (Decisión independiente de validación técnica)
+    ▼
+RELEASE_AUTHORIZED
+    │  (Promoción operacional autorizada por comité / release gate)
+    ▼
+PRODUCTION
+    │  (Entrega formal al repositorio institucional)
+    ▼
+DISTRIBUTION
+3. Reglas Operacionales de Distribución
+Prohibición de Staging Directo: Ningún artefacto se distribuye directamente desde carpetas de trabajo o entornos de prueba (staging).
+
+Flujo Obligatorio: Todo paquete de distribución debe seguir estrictamente la ruta:
+STAGING ➔ CERTIFICATION ➔ MANIFEST ➔ MULTI-FORMAT CHECK ➔ RELEASE GATE (E26.4) ➔ PRODUCTION REPOSITORY ➔ DISTRIBUTION.
+
+Inmutabilidad del Repositorio de Producción: Los artefactos publicados en producción no pueden ser reemplazados de forma retroactiva; cualquier corrección exige un nuevo ciclo de ejecución con un executionId y una versión incrementada.
+
+
+---
+
+### Archivo 4: `docs/operations/O5-Incident-Recertification.md`
+*(Copia todo el contenido a continuación, pégalo en Notepad++ y guárdalo como `O5-Incident-Recertification.md` en la carpeta `docs/operations/`)*
+
+```markdown
+# O5 — Incident & Recertification Governance
+**Estado:** 🟢 CERTIFIED / FROZEN  
+
+---
+
+## 1. Propósito y Alcance
+
+O5 define el protocolo institucional para afrontar incidencias o errores detectados en artefactos ya liberados, protegiendo al sistema de la degradación por "parches rápidos".
+
+---
+
+## 2. La Regla de Oro del Núcleo Congelado
+
+> **Una incidencia operacional jamás es una invitación a modificar el motor (E18–E26). El núcleo está congelado y es inmutable.**
+
+Ante un defecto reportado (ej. *"El Artículo 37 quedó con sangría incorrecta"*), está estrictamente prohibido aplicar modificaciones silenciosas al código fuente del motor.
+
+---
+
+## 3. Protocolo de Resolución de Incidentes
+
+Ante un fallo detectado en explotación, se sigue rigurosamente este flujo:
+1. **Aislamiento Forense:** Se utiliza la evidencia soberana de la ejecución fallida para determinar el estrato exacto del error.
+2. **Clasificación del Origen:** Se determina si la causa raíz proviene de:
+   * Un error en el corpus de entrada (datos jurídicos).
+   * Una desviación en la política de proyección.
+   * Una anomalía en el entorno físico de renderizado (InDesign).
+3. **Corrección Externa:** Se subsana el origen (la entrada o la regla de proyección en capas superiores).
+4. **Recertificación Controlada:** Se dispara una **nueva ejecución** con un nuevo `executionId` que procesa la corrección, generando una cadena de certificación limpia. La evidencia histórica del error anterior permanece intacta en el repositorio como parte de la memoria de auditoría.
+Archivo 5: docs/operations/O6-Canonical-Runbooks.md
+(Copia todo el contenido a continuación, pégalo en Notepad++ y guárdalo como O6-Canonical-Runbooks.md en la carpeta docs/operations/)
+
+Markdown
+# O6 — Canonical Runbooks (Manual Operativo)
+**Estado:** 🟢 CERTIFIED / FROZEN  
+**Sistemas Operativos:** Windows 11 (Desarrollo) ➔ Linux Mint (Producción)
+
+---
+
+## 1. Propósito y Alcance
+
+Este documento constituye el manual paso a paso para los operadores y desarrolladores encargados de ejecutar, auditar y mantener la plataforma LexDigitalHD bajo el régimen de **Production Operations**.
+
+---
+
+## 2. Runbook de Arranque y Ejecución (O6.1)
+
+Para ejecutar una corrida piloto controlada o un trabajo de producción sobre Windows 11 o Linux Mint:
+1. Verificar la integridad del entorno Node.js.
+2. Configurar el corpus de entrada en el directorio correspondiente.
+3. Ejecutar la suite de pruebas unitarias/contratos para validar el baseline:
+   ```powershell
+   npx jest --runInBand
+Invocar el orquestador de pruebas piloto mediante el script CLI correspondiente.
+
+3. Manual de Auditoría Forense (O6.2)
+Para responder a la pregunta maestra ante un comité de auditoría:
+
+Obtener la jobIdentity o el executionId del artefacto cuestionado.
+
+Localizar el directorio correspondiente en el almacén de evidencia: evidence/<jobIdentity>/<executionId>/.
+
+Validar los hashes SHA-256 contenidos en el evidence-manifest.json frente a los archivos físicos de la carpeta de gobierno.
+
+4. Guía de Mantenimiento y Actualización de Entorno (O6.5)
+Migración Windows 11 ➔ Linux Mint: Cualquier cambio de sistema operativo debe validar la paridad de serialización y la normalización de rutas canónicas, asegurando que los hashes generados en Linux coincidan exactamente con los criterios de prueba congelados.
+
+Ampliación de Funcionalidades: Toda nueva capacidad o formato de salida debe implementarse como una capa consumidora u ortogonal, sin alterar los contratos E18–E26.

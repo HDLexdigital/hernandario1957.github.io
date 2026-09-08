@@ -1,0 +1,4625 @@
+{
+  "document": {
+    "name": "Constitución-Colombia_a_diseños.indd",
+    "exportDate": "Sun Aug 23 2026 17:52:40 GMT-0500",
+    "version": "1.0"
+  },
+  "paragraphStyles": {
+    "style_0": {
+      "id": "style_0",
+      "metadata": {
+        "originalName": "[Ningún estilo de párrafo]",
+        "styleGroup": "Root",
+        "internalDomId": 126,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": 12,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 0
+      },
+      "resolved": {
+        "pointSize": 12,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 0
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_1": {
+      "id": "style_1",
+      "metadata": {
+        "originalName": "[Párrafo básico]",
+        "styleGroup": "Root",
+        "internalDomId": 129,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": "[Párrafo básico]"
+      },
+      "declared": {
+        "pointSize": 12,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 0
+      },
+      "resolved": {
+        "pointSize": 12,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 0
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_2": {
+      "id": "style_2",
+      "metadata": {
+        "originalName": "Volver_Glosario",
+        "styleGroup": "A medida V",
+        "internalDomId": 215968,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": "Volver_Glosario"
+      },
+      "declared": {
+        "pointSize": 9,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": 12,
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 0
+      },
+      "resolved": {
+        "pointSize": 9,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": 12,
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 0
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_3": {
+      "id": "style_3",
+      "metadata": {
+        "originalName": "P08_GLS_TERM_DD",
+        "styleGroup": "A medida V",
+        "internalDomId": 197902,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P08_GLS_TERM_DT",
+        "nextStyle": "P08_GLS-ART"
+      },
+      "declared": {
+        "pointSize": 12,
+        "appliedFont": "Liberation Sans Narrow	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 0
+      },
+      "resolved": {
+        "pointSize": 12,
+        "appliedFont": "Liberation Sans Narrow	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 0
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_4": {
+      "id": "style_4",
+      "metadata": {
+        "originalName": "P08_GLS_TERM_DT",
+        "styleGroup": "A medida V",
+        "internalDomId": 197900,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": "P08_GLS_TERM_DD"
+      },
+      "declared": {
+        "pointSize": 12,
+        "appliedFont": "Liberation Sans Narrow	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 0
+      },
+      "resolved": {
+        "pointSize": 12,
+        "appliedFont": "Liberation Sans Narrow	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 0
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_5": {
+      "id": "style_5",
+      "metadata": {
+        "originalName": "P01_BODY_BASE",
+        "styleGroup": "A medida V::01_Cuerpo de texto",
+        "internalDomId": 190327,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": "P01_BODY_CONT"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_6": {
+      "id": "style_6",
+      "metadata": {
+        "originalName": "P01_BODY_CONT",
+        "styleGroup": "A medida V::01_Cuerpo de texto",
+        "internalDomId": 190328,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P01_BODY_BASE",
+        "nextStyle": "P01_BODY_CONT"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_7": {
+      "id": "style_7",
+      "metadata": {
+        "originalName": "P01_BODY_FIRST",
+        "styleGroup": "A medida V::01_Cuerpo de texto",
+        "internalDomId": 190329,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P01_BODY_CONT",
+        "nextStyle": "P01_BODY_FIRST"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_8": {
+      "id": "style_8",
+      "metadata": {
+        "originalName": "P01_BODY_NO_SENTENCE",
+        "styleGroup": "A medida V::01_Cuerpo de texto",
+        "internalDomId": 190332,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P01_BODY_BASE",
+        "nextStyle": "P01_BODY_NO_SENTENCE"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_9": {
+      "id": "style_9",
+      "metadata": {
+        "originalName": "P07_INDENT_L1",
+        "styleGroup": "A medida V::01_Cuerpo de texto",
+        "internalDomId": 190335,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "[Párrafo básico]",
+        "nextStyle": "P07_INDENT_L1"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_10": {
+      "id": "style_10",
+      "metadata": {
+        "originalName": "P07_INDENT_L1_NONUM",
+        "styleGroup": "A medida V::01_Cuerpo de texto",
+        "internalDomId": 190337,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P07_INDENT_L1",
+        "nextStyle": "P07_INDENT_L1_NONUM"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_11": {
+      "id": "style_11",
+      "metadata": {
+        "originalName": "P07_INDENT_L2",
+        "styleGroup": "A medida V::01_Cuerpo de texto",
+        "internalDomId": 190338,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P01_BODY_BASE",
+        "nextStyle": "P07_INDENT_L2"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_12": {
+      "id": "style_12",
+      "metadata": {
+        "originalName": "P02_TITLE_BASE",
+        "styleGroup": "A medida V::02_TITULOS",
+        "internalDomId": 190346,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P01_BODY_BASE",
+        "nextStyle": "P02_TITLE_BASE"
+      },
+      "declared": {
+        "pointSize": 15,
+        "appliedFont": "Liberation Serif	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 15,
+        "appliedFont": "Liberation Serif	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_13": {
+      "id": "style_13",
+      "metadata": {
+        "originalName": "P02_TITLE_MAIN",
+        "styleGroup": "A medida V::02_TITULOS",
+        "internalDomId": 190347,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P02_TITLE_BASE",
+        "nextStyle": "P02_TITLE_MAIN"
+      },
+      "declared": {
+        "pointSize": 16,
+        "appliedFont": "Georgia Pro	Cond Semibold",
+        "fontStyle": "Cond Semibold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 16,
+        "appliedFont": "Georgia Pro	Cond Semibold",
+        "fontStyle": "Cond Semibold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_14": {
+      "id": "style_14",
+      "metadata": {
+        "originalName": "P02_TITLE_CHAPTER",
+        "styleGroup": "A medida V::02_TITULOS",
+        "internalDomId": 190348,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": "P02_TITLE_CHAPTER"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 0
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 0
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_15": {
+      "id": "style_15",
+      "metadata": {
+        "originalName": "P02_TITLE_PART",
+        "styleGroup": "A medida V::02_TITULOS",
+        "internalDomId": 190350,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P02_TITLE_BASE",
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": 24,
+        "appliedFont": "Georgia Pro	Cond Semibold",
+        "fontStyle": "Cond Semibold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 24,
+        "appliedFont": "Georgia Pro	Cond Semibold",
+        "fontStyle": "Cond Semibold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_16": {
+      "id": "style_16",
+      "metadata": {
+        "originalName": "P02_TITLE_BOOK_SUB",
+        "styleGroup": "A medida V::02_TITULOS",
+        "internalDomId": 197436,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P02_TITLE_BOOK",
+        "nextStyle": "P02_TITLE_BOOK_SUB"
+      },
+      "declared": {
+        "pointSize": 16,
+        "appliedFont": "Liberation Serif	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 16,
+        "appliedFont": "Liberation Serif	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_17": {
+      "id": "style_17",
+      "metadata": {
+        "originalName": "P02_TITLE_BOOK",
+        "styleGroup": "A medida V::02_TITULOS",
+        "internalDomId": 197435,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P02_TITLE_MAIN",
+        "nextStyle": "P02_TITLE_BOOK_SUB"
+      },
+      "declared": {
+        "pointSize": 20,
+        "appliedFont": "Georgia Pro	Cond Semibold",
+        "fontStyle": "Cond Semibold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 20,
+        "appliedFont": "Georgia Pro	Cond Semibold",
+        "fontStyle": "Cond Semibold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_18": {
+      "id": "style_18",
+      "metadata": {
+        "originalName": "P03_CENTER_NORMAL",
+        "styleGroup": "A medida V::03_ESTILOS_ADICIONALES",
+        "internalDomId": 190342,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P01_BODY_CONT",
+        "nextStyle": "P03_CENTER_NORMAL"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_19": {
+      "id": "style_19",
+      "metadata": {
+        "originalName": "P03_CENTER_BOLD",
+        "styleGroup": "A medida V::03_ESTILOS_ADICIONALES",
+        "internalDomId": 190343,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P03_CENTER_NORMAL",
+        "nextStyle": "P03_CENTER_BOLD"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_20": {
+      "id": "style_20",
+      "metadata": {
+        "originalName": "P03_OFFICIAL_NAME",
+        "styleGroup": "A medida V::03_ESTILOS_ADICIONALES",
+        "internalDomId": 190355,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P03_CENTER_NORMAL",
+        "nextStyle": "P03_OFFICIAL_ROLE"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_21": {
+      "id": "style_21",
+      "metadata": {
+        "originalName": "P03_OFFICIAL_ROLE",
+        "styleGroup": "A medida V::03_ESTILOS_ADICIONALES",
+        "internalDomId": 190356,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P03_CENTER_NORMAL",
+        "nextStyle": "P03_OFFICIAL_NAME"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Liberation Serif	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_22": {
+      "id": "style_22",
+      "metadata": {
+        "originalName": "P05_IDX_ART",
+        "styleGroup": "A medida V::04 Indice Articulos",
+        "internalDomId": 197438,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": "P01_BODY_CONT"
+      },
+      "declared": {
+        "pointSize": 14,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 8
+      },
+      "resolved": {
+        "pointSize": 14,
+        "appliedFont": "Minion Pro	Regular",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 8
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_23": {
+      "id": "style_23",
+      "metadata": {
+        "originalName": "P08_GLS-ART",
+        "styleGroup": "A medida V::GLOSARIO",
+        "internalDomId": 197903,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "P08_GLS_TERM_DT",
+        "nextStyle": "P08_GLS_TERM_DT"
+      },
+      "declared": {
+        "pointSize": 12,
+        "appliedFont": "Liberation Sans Narrow	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "skew": 0,
+        "tracking": 0
+      },
+      "resolved": {
+        "pointSize": 12,
+        "appliedFont": "Liberation Sans Narrow	Bold",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": false,
+        "tracking": 0
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    }
+  },
+  "characterStyles": {
+    "style_0": {
+      "id": "style_0",
+      "metadata": {
+        "originalName": "[Ninguno]",
+        "styleGroup": "Root",
+        "internalDomId": 125,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_1": {
+      "id": "style_1",
+      "metadata": {
+        "originalName": "Glosario",
+        "styleGroup": "A medida V",
+        "internalDomId": 229541,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_2": {
+      "id": "style_2",
+      "metadata": {
+        "originalName": "00 Normal_char",
+        "styleGroup": "A medida V",
+        "internalDomId": 197441,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": 0,
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_3": {
+      "id": "style_3",
+      "metadata": {
+        "originalName": "01 Bold_char",
+        "styleGroup": "A medida V",
+        "internalDomId": 197440,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "00 Normal_char",
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": 0,
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_4": {
+      "id": "style_4",
+      "metadata": {
+        "originalName": "05 Hiperlink_char",
+        "styleGroup": "A medida V",
+        "internalDomId": 88190,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": false,
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": false,
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_5": {
+      "id": "style_5",
+      "metadata": {
+        "originalName": "C00_NORMAL",
+        "styleGroup": "A medida V",
+        "internalDomId": 229,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": 0,
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_6": {
+      "id": "style_6",
+      "metadata": {
+        "originalName": "C01_BOLD",
+        "styleGroup": "A medida V",
+        "internalDomId": 230,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "C00_NORMAL",
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": 0,
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_7": {
+      "id": "style_7",
+      "metadata": {
+        "originalName": "C02_ITALIC",
+        "styleGroup": "A medida V",
+        "internalDomId": 231,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Italic",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": 0,
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Italic",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_8": {
+      "id": "style_8",
+      "metadata": {
+        "originalName": "C03_SUPERSCRIPT",
+        "styleGroup": "A medida V",
+        "internalDomId": 190319,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": "C00_NORMAL",
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": true,
+        "strikeThru": {
+
+        },
+        "skew": 0,
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": true,
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_9": {
+      "id": "style_9",
+      "metadata": {
+        "originalName": "C12_CROSSREF",
+        "styleGroup": "A medida V",
+        "internalDomId": 88325,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_10": {
+      "id": "style_10",
+      "metadata": {
+        "originalName": "C13_TABNUM_CONTENT",
+        "styleGroup": "A medida V",
+        "internalDomId": 190321,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_11": {
+      "id": "style_11",
+      "metadata": {
+        "originalName": "C14_ROMAN_UPPER",
+        "styleGroup": "A medida V",
+        "internalDomId": 190322,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_12": {
+      "id": "style_12",
+      "metadata": {
+        "originalName": "C15_NARROW_90",
+        "styleGroup": "A medida V",
+        "internalDomId": 190323,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": {
+
+        },
+        "skew": 0,
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_13": {
+      "id": "style_13",
+      "metadata": {
+        "originalName": "C16_TD_GLOSS",
+        "styleGroup": "A medida V",
+        "internalDomId": 190324,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_14": {
+      "id": "style_14",
+      "metadata": {
+        "originalName": "C17_ARTLINK",
+        "styleGroup": "A medida V",
+        "internalDomId": 208411,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Bold",
+        "leading": 15.8,
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Bold",
+        "leading": 15.8,
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_15": {
+      "id": "style_15",
+      "metadata": {
+        "originalName": "TerminoGlosario",
+        "styleGroup": "A medida V",
+        "internalDomId": 210561,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": false,
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_16": {
+      "id": "style_16",
+      "metadata": {
+        "originalName": "flecha",
+        "styleGroup": "A medida V",
+        "internalDomId": 208318,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_17": {
+      "id": "style_17",
+      "metadata": {
+        "originalName": "Hipervínculo",
+        "styleGroup": "A medida V",
+        "internalDomId": 203044,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": true,
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": true,
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_18": {
+      "id": "style_18",
+      "metadata": {
+        "originalName": "Referencia Artículo",
+        "styleGroup": "A medida V",
+        "internalDomId": 198461,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_19": {
+      "id": "style_19",
+      "metadata": {
+        "originalName": "SYS_FIX_ARTICLE_NUMBER",
+        "styleGroup": "A medida V",
+        "internalDomId": 190325,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_20": {
+      "id": "style_20",
+      "metadata": {
+        "originalName": "Strong",
+        "styleGroup": "A medida V",
+        "internalDomId": 217574,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": "Bold",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_21": {
+      "id": "style_21",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word1",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217600,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_22": {
+      "id": "style_22",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word2",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217602,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_23": {
+      "id": "style_23",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word3",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217604,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_24": {
+      "id": "style_24",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word4",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217606,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_25": {
+      "id": "style_25",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word5",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217608,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_26": {
+      "id": "style_26",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word6",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217610,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_27": {
+      "id": "style_27",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word7",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217612,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_28": {
+      "id": "style_28",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word8",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217614,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_29": {
+      "id": "style_29",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word9",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217616,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_30": {
+      "id": "style_30",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word10",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217618,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_31": {
+      "id": "style_31",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word11",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217620,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_32": {
+      "id": "style_32",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word12",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217622,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_33": {
+      "id": "style_33",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word13",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217624,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_34": {
+      "id": "style_34",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word14",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217626,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_35": {
+      "id": "style_35",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word15",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217628,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_36": {
+      "id": "style_36",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word16",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217630,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_37": {
+      "id": "style_37",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word17",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217632,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_38": {
+      "id": "style_38",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word18",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217634,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_39": {
+      "id": "style_39",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word19",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217636,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_40": {
+      "id": "style_40",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word20",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217638,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_41": {
+      "id": "style_41",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word21",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217640,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_42": {
+      "id": "style_42",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word22",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217642,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_43": {
+      "id": "style_43",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word23",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217644,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": {
+
+        },
+        "appliedFont": null,
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": {
+
+        },
+        "appliedFont": "Default",
+        "fontStyle": {
+
+        },
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    },
+    "style_44": {
+      "id": "style_44",
+      "metadata": {
+        "originalName": "Estilo de lista importada de Word24",
+        "styleGroup": "A medida V::Estilos para listas de Word/RTF importadas",
+        "internalDomId": 217646,
+        "isRoot": false,
+        "isUsed": true
+      },
+      "relationships": {
+        "basedOn": null,
+        "nextStyle": null
+      },
+      "declared": {
+        "pointSize": 10,
+        "appliedFont": null,
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "skew": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "resolved": {
+        "pointSize": 10,
+        "appliedFont": "Default",
+        "fontStyle": "Regular",
+        "leading": {
+
+        },
+        "capitalization": {
+
+        },
+        "position": {
+
+        },
+        "underline": {
+
+        },
+        "strikeThru": {
+
+        },
+        "tracking": {
+
+        }
+      },
+      "semantic": {
+        "tag": "p",
+        "role": "body",
+        "isHeuristic": false
+      }
+    }
+  }
+}

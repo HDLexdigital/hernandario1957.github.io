@@ -1,0 +1,27 @@
+{
+  "contract": "MVP-023-PublicSearch",
+  "version": "0.1.0-draft",
+  "description": "Endpoint público de búsqueda simplificada sobre índice precalculado",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "endpoint": {
+    "path": "/api/v1/public/search",
+    "method": "GET",
+    "auth": false
+  },
+  "parameters": {
+    "q": "string",
+    "limit": "number"
+  },
+  "validation": {
+    "requireQuery": true,
+    "requireSearchIndex": true,
+    "maxResultsDefault": 20,
+    "minQueryLength": 2
+  }
+}

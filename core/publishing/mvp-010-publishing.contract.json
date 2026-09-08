@@ -1,0 +1,83 @@
+{
+  "contract": "MVP-010-Publishing",
+  "version": "0.1.0-draft",
+  "description": "Contrato de publicación y distribución web automática a partir de LEDM 2.0",
+  "principles": {
+    "ledmReadOnly": true,
+    "reproducible": true,
+    "deterministic": true,
+    "artifactIntegrity": true,
+    "distributionManifest": true,
+    "noInlineStyles": true,
+    "semanticIndex": true
+  },
+  "input": {
+    "type": "LEDM 2.0",
+    "requiredValidation": "core/ledm/test/ledm-v2.contract.test.js"
+  },
+  "outputTargets": {
+    "web": {
+      "renderer": "core/web/WebRenderer.js",
+      "bundle": [
+        "base.css"
+      ]
+    },
+    "epub": {
+      "renderer": "core/epub/EpubGenerator.js",
+      "bundle": [
+        "base.css"
+      ]
+    },
+    "pdf-ua": {
+      "renderer": "scripts/build-pdf-weasyprint.js",
+      "bundle": [
+        "base.css",
+        "paged-media.css"
+      ]
+    },
+    "pdf-print": {
+      "renderer": "scripts/build-pdf-print.js",
+      "bundle": [
+        "base.css",
+        "paged-media.css",
+        "print.css"
+      ]
+    }
+  },
+  "distribution": {
+    "root": "public",
+    "index": "index.html",
+    "manifest": "manifest.json",
+    "normativeIndex": "indice.json",
+    "assets": "assets"
+  },
+  "manifest": {
+    "requiredFields": [
+      "documentId",
+      "version",
+      "createdAt",
+      "artifacts"
+    ],
+    "artifactFields": [
+      "type",
+      "path",
+      "checksum",
+      "rendererVersion"
+    ]
+  },
+  "index": {
+    "requiredFields": [
+      "documentId",
+      "title",
+      "url",
+      "nodeId"
+    ]
+  },
+  "validation": {
+    "requireAllArtifacts": true,
+    "requireManifest": true,
+    "requireIndex": true,
+    "requireChecksums": true,
+    "failOnMissing": true
+  }
+}

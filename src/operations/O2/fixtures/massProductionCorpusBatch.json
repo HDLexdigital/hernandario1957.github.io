@@ -1,0 +1,25 @@
+{
+  "batchId": "BATCH_PRODUCTION_2026_01",
+  "version": "1.0.0",
+  "description": "Lote masivo de producción institucional para validación O2.4",
+  "jobs": [
+    {
+      "jobLogicalId": "JOB_UNIT_ALPHA",
+      "corpusPayload": {
+        "corpusId": "ALPHA_CORPUS",
+        "nodes": [{ "nodeId": "node_alpha_1", "type": "ARTICLE", "number": "1", "text": "Texto alfa de producción." }]
+      }
+    },
+    {
+      "jobLogicalId": "JOB_UNIT_BETA",
+      "corpusPayload": {
+        "corpusId": "BETA_CORPUS",
+        "nodes": [{ "nodeId": "node_beta_1", "type": "ARTICLE", "number": "1", "text": "Texto beta de producción." }]
+      }
+    }
+  ],
+  "metadata": {
+    "targetFormats": ["INDD", "PDF", "EPUB3"],
+    "concurrencySupported": true
+  }
+}

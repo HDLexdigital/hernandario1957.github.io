@@ -1,0 +1,30 @@
+{
+  "contract": "MVP-022-Health",
+  "version": "0.1.0-draft",
+  "description": "Endpoint público de salud del servicio LexDigitalHD",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "endpoint": {
+    "path": "/api/v1/health",
+    "method": "GET",
+    "auth": false
+  },
+  "responseSchema": {
+    "type": "object",
+    "properties": {
+      "status": "string",
+      "version": "string",
+      "timestamp": "string"
+    },
+    "required": [
+      "status",
+      "version",
+      "timestamp"
+    ]
+  }
+}

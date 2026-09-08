@@ -1,0 +1,34 @@
+{
+  "contract": "MVP-025-Timeline",
+  "version": "0.1.0-draft",
+  "description": "Línea de tiempo de versiones por documento jurídico",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "directory": "public/timeline",
+    "filePattern": "<documentId>.json",
+    "endpoint": "/api/v1/public/timeline/:documentId",
+    "method": "GET",
+    "auth": false
+  },
+  "source": {
+    "catalog": "public/catalogo.json",
+    "manifests": "public/<documentId>/<versionId>/manifest.json"
+  },
+  "sort": {
+    "field": "createdAt",
+    "order": "asc"
+  },
+  "fields": [
+    "documentId",
+    "versionId",
+    "createdAt",
+    "title",
+    "url"
+  ]
+}

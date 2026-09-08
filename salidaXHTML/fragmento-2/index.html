@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Publicación Móvil</title>
+		<link href="publication-web-resources/css/main.css" rel="stylesheet" type="text/css" />
+		<script src="publication-web-resources/script/main.js" type="text/javascript"></script>
+		<style>
+			/* Ajustes responsivos esenciales para móviles */
+			html, body {
+				margin: 0;
+				padding: 0;
+				width: 100vw;
+				height: 100vh;
+				overflow: hidden;
+				-webkit-text-size-adjust: 100%;
+			}
+
+			/* Forzar que los iframes ocupen toda la pantalla de forma fluida */
+			.contentIframeClass, .dummyFrameClass {
+				width: 100% !important;
+				height: 100% !important;
+				border: none;
+				display: block;
+			}
+
+			/* Optimizar botones de navegación para pantallas táctiles (más área de toque) */
+			.prev, .next {
+				position: fixed;
+				top: 50%;
+				transform: translateY(-50%);
+				z-index: 1000;
+				background-color: rgba(0, 0, 0, 0.4);
+				color: white;
+				padding: 16px 12px;
+				cursor: pointer;
+				user-select: none;
+				-webkit-tap-highlight-color: transparent;
+				font-size: 20px;
+				border-radius: 4px;
+			}
+
+			.prev { left: 10px; }
+			.next { right: 10px; }
+
+			/* Media Query opcional para ajustar en pantallas muy pequeñas */
+			@media screen and (max-width: 480px) {
+				.prev, .next {
+					padding: 12px 8px;
+					font-size: 16px;
+				}
+			}
+		</style>
+	</head>
+	<body onload="showHideArrows()">
+		<iframe onload="showHideArrows()" id="contentIFrame" class="contentIframeClass" src="publication-web-resources/html/publication.html"></iframe>
+		<iframe id="dummyIFrame" class="dummyFrameClass"></iframe>
+		<div class="prev" onclick="showPreviousPage()">&#10094;</div>
+		<div class="next" onclick="showNextPage()">&#10095;</div>
+	</body>
+</html>

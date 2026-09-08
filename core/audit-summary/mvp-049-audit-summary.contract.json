@@ -1,0 +1,33 @@
+{
+  "id": "MVP-049",
+  "title": "Endpoint de resumen ejecutivo de auditoría",
+  "description": "Consolida en un único JSON el estado combinado de integridad, enlaces externos y anclas internas.",
+  "version": "1.0.0",
+  "status": "implemented",
+  "created": "2026-09-08",
+  "module": "core/audit-summary",
+  "acceptance_criteria": [
+    "El generador lee los reportes integrity-report.json, external-links-report.json y anchors-report.json.",
+    "Si falta un reporte, se marca SIN DATOS.",
+    "El estado global es ERROR si al menos un reporte tiene errores.",
+    "Se genera public/audit-summary.json con estructura resumida.",
+    "Existe un endpoint público GET /api/v1/public/audit-summary sin autenticación.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/audit-summary.json",
+    "scripts/build-audit-summary.js",
+    "core/audit-summary/test/mvp-049-audit-summary.builder.test.js"
+  ],
+  "dependencies": [
+    "public/integrity-report.json",
+    "public/external-links-report.json",
+    "public/anchors-report.json",
+    "core/api/server.js"
+  ],
+  "risks": [
+    "Posible ausencia temporal de reportes si los generadores no se han ejecutado.",
+    "Interpretación errónea del estado global si un validador no cubre todas las áreas."
+  ],
+  "updated": "2026-09-08"
+}

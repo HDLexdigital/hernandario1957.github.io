@@ -1,0 +1,2151 @@
+{
+  "documento": {
+    "titulo": "Fragmento"
+  },
+  "totalParrafos": 42,
+  "fecha": "2026-08-31T16:18:29.374Z",
+  "parrafos": [
+    {
+      "id": 1,
+      "texto": "Constitución Política \nde la República de Colombia",
+      "estilo": "P02_TITLE_PART",
+      "estiloParrafo": {
+        "nombreEstilo": "P02_TITLE_PART",
+        "fuente": "Georgia Pro\tCond Semibold",
+        "estiloFuente": "Cond Semibold",
+        "tamano": 24,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "CENTER_ALIGN",
+        "espacioAntes": 5,
+        "espacioDespues": 1,
+        "sangriaIzquierda": 2,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "Black",
+        "mayusculas": "ALL_CAPS",
+        "escalaHorizontal": 90,
+        "escalaVertical": 100,
+        "separacionSilabas": false,
+        "fileteInferior": false,
+        "grosorFilete": 2,
+        "desplazamientoFilete": 2,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Constitución Política \nde la República de Colombia\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "texto": "PREÁMBULO",
+      "estilo": "P03_CENTER_NORMAL",
+      "estiloParrafo": {
+        "nombreEstilo": "P03_CENTER_NORMAL",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "CENTER_ALIGN",
+        "espacioAntes": 1.7638888888888888,
+        "espacioDespues": 1.7638888888888888,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "PREÁMBULO\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "texto": "El pueblo de Colombia,",
+      "estilo": "P03_CENTER_BOLD",
+      "estiloParrafo": {
+        "nombreEstilo": "P03_CENTER_BOLD",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "CENTER_ALIGN",
+        "espacioAntes": 1.7638888888888888,
+        "espacioDespues": 1.7638888888888888,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "El pueblo de Colombia,\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "texto": "en ejercicio de su poder soberano\u0004, representado por sus delegatarios a la Asamblea Nacional Constituyente, invocando la protección de Dios, y con el fin de fortalecer la unidad de la Nación y asegurar a sus integrantes la vida, la convivencia, el trabajo, la justicia, la igualdad, el conocimiento, la libertad y la paz, dentro de un marco jurídico, democrático y participativo que garantice un orden político, económico y social justo, y comprometido a impulsar la integración de la comunidad latinoamericana, decreta, sanciona y promulga la siguiente:",
+      "estilo": "P01_BODY_FIRST",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_FIRST",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 0,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "en ejercicio de su poder soberano",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": "\u0004",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": ", representado por sus delegatarios a la Asamblea Nacional Constituyente, invocando la protección de Dios, y con el fin de fortalecer la unidad de la Nación y asegurar a sus integrantes la vida, la convivencia, el trabajo, la justicia, la igualdad, el conocimiento, la libertad y la paz, dentro de un marco jurídico, democrático y participativo que garantice un orden político, económico y social justo, y comprometido a impulsar la integración de la comunidad latinoamericana, decreta, sanciona y promulga la siguiente:\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "texto": "Constitución Política de Colombia",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "CENTER_ALIGN",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Constitución Política de Colombia\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "texto": "TÍTULO I.\nDE LOS PRINCIPIOS FUNDAMENTALES\u0004",
+      "estilo": "P02_TITLE_MAIN",
+      "estiloParrafo": {
+        "nombreEstilo": "P02_TITLE_MAIN",
+        "fuente": "Georgia Pro\tCond Semibold",
+        "estiloFuente": "Cond Semibold",
+        "tamano": 16,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "CENTER_ALIGN",
+        "espacioAntes": 5,
+        "espacioDespues": 1,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "ALL_CAPS",
+        "escalaHorizontal": 90,
+        "escalaVertical": 100,
+        "separacionSilabas": false,
+        "fileteInferior": false,
+        "grosorFilete": 2,
+        "desplazamientoFilete": 2,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "TÍTULO I.\nDE LOS PRINCIPIOS FUNDAMENTALES",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "\u0004",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "texto": "Artículo 1. Colombia es un Estado social de derecho, organizado en forma de República unitaria y descentralizada, con autonomía de sus entidades territoriales; democrática, participativa y pluralista; fundada en el respeto de la dignidad humana, en el trabajo y en la solidaridad de las personas que la integran, así como en la prevalencia del interés general.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 1.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Colombia es un ",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": "Estado social de derecho",
+          "estiloCaracter": "C18_TT_GLOSS",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": ", organizado en forma de República unitaria y descentralizada, con autonomía de sus ",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": "entidades territoriales",
+          "estiloCaracter": "C18_TT_GLOSS",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": "; democrática, participativa y pluralista; fundada en el respeto de la dignidad humana, en el trabajo y en la solidaridad de las personas que la integran, así como en la prevalencia del interés general.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "texto": "Artículo 2. Son fines esenciales del Estado: servir a la comunidad, promover la prosperidad general y garantizar la efectividad de los principios, derechos y deberes consagrados en la Constitución; facilitar la participación de todos en las decisiones que los afectan y en la vida económica, política, administrativa y cultural de la Nación; defender la independencia nacional, mantener la integridad territorial y asegurar la convivencia pacífica y la vigencia de un orden justo.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 2.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Son fines esenciales del Estado: servir a la comunidad, promover la prosperidad general y garantizar la efectividad de los principios, derechos y deberes consagrados en la Constitución; facilitar la participación de todos en las decisiones que los afectan y en la vida económica, política, administrativa y cultural de la Nación; defender la independencia nacional, mantener la integridad territorial y asegurar la convivencia pacífica y la vigencia de un orden justo.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "texto": "Las autoridades de la República están instituidas para proteger a todas las personas residentes en Colombia, en su vida, honra, bienes, creencias y demás derechos y libertades, así como para asegurar el cumplimiento de los deberes sociales del Estado y de los particulares.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Las autoridades de la República están instituidas para proteger a todas las personas residentes en Colombia, en su vida, honra, bienes, creencias y demás derechos y libertades, así como para asegurar el cumplimiento de los deberes sociales del Estado y de los particulares.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "texto": "Artículo 3. La soberanía reside exclusivamente en el pueblo, del cual emana el poder público. El pueblo la ejerce en forma directa o por medio de sus representantes, en los términos que la Constitución establece.\u0004",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 3.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "La soberanía reside exclusivamente en el pueblo, del cual emana el poder público. El pueblo la ejerce en forma directa o por medio de sus representantes, en los términos que la Constitución establece.",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": "\u0004",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": "\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "texto": "Artículo 4. La Constitución es norma de normas. En todo caso de incompatibilidad entre la Constitución y la ley, u otra norma jurídica, se aplicarán las disposiciones constitucionales.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 4.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "La Constitución es norma de normas. En todo caso de incompatibilidad entre la Constitución y la ley, u otra norma jurídica, se aplicarán las disposiciones constitucionales.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "texto": "Es deber de los nacionales y de los extranjeros en Colombia acatar la Constitución y las leyes, así como respetar y obedecer a las autoridades.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Es deber de los nacionales y de los extranjeros en Colombia acatar la Constitución y las leyes, así como respetar y obedecer a las autoridades.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "texto": "Artículo 5. El Estado reconoce, sin discriminación alguna, la primacía de los derechos inalienables de la persona y ampara a la familia como institución básica de la sociedad.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 5.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "El Estado reconoce, sin discriminación alguna, la primacía de los derechos inalienables de la persona y ampara a la familia como institución básica de la sociedad.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "texto": "Artículo 6. Los particulares solo son responsables ante las autoridades por infringir la Constitución y las leyes. Los servidores públicos lo son por la misma causa y, además, por omisión o extralimitación en el ejercicio de sus funciones.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 6.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Los particulares solo son responsables ante las autoridades por infringir la Constitución y las leyes. Los servidores públicos lo son por la misma causa y, además, por omisión o extralimitación en el ejercicio de sus funciones.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "texto": "Artículo 7. El Estado reconoce y protege la diversidad étnica y cultural de la Nación colombiana.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 7.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "El Estado reconoce y protege la diversidad étnica y cultural de la Nación colombiana.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "texto": "Artículo 8. Es obligación del Estado y de las personas proteger las riquezas culturales y naturales de la Nación.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 8.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Es obligación del Estado y de las personas proteger las riquezas culturales y naturales de la Nación.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "texto": "Artículo 9. Las relaciones exteriores del Estado se fundamentan en la soberanía nacional, en el respeto a la autodeterminación de los pueblos y en el reconocimiento de los principios del derecho internacional aceptados por Colombia.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 9.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Las relaciones exteriores del Estado se fundamentan en la soberanía nacional, en el respeto a la autodeterminación de los pueblos y en el reconocimiento de los principios del derecho internacional aceptados por Colombia.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "texto": "De igual manera, la política exterior de Colombia se orientará hacia la integración latinoamericana y caribeña.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "De igual manera, la política exterior de Colombia se orientará hacia la integración latinoamericana y caribeña.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "texto": "Artículo 10. El castellano es el idioma oficial de Colombia. Las lenguas y dialectos de los grupos étnicos son también oficiales en sus respectivos territorios. La enseñanza que se imparta en las comunidades con tradiciones lingüísticas propias será bilingüe.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 10.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "El castellano es el idioma oficial de Colombia. Las lenguas y dialectos de los grupos étnicos son también oficiales en sus respectivos territorios. La enseñanza que se imparta en las comunidades con tradiciones lingüísticas propias será bilingüe.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "texto": "TÍTULO II.\nDE LOS DERECHOS, LAS GARANTIAS Y LOS DEBERES",
+      "estilo": "P02_TITLE_MAIN",
+      "estiloParrafo": {
+        "nombreEstilo": "P02_TITLE_MAIN",
+        "fuente": "Georgia Pro\tCond Semibold",
+        "estiloFuente": "Cond Semibold",
+        "tamano": 16,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "CENTER_ALIGN",
+        "espacioAntes": 5,
+        "espacioDespues": 1,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "ALL_CAPS",
+        "escalaHorizontal": 90,
+        "escalaVertical": 100,
+        "separacionSilabas": false,
+        "fileteInferior": false,
+        "grosorFilete": 2,
+        "desplazamientoFilete": 2,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "TÍTULO II.\nDE LOS DERECHOS, LAS GARANTIAS Y LOS DEBERES\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "texto": "Capítulo 1. De los derechos fundamentales",
+      "estilo": "P02_TITLE_CHAPTER",
+      "estiloParrafo": {
+        "nombreEstilo": "P02_TITLE_CHAPTER",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 0,
+        "alineacion": "CENTER_ALIGN",
+        "espacioAntes": 4,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "Capítulo Constitucion",
+        "mayusculas": "SMALL_CAPS",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": false,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 2,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Capítulo 1. De los derechos fundamentales\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "texto": "Artículo 11. El derecho a la vida es inviolable. No habrá pena de muerte.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 11.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "El derecho a la vida es inviolable. No habrá pena de muerte.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "texto": "Artículo 12. Nadie será sometido a desaparición forzada, a torturas ni a tratos o penas crueles, inhumanos o degradantes.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 12.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Nadie será sometido a desaparición forzada, a torturas ni a tratos o penas crueles, inhumanos o degradantes.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "texto": "Artículo 13. Todas las personas nacen libres e iguales ante la ley, recibirán la misma protección y trato de las autoridades y gozarán de los mismos derechos, libertades y oportunidades, sin discriminación alguna por razones de sexo, raza, origen nacional o familiar, lengua, religión u opinión política o filosófica.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 13.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Todas las personas nacen libres e iguales ante la ley, recibirán la misma protección y trato de las autoridades y gozarán de los mismos derechos, libertades y oportunidades, sin discriminación alguna por razones de sexo, raza, origen nacional o familiar, lengua, religión u opinión política o filosófica.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "texto": "El Estado promoverá las condiciones para que la igualdad sea real y efectiva, y adoptará medidas en favor de grupos discriminados o marginados.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "El Estado promoverá las condiciones para que la igualdad sea real y efectiva, y adoptará medidas en favor de grupos discriminados o marginados.\rEl Estado protegerá especialmente a aquellas personas que, por su condición económica, física o mental, se encuentren en circunstancia de debilidad manifiesta, y sancionará los abusos o maltratos que contra ellas se cometan.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "texto": "El Estado protegerá especialmente a aquellas personas que, por su condición económica, física o mental, se encuentren en circunstancia de debilidad manifiesta, y sancionará los abusos o maltratos que contra ellas se cometan.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "El Estado protegerá especialmente a aquellas personas que, por su condición económica, física o mental, se encuentren en circunstancia de debilidad manifiesta, y sancionará los abusos o maltratos que contra ellas se cometan.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "texto": "Artículo 14. Toda persona tiene derecho al reconocimiento de su personalidad jurídica.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 14.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Toda persona tiene derecho al reconocimiento de su personalidad jurídica.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "texto": "Artículo 15. Todas las personas tienen derecho a su intimidad personal y familiar y a su buen nombre, y el Estado debe respetarlos y hacerlos respetar. De igual modo, tienen derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bancos de datos y en archivos de entidades públicas o privadas.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 15.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Todas las personas tienen derecho a su intimidad personal y familiar y a su buen nombre, y el Estado debe respetarlos y hacerlos respetar. De igual modo, tienen derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bancos de datos y en archivos de entidades públicas o privadas.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "texto": "En la recolección, tratamiento y circulación de datos se respetarán la libertad y las demás garantías consagradas en la Constitución.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "En la recolección, tratamiento y circulación de datos se respetarán la libertad y las demás garantías consagradas en la Constitución.\rLa correspondencia y demás formas de comunicación privada son inviolables. Solo podrán ser interceptadas o registradas mediante orden judicial, en los casos y con las formalidades que establezca la ley.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "texto": "La correspondencia y demás formas de comunicación privada son inviolables. Solo podrán ser interceptadas o registradas mediante orden judicial, en los casos y con las formalidades que establezca la ley.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "La correspondencia y demás formas de comunicación privada son inviolables. Solo podrán ser interceptadas o registradas mediante orden judicial, en los casos y con las formalidades que establezca la ley.\rPara efectos tributarios o judiciales, y para los casos de inspección, vigilancia e intervención del Estado, podrá exigirse la presentación de libros de contabilidad y demás documentos privados, en los términos que señale la ley.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "texto": "Para efectos tributarios o judiciales, y para los casos de inspección, vigilancia e intervención del Estado, podrá exigirse la presentación de libros de contabilidad y demás documentos privados, en los términos que señale la ley.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Para efectos tributarios o judiciales, y para los casos de inspección, vigilancia e intervención del Estado, podrá exigirse la presentación de libros de contabilidad y demás documentos privados, en los términos que señale la ley.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "texto": "Artículo 16. Todas las personas tienen derecho al libre desarrollo de su personalidad, sin más limitaciones que las que imponen los derechos de los demás y el orden jurídico.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 16.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Todas las personas tienen derecho al libre desarrollo de su personalidad, sin más limitaciones que las que imponen los derechos de los demás y el orden jurídico.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "texto": "Artículo 17. Se prohíben la esclavitud, la servidumbre y la trata de seres humanos en todas sus formas.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 17.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Se prohíben la esclavitud, la servidumbre y la trata de seres humanos en todas sus formas.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "texto": "Artículo 18. Se garantiza la libertad de conciencia. Nadie será molestado por razón de sus convicciones o creencias, ni compelido a revelarlas, ni obligado a actuar contra su conciencia.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 18.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Se garantiza la libertad de conciencia. Nadie será molestado por razón de sus convicciones o creencias, ni compelido a revelarlas, ni obligado a actuar contra su conciencia.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "texto": "Artículo 19. Se garantiza la libertad de cultos. Toda persona tiene derecho a profesar libremente su religión y a difundirla, en forma individual o colectiva.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 19.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Se garantiza la libertad de cultos. Toda persona tiene derecho a profesar libremente su religión y a difundirla, en forma individual o colectiva.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "texto": "Todas las confesiones religiosas e iglesias son igualmente libres ante la ley.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Todas las confesiones religiosas e iglesias son igualmente libres ante la ley.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "texto": "Artículo 20. Se garantiza a toda persona la libertad de expresar y difundir su pensamiento y opiniones; la de informar y recibir información veraz e imparcial; y la de fundar medios masivos de comunicación.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 20.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Se garantiza a toda persona la libertad de expresar y difundir su pensamiento y opiniones; la de informar y recibir información veraz e imparcial; y la de fundar medios masivos de comunicación.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "texto": "Estos son libres y tienen responsabilidad social. Se garantiza el derecho a la rectificación en condiciones de equidad. No habrá censura.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Estos son libres y tienen responsabilidad social. Se garantiza el derecho a la rectificación en condiciones de equidad. No habrá censura.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "texto": "Artículo 21. Se garantiza el derecho a la honra. La ley señalará la forma de su protección.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 21.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "Se garantiza el derecho a la honra. La ley señalará la forma de su protección.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "texto": "Artículo 22. La paz es un derecho y un deber de obligatorio cumplimiento.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 22.",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " ",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "La paz es un derecho y un deber de obligatorio cumplimiento.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "texto": "Artículo 22A. Como una garantía de No Repetición y con el fin de contribuir a asegurar el monopolio legítimo de la fuerza y del uso de las armas por parte del Estado, y en particular de la Fuerza Pública, en todo el territorio, se prohíbe la creación, promoción, instigación, organización, instrucción, apoyo, tolerancia, encubrimiento o favorecimiento, financiación o empleo oficial y/o privado de grupos civiles armados organizados con fines ilegales de cualquier tipo, incluyendo los denominados autodefensas, paramilitares, así como sus redes de apoyo, estructuras o prácticas, grupos de seguridad con fines ilegales u otras denominaciones equivalentes.",
+      "estilo": "P01_BODY_BASE",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_BASE",
+        "fuente": "Liberation Serif\tBold",
+        "estiloFuente": "Bold",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 3.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 0,
+        "color": "TITULO Constitucion",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "Artículo 22",
+          "estiloCaracter": "negrita-resaltado",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": "A.",
+          "estiloCaracter": "C01_BOLD",
+          "formatoDirecto": {
+            "negrita": true
+          }
+        },
+        {
+          "texto": " Como una garantía de No Repetición y con el fin de contribuir a asegurar el ",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": "monopolio legítimo de la fuerza",
+          "estiloCaracter": "C18_TT_GLOSS",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": " y del uso de las armas por parte del Estado, y en particular de la Fuerza Pública, en todo el territorio, se prohíbe la creación, promoción, instigación, organización, instrucción, apoyo, tolerancia, encubrimiento o favorecimiento, financiación o empleo oficial y/o privado de ",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": "grupos civiles armados",
+          "estiloCaracter": "C18_TT_GLOSS",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        },
+        {
+          "texto": " organizados con fines ilegales de cualquier tipo, incluyendo los denominados autodefensas, paramilitares, así como sus redes de apoyo, estructuras o prácticas, grupos de seguridad con fines ilegales u otras denominaciones equivalentes.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "texto": "La ley regulará los tipos penales relacionados con estas conductas, así como las sanciones disciplinarias y administrativas correspondientes.",
+      "estilo": "P01_BODY_CONT",
+      "estiloParrafo": {
+        "nombreEstilo": "P01_BODY_CONT",
+        "fuente": "Liberation Serif\tRegular",
+        "estiloFuente": "Regular",
+        "tamano": 14,
+        "interlineado": {},
+        "tracking": 8,
+        "alineacion": "LEFT_JUSTIFIED",
+        "espacioAntes": 1.5,
+        "espacioDespues": 0,
+        "sangriaIzquierda": 0,
+        "sangriaDerecha": 0,
+        "sangriaPrimeraLinea": 5.996999999999999,
+        "color": "Black",
+        "mayusculas": "NORMAL",
+        "escalaHorizontal": 100,
+        "escalaVertical": 100,
+        "separacionSilabas": true,
+        "fileteInferior": false,
+        "grosorFilete": 1,
+        "desplazamientoFilete": 0,
+        "sombreado": null,
+        "espacioMinPalabras": 75,
+        "espacioMaxPalabras": 133,
+        "espacioMinLetras": -5,
+        "espacioMaxLetras": 25
+      },
+      "fragmentos": [
+        {
+          "texto": "La ley regulará los tipos penales relacionados con estas conductas, así como las sanciones disciplinarias y administrativas correspondientes.\r",
+          "estiloCaracter": "[Ninguno]",
+          "formatoDirecto": {
+            "negrita": false
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "documento": {
+    "titulo": "fragmento.indd"
+  },
+  "fragmentos": [
+    {
+      "estilo": "P01_BODY_BASE",
+      "texto": "\r",
+      "fragmentos": [
+        {
+          "texto": "\r",
+          "estiloCaracter": "[Ninguno]"
+        }
+      ]
+    },
+    {
+      "estilo": "P02_TITLE_PART",
+      "texto": "Constitución Política \nde la República de Colombia\r",
+      "fragmentos": [
+        {
+          "texto": "Constitución Política \nde la República de Colombia\r",
+          "estiloCaracter": "[Ninguno]"
+        }
+      ]
+    },
+    {
+      "estilo": "P01_BODY_CONT",
+      "texto": "\r",
+      "fragmentos": [
+        {
+          "texto": "\r\r",
+          "estiloCaracter": "[Ninguno]"
+        }
+      ]
+    },
+    {
+      "estilo": "P01_BODY_CONT",
+      "texto": "\r",
+      "fragmentos": [
+        {
+          "texto": "\r",
+          "estiloCaracter": "[Ninguno]"
+        }
+      ]
+    },
+    {
+      "estilo": "P03_CENTER_BOLD",
+      "texto": "PREÁMBULO\r",
+      "fragmentos": [
+        {
+          "texto": "PREÁMBULO\r",
+          "estiloCaracter": "[Ninguno]"
+        }
+      ]
+    },
+    {
+      "estilo": "P01_BODY_CONT",
+      "texto": "El pueblo de Colombia, en ejercicio de su soberanía...",
+      "fragmentos": [
+        {
+          "texto": "El pueblo de Colombia, en ejercicio de su",
+          "estiloCaracter": "00 Normal_char"
+        },
+        {
+          "texto": " soberanía",
+          "estiloCaracter": "TerminoGlosario"
+        }
+      ]
+    },
+    {
+      "estilo": "P02_TITLE_MAIN",
+      "texto": "TÍTULO I. \nDE LOS PRINCIPIOS FUNDAMENTALES\r",
+      "fragmentos": [
+        {
+          "texto": "TÍTULO I. \nDE LOS PRINCIPIOS FUNDAMENTALES\r",
+          "estiloCaracter": "[Ninguno]"
+        }
+      ]
+    },
+    {
+      "estilo": "P01_BODY_BASE",
+      "texto": "Artículo 1. Colombia es un Estado social de derecho...",
+      "fragmentos": [
+        {
+          "texto": "Artículo 1. Colombia es un Estado social de derecho...",
+          "estiloCaracter": "[Ninguno]"
+        }
+      ]
+    }
+  ]
+}

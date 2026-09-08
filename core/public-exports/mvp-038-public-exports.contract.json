@@ -1,0 +1,26 @@
+{
+  "contract": "MVP-038-PublicExports",
+  "version": "0.1.0-draft",
+  "description": "Panel público estático que centraliza los formatos de exportación disponibles",
+  "principles": {
+    "public": true,
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "noLedmMutation": true
+  },
+  "output": {
+    "dashboard": "public/exports.html",
+    "exports": [
+      "collection-export.json",
+      "collection-export.csv",
+      "collection-export.ndjson",
+      "feed.xml",
+      "sitemap.xml",
+      "build-metrics.json"
+    ]
+  },
+  "source": {
+    "buildMetrics": "public/build-metrics.json"
+  }
+}

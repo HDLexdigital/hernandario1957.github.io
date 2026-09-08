@@ -1,0 +1,55 @@
+# Dependencias
+node_modules/
+
+# Artefactos de build y cobertura
+public/
+coverage/
+
+# Archivos generados
+*.epub
+*.zip
+
+# Herramientas descargadas localmente
+epubcheck-5.2.1/
+epubcheck.zip
+
+# Scripts de diagnóstico temporales
+diagnostico-ids.js
+list-types.js
+
+# Archivos temporales
+.tmp.driveupload/
+debug-a11y.js
+measure-ledm-full.js
+
+# Logs
+logs/
+*.lognode_modules/
+*.pub
+*.gpg
+
+node_modules/
+*.pub
+*.gpg
+LED23en33*
+
+# Artefactos de salida
+output/
+*.pdf
+*.png
+*.html
+*.zip
+*.epub
+scripts/veraPDF-library-1.30.2/
+
+# Código fuente de veraPDF descargado por error
+scripts/veraPDF-library-1.30.2/
+
+# Otros ya existentes
+node_modules/
+public/
+coverage/
+epubcheck-5.2.1/tmp-ledm.json
+tmp-DOC-*.json
+lexkey
+tmp-ledm.json

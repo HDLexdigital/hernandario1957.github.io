@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "model": "CIDM-1.0",
+    "source": {
+      "type": "INDESIGN",
+      "id": "test.indd"
+    },
+    "createdAt": "2026-09-01T10:00:00Z",
+    "provenance": {
+      "extractor": "LexCore_Extract.jsx",
+      "version": "1.0.0"
+    }
+  },
+  "styleDictionary": {
+    "style-p-title": {
+      "id": "style-p-title",
+      "name": "Title",
+      "type": "paragraph",
+      "properties": { "nativeName": "P01_TITLE" }
+    },
+    "style-p-body": {
+      "id": "style-p-body",
+      "name": "Body",
+      "type": "paragraph",
+      "properties": { "nativeName": "P02_BODY" }
+    },
+    "style-c-bold": {
+      "id": "style-c-bold",
+      "name": "Bold",
+      "type": "character",
+      "properties": { "nativeName": "C01_BOLD" }
+    }
+  },
+  "stories": [
+    {
+      "storyId": "story-001",
+      "order": 1,
+      "blocks": [
+        {
+          "blockId": "story-001-b0001",
+          "order": 1,
+          "text": "Título del capítulo",
+          "styleId": "style-p-title",
+          "fragments": []
+        },
+        {
+          "blockId": "story-001-b0002",
+          "order": 2,
+          "text": "Colombia es un Estado social de derecho...",
+          "styleId": "style-p-body",
+          "fragments": [
+            {
+              "text": "Colombia es un Estado social de derecho...",
+              "characterStyleId": "style-c-bold"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

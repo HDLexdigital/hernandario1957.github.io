@@ -1,0 +1,1 @@
+Este archivo actúa como el diccionario ontológico que inyecta los metadatos de accesibilidad (roles ARIA, etiquetas HTML semánticas y tipos EPUB) que InDesign no almacena de forma nativa en sus paneles de estilo.

@@ -1,0 +1,220 @@
+/* ========================================================================== */
+/* LEXDIGITAL STYLESHEET - Document: Constitución-Colombia_a_preparar.indd */
+/* ========================================================================== */
+
+.ningun-estilo-de-parrafo {
+  font-size: 12pt;
+  font-family: "Minion Pro Regular", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.parrafo-basico {
+  font-size: 11pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.p01-body-base {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 01_Cuerpo de texto | basedOn: none */
+}
+
+.p01-body-cont {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 01_Cuerpo de texto | basedOn: P01_BODY_BASE */
+}
+
+.p01-body-first {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 01_Cuerpo de texto | basedOn: P01_BODY_CONT */
+}
+
+.p01-body-no-sentence {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 01_Cuerpo de texto | basedOn: P01_BODY_BASE */
+}
+
+.p07-indent-l1 {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 01_Cuerpo de texto | basedOn: [Párrafo básico] */
+}
+
+.p07-indent-l1-nonum {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 01_Cuerpo de texto | basedOn: P07_INDENT_L1 */
+}
+
+.p07-indent-l2 {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 01_Cuerpo de texto | basedOn: P01_BODY_BASE */
+}
+
+.p02-title-base {
+  font-size: 15pt;
+  font-family: "Liberation Serif Bold", sans-serif;
+  /* group: 02_TITULOS | basedOn: P01_BODY_BASE */
+}
+
+.p02-title-main {
+  font-size: 16pt;
+  font-family: "Georgia Pro Cond Semibold", sans-serif;
+  /* group: 02_TITULOS | basedOn: P02_TITLE_BASE */
+}
+
+.p02-title-chapter {
+  font-size: 14pt;
+  font-family: "Liberation Serif Bold", sans-serif;
+  /* group: 02_TITULOS | basedOn: none */
+}
+
+.p02-title-part {
+  font-size: 24pt;
+  font-family: "Georgia Pro Cond Semibold", sans-serif;
+  /* group: 02_TITULOS | basedOn: P02_TITLE_BASE */
+}
+
+.p02-title-book-sub {
+  font-size: 16pt;
+  font-family: "Liberation Serif Bold", sans-serif;
+  /* group: 02_TITULOS | basedOn: P02_TITLE_BOOK */
+}
+
+.p02-title-book {
+  font-size: 20pt;
+  font-family: "Georgia Pro Cond Semibold", sans-serif;
+  /* group: 02_TITULOS | basedOn: P02_TITLE_MAIN */
+}
+
+.p03-center-normal {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 03_ESTILOS_ADICIONALES | basedOn: P01_BODY_CONT */
+}
+
+.p03-center-bold {
+  font-size: 14pt;
+  font-family: "Liberation Serif Bold", sans-serif;
+  /* group: 03_ESTILOS_ADICIONALES | basedOn: P03_CENTER_NORMAL */
+}
+
+.p03-official-name {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 03_ESTILOS_ADICIONALES | basedOn: P03_CENTER_NORMAL */
+}
+
+.p03-official-role {
+  font-size: 14pt;
+  font-family: "Liberation Serif Regular", sans-serif;
+  /* group: 03_ESTILOS_ADICIONALES | basedOn: P03_CENTER_NORMAL */
+}
+
+.p05-idx-art {
+  font-size: 14pt;
+  font-family: "Minion Pro Regular", sans-serif;
+  /* group: 04 Indice Articulos | basedOn: none */
+}
+
+.p08-gls-art {
+  font-size: 12pt;
+  font-family: "Liberation Sans Narrow Bold", sans-serif;
+  /* group: GLOSARIO | basedOn: P08_GLS_TERM_DT */
+}
+
+.p08-gls-term-dd {
+  font-size: 12pt;
+  font-family: "Liberation Sans Narrow Regular", sans-serif;
+  /* group: GLOSARIO | basedOn: P08_GLS_TERM_DT */
+}
+
+.p08-gls-term-dt {
+  font-size: 12pt;
+  font-family: "Liberation Sans Narrow Bold", sans-serif;
+  /* group: GLOSARIO | basedOn: none */
+}
+
+.ninguno {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.c00-normal {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.c01-bold {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: C00_NORMAL */
+}
+
+.c02-italic {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.05-hiperlink-char {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.c12-crossref {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.c03-superscript {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: C00_NORMAL */
+}
+
+.c11-hyperlink {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.c13-tabnum-content {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.c14-roman-upper {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.c15-narrow-90 {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.dt-termino-glosario {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+
+.sys-fix-article-number {
+  font-size: 1851876449pt;
+  font-family: "Default", sans-serif;
+  /* group: Root | basedOn: none */
+}
+

@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "documentoPerfil": "Juridico-Normativo",
+  "politicaGobernanza": {
+    "fallFastOnError": true,
+    "umbralOverridesMaximo": 5.0
+  },
+  "mapeoEstilosParrafo": {
+    "[Estilo básico de párrafo]": {
+      "tagHtml": "p",
+      "epubType": null,
+      "ariaRole": "doc-paragraph",
+      "nivelHtml": null,
+      "obligatorio": false
+    },
+    "P02_TITLE_PART": {
+      "tagHtml": "h1",
+      "epubType": "part",
+      "ariaRole": "heading",
+      "nivelHtml": 1,
+      "obligatorio": true
+    },
+    "P02_TITLE_MAIN": {
+      "tagHtml": "h2",
+      "epubType": "title",
+      "ariaRole": "heading",
+      "nivelHtml": 2,
+      "obligatorio": true
+    },
+    "P02_TITLE_CHAPTER": {
+      "tagHtml": "h3",
+      "epubType": "chapter",
+      "ariaRole": "heading",
+      "nivelHtml": 3,
+      "obligatorio": true
+    },
+    "P01_BODY_BASE": {
+      "tagHtml": "p",
+      "epubType": "bodymatter",
+      "ariaRole": "doc-view",
+      "nivelHtml": null,
+      "obligatorio": true
+    }
+  },
+  "mapeoEstilosCaracter": {
+    "[Ninguno]": {
+      "tagHtml": "span",
+      "epubType": null,
+      "ariaRole": null
+    },
+    "C01_ENFASIS": {
+      "tagHtml": "em",
+      "epubType": "seml:emphasis",
+      "ariaRole": null
+    },
+    "C02_LEGAL_REF": {
+      "tagHtml": "cite",
+      "epubType": "biblioentry",
+      "ariaRole": "doc-biblioref"
+    }
+  }
+}

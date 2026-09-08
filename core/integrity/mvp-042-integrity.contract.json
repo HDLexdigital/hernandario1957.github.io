@@ -1,0 +1,33 @@
+{
+  "id": "MVP-042",
+  "title": "Validador de integridad de artefactos públicos",
+  "description": "Verifica que todos los artefactos públicos generados estén presentes, sean válidos y no contengan referencias rotas.",
+  "version": "1.0.0",
+  "status": "implemented",
+  "created": "2026-09-07",
+  "module": "core/integrity",
+  "acceptance_criteria": [
+    "El generador recorre public/nav.html y extrae todos los enlaces internos relativos.",
+    "El generador valida que cada enlace corresponda a un archivo existente dentro de public/.",
+    "El generador detecta referencias locales rotas a CSS, JS o JSON en los HTML públicos.",
+    "Se genera public/integrity-report.json con estado OK o ERROR y detalles por artefacto.",
+    "Existe un endpoint público GET /api/v1/public/integrity que devuelve el reporte sin autenticación.",
+    "Las pruebas de contrato y del generador pasan en verde."
+  ],
+  "outputs": [
+    "public/integrity-report.json",
+    "scripts/build-integrity-report.js",
+    "core/integrity/test/mvp-042-integrity.builder.test.js"
+  ],
+  "dependencies": [
+    "public/nav.html",
+    "public/*.html",
+    "public/*.json",
+    "core/api/server.js"
+  ],
+  "risks": [
+    "Posibles falsos positivos en referencias generadas dinámicamente por fetch().",
+    "Enlaces absolutos externos deben ser excluidos del análisis local."
+  ],
+  "updated": "2026-09-07"
+}

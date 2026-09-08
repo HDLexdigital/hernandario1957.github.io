@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+  "descripcion": "Patrones GREP externalizados para clasificación semántica de párrafos",
+  "patrones": [
+    {
+      "nombre": "preambulo",
+      "regex": "^(PREÁMBULO|PREAMBULO|Preámbulo|Preambulo)\\b",
+      "tipo": "preambulo",
+      "epubType": "preamble",
+      "nivelHtml": 2,
+      "ariaRole": "heading"
+    },
+    {
+      "nombre": "titulo_parte",
+      "regex": "^(TÍTULO|TITULO|Parte|PARTE)\\s+[IVXLC]+\\b",
+      "tipo": "titulo_parte",
+      "epubType": "part",
+      "nivelHtml": 1,
+      "ariaRole": "heading"
+    },
+    {
+      "nombre": "titulo_capitulo",
+      "regex": "^(CAPÍTULO|CAPITULO|Capítulo|Capitulo)\\s+\\d+",
+      "tipo": "titulo_capitulo",
+      "epubType": "chapter",
+      "nivelHtml": 2,
+      "ariaRole": "heading"
+    },
+    {
+      "nombre": "articulo",
+      "regex": "^Art[íi]culo\\s+\\d+",
+      "tipo": "articulo",
+      "epubType": "article",
+      "nivelHtml": 3,
+      "ariaRole": "article"
+    },
+    {
+      "nombre": "inciso",
+      "regex": "^(INCISO|Inciso)\\s+[A-Za-z]",
+      "tipo": "inciso",
+      "epubType": null,
+      "nivelHtml": 4,
+      "ariaRole": "listitem"
+    },
+    {
+      "nombre": "parrafo_generico",
+      "regex": "^(?!.*(?:Art[íi]culo|CAPÍTULO|CAPITULO|TÍTULO|TITULO|PREÁMBULO|PREAMBULO|INCISO|Inciso)).+",
+      "tipo": "parrafo",
+      "epubType": null,
+      "nivelHtml": null,
+      "ariaRole": null
+    }
+  ]
+}

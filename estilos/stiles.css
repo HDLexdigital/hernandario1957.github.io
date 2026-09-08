@@ -1,0 +1,182 @@
+/* =======================================================
+   CSS MULTIPLATAFORMA (HTML5, EPUB3, PDF ACCESIBLE)
+   Generado desde InDesign: fragmento.indd
+   ======================================================= */
+
+:root {
+	font-size: 12pt;
+}
+
+/* --- ESTILOS DE PÁRRAFO --- */
+
+.P-rrafo-b-sico {
+	font-family: 'Minion Pro', sans-serif;
+	font-size: 12pt;
+	font-size: 1.000rem;
+	color: #000000;
+	text-align: left;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P01_BODY_CONT {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	text-indent: 0.500em;
+	margin-top: 0.125em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P01_BODY_BASE {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: justify;
+	margin-top: 0.292em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P07_INDENT_L1 {
+	font-family: 'Minion Pro', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: left;
+	margin-left: 1.117em;
+	text-indent: -0.647em;
+	margin-top: 0.125em;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P02_TITLE_BASE {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	font-size: 15pt;
+	font-size: 1.250rem;
+	color: #000000;
+	text-align: center;
+	margin-top: 0.292em;
+	orphans: 2;
+	widows: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P02_TITLE_PART {
+	font-family: 'Georgia Pro', sans-serif;
+	font-weight: bold;
+	font-size: 24pt;
+	font-size: 2.000rem;
+	color: #000000;
+	text-align: center;
+	margin-left: 0.167em;
+	margin-top: 0.417em;
+	margin-bottom: 0.083em;
+	orphans: 2;
+	widows: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P02_TITLE_MAIN {
+	font-family: 'Georgia Pro', sans-serif;
+	font-weight: bold;
+	font-size: 16pt;
+	font-size: 1.333rem;
+	color: /* InDesign Color: TITULO Constitucion */;
+	text-align: center;
+	margin-top: 0.417em;
+	margin-bottom: 0.083em;
+	orphans: 2;
+	widows: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P02_TITLE_CHAPTER {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: /* InDesign Color: Capítulo Constitucion */;
+	text-align: center;
+	margin-top: 0.333em;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+.P03_CENTER_NORMAL {
+	font-family: 'Liberation Serif', sans-serif;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: center;
+	margin-top: 0.147em;
+	margin-bottom: 0.147em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+.P03_CENTER_BOLD {
+	font-family: 'Liberation Serif', sans-serif;
+	font-weight: bold;
+	font-size: 14pt;
+	font-size: 1.167rem;
+	color: #000000;
+	text-align: center;
+	margin-top: 0.147em;
+	margin-bottom: 0.147em;
+	orphans: 2;
+	widows: 2;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+/* --- ESTILOS DE CARÁCTER --- */
+
+.C00_NORMAL {
+	font-family: 'undefined', sans-serif;
+}
+
+.C01_BOLD {
+	font-family: 'undefined', sans-serif;
+	font-weight: bold;
+	color: /* InDesign Color: TITULO Constitucion */;
+}
+
+.00-Normal_char {
+	font-family: 'undefined', sans-serif;
+}
+
+.TerminoGlosario {
+	color: #000000;
+}
+
+.C16_TD_GLOSS {
+	font-family: 'undefined', sans-serif;
+	color: /* InDesign Color: Capítulo Constitucion */;
+}
+

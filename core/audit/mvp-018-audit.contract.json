@@ -1,0 +1,40 @@
+{
+  "contract": "MVP-018-Audit",
+  "version": "0.1.0-draft",
+  "description": "Contrato para registro de auditoría basado en archivos planos",
+  "principles": {
+    "readOnly": true,
+    "stateless": true,
+    "noDatabase": true,
+    "appendOnly": true,
+    "deterministic": true,
+    "noLedmMutation": true,
+    "noPII": true
+  },
+  "log": {
+    "directory": "logs/audit",
+    "filePattern": "audit-YYYY-MM-DD.log",
+    "rotation": "daily",
+    "format": "jsonl",
+    "fields": {
+      "required": ["timestamp", "event", "resource", "apiKeyHash", "status"],
+      "optional": ["durationMs", "metadata"]
+    }
+  },
+  "events": [
+    "request",
+    "auth_failure",
+    "auth_success",
+    "catalog_access",
+    "search_access",
+    "admin_access"
+  ],
+  "validation": {
+    "requireLogDirectory": true,
+    "requireFilePattern": true,
+    "requireAppendOnly": true,
+    "requireNoLedmMutation": true,
+    "requireUniqueRequestId": true,
+    "failOnMissing": true
+  }
+}

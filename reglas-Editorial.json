@@ -1,0 +1,219 @@
+{
+    "perfil": "constitucion_y_codigos",
+    "reglasContenedores": [
+        {
+            "estiloDisparador": "P02_TITLE_MAIN",
+            "tipoContenedor": "section",
+            "cerrarAnteriores": [
+                "section"
+            ],
+            "atributos": {
+                "aria-labelledby": "titulo-i"
+            }
+        }
+    ],
+    "mapeoEstilosParrafo": {
+        "[NINGÚN_ESTILO_DE_PÁRRAFO]": {
+            "etiqueta": "p",
+            "clase": "[ningún-estilo-de-párrafo]"
+        },
+        "[PÁRRAFO_BÁSICO]": {
+            "etiqueta": "p",
+            "clase": "[párrafo-básico]"
+        },
+        "P01_BODY_NO_SENTENCE": {
+            "etiqueta": "p",
+            "clase": "p01-body-no-sentence"
+        },
+        "P02_TITLE_BASE": {
+            "etiqueta": "p",
+            "clase": "p02-title-base"
+        },
+        "P02_TITLE_BOOK": {
+            "etiqueta": "p",
+            "clase": "p02-title-book"
+        },
+        "P02_TITLE_BOOK_SUB": {
+            "etiqueta": "p",
+            "clase": "p02-title-book-sub"
+        },
+        "P02_TITLE_CHAPTER": {
+            "etiqueta": "p",
+            "clase": "p02_title_chapter"
+        },
+        "P02_TITLE_MAIN": {
+            "etiqueta": "h2",
+            "clase": "p02-title-main"
+        },
+        "P02_TITLE_PART": {
+            "etiqueta": "h1",
+            "clase": "p02-title-part",
+            "role": "doc-subtitle"
+        },
+        "P03_CENTER_BOLD": {
+            "etiqueta": "p",
+            "clase": "p03-center-bold",
+            "role": "doc-subtitle"
+        },
+        "P03_CENTER_NORMAL": {
+            "etiqueta": "p",
+            "clase": "p03-center-normal"
+        },
+        "P03_OFFICIAL_NAME": {
+            "etiqueta": "p",
+            "clase": "p03-official-name"
+        },
+        "P03_OFFICIAL_ROLE": {
+            "etiqueta": "p",
+            "clase": "p03-official-role"
+        },
+        "P05_IDX_ART": {
+            "etiqueta": "p",
+            "clase": "p05-idx-art"
+        },
+        "P07_INDENT_L1": {
+            "etiqueta": "p",
+            "clase": "p07-indent-l1"
+        },
+        "P07_INDENT_L1_NONUM": {
+            "etiqueta": "p",
+            "clase": "p07-indent-l1-nonum"
+        },
+        "P07_INDENT_L2": {
+            "etiqueta": "p",
+            "clase": "p07-indent-l2"
+        },
+        "P08_GLS_ART": {
+            "etiqueta": "p",
+            "clase": "p08-gls-art"
+        },
+        "P08_GLS_TERM_DD": {
+            "etiqueta": "p",
+            "clase": "p08-gls-term-dd"
+        },
+        "P08_GLS_TERM_DT": {
+            "etiqueta": "p",
+            "clase": "p08-gls-term-dt"
+        },
+        "PORTADILLA": {
+            "etiqueta": "p",
+            "clase": "portadilla"
+        },
+        "PAGINA_LEGAL": {
+            "etiqueta": "p",
+            "clase": "pagina-legal"
+        },
+        "INTRODUCCION": {
+            "etiqueta": "p",
+            "clase": "introduccion"
+        },
+        "TABLA_CONTENIDOS": {
+            "etiqueta": "p",
+            "clase": "tabla-contenidos"
+        },
+        "TITULO_OBRA": {
+            "etiqueta": "p",
+            "clase": "titulo-obra"
+        },
+        "TITULO_NIVEL2": {
+            "etiqueta": "p",
+            "clase": "titulo-nivel2"
+        },
+        "TITULO_NIVEL3": {
+            "etiqueta": "p",
+            "clase": "titulo-nivel3"
+        },
+        "TITULO_NIVEL4": {
+            "etiqueta": "p",
+            "clase": "titulo-nivel4"
+        },
+        "ARTICULO": {
+            "etiqueta": "p",
+            "clase": "articulo"
+        },
+        "INCISO": {
+            "etiqueta": "p",
+            "clase": "inciso"
+        },
+        "PARAGRAFO": {
+            "etiqueta": "p",
+            "clase": "paragrafo"
+        },
+        "GLOSARIO": {
+            "etiqueta": "p",
+            "clase": "glosario"
+        },
+        "TERMINO": {
+            "etiqueta": "p",
+            "clase": "termino"
+        },
+        "DEFINICION": {
+            "etiqueta": "p",
+            "clase": "definicion"
+        },
+        "P01_BODY_BASE": {
+            "etiqueta": "p",
+            "clase": "p01-body-base parrafo-justificado"
+        },
+        "INDENT_L1": {
+            "etiqueta": "p",
+            "clase": "indent-l1"
+        },
+        "INDENT_L2": {
+            "etiqueta": "p",
+            "clase": "indent-l2"
+        },
+        "INDENT_L3": {
+            "etiqueta": "p",
+            "clase": "indent-l3"
+        },
+        "INDENT_L1_NONUM": {
+            "etiqueta": "p",
+            "clase": "indent-l1-nonum"
+        },
+        "P01_BODY_CONT": {
+            "etiqueta": "p",
+            "clase": "p01-body-cont parrafo-justificado"
+        },
+        "P01_BODY_FIRST": {
+            "etiqueta": "p",
+            "clase": "p01-body-first parrafo-justificado"
+        }
+    },
+    "mapeoEstilosCaracter": {
+        "[ninguno]": {
+            "etiqueta": "span",
+            "clase": "[ninguno]"
+        },
+        "terminoglosario": {
+            "etiqueta": "span",
+            "clase": "c18-tt-gloss",
+            "atributos": {
+                "role": "term"
+            }
+        },
+        "negrita-resaltado": {
+            "etiqueta": "strong",
+            "clase": "negrita-resaltado"
+        },
+        "c01-bold": {
+            "etiqueta": "strong",
+            "clase": "c01-bold"
+        },
+        "c01_bold": {
+            "etiqueta": "strong",
+            "clase": "c01-bold"
+        },
+        "c00_normal": {
+            "etiqueta": "span",
+            "clase": "c00-normal"
+        },
+        "c18_tt_gloss": {
+            "etiqueta": "span",
+            "clase": "c18-tt-gloss",
+            "atributos": {
+                "role": "term"
+            }
+        }
+    }
+}

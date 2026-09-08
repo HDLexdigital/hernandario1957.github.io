@@ -1,0 +1,702 @@
+@charset "UTF-8";
+
+/* 
+=============================================================================
+  HOJA DE ESTILOS PRINCIPAL — CONSTITUCIÓN DE COLOMBIA
+  Generada el: 27 de agosto de 2026
+  Versión: 1.0
+  Uso: Documentos de la serie (Reportes, Publicaciones y Guías visuales)
+=============================================================================
+*/
+
+/* VARIABLES DE COLOR (Reemplazar valores HEX temporales por los de la marca) */
+:root {
+  --color-black: #000000;
+  --color-titulo-constitucion: #1a3b5c; /* Reemplazar */
+  --color-capitulo-constitucion: #2c5e8a; /* Reemplazar */
+  --color-sombra-titulo: #e8eaf6; /* Reemplazar */
+  --color-azul-borgona: #8a1538; /* Reemplazar */
+  --color-verde-glosario: #2e7d32; /* Reemplazar */
+  --color-hipervinculo: #0000ee; /* Reemplazar */
+}
+
+/* RESET BÁSICO Y MEJORAS DE RENDERIZADO */
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: var(--color-black);
+  /* Definir tipografía base para herencia si algún elemento pierde su clase */
+  font-family: "Minion Pro", "Liberation Serif", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 
+-----------------------------------------------------------------------------
+  A PARTIR DE AQUÍ COMIENZAN LAS CLASES DE PÁRRAFO Y CARÁCTER EXPORTADAS
+-----------------------------------------------------------------------------
+*/
+
+/* --- ESTILOS DE PÁRRAFO --- */
+
+
+/* PÁRRAFO: [Ningún estilo de párrafo] */
+.ningun-estilo-de-parrafo {
+    font-family: "Minion Pro", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.2; /* autoLeading: 120 */
+    letter-spacing: 0;
+    text-align: left; /* justification: LEFT_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+}
+
+/* PÁRRAFO: [Párrafo básico] */
+.parrafo-basico {
+    font-family: "Minion Pro", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.2; /* autoLeading: 120 */
+    letter-spacing: 0;
+    text-align: left; /* justification: LEFT_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+}
+
+/* PÁRRAFO: Volver_Glosario */
+.volver-glosario {
+    font-family: "Minion Pro", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 9pt;
+    line-height: 1.333; /* leading: 12 / font-size: 9 */
+    letter-spacing: 0;
+    text-align: left; /* justification: LEFT_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+}
+
+/* PÁRRAFO: P08_GLS_TERM_DD */
+.p08-gls-term-dd {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.15; /* autoLeading: 115 */
+    letter-spacing: 0;
+    text-align: left; /* justification: LEFT_JUSTIFIED */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+    page-break-inside: avoid; /* keepLinesTogether: true, keepAllLinesTogether: true */
+    break-inside: avoid;
+}
+
+/* PÁRRAFO: P08_GLS_TERM_DT */
+.p08-gls-term-dt {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.15; /* autoLeading: 115 */
+    letter-spacing: 0;
+    text-align: left; /* justification: LEFT_JUSTIFIED */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* Fallback for: fillColor: Capítulo Constitucion */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 2pt; /* spaceBefore: 2 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+    page-break-inside: avoid; /* keepLinesTogether: true, keepAllLinesTogether: true */
+    break-inside: avoid;
+    page-break-after: avoid; /* keepWithNext: 3 */
+    break-after: avoid;
+}
+
+/* PÁRRAFO: P01_BODY_BASE */
+.p01-body-base {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: left; /* justification: LEFT_JUSTIFIED */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 3.5pt; /* spaceBefore: 3.5 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P01_BODY_CONT */
+.p01-body-cont {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: left; /* justification: LEFT_JUSTIFIED */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 1.5pt; /* spaceBefore: 1.5 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 5.997pt; /* firstLineIndent: 5.997 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P01_BODY_FIRST */
+.p01-body-first {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: left; /* justification: LEFT_JUSTIFIED */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P01_BODY_NO_SENTENCE */
+.p01-body-no-sentence {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: left; /* justification: LEFT_JUSTIFIED */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 3.5pt; /* spaceBefore: 3.5 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P07_INDENT_L1 */
+.p07-indent-l1 {
+    font-family: "Minion Pro", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: left; /* justification: LEFT_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 1.5pt; /* spaceBefore: 1.5 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: -7.761pt; /* firstLineIndent: -7.761 */
+    margin-left: 13.406pt; /* leftIndent: 13.406 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+}
+
+/* PÁRRAFO: P07_INDENT_L1_NONUM */
+.p07-indent-l1-nonum {
+    font-family: "Minion Pro", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: left; /* justification: LEFT_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 1.5pt; /* spaceBefore: 1.5 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: -0.00044444444445pt; /* firstLineIndent: -0.00044444444445 */
+    margin-left: 13.406pt; /* leftIndent: 13.406 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+}
+
+/* PÁRRAFO: P07_INDENT_L2 */
+.p07-indent-l2 {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: left; /* justification: LEFT_JUSTIFIED */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 1.5pt; /* spaceBefore: 1.5 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: -6.703pt; /* firstLineIndent: -6.703 */
+    margin-left: 20.461pt; /* leftIndent: 20.461 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P02_TITLE_BASE */
+.p02-title-base {
+    font-family: "Liberation Serif", serif;
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    font-size: 15pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 3.5pt; /* spaceBefore: 3.5 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P02_TITLE_MAIN */
+.p02-title-main {
+    font-family: "Georgia Pro", serif;
+    font-weight: 600; /* Cond Semibold */
+    font-style: normal;
+    font-size: 16pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: uppercase; /* capitalization: ALL_CAPS */
+    color: #000000; /* Fallback for: fillColor: TITULO Constitucion */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 5pt; /* spaceBefore: 5 */
+    margin-bottom: 1pt; /* spaceAfter: 1 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+    /* Shading Support */
+    background-color: #f2f2f2; /* Fallback for Sombra_Titulo tint 20 */
+    padding-top: 2pt; /* paragraphShadingTopOffset */
+    padding-bottom: 1pt; /* paragraphShadingBottomOffset */
+    /* Rule Below */
+    border-bottom: 2pt dotted #000000; /* ruleBelowType: Con puntos, ruleBelowLineWeight: 2 */
+}
+
+/* PÁRRAFO: P02_TITLE_CHAPTER */
+.p02-title-chapter {
+    font-family: "Liberation Serif", serif;
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0;
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* Fallback for: fillColor: Capítulo Constitucion */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 4pt; /* spaceBefore: 4 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+    /* Rule Below */
+    border-bottom: 1pt dotted #000000; /* ruleBelowType: Con puntos, ruleBelowLineWeight: 1 */
+}
+
+/* PÁRRAFO: P02_TITLE_PART */
+.p02-title-part {
+    font-family: "Georgia Pro", serif;
+    font-weight: 600; /* Cond Semibold */
+    font-style: normal;
+    font-size: 24pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: uppercase; /* capitalization: ALL_CAPS */
+    color: rgba(0,0,0,0.85); /* fillColor: Black, fillTint: 85 */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 5pt; /* spaceBefore: 5 */
+    margin-bottom: 1pt; /* spaceAfter: 1 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 2pt; /* leftIndent: 2 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+    /* Shading Support */
+    background-color: #f2f2f2; /* Fallback for Azul Borgoña tint 20 */
+    padding-top: 2pt; /* paragraphShadingTopOffset */
+    padding-bottom: 1pt; /* paragraphShadingBottomOffset */
+    /* Rule Below */
+    border-bottom: 2pt dotted #000000; /* ruleBelowType: Con puntos, ruleBelowLineWeight: 2 */
+}
+
+/* PÁRRAFO: P02_TITLE_BOOK_SUB */
+.p02-title-book-sub {
+    font-family: "Liberation Serif", serif;
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    font-size: 16pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: uppercase; /* capitalization: ALL_CAPS */
+    color: #000000; /* Fallback for: fillColor: TITULO Constitucion, fillTint: 85 */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 10pt; /* spaceAfter: 10 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+    /* Rule Above */
+    border-top: 1pt solid #000000; /* ruleAboveType: Sólido, ruleAboveLineWeight: 1 */
+}
+
+/* PÁRRAFO: P02_TITLE_BOOK */
+.p02-title-book {
+    font-family: "Georgia Pro", serif;
+    font-weight: 600; /* Cond Semibold */
+    font-style: normal;
+    font-size: 20pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: uppercase; /* capitalization: ALL_CAPS */
+    color: #000000; /* Fallback for: fillColor: TITULO Constitucion, fillTint: 85 */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 5pt; /* spaceBefore: 5 */
+    margin-bottom: 10pt; /* spaceAfter: 10 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P03_CENTER_NORMAL */
+.p03-center-normal {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 1.76388888888889pt; /* spaceBefore: 1.76388888888889 */
+    margin-bottom: 1.76388888888889pt; /* spaceAfter: 1.76388888888889 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P03_CENTER_BOLD */
+.p03-center-bold {
+    font-family: "Liberation Serif", serif;
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 1.76388888888889pt; /* spaceBefore: 1.76388888888889 */
+    margin-bottom: 1.76388888888889pt; /* spaceAfter: 1.76388888888889 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P03_OFFICIAL_NAME */
+.p03-official-name {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: uppercase; /* capitalization: ALL_CAPS */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 3pt; /* spaceAfter: 3 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P03_OFFICIAL_ROLE */
+.p03-official-role {
+    font-family: "Liberation Serif", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: center; /* justification: CENTER_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 0; /* spaceAfter: 0 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P05_IDX_ART */
+.p05-idx-art {
+    font-family: "Minion Pro", serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-size: 14pt;
+    line-height: 1.35; /* autoLeading: 135 */
+    letter-spacing: 0.008em; /* tracking: 8 */
+    text-align: left; /* justification: LEFT_JUSTIFIED */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* fillColor: Black */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 0; /* spaceBefore: 0 */
+    margin-bottom: 1pt; /* spaceAfter: 1 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: none; /* ligatures: false */
+}
+
+/* PÁRRAFO: P08_GLS-ART */
+.p08-gls-art {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    font-size: 12pt;
+    line-height: 1.15; /* autoLeading: 115 */
+    letter-spacing: 0;
+    text-align: left; /* justification: LEFT_ALIGN */
+    text-transform: none; /* capitalization: NORMAL */
+    color: #000000; /* Fallback for: fillColor: Verde glosario */
+    text-decoration: none; /* underline: false, strikeThru: false */
+    margin-top: 2pt; /* spaceBefore: 2 */
+    margin-bottom: 2pt; /* spaceAfter: 2 */
+    text-indent: 0; /* firstLineIndent: 0 */
+    margin-left: 0; /* leftIndent: 0 */
+    margin-right: 0; /* rightIndent: 0 */
+    font-variant-ligatures: common-ligatures; /* ligatures: true */
+    page-break-inside: avoid; /* keepLinesTogether: true, keepAllLinesTogether: true */
+    break-inside: avoid;
+    page-break-after: avoid; /* keepWithNext: 3 */
+    break-after: avoid;
+}
+
+/* --- ESTILOS DE CARÁCTER --- */
+
+/* CARÁCTER: [Ninguno] */
+.ninguno {
+    /* No properties specified */
+}
+
+/* CARÁCTER: Glosario */
+.glosario {
+    /* No properties specified */
+}
+
+/* CARÁCTER: 00 Normal_char */
+.char-00-normal-char {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 400; /* Regular */
+}
+
+/* CARÁCTER: 01 Bold_char */
+.char-01-bold-char {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 700; /* Bold */
+    color: #000000; /* Fallback for: fillColor: TITULO Constitucion */
+}
+
+/* CARÁCTER: 05 Hiperlink_char */
+.char-05-hiperlink-char {
+    text-decoration: underline; /* underlineColor: Black */
+    color: rgba(0,0,0,0.9); /* fillColor: Black, fillTint: 90 */
+}
+
+/* CARÁCTER: C00_NORMAL */
+.char-c00-normal {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 400; /* Regular */
+}
+
+/* CARÁCTER: C01_BOLD */
+.char-c01-bold {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 700; /* Bold */
+    color: #000000; /* Fallback for: fillColor: TITULO Constitucion */
+}
+
+/* CARÁCTER: C02_ITALIC */
+.char-c02-italic {
+    font-family: "Liberation Serif", serif;
+    font-style: italic;
+    color: #000000; /* Fallback for: fillColor: TITULO Constitucion */
+}
+
+/* CARÁCTER: C03_SUPERSCRIPT */
+.char-c03-superscript {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 400; /* Regular */
+    vertical-align: super; /* position: SUPERSCRIPT */
+    font-size: smaller;
+    text-decoration: underline; /* underline: true */
+    color: #000000; /* fillColor: Black */
+}
+
+/* CARÁCTER: C12_CROSSREF */
+.char-c12-crossref {
+    font-style: normal;
+    font-weight: 400; /* Regular */
+    color: #000000; /* Fallback for: fillColor: Capítulo Constitucion, fillTint: 90 */
+}
+
+/* CARÁCTER: C13_TABNUM_CONTENT */
+.char-c13-tabnum-content {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-style: normal;
+    font-weight: 400; /* Regular */
+}
+
+/* CARÁCTER: C14_ROMAN_UPPER */
+.char-c14-roman-upper {
+    text-transform: uppercase; /* capitalization: ALL_CAPS */
+}
+
+/* CARÁCTER: C15_NARROW_90 */
+.char-c15-narrow-90 {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-style: normal;
+    font-weight: 400; /* Regular */
+    text-decoration: none; /* underline: false */
+}
+
+/* CARÁCTER: C16_TD_GLOSS */
+.char-c16-td-gloss {
+    font-family: "Liberation Serif", serif;
+    font-style: normal;
+    font-weight: 400; /* Regular */
+    color: #000000; /* Fallback for: fillColor: Capítulo Constitucion */
+}
+
+/* CARÁCTER: C17_ARTLINK */
+.char-c17-artlink {
+    font-family: "Liberation Sans Narrow", sans-serif;
+    font-style: normal;
+    font-weight: 700; /* Bold */
+    color: #000000; /* Fallback for: fillColor: Verde glosario */
+}
+
+/* CARÁCTER: TerminoGlosario */
+.char-terminoglosario {
+    text-decoration: none; /* underline: false */
+    color: #000000; /* fillColor: Black */
+}
+
+/* CARÁCTER: flecha */
+.char-flecha {
+    font-family: "Wingdings", sans-serif;
+    font-style: normal;
+    font-weight: 400; /* Regular */
+    color: #000000; /* Fallback for: fillColor: Verde glosario */
+}
+
+/* CARÁCTER: Hipervínculo */
+.char-hipervinculo {
+    text-decoration: underline; /* underline: true */
+    color: #000000; /* Fallback for: fillColor: Hipervínculo */
+}
+
+/* CARÁCTER: Referencia Artículo */
+.char-referencia-articulo {
+    color: #000000; /* Fallback for: fillColor: Capítulo Constitucion, fillTint: 90 */
+}
+
+/* CARÁCTER: SYS_FIX_ARTICLE_NUMBER */
+.char-sys-fix-article-number {
+    color: #000000; /* fillColor: Black */
+}
+
+/* CARÁCTER: Strong */
+.char-strong {
+    font-style: normal;
+    font-weight: 700; /* Bold */
+}
