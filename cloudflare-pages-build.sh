@@ -5,8 +5,8 @@ echo "📦 Instalando dependencias..."
 npm ci
 
 echo "🧱 Generando artefactos públicos..."
-npm run publish:constitucion || true
 
+# Generar catálogo y métricas
 node scripts/build-catalog.js || true
 node scripts/build-metrics.js || true
 node scripts/build-timeline.js || true
@@ -15,6 +15,7 @@ node scripts/build-integrity-report.js || true
 node scripts/build-external-links-report.js || true
 node scripts/build-audit-summary.js || true
 
+# Generar dashboards HTML
 node scripts/build-public-home.js || true
 node scripts/build-public-nav.js || true
 node scripts/build-public-search.js || true
