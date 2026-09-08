@@ -43,3 +43,4 @@
 | MVP-046 | Panel público de enlaces externos | ✅ Implementado |
 | MVP-047 | Validador de anclas internas en artefactos públicos | 🧪 Contrato 0.1.0-draft |
 | MVP-048 | Panel público de anclas internas | ✅ Implementado |
+| MVP-049 | Endpoint de resumen ejecutivo de auditoría | 🧪 Contrato 0.1.0-draft |

@@ -881,9 +881,10 @@
 
 ---
 
-## Pausa de Estabilidad Definitiva — post MVP-048
+## Apertura MVP-049 — Endpoint de resumen ejecutivo de auditoría
 
-- Estado: repositorio congelado en v1.0.0-public-anchors.
-- Actividad permitida: solo auditoría externa y configuración de infraestructura.
-- Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
-- Próximo retorno: apertura de MVP-049 o ajuste de producción.
+- Contrato: core/audit-summary/mvp-049-audit-summary.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: 6/6 passed
+- Estado: contrato creado, implementación pendiente
+- Pausa de estabilidad suspendida temporalmente.
