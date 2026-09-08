@@ -4,6 +4,9 @@ set -e
 echo "📦 Instalando dependencias..."
 npm ci
 
+echo "📁 Creando directorio public..."
+mkdir -p public
+
 echo "🧹 Limpiando temporales grandes..."
 find . -type f -size +25M -not -path './node_modules/*' -delete
 find public -type f -size +25M -delete
