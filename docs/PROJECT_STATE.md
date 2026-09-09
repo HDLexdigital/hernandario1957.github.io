@@ -913,3 +913,19 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
 - Próximo retorno: apertura de MVP-051 o ajuste de producción.
+
+
+---
+
+## Migración a Cloudflare Pages
+
+- Motivo: expiración de GitHub Enterprise y limitación de GitHub Pages.
+- Proveedor anterior: GitHub Pages.
+- Proveedor nuevo: Cloudflare Pages.
+- URL temporal: https://hernandario1957-github-io.pages.dev
+- Dominio definitivo: https://www.lexdigitalhd.com
+- HTTPS: operativo
+- Build command: bash cloudflare-pages-build.sh
+- Output directory: public
+- Rama de despliegue: main
+- Estado: producción operativa, core sin cambios.
