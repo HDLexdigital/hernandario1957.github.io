@@ -1,0 +1,10 @@
+{
+  "name": "lexdigital-pipeline",
+  "version": "0.1.0",
+  "description": "Servidor HTTP y pipeline IPC para LexDigitalHD",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "health": "curl -s http://127.0.0.1:8765/health"
+  }
+}
