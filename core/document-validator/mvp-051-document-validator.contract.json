@@ -1,0 +1,35 @@
+{
+  "id": "MVP-051",
+  "title": "Validador de documento JSON previo al procesamiento",
+  "description": "Valida estructura, semántica de párrafos, codificación UTF-8 sin BOM y clases CSS normalizadas antes de procesar un documento desde publicaciones/.",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-09",
+  "module": "core/document-validator",
+  "acceptance_criteria": [
+    "El validador detecta JSON inválido y lo rechaza antes de copiar tmp-ledm.json.",
+    "El validador verifica presencia de metadata, content/nodes/body.",
+    "El validador verifica que todos los <p> estén correctamente cerrados.",
+    "El validador normaliza clases CSS a kebab-case si es necesario.",
+    "El validador rechaza archivos con BOM o caracteres nulos.",
+    "El validador acepta párrafos con role=\"region\" y aria-label.",
+    "El validador produce un reporte JSON con estado OK/ERROR.",
+    "La interfaz Electron consulta el validador antes de procesar.",
+    "Las pruebas de contrato y del validador pasan en verde."
+  ],
+  "outputs": [
+    "scripts/validate-document-json.js",
+    "public/document-validation-report.json",
+    "core/document-validator/test/mvp-051-document-validator.builder.test.js"
+  ],
+  "dependencies": [
+    "publicaciones/<documento>/<archivo>.json",
+    "scripts/ui/main.js",
+    "scripts/ui/index.html"
+  ],
+  "risks": [
+    "Posibles falsos positivos en validación de párrafos heredados de InDesign.",
+    "Documentos antiguos pueden requerir saneamiento de clases CSS.",
+    "La validación añade un paso antes del build, aumentando ligeramente el tiempo total."
+  ]
+}

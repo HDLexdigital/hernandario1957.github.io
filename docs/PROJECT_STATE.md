@@ -907,6 +907,14 @@
 
 ---
 
+## Apertura MVP-051 — Validador de documento JSON previo al procesamiento
+
+- Contrato: core/document-validator/mvp-051-document-validator.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: 6/6 passed
+- Estado: contrato creado, implementación pendiente
+- Pausa de estabilidad suspendida temporalmente.
+
 ## Pausa de Estabilidad Definitiva — post MVP-050
 
 - Estado: repositorio congelado en v1.0.0-public-audit.
