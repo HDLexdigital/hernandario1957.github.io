@@ -1,0 +1,83 @@
+[
+  {
+    "archivo": "defecto-array-vacio/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "tipoDefecto": "Sin contenido",
+    "mensaje": "El array 'content' no existe o está vacío",
+    "recomendacion": "Asegurar extracción de nodos de texto."
+  },
+  {
+    "archivo": "defecto-bom/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "tipoDefecto": "BOM detectado",
+    "mensaje": "El archivo contiene un Byte Order Mark",
+    "recomendacion": "Limpiar el buffer con .replace(/^\\uFEFF/, '')"
+  },
+  {
+    "archivo": "defecto-json-incompleto/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "CRITICA",
+    "tipoDefecto": "JSON incompleto/malformado",
+    "mensaje": "Expected ',' or ']' after array element in JSON at position 66",
+    "recomendacion": "Verificar cierres de llaves/corchetes."
+  },
+  {
+    "archivo": "defecto-llaves/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "CRITICA",
+    "tipoDefecto": "JSON incompleto/malformado",
+    "mensaje": "Expected ',' or '}' after property value in JSON at position 67",
+    "recomendacion": "Verificar cierres de llaves/corchetes."
+  },
+  {
+    "archivo": "defecto-metadata-tipo/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "tipoDefecto": "Metadata inválida",
+    "mensaje": "Falta el nodo metadata o está vacío",
+    "recomendacion": "Incluir objeto metadata válido."
+  },
+  {
+    "archivo": "defecto-metadata-vacio/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "tipoDefecto": "Metadata inválida",
+    "mensaje": "Falta el nodo metadata o está vacío",
+    "recomendacion": "Incluir objeto metadata válido."
+  },
+  {
+    "archivo": "defecto-objeto-nulo/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "tipoDefecto": "Metadata inválida",
+    "mensaje": "Falta el nodo metadata o está vacío",
+    "recomendacion": "Incluir objeto metadata válido."
+  },
+  {
+    "archivo": "defecto-sin-contenido/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "tipoDefecto": "Sin contenido",
+    "mensaje": "El array 'content' no existe o está vacío",
+    "recomendacion": "Asegurar extracción de nodos de texto."
+  },
+  {
+    "archivo": "defecto-sin-metadata/documento.json",
+    "fecha": "2026-09-09",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "tipoDefecto": "Metadata inválida",
+    "mensaje": "Falta el nodo metadata o está vacío",
+    "recomendacion": "Incluir objeto metadata válido."
+  }
+]

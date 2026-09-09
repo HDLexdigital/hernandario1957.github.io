@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ERR-JSON-001",
+    "tipoDefecto": "JSON malformado o incompleto",
+    "sintoma": "Unexpected end of JSON input o Unexpected token",
+    "causaProbable": "El archivo se truncó durante la exportación o faltan llaves de cierre '}' y corchetes ']'.",
+    "solucion": "Validar la estructura del documento con un linter JSON antes de compilar.",
+    "ejemploIncorrecto": "{ \"metadata\": { \"titulo\": \"Ley\" } ",
+    "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley\" } }"
+  },
+  {
+    "id": "ERR-ENC-001",
+    "tipoDefecto": "Codificación con BOM (Byte Order Mark)",
+    "sintoma": "Fallo silencioso en el analizador JSON o renderizado del caracter invisible \\uFEFF en el HTML final.",
+    "causaProbable": "El archivo fue guardado usando codificación UTF-8 con BOM, forzada por ExtendScript en InDesign.",
+    "solucion": "Ejecutar limpieza explícita en Node.js mediante .replace(/^\\uFEFF/, '') antes de JSON.parse().",
+    "ejemploIncorrecto": "\\uFEFF{\"metadata\": ...}",
+    "ejemploCorrecto": "{\"metadata\": ...}"
+  },
+  {
+    "id": "ERR-META-002",
+    "tipoDefecto": "Metadata vacía o ausente",
+    "sintoma": "El validador rechaza el archivo por carecer de la propiedad 'metadata' o estar vacía.",
+    "causaProbable": "Fallo en la extracción de metadatos de InDesign o documento origen sin propiedades definidas.",
+    "solucion": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "ejemploIncorrecto": "{ \"content\": [] }",
+    "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }"
+  },
+  {
+    "id": "ERR-STY-001",
+    "tipoDefecto": "Nomenclatura de clases CSS inválida",
+    "sintoma": "Clases con espacios, mayúsculas o guiones bajos rompen la vinculación con la hoja de estilos.",
+    "causaProbable": "Herencia directa de nombres de estilo no sanitizados desde el motor de maquetación.",
+    "solucion": "Aplicar saneamiento mediante expresiones regulares hacia formato kebab-case estricto.",
+    "ejemploIncorrecto": "class=\"P01_Body Base\"",
+    "ejemploCorrecto": "class=\"p01-body-base\""
+  },
+  {
+    "id": "ERR-CONT-001",
+    "tipoDefecto": "Array content vacío o ausente",
+    "sintoma": "El validador rechaza el documento por no contener nodos de texto.",
+    "causaProbable": "Fallo en la extracción del AST o documento sin cuerpo normativo.",
+    "solucion": "Asegurar que el JSON tenga 'content' como array con al menos un elemento.",
+    "ejemploIncorrecto": "{ \"metadata\": {...}, \"content\": [] }",
+    "ejemploCorrecto": "{ \"metadata\": {...}, \"content\": [{ \"type\": \"p\" }] }"
+  },
+  {
+    "id": "ERR-META-003",
+    "tipoDefecto": "Metadata de tipo incorrecto",
+    "sintoma": "El validador rechaza metadata que no sea objeto.",
+    "causaProbable": "El documento fuente exportó metadata como cadena o número.",
+    "solucion": "Garantizar que metadata sea un objeto JSON.",
+    "ejemploIncorrecto": "{ \"metadata\": \"Ley 1\" }",
+    "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley 1\" } }"
+  },
+  {
+    "id": "ERR-HTML-001",
+    "tipoDefecto": "Etiquetas <p> sin cerrar",
+    "sintoma": "El navegador o validador HTML detecta anidamiento incorrecto.",
+    "causaProbable": "Contenido HTML generado desde InDesign sin saneamiento.",
+    "solucion": "Verificar cierre estricto de todos los <p> antes de empaquetar.",
+    "ejemploIncorrecto": "\"<p>Texto sin cerrar\"",
+    "ejemploCorrecto": "\"<p>Texto cerrado</p>\""
+  },
+  {
+    "id": "ERR-HTML-002",
+    "tipoDefecto": "Anidamiento inválido de <p>",
+    "sintoma": "Etiquetas <p> dentro de <p> generan corrección impredecible del DOM.",
+    "causaProbable": "Transformación incorrecta de bloques durante la exportación.",
+    "solucion": "Aplanar jerarquía de párrafos antes de generar HTML.",
+    "ejemploIncorrecto": "\"<p><p>Texto</p></p>\"",
+    "ejemploCorrecto": "\"<p>Texto</p>\""
+  }
+]
