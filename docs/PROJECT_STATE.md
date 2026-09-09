@@ -913,3 +913,18 @@
 - Actividad permitida: solo auditoría externa y configuración de infraestructura.
 - Pendientes externos: DNS, HTTPS, despliegue en www.lexdigitalhd.com.
 - Próximo retorno: apertura de MVP-051 o ajuste de producción.
+
+
+---
+
+## Cierre MVP-052 — Pipeline IPC y Compilador Modular
+
+- Commit: 00b9580
+- Tag: v1.0.0-pipeline
+- Servidor HTTP: 127.0.0.1:8765
+- Heartbeat: 3s
+- Watchdog IPC: operativo
+- Endpoints: /health, /build, /build-stream (SSE)
+- Interfaz Electron: log en vivo con EventSource
+- Build público: OK
+- Estado: repositorio congelado en v1.0.0-pipeline
