@@ -1,0 +1,119 @@
+[
+  {
+    "archivo": "defecto-array-vacio/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "reseña_usuario": "Asegurar que el JSON tenga 'content' como array con al menos un elemento.",
+    "reseña_tecnica": {
+      "causaProbable": "Fallo en la extracción del AST o documento sin cuerpo normativo.",
+      "solucion": "Asegurar que el JSON tenga 'content' como array con al menos un elemento.",
+      "ejemploIncorrecto": "{ \"metadata\": {...}, \"content\": [] }",
+      "ejemploCorrecto": "{ \"metadata\": {...}, \"content\": [{ \"type\": \"p\" }] }",
+      "mensajeOriginal": "El array 'content' no existe o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-bom/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "reseña_usuario": "Ejecutar limpieza explícita en Node.",
+    "reseña_tecnica": {
+      "causaProbable": "El archivo fue guardado usando codificación UTF-8 con BOM, forzada por ExtendScript en InDesign.",
+      "solucion": "Ejecutar limpieza explícita en Node.js mediante .replace(/^\\uFEFF/, '') antes de JSON.parse().",
+      "ejemploIncorrecto": "\\uFEFF{\"metadata\": ...}",
+      "ejemploCorrecto": "{\"metadata\": ...}",
+      "mensajeOriginal": "El archivo contiene un Byte Order Mark"
+    }
+  },
+  {
+    "archivo": "defecto-json-incompleto/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "CRITICA",
+    "reseña_usuario": "Validar la estructura del documento con un linter JSON antes de compilar.",
+    "reseña_tecnica": {
+      "causaProbable": "El archivo se truncó durante la exportación o faltan llaves de cierre '}' y corchetes ']'.",
+      "solucion": "Validar la estructura del documento con un linter JSON antes de compilar.",
+      "ejemploIncorrecto": "{ \"metadata\": { \"titulo\": \"Ley\" } ",
+      "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley\" } }",
+      "mensajeOriginal": "Expected ',' or ']' after array element in JSON at position 66"
+    }
+  },
+  {
+    "archivo": "defecto-llaves/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "CRITICA",
+    "reseña_usuario": "Validar la estructura del documento con un linter JSON antes de compilar.",
+    "reseña_tecnica": {
+      "causaProbable": "El archivo se truncó durante la exportación o faltan llaves de cierre '}' y corchetes ']'.",
+      "solucion": "Validar la estructura del documento con un linter JSON antes de compilar.",
+      "ejemploIncorrecto": "{ \"metadata\": { \"titulo\": \"Ley\" } ",
+      "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley\" } }",
+      "mensajeOriginal": "Expected ',' or '}' after property value in JSON at position 67"
+    }
+  },
+  {
+    "archivo": "defecto-metadata-tipo/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "reseña_usuario": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "reseña_tecnica": {
+      "causaProbable": "Fallo en la extracción de metadatos de InDesign o documento origen sin propiedades definidas.",
+      "solucion": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+      "ejemploIncorrecto": "{ \"content\": [] }",
+      "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }",
+      "mensajeOriginal": "Falta el nodo metadata o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-metadata-vacio/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "reseña_usuario": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "reseña_tecnica": {
+      "causaProbable": "Fallo en la extracción de metadatos de InDesign o documento origen sin propiedades definidas.",
+      "solucion": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+      "ejemploIncorrecto": "{ \"content\": [] }",
+      "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }",
+      "mensajeOriginal": "Falta el nodo metadata o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-objeto-nulo/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "reseña_usuario": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "reseña_tecnica": {
+      "causaProbable": "Fallo en la extracción de metadatos de InDesign o documento origen sin propiedades definidas.",
+      "solucion": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+      "ejemploIncorrecto": "{ \"content\": [] }",
+      "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }",
+      "mensajeOriginal": "Falta el nodo metadata o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-sin-contenido/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "reseña_usuario": "Asegurar que el JSON tenga 'content' como array con al menos un elemento.",
+    "reseña_tecnica": {
+      "causaProbable": "Fallo en la extracción del AST o documento sin cuerpo normativo.",
+      "solucion": "Asegurar que el JSON tenga 'content' como array con al menos un elemento.",
+      "ejemploIncorrecto": "{ \"metadata\": {...}, \"content\": [] }",
+      "ejemploCorrecto": "{ \"metadata\": {...}, \"content\": [{ \"type\": \"p\" }] }",
+      "mensajeOriginal": "El array 'content' no existe o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-sin-metadata/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "reseña_usuario": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "reseña_tecnica": {
+      "causaProbable": "Fallo en la extracción de metadatos de InDesign o documento origen sin propiedades definidas.",
+      "solucion": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+      "ejemploIncorrecto": "{ \"content\": [] }",
+      "ejemploCorrecto": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }",
+      "mensajeOriginal": "Falta el nodo metadata o está vacío"
+    }
+  }
+]
