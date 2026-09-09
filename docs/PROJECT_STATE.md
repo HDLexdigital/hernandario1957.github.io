@@ -950,3 +950,13 @@
 - Motor: asíncrono, tolerante a fallos, preparado para producción masiva.
 - Actividad permitida: infraestructura (Linux Mint, persistencia, DNS, HTTPS) y documentación.
 - Próximo retorno: apertura de MVP-053.
+
+
+---
+
+## Pausa de validación systemd
+
+- Fecha: 2026-09-09
+- Motivo: reinicio de Linux Mint para validar persistencia del Watchdog.
+- Estado previo: pipeline operativo en v1.0.0-pipeline.
+- Pendiente: confirmar arranque automático y conexión SSE sin intervención manual.
