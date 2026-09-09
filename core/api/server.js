@@ -46,6 +46,15 @@ const authMiddleware = (req, res, next) => {
 
 app.use(express.json());
 app.use(createAuditLogger());
+app.get('/api/v1/public/anchors', (req, res) => {
+  const anchorsPath = path.join(RAIZ, 'public', 'anchors.json');
+  if (!fs.existsSync(anchorsPath)) {
+    return res.status(404).json({ error: 'anchors not found' });
+  }
+  const data = JSON.parse(fs.readFileSync(anchorsPath, 'utf8'));
+  res.json(data);
+});
+
 
 // ========== RUTAS PÚBLICAS SIN AUTENTICACIÓN ==========
 
