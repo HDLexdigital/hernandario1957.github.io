@@ -26,35 +26,48 @@ function leerLedm(ledmPath) {
     return JSON.parse(fs.readFileSync(ledmPath, 'utf8'));
 }
 
+
+function listarDocumentosDirectos() {
+    return fs.readdirSync(PUBLICACIONES_DIR)
+        .filter(nombre => {
+            const full = path.join(PUBLICACIONES_DIR, nombre);
+            return fs.statSync(full).isDirectory();
+        })
+        .map(nombre => {
+            const dir = path.join(PUBLICACIONES_DIR, nombre);
+            const archivos = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+            return { nombre, archivos };
+        })
+        .filter(item => item.archivos.length > 0);
+}
+
 function main() {
     const catalogo = [];
+    const documentos = listarDocumentosDirectos();
 
-    for (const documento of listarDocumentos()) {
-        const documentoDir = path.join(PUBLICACIONES_DIR, documento);
-        const versiones = listarVersiones(documentoDir);
+    for (const doc of documentos) {
+        const docDir = path.join(PUBLICACIONES_DIR, doc.nombre);
+        const jsonFile = doc.archivos[0];
+        const jsonPath = path.join(docDir, jsonFile);
 
-        if (versiones.length === 0) continue;
-
-        const versionesValidas = versiones.filter(v => {
-            const ledmPath = path.join(documentoDir, v, 'documento.ledm.json');
-            return fs.existsSync(ledmPath);
-        });
-
-        if (versionesValidas.length === 0) continue;
-
-        const primerLedm = leerLedm(path.join(documentoDir, versionesValidas[0], 'documento.ledm.json'));
-        const documentId = primerLedm.meta.documentId || documento;
+        let metadata = {};
+        try {
+            const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+            metadata = data.metadata || data.meta || { title: jsonFile };
+        } catch {
+            metadata = { title: jsonFile };
+        }
 
         catalogo.push({
-            documentId,
-            versions: versionesValidas
+            id: doc.nombre,
+            title: metadata.title || doc.nombre,
+            version: metadata.version || '1.0.0',
+            file: jsonFile
         });
     }
 
-    fs.mkdirSync(path.dirname(CATALOGO_PATH), { recursive: true });
-    fs.writeFileSync(CATALOGO_PATH, JSON.stringify(catalogo, null, 2), 'utf8');
-
-    console.log(`✅ catálogo generado con ${catalogo.length} documento(s).`);
+    fs.writeFileSync(CATALOGO_PATH, JSON.stringify(catalogo, null, 2));
+    console.log('✅ catálogo generado con ' + catalogo.length + ' documento(s).');
 }
 
 try {
