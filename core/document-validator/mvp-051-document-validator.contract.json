@@ -2,8 +2,8 @@
   "id": "MVP-051",
   "title": "Validador de documento JSON previo al procesamiento",
   "description": "Valida estructura, semántica de párrafos, codificación UTF-8 sin BOM y clases CSS normalizadas antes de procesar un documento desde publicaciones/.",
-  "version": "0.1.0-draft",
-  "status": "draft",
+  "version": "1.0.0",
+  "status": "implemented",
   "created": "2026-09-09",
   "module": "core/document-validator",
   "acceptance_criteria": [
@@ -31,5 +31,6 @@
     "Posibles falsos positivos en validación de párrafos heredados de InDesign.",
     "Documentos antiguos pueden requerir saneamiento de clases CSS.",
     "La validación añade un paso antes del build, aumentando ligeramente el tiempo total."
-  ]
+  ],
+  "updated": "2026-09-09"
 }

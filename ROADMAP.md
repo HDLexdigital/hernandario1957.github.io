@@ -45,4 +45,4 @@
 | MVP-048 | Panel público de anclas internas | ✅ Implementado |
 | MVP-049 | Endpoint de resumen ejecutivo de auditoría | ✅ Implementado |
 | MVP-050 | Panel público de auditoría consolidada | ✅ Implementado |
-| MVP-051 | Validador de documento JSON previo al procesamiento | 🧪 Contrato 0.1.0-draft |
+| MVP-051 | Validador de documento JSON previo al procesamiento | ✅ Implementado |
