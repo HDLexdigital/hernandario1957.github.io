@@ -928,3 +928,25 @@
 - Interfaz Electron: log en vivo con EventSource
 - Build público: OK
 - Estado: repositorio congelado en v1.0.0-pipeline
+
+
+---
+
+## Cierre MVP-051 — Estabilización y validación previa del flujo de compilación
+- Generador de carga defectuosa implementado y validado.
+- Validación estricta de estructura JSON y codificación UTF-8 pura.
+- Estado: implementado y validado.
+
+## Cierre MVP-052 — Pipeline IPC y Compilador Modular
+- Contrato arquitectónico implementado en src/core/server.js.
+- Watchdog Node.js y servidor HTTP (puerto 8765) activos.
+- Flujo SSE integrado para transmisión de logs.
+- Interfaz gráfica aislada y segura conectada al motor.
+- Tag oficial: v1.0.0-pipeline
+- Estado: implementado, funcional y blindado.
+
+## Pausa de Estabilidad Arquitectónica — post MVP-052
+- Estado: repositorio congelado en v1.0.0-pipeline.
+- Motor: asíncrono, tolerante a fallos, preparado para producción masiva.
+- Actividad permitida: infraestructura (Linux Mint, persistencia, DNS, HTTPS) y documentación.
+- Próximo retorno: apertura de MVP-053.
