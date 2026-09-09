@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "id": "modelo-referencia-001",
+    "title": "Modelo Referencial de Documento Jurídico Ampliado",
+    "version": "1.1.0",
+    "createdAt": "2026-09-09",
+    "language": "es",
+    "publisher": "LexDigitalHD",
+    "type": "modelo-referencia",
+    "description": "Cubre estilos de párrafo y carácter para compilaciones jurídicas estructuradas."
+  },
+  "styles": {
+    "paragraphs": [
+      {
+        "id": "p01-body-first",
+        "alias": "cuerpo-primero",
+        "description": "Párrafo inicial sin sangría",
+        "css": "text-indent:0; text-align:justify; hyphens:auto;"
+      },
+      {
+        "id": "p01-body-cont",
+        "alias": "cuerpo-siguiente",
+        "description": "Párrafo de continuación con sangría",
+        "css": "text-indent:24px; text-align:justify; hyphens:auto;"
+      },
+      {
+        "id": "p02-body-indent",
+        "alias": "cuerpo-sangria-doble",
+        "description": "Párrafo con sangría doble",
+        "css": "text-indent:48px; text-align:justify;"
+      },
+      {
+        "id": "p03-quote",
+        "alias": "cita-normativa",
+        "description": "Cita normativa destacada",
+        "css": "margin-left:32px; margin-right:32px; font-style:italic;"
+      },
+      {
+        "id": "p04-center",
+        "alias": "parrafo-centrado",
+        "description": "Párrafo centrado para títulos internos",
+        "css": "text-align:center;"
+      }
+    ],
+    "characters": [
+      {
+        "id": "c01_bold",
+        "alias": "negrita-resaltado",
+        "description": "Negrita para términos destacados",
+        "css": "font-weight:bold;"
+      },
+      {
+        "id": "c02_italic",
+        "alias": "cursiva-enfasis",
+        "description": "Cursiva para énfasis",
+        "css": "font-style:italic;"
+      },
+      {
+        "id": "c03_underline",
+        "alias": "subrayado-normativo",
+        "description": "Subrayado para referencias normativas",
+        "css": "text-decoration:underline;"
+      },
+      {
+        "id": "c04_smallcaps",
+        "alias": "versalitas",
+        "description": "Versalitas para siglas",
+        "css": "font-variant:small-caps;"
+      },
+      {
+        "id": "c05_superscript",
+        "alias": "superindice",
+        "description": "Superíndice para llamadas",
+        "css": "vertical-align:super; font-size:0.8em;"
+      }
+    ]
+  },
+  "content": [
+    {
+      "type": "section",
+      "id": "sec-1",
+      "title": "Disposiciones Generales",
+      "children": [
+        {
+          "type": "article",
+          "id": "art-1",
+          "title": "Objeto",
+          "paragraphs": [
+            {
+              "class": "p01-body-first parrafo-justificado",
+              "role": "region",
+              "aria-label": "Párrafo normativo principal",
+              "text": "El presente documento establece las directrices generales para la estructuración de textos jurídicos digitales dentro del ecosistema LexDigitalHD."
+            },
+            {
+              "class": "p01-body-cont parrafo-justificado",
+              "role": "region",
+              "aria-label": "Párrafo normativo de continuación",
+              "text": "Se garantiza la correcta herencia de estilos tipográficos provenientes del motor de exportación de Adobe InDesign, preservando la semántica HTML5 y la accesibilidad WCAG 2.1."
+            },
+            {
+              "class": "p03-quote",
+              "role": "region",
+              "aria-label": "Cita normativa",
+              "text": "La norma se interpretará conforme al principio de legalidad y seguridad jurídica."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
