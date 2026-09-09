@@ -42,39 +42,11 @@ const html = '<!DOCTYPE html>' +
 '            <a href="metrics.html">Métricas</a>' +
 '            <a href="exports.html">Exportaciones</a>' +
 '            <a href="collection.html">Colección Completa</a>' +
-'        </nav>' +
-'    </div>' +
-'    <script>' +
-'        fetch("./build-metrics.json")' +
-'            .then(function(res) { return res.ok ? res.json() : null; })' +
-'            .then(function(metrics) {' +
-'                if (!metrics) return;' +
-'                var el = document.getElementById("metrics-cards");' +
-'                el.innerHTML = "";' +
-'                var items = [' +
-'                    ["Documentos", metrics.totalDocuments],' +
-'                    ["Versiones", metrics.totalVersions],' +
-'                    ["Core", metrics.coreVersion],' +
-'                    ["LEDM", metrics.ledmVersion]' +
-'                ];' +
-'                items.forEach(function(entry) {' +
-'                    var div = document.createElement("div");' +
-'                    div.className = "card";' +
-'                    var label = document.createElement("div");' +
-'                    label.className = "label";' +
-'                    label.textContent = entry[0];' +
-'                    var value = document.createElement("div");' +
-'                    value.className = "value";' +
-'                    value.textContent = entry[1];' +
-'                    div.appendChild(label);' +
-'                    div.appendChild(value);' +
-'                    el.appendChild(div);' +
-'                });' +
-'            })' +
-'            .catch(function() {});' +
-'    </script>' +
-'</body>' +
-'</html>';
+'            <a href="integrity.html">Integridad</a>' +
+'            <a href="deploy-status.html">Estado del Despliegue</a>' +
+'            <a href="external-links.html">Enlaces Externos</a>' +
+'            <a href="anchors.html">Anclas Internas</a>' +
+'            <a href="audit.html">Auditoría Consolidada</a>' +
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, html, 'utf8');
