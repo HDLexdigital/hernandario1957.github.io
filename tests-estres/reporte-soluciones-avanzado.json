@@ -1,0 +1,119 @@
+[
+  {
+    "archivo": "defecto-array-vacio/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "para_usuario": "Asegurar que el JSON tenga 'content' como array con al menos un elemento.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Asegurar que \"content\" sea un array con al menos un nodo.",
+      "codigo_original": "{ \"metadata\": {...}, \"content\": [] }",
+      "codigo_corregido": "{ \"metadata\": {...}, \"content\": [{ \"type\": \"p\" }] }",
+      "mensaje_original": "El array 'content' no existe o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-bom/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "para_usuario": "Ejecutar limpieza explícita en Node.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Eliminar el carácter BOM del inicio del archivo. Usar buffer.replace(/^\\uFEFF/, \"\") antes de JSON.parse().",
+      "codigo_original": "\\uFEFF{\"metadata\": ...}",
+      "codigo_corregido": "{\"metadata\": ...}",
+      "mensaje_original": "El archivo contiene un Byte Order Mark"
+    }
+  },
+  {
+    "archivo": "defecto-json-incompleto/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "CRITICA",
+    "para_usuario": "Validar la estructura del documento con un linter JSON antes de compilar.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Cerrar todas las llaves y corchetes del JSON. Verificar que cada { tenga su } y cada [ tenga su ].",
+      "codigo_original": "{ \"metadata\": { \"titulo\": \"Ley\" } ",
+      "codigo_corregido": "{ \"metadata\": { \"titulo\": \"Ley\" } }",
+      "mensaje_original": "Expected ',' or ']' after array element in JSON at position 66"
+    }
+  },
+  {
+    "archivo": "defecto-llaves/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "CRITICA",
+    "para_usuario": "Validar la estructura del documento con un linter JSON antes de compilar.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Cerrar todas las llaves y corchetes del JSON. Verificar que cada { tenga su } y cada [ tenga su ].",
+      "codigo_original": "{ \"metadata\": { \"titulo\": \"Ley\" } ",
+      "codigo_corregido": "{ \"metadata\": { \"titulo\": \"Ley\" } }",
+      "mensaje_original": "Expected ',' or '}' after property value in JSON at position 67"
+    }
+  },
+  {
+    "archivo": "defecto-metadata-tipo/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "para_usuario": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Añadir un objeto metadata con al menos \"titulo\" e \"idioma\".",
+      "codigo_original": "{ \"content\": [] }",
+      "codigo_corregido": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }",
+      "mensaje_original": "Falta el nodo metadata o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-metadata-vacio/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "para_usuario": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Añadir un objeto metadata con al menos \"titulo\" e \"idioma\".",
+      "codigo_original": "{ \"content\": [] }",
+      "codigo_corregido": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }",
+      "mensaje_original": "Falta el nodo metadata o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-objeto-nulo/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "para_usuario": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Añadir un objeto metadata con al menos \"titulo\" e \"idioma\".",
+      "codigo_original": "{ \"content\": [] }",
+      "codigo_corregido": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }",
+      "mensaje_original": "Falta el nodo metadata o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-sin-contenido/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "para_usuario": "Asegurar que el JSON tenga 'content' como array con al menos un elemento.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Asegurar que \"content\" sea un array con al menos un nodo.",
+      "codigo_original": "{ \"metadata\": {...}, \"content\": [] }",
+      "codigo_corregido": "{ \"metadata\": {...}, \"content\": [{ \"type\": \"p\" }] }",
+      "mensaje_original": "El array 'content' no existe o está vacío"
+    }
+  },
+  {
+    "archivo": "defecto-sin-metadata/documento.json",
+    "estado": "RECHAZADO",
+    "severidad": "ALTA",
+    "para_usuario": "Asegurar que el objeto JSON principal contenga 'metadata' con al menos 'titulo' e 'idioma'.",
+    "para_tecnico": {
+      "linea": 1,
+      "instruccion": "Añadir un objeto metadata con al menos \"titulo\" e \"idioma\".",
+      "codigo_original": "{ \"content\": [] }",
+      "codigo_corregido": "{ \"metadata\": { \"titulo\": \"Ley 1\" }, \"content\": [] }",
+      "mensaje_original": "Falta el nodo metadata o está vacío"
+    }
+  }
+]
