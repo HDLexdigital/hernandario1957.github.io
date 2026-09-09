@@ -960,3 +960,13 @@
 - Motivo: reinicio de Linux Mint para validar persistencia del Watchdog.
 - Estado previo: pipeline operativo en v1.0.0-pipeline.
 - Pendiente: confirmar arranque automático y conexión SSE sin intervención manual.
+
+
+---
+
+## Migración a Linux Mint nativo
+
+- Fecha: 2026-09-09
+- Entorno anterior: VirtualBox bajo Windows
+- Entorno nuevo: Linux Mint como sistema único en SSD
+- Acciones pendientes: verificar rutas, Node.js, Git, Electron y servicio systemd
