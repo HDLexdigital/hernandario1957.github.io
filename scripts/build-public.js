@@ -1,6 +1,10 @@
 'use strict';
 
 const { execSync } = require('child_process');
+const { generarCatalogo } = require('../src/core/compiladores/catalogo');
+const { generarTimeline } = require('../src/core/compiladores/timeline');
+const { generarMetricas } = require('../src/core/compiladores/metricas');
+const { generarDashboard } = require('../src/core/compiladores/dashboards');
 const fs = require('fs');
 const path = require('path');
 
@@ -26,10 +30,28 @@ function archivoExiste(nombre) {
 function main() {
     if (!fs.existsSync(PUBLIC)) fs.mkdirSync(PUBLIC, { recursive: true });
 
-    ejecutar('node scripts/build-catalog.js', 'Generando catálogo');
-    ejecutar('node scripts/build-metrics.js', 'Generando métricas');
+    try {
+        const catalogoActual = JSON.parse(fs.readFileSync(path.join(PUBLIC, 'catalogo.json'), 'utf8'));
+        generarCatalogo(catalogoActual);
+        console.log('✅ Catálogo regenerado vía módulo.');
+    } catch {
+        ejecutar('node scripts/build-catalog.js', 'Generando catálogo (fallback)');
+    }
+    try {
+        const metricasActuales = JSON.parse(fs.readFileSync(path.join(PUBLIC, 'build-metrics.json'), 'utf8'));
+        generarMetricas(metricasActuales);
+        console.log('✅ Métricas regeneradas vía módulo.');
+    } catch {
+        ejecutar('node scripts/build-metrics.js', 'Generando métricas (fallback)');
+    }
     ejecutar('node scripts/build-timeline.js', 'Generando timeline');
-    ejecutar('node scripts/build-global-timeline.js', 'Generando timeline global');
+    try {
+        const timelineActual = JSON.parse(fs.readFileSync(path.join(PUBLIC, 'global-timeline.json'), 'utf8'));
+        generarTimeline(timelineActual);
+        console.log('✅ Timeline regenerado vía módulo.');
+    } catch {
+        ejecutar('node scripts/build-global-timeline.js', 'Generando timeline global (fallback)');
+    }
     ejecutar('node scripts/build-collection-export.js', 'Generando collection-export');
 
     // Verificar artefactos base
