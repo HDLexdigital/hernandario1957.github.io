@@ -42,7 +42,7 @@ function construirNodo(nodo) {
 }
 
 function construirXHTMLDesdeLEDM(ledm) {
-    const titulo = (ledm.meta && ledm.meta.title) || 'Documento LEDM';
+    const documentTitle = (ledm.meta && ledm.meta.title) ? ledm.meta.title : 'Documento LexDigitalHD';
     const nodos = ledm.content || ledm.nodes || [];
     const cuerpo = nodos.map(construirNodo).join('\n');
 
@@ -50,7 +50,8 @@ function construirXHTMLDesdeLEDM(ledm) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>${escaparHTML(titulo)}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escaparHTML(documentTitle)}</title>
 </head>
 <body>
 ${cuerpo}
