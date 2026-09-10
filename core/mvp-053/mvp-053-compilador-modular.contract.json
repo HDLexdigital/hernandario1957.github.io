@@ -1,18 +1,23 @@
 {
   "id": "MVP-053",
-  "title": "Migración al Compilador Modular",
-  "version": "0.1.0-draft",
-  "status": "draft",
+  "title": "Consolidación del Compilador Modular",
+  "version": "1.0.0",
+  "status": "open",
   "created": "2026-09-10",
+  "updated": "2026-09-10",
   "module": "core/mvp-053",
   "acceptance_criteria": [
-    "Existe src/core/compiladores/ con módulos separados.",
-    "Existe src/core/constructores/ para XHTML.",
-    "Existe src/core/utils/ para utilidades.",
-    "Existe src/core/validators/ con validadores por capas.",
-    "server.js usa el compilador modular.",
-    "Los scripts antiguos siguen funcionando.",
-    "Pruebas contractuales y unitarias pasan en verde."
+    "src/core/compiladores/ contiene toda la lógica de compilación sustantiva.",
+    "src/core/constructores/ contiene los constructores XHTML/EPUB.",
+    "src/core/utils/ contiene utilidades compartidas.",
+    "src/core/validators/ contiene validadores por capas (E18-E26).",
+    "server.js consume el compilador modular.",
+    "scripts/build-*.js son wrappers delgados sin lógica sustantiva.",
+    "build-public.js consume src/core/compiladores/.",
+    "No existe duplicación funcional entre scripts/ y src/core/.",
+    "Los comandos npm run build:* siguen funcionando.",
+    "/render sigue funcionando sin regresión.",
+    "Suite completa en verde."
   ],
   "outputs": [
     "src/core/compiladores/catalogo.js",
@@ -22,5 +27,10 @@
     "src/core/constructores/xhtml.js",
     "src/core/utils/fs.js",
     "src/core/validators/integrity.js"
-  ]
+  ],
+  "guarantees": {
+    "single_source_of_truth": "Ninguna lógica de compilación sustantiva puede residir simultáneamente en scripts/ y src/core/compiladores/.",
+    "wrappers": "Los scripts/build-*.js delegan en src/core/compiladores/. No contienen lógica de compilación propia.",
+    "regression": "npm run build:public y /render deben producir el mismo resultado que antes de MVP-053."
+  }
 }
