@@ -991,3 +991,20 @@
 - Endpoints nuevos: /modular, /health, /build, /build-stream
 - Commit: 6703b5f
 - Estado: base operativa, pendiente migración de build-public.js
+
+
+---
+
+## Cierre migración modular MVP-053
+
+- Fecha: 2026-09-10
+- Migración completa a src/core/compiladores/
+- Módulos activos:
+  - catalogo.js
+  - metricas.js
+  - timeline.js
+  - dashboards.js
+- Fallback a scripts antiguos mantenido.
+- Build público: OK
+- Integridad: OK
+- Estado: migración cerrada, pendiente tag
