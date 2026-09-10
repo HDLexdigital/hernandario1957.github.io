@@ -1,0 +1,6 @@
+{
+  "status": "ERROR",
+  "mensaje": "JSON invalido",
+  "detalle": "Expected property name or '}' in JSON at position 2",
+  "timestamp": "2026-09-10T17:31:37.086Z"
+}

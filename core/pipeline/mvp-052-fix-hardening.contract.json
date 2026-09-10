@@ -1,0 +1,134 @@
+{
+  "id": "MVP-052-FIX",
+  "title": "Endurecimiento del Pipeline IPC",
+  "version": "1.0.0",
+  "status": "closed",
+  "created": "2026-09-10",
+  "module": "core/pipeline",
+  "parent": "MVP-052",
+  "description": "Endurecer las garantías operacionales del pipeline IPC sin agregar funcionalidades nuevas al pipeline editorial.",
+  "scope": {
+    "in": [
+      "Lock de concurrencia en /build",
+      "Lifecycle SSE idempotente con transiciones terminales únicas",
+      "Manejo explícito de error en spawn",
+      "BOM cleanup en payloads JSON",
+      "MAX_BODY_SIZE en /render",
+      "Semántica HTTP 400 vs 500",
+      "CORS restringido a origen local",
+      "Escritura atómica en request, response y heartbeat",
+      "Timeout en watchdog",
+      "Watchdog con validación de schema y sin shell arbitrario",
+      "Heartbeat inmediato y detenible",
+      "Single IPC instance por raíz de proyecto"
+    ],
+    "out": [
+      "Nuevas funcionalidades editoriales",
+      "Nuevos endpoints fuera de la superficie declarada",
+      "Cambios en el formato LEDM/CIDM",
+      "Cambios en los contratos de MVPs anteriores"
+    ]
+  },
+  "surface": {
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/health"
+      },
+      {
+        "method": "GET",
+        "path": "/modular"
+      },
+      {
+        "method": "POST",
+        "path": "/build"
+      },
+      {
+        "method": "GET",
+        "path": "/build-stream"
+      },
+      {
+        "method": "POST",
+        "path": "/render"
+      }
+    ]
+  },
+  "constants": {
+    "BUILD_TIMEOUT_MS": 120000,
+    "WATCHDOG_TIMEOUT_MS": 30000,
+    "MAX_BODY_SIZE_BYTES": 5242880,
+    "HEARTBEAT_INTERVAL_MS": 3000,
+    "CORS_ORIGIN": "http://127.0.0.1:8765"
+  },
+  "lifecycle_sse": {
+    "states": [
+      "STARTED",
+      "RUNNING",
+      "FINISHED",
+      "FAILED",
+      "TERMINATING",
+      "TERMINATED"
+    ],
+    "terminal_states": [
+      "FINISHED",
+      "FAILED",
+      "TERMINATED"
+    ],
+    "guarantee": "Exactamente una transición terminal por sesión SSE, incluso ante combinaciones de close, error, exit y desconexión del cliente."
+  },
+  "atomicity": {
+    "request": "request-<id>.tmp → rename() → request-<id>.json",
+    "response": "response-<id>.tmp → rename() → response-<id>.json",
+    "heartbeat": "active-ipc-root.json.tmp → rename() → active-ipc-root.json",
+    "guarantee": "Ningún consumidor debe observar un JSON parcialmente escrito."
+  },
+  "single_instance": {
+    "guarantee": "No pueden coexistir dos instancias activas del IPC para la misma raíz de proyecto.",
+    "mechanism": "IPC PID lock o equivalente."
+  },
+  "acceptance_criteria": [
+    "Segundo POST /build rechazado mientras existe build activo (409 Conflict).",
+    "Lock de build se libera tras success, error y timeout.",
+    "SSE finaliza exactamente una vez.",
+    "SSE maneja child error.",
+    "SSE maneja client disconnect.",
+    "Proceso hijo termina ante disconnect.",
+    "No quedan procesos huérfanos.",
+    "Request con BOM funciona.",
+    "Request JSON corrupto es rechazado (400).",
+    "Request que viola schema es rechazado (400).",
+    "Request se procesa una sola vez.",
+    "Requests concurrentes no producen doble ejecución.",
+    "execSync/ejecución tiene timeout (WATCHDOG_TIMEOUT_MS).",
+    "Response se escribe atómicamente.",
+    "Request se publica/procesa atómicamente.",
+    "Heartbeat aparece inmediatamente.",
+    "Heartbeat se actualiza cada 3 s.",
+    "Heartbeat se escribe atómicamente.",
+    "Heartbeat puede detenerse (detenerHeartbeat).",
+    "Estado stale no se interpreta como IPC vivo.",
+    "Body > MAX_BODY_SIZE_BYTES es rechazado (413).",
+    "JSON inválido en /render → 400.",
+    "Error interno en /render → 500.",
+    "Solo una instancia IPC activa por raíz de proyecto."
+  ],
+  "outputs": [
+    "src/core/server.js endurecido",
+    "src/core/watchdog.js endurecido",
+    "src/core/heartbeat.js endurecido",
+    "core/pipeline/test/mvp-052-fix-hardening.contract.test.js",
+    "docs/auditorias/mvp-052-fix-report.md"
+  ],
+  "dependencies": [
+    "MVP-052",
+    "src/core/server.js",
+    "src/core/watchdog.js",
+    "src/core/heartbeat.js"
+  ],
+  "risks": [
+    "Introducir regresiones en el flujo actual del pipeline.",
+    "Romper compatibilidad con la interfaz Electron.",
+    "Lock mal implementado que bloquee builds legítimos."
+  ],
+  "updated": "2026-09-10"
+}
