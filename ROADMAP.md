@@ -41,8 +41,11 @@
 | MVP-044 | Panel público de estado del despliegue | ✅ Implementado |
 | MVP-045 | Validador de enlaces externos en artefactos públicos | ✅ Implementado |
 | MVP-046 | Panel público de enlaces externos | ✅ Implementado |
-| MVP-047 | Validador de anclas internas en artefactos públicos | 🧪 Contrato 0.1.0-draft |
+| MVP-047 | Validador de anclas internas en artefactos públicos | ✅ Implementado |
 | MVP-048 | Panel público de anclas internas | ✅ Implementado |
 | MVP-049 | Endpoint de resumen ejecutivo de auditoría | ✅ Implementado |
 | MVP-050 | Panel público de auditoría consolidada | ✅ Implementado |
 | MVP-051 | Validador de documento JSON previo al procesamiento | ✅ Implementado |
+| MVP-052 | Pipeline IPC y Compilador Modular | ✅ Implementado |
+| MVP-053 | Migración al Compilador Modular | ✅ Implementado |
+| MVP-054 | Compilador de XHTML a partir de LEDM | ✅ Implementado |
