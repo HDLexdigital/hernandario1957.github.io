@@ -1,6 +1,6 @@
 'use strict';
 
-const { toNDJSON } = require('../../../scripts/build-collection-export-ndjson');
+const { toNDJSON } = require('../../../src/core/compiladores/exports');
 
 describe('MVP-036 Collection NDJSON Builder', () => {
     test('toNDJSON genera líneas JSON válidas', () => {

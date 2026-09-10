@@ -1,6 +1,6 @@
 'use strict';
 
-const { toCSV } = require('../../../scripts/build-collection-export-csv');
+const { toCSV } = require('../../../src/core/compiladores/exports');
 
 describe('MVP-034 Collection CSV Builder', () => {
     test('toCSV genera cabecera y filas', () => {

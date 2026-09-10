@@ -1,6 +1,6 @@
 'use strict';
 
-const { buildExport } = require('../../../scripts/build-collection-export');
+const { buildExport } = require('../../../src/core/compiladores/exports');
 
 describe('MVP-033 Collection Export Builder', () => {
     test('buildExport combina catálogo, timeline y métricas', () => {

@@ -17,9 +17,14 @@ function asegurarPublic() {
     }
 }
 
-// ============================================================
-// JSON — collection-export.json
-// ============================================================
+function escaparCSV(v) {
+    const s = String(v == null ? '' : v);
+    if (/[",\n]/.test(s)) {
+        return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+}
+
 function compilarCollectionExport() {
     const catalogo = leerJson(path.join(PUBLIC_DIR, 'catalogo.json'));
     const timeline = leerJson(path.join(PUBLIC_DIR, 'global-timeline.json'));
@@ -29,12 +34,7 @@ function compilarCollectionExport() {
         throw new Error('No se encontraron catálogo, timeline o métricas.');
     }
 
-    const payload = {
-        exportedAt: new Date().toISOString(),
-        catalog: catalogo,
-        timeline,
-        metrics
-    };
+    const payload = buildExport(catalogo, timeline, metrics);
 
     asegurarPublic();
     const outputPath = path.join(PUBLIC_DIR, 'collection-export.json');
@@ -43,49 +43,71 @@ function compilarCollectionExport() {
     return outputPath;
 }
 
-// ============================================================
-// CSV — collection-export.csv
-// ============================================================
 function compilarCollectionCSV() {
     const catalogo = leerJson(path.join(PUBLIC_DIR, 'catalogo.json'));
     if (!catalogo) throw new Error('No se encontró catálogo.');
 
-    const lineas = ['documentId,title,version,url'];
-    for (const doc of catalogo) {
-        const url = '/' + doc.id + '/';
-        lineas.push([doc.documentId, doc.title, doc.version, url].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','));
-    }
-
     asegurarPublic();
     const outputPath = path.join(PUBLIC_DIR, 'collection-export.csv');
-    fs.writeFileSync(outputPath, lineas.join('\n'), 'utf8');
+    fs.writeFileSync(outputPath, toCSV(catalogo), 'utf8');
     console.log('✅ collection-export.csv generado en ' + outputPath);
     return outputPath;
 }
 
-// ============================================================
-// NDJSON — collection-export.ndjson
-// ============================================================
 function compilarCollectionNDJSON() {
     const catalogo = leerJson(path.join(PUBLIC_DIR, 'catalogo.json'));
     if (!catalogo) throw new Error('No se encontró catálogo.');
 
-    const lineas = catalogo.map(doc => JSON.stringify({
-        documentId: doc.documentId,
-        title: doc.title,
-        version: doc.version,
-        url: '/' + doc.id + '/'
-    }));
-
     asegurarPublic();
     const outputPath = path.join(PUBLIC_DIR, 'collection-export.ndjson');
-    fs.writeFileSync(outputPath, lineas.join('\n'), 'utf8');
+    fs.writeFileSync(outputPath, toNDJSON(catalogo), 'utf8');
     console.log('✅ collection-export.ndjson generado en ' + outputPath);
     return outputPath;
+}
+
+function buildExport(catalog, timeline, metrics) {
+    return {
+        exportedAt: new Date().toISOString(),
+        catalog,
+        timeline,
+        metrics
+    };
+}
+
+function toCSV(catalogo) {
+    const lineas = ['documentId,title,versionId,createdAt,url'];
+    for (const doc of catalogo) {
+        const versions = (doc.versions && doc.versions.length > 0) ? doc.versions : [''];
+        for (const v of versions) {
+            const url = '/' + doc.documentId + '/' + v + '/';
+            const createdAt = doc.createdAt || '';
+            lineas.push([doc.documentId, doc.title, v, createdAt, url].map(escaparCSV).join(','));
+        }
+    }
+    return lineas.join('\n');
+}
+
+function toNDJSON(catalogo) {
+    const lineas = [];
+    for (const doc of catalogo) {
+        const versions = (doc.versions && doc.versions.length > 0) ? doc.versions : [''];
+        for (const v of versions) {
+            lineas.push(JSON.stringify({
+                documentId: doc.documentId,
+                title: doc.title,
+                versionId: v,
+                url: '/' + doc.documentId + '/' + v + '/'
+            }));
+        }
+    }
+    return lineas.join('\n');
 }
 
 module.exports = {
     compilarCollectionExport,
     compilarCollectionCSV,
-    compilarCollectionNDJSON
+    compilarCollectionNDJSON,
+    buildExport,
+    toCSV,
+    toNDJSON
 };
