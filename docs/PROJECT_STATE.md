@@ -1008,3 +1008,19 @@
 - Build público: OK
 - Integridad: OK
 - Estado: migración cerrada, pendiente tag
+
+
+---
+
+## Cierre de infraestructura pública — Opción B
+
+- Fecha: 2026-09-10
+- Dominio: lexdigitalhd.com
+- Subdominio: www.lexdigitalhd.com
+- DNS: gestionado en Cloudflare
+- HTTPS: operativo en ambos dominios
+- Server: cloudflare
+- www.lexdigitalhd.com → HTTP/2 200
+- lexdigitalhd.com → HTTP/2 200
+- Solución aplicada desde GitHub
+- Estado: infraestructura pública cerrada
