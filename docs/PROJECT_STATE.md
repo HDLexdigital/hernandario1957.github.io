@@ -974,3 +974,20 @@
 - Build público: OK
 - Integridad: OK
 - Estado: MVP-052 cerrado y validado en producción local
+
+
+---
+
+## Apertura MVP-053 — Migración al Compilador Modular
+
+- Contrato: core/mvp-053/mvp-053-compilador-modular.contract.json
+- Versión: 0.1.0-draft
+- Test contractual: 3/3 passed
+- Estructura creada:
+  - src/core/compiladores/ (catalogo, timeline, metricas, dashboards)
+  - src/core/constructores/xhtml.js
+  - src/core/utils/fs.js
+  - src/core/validators/integrity.js
+- Endpoints nuevos: /modular, /health, /build, /build-stream
+- Commit: 6703b5f
+- Estado: base operativa, pendiente migración de build-public.js
