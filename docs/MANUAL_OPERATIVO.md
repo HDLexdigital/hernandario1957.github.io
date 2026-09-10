@@ -67,3 +67,52 @@ Estado final esperado: Proceso finalizado con código 0.
 - src/core/server.js
 - scripts/ui/
 - scripts/build-public.js
+
+
+---
+
+## 11. Arquitectura modular consolidada (MVP-053)
+
+A partir de v1.0.2-modular-consolidated, la logica canonica vive en src/core/.
+
+### Estructura
+
+src/core/
+- compiladores/     Logica de compilacion
+  - catalogo.js
+  - timeline.js
+  - metricas.js
+  - global-timeline.js
+  - exports.js
+  - novedades.js
+  - feed.js
+  - sitemap.js
+  - search-index.js
+  - web.js
+  - dashboards/   15 paneles publicos
+  - pdf/          3 modulos PDF
+- constructores/    XHTML, EPUB, notas
+- validators/       Integridad, E18-E26, schemas
+- utils/            Utilidades compartidas
+
+### Wrappers
+
+Los scripts en scripts/build-*.js son wrappers delgados.
+Solo delegan en src/core/compiladores/ y no contienen logica sustantiva.
+
+## 12. Test de unicidad
+
+El test core/mvp-053/test/mvp-053-unicidad.test.js verifica que:
+
+- Los wrappers en scripts/ importan desde src/core/.
+- No contienen fs.readFileSync, fs.writeFileSync, JSON.parse ni JSON.stringify.
+
+Si falla, indica que hay logica sustantiva en un wrapper que debe migrarse al core.
+
+## 13. Auditoria MVP-053
+
+- Reporte: docs/auditorias/mvp-053-audit-response.md
+- Veredicto: APTO CON OBSERVACIONES
+- Hallazgos: fachada, BOM centralizado, AST en test
+- Plan: MVP-054-FIX tras la pausa
+
