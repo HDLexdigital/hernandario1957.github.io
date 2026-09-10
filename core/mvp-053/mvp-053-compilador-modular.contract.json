@@ -1,0 +1,26 @@
+{
+  "id": "MVP-053",
+  "title": "Migración al Compilador Modular",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-10",
+  "module": "core/mvp-053",
+  "acceptance_criteria": [
+    "Existe src/core/compiladores/ con módulos separados.",
+    "Existe src/core/constructores/ para XHTML.",
+    "Existe src/core/utils/ para utilidades.",
+    "Existe src/core/validators/ con validadores por capas.",
+    "server.js usa el compilador modular.",
+    "Los scripts antiguos siguen funcionando.",
+    "Pruebas contractuales y unitarias pasan en verde."
+  ],
+  "outputs": [
+    "src/core/compiladores/catalogo.js",
+    "src/core/compiladores/timeline.js",
+    "src/core/compiladores/metricas.js",
+    "src/core/compiladores/dashboards.js",
+    "src/core/constructores/xhtml.js",
+    "src/core/utils/fs.js",
+    "src/core/validators/integrity.js"
+  ]
+}
