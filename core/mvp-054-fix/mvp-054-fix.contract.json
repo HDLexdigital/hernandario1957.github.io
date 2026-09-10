@@ -1,0 +1,77 @@
+{
+  "id": "MVP-054-FIX",
+  "title": "Endurecimiento arquitectónico post auditoría MVP-053",
+  "version": "0.1.0-draft",
+  "status": "planned",
+  "created": "2026-09-10",
+  "updated": "2026-09-10",
+  "module": "core/mvp-054-fix",
+  "parent": "MVP-053",
+  "baseline": "v1.0.2-modular-consolidated",
+  "description": "Aplicar hallazgos de auditoría sobre el compilador modular consolidado en MVP-053, sin introducir funcionalidad nueva. Se planifica como deuda técnica formal y no modifica el baseline durante la pausa de estabilidad.",
+  "hallazgos": [
+    {
+      "id": "FIX-01",
+      "prioridad": "ALTO",
+      "titulo": "BOM disperso en filesystem",
+      "descripcion": "La limpieza de BOM (\\uFEFF) está replicada en varios módulos en lugar de centralizarse.",
+      "tratamiento": "Centralizar en src/core/utils/fs.js y delegar desde todos los compiladores."
+    },
+    {
+      "id": "FIX-02",
+      "prioridad": "MEDIO",
+      "titulo": "Ausencia de patrón fachada",
+      "descripcion": "No existe un index.js que centralice los exports de src/core/compiladores/.",
+      "tratamiento": "Evaluar la creación de src/core/compiladores/index.js como API conveniente. Se acepta solo si aporta una frontera útil; no es requisito impuesto."
+    },
+    {
+      "id": "FIX-03",
+      "prioridad": "MEDIO",
+      "titulo": "Unicidad basada en heurísticas",
+      "descripcion": "El test de unicidad detecta I/O y JSON.parse/stringify, pero puede no detectar duplicación lógica.",
+      "tratamiento": "Complementar con análisis AST que detecte duplicación funcional."
+    },
+    {
+      "id": "FIX-04",
+      "prioridad": "BAJO",
+      "titulo": "Posibles ciclos de dependencia",
+      "descripcion": "No se ha auditado si existen ciclos entre módulos de src/core/.",
+      "tratamiento": "Auditoría de dependencias entre módulos y reporte."
+    },
+    {
+      "id": "FIX-05",
+      "prioridad": "BAJO",
+      "titulo": "Aislamiento para UXP",
+      "descripcion": "No se ha verificado si src/core/ puede consumirse como núcleo independiente desde el Plugin UXP.",
+      "tratamiento": "Verificar frontera del core y documentar dependencias que impidan reutilización."
+    }
+  ],
+  "acceptance_criteria": [
+    "Existe src/core/utils/fs.js con función centralizada de limpieza de BOM.",
+    "Todos los compiladores delegan la limpieza de BOM a fs.js.",
+    "Se evalúa y decide sobre src/core/compiladores/index.js.",
+    "El test de unicidad se complementa con análisis AST.",
+    "Se reporta cualquier ciclo de dependencia entre módulos.",
+    "Se documenta el aislamiento del core para UXP.",
+    "La suite completa pasa en verde.",
+    "El contrato pasa de 0.1.0-draft a 1.0.0 solo tras verificación."
+  ],
+  "orden_implementacion": [
+    "FIX-01 (ALTO): BOM centralizado",
+    "FIX-02 (MEDIO): Fachada",
+    "FIX-03 (MEDIO): AST en test de unicidad",
+    "FIX-04 (BAJO): Análisis de ciclos",
+    "FIX-05 (BAJO): Aislamiento UXP"
+  ],
+  "guarantees": {
+    "no_modifica_baseline": "El contrato no modifica src/core/ ni los wrappers en scripts/ durante la pausa de estabilidad.",
+    "no_nueva_funcionalidad": "Es deuda técnica, no funcionalidad.",
+    "verificable": "Cada hallazgo debe ser verificable empíricamente."
+  },
+  "outputs": [
+    "src/core/utils/fs.js (ampliado)",
+    "src/core/compiladores/index.js (evaluado)",
+    "core/mvp-054-fix/test/mvp-054-fix.contract.test.js",
+    "docs/auditorias/mvp-054-fix-report.md (al cerrar)"
+  ]
+}

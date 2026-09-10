@@ -1056,3 +1056,13 @@
 - Hallazgo MEDIO: complementar test de unicidad con AST.
 - Plan: abrir MVP-054-FIX tras la pausa para aplicar hallazgos.
 - Estado: pausa de estabilidad activa.
+
+
+---
+
+## Apertura planificada MVP-054-FIX
+- Contrato: core/mvp-054-fix/mvp-054-fix.contract.json
+- Versión: 0.1.0-draft
+- Estado: planned (sin implementación).
+- Baseline congelado: v1.0.2-modular-consolidated.
+- Hallazgos: BOM (ALTO), Fachada (MEDIO), AST (MEDIO), ciclos (BAJO), UXP (BAJO).
