@@ -1,0 +1,20 @@
+{
+  "id": "MVP-054",
+  "title": "Compilador de XHTML a partir de LEDM",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "created": "2026-09-10",
+  "module": "core/mvp-054",
+  "acceptance_criteria": [
+    "Existe src/core/constructores/xhtml-ledm.js.",
+    "Existe src/core/validators/capas.js con validadores E18-E26.",
+    "El pipeline /build-stream usa el nuevo constructor.",
+    "Existe endpoint /render que convierte LEDM a XHTML.",
+    "Las pruebas contractuales y unitarias pasan en verde."
+  ],
+  "outputs": [
+    "src/core/constructores/xhtml-ledm.js",
+    "src/core/validators/capas.js",
+    "core/mvp-054/test/mvp-054.builder.test.js"
+  ]
+}

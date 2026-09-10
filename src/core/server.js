@@ -5,6 +5,8 @@ const { spawn } = require('child_process');
 const { iniciarHeartbeat } = require('./heartbeat');
 const { iniciarWatchdog } = require('./watchdog');
 const { validarIntegridad } = require('./validators/integrity');
+const { construirXHTMLDesdeLEDM } = require('./constructores/xhtml-ledm');
+const { validarTodo } = require('./validators/capas');
 
 const PORT = process.env.LEXDIGITAL_PORT || 8765;
 const HOST = '127.0.0.1';
@@ -86,6 +88,30 @@ const server = http.createServer((req, res) => {
             if (!buildProcess.killed) buildProcess.kill('SIGINT');
         });
 
+        return;
+    }
+
+    if (req.method === 'POST' && req.url === '/render') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+            try {
+                const limpio = body.replace(/^\uFEFF/, '');
+                const ledm = JSON.parse(limpio);
+                const validacion = validarTodo(ledm);
+                if (!validacion.ok) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ status: 'ERROR', validacion }));
+                    return;
+                }
+                const xhtml = construirXHTMLDesdeLEDM(ledm);
+                res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+                res.end(xhtml);
+            } catch (error) {
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ status: 'ERROR', mensaje: error.message }));
+            }
+        });
         return;
     }
 
