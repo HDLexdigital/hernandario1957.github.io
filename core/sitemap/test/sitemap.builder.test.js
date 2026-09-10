@@ -1,6 +1,6 @@
 'use strict';
 
-const { generarSitemap, generarRobots } = require('../../../scripts/build-sitemap');
+const { generarSitemap, generarRobots } = require('../../../src/core/compiladores/sitemap');
 
 describe('MVP-020 Sitemap Builder', () => {
     test('generarSitemap produce XML válido', () => {

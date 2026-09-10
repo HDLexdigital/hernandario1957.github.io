@@ -1,6 +1,6 @@
 'use strict';
 
-const { generarFeed } = require('../../../scripts/build-feed');
+const { generarFeed } = require('../../../src/core/compiladores/feed');
 
 describe('MVP-026 Feed Builder', () => {
     test('generarFeed produce RSS 2.0 válido', () => {
