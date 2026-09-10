@@ -47,5 +47,5 @@
 | MVP-050 | Panel público de auditoría consolidada | ✅ Implementado |
 | MVP-051 | Validador de documento JSON previo al procesamiento | ✅ Implementado |
 | MVP-052 | Pipeline IPC y Compilador Modular | ✅ Implementado |
-| MVP-053 | Migración al Compilador Modular | ✅ Implementado |
+| MVP-053 | Consolidación del Compilador Modular | ✅ Implementado |
 | MVP-054 | Compilador de XHTML a partir de LEDM | ✅ Implementado |
