@@ -54,3 +54,4 @@ tmp-DOC-*.json
 lexkey
 tmp-ledm.json
 publicaciones/defecto-*
+docs/*.sdr/
