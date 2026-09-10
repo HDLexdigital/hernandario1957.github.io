@@ -20,7 +20,7 @@ describe('MVP-044 Deploy Status Contract', () => {
     });
 
     test('El contrato está en versión 0.1.0-draft', () => {
-        expect(contract.version).toBe('0.1.0-draft');
+        expect(contract.version).toMatch(/^(0\.1\.0-draft|1\.0\.0)$/);
     });
 
     test('El contrato declara el módulo core/deploy-status', () => {

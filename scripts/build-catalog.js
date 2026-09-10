@@ -8,7 +8,11 @@ const PUBLICACIONES_DIR = path.join(RAIZ, 'publicaciones');
 const CATALOGO_PATH = path.join(RAIZ, 'public', 'catalogo.json');
 
 function esDirectorio(ruta) {
-    return fs.statSync(ruta).isDirectory();
+    try {
+        return fs.statSync(ruta).isDirectory();
+    } catch {
+        return false;
+    }
 }
 
 function listarDocumentos() {
@@ -16,63 +20,76 @@ function listarDocumentos() {
         .filter(nombre => esDirectorio(path.join(PUBLICACIONES_DIR, nombre)));
 }
 
+function esVersionValida(ruta) {
+    return /^v\d+$/i.test(path.basename(ruta));
+}
+
 function listarVersiones(documentoDir) {
     return fs.readdirSync(documentoDir)
-        .filter(nombre => esDirectorio(path.join(documentoDir, nombre)))
+        .filter(nombre => {
+            const full = path.join(documentoDir, nombre);
+            return esDirectorio(full) && esVersionValida(full);
+        })
         .sort();
 }
 
-function leerLedm(ledmPath) {
-    return JSON.parse(fs.readFileSync(ledmPath, 'utf8'));
+function buscarJsonEnVersion(versionDir) {
+    const archivos = fs.readdirSync(versionDir).filter(f => f.endsWith('.json'));
+    return archivos[0] || null;
 }
 
-
-function listarDocumentosDirectos() {
-    return fs.readdirSync(PUBLICACIONES_DIR)
-        .filter(nombre => {
-            const full = path.join(PUBLICACIONES_DIR, nombre);
-            return fs.statSync(full).isDirectory();
-        })
-        .map(nombre => {
-            const dir = path.join(PUBLICACIONES_DIR, nombre);
-            const archivos = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
-            return { nombre, archivos };
-        })
-        .filter(item => item.archivos.length > 0);
+function buscarJsonEnRaiz(documentoDir) {
+    const archivos = fs.readdirSync(documentoDir).filter(f => f.endsWith('.json'));
+    return archivos[0] || null;
 }
 
 function main() {
     const catalogo = [];
-    const documentos = listarDocumentosDirectos();
+    const documentos = listarDocumentos();
 
-    for (const doc of documentos) {
-        const docDir = path.join(PUBLICACIONES_DIR, doc.nombre);
-        const jsonFile = doc.archivos[0];
-        const jsonPath = path.join(docDir, jsonFile);
+    for (const nombre of documentos) {
+        const docDir = path.join(PUBLICACIONES_DIR, nombre);
+        const versiones = listarVersiones(docDir);
 
-        let metadata = {};
-        try {
-            const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-            metadata = data.metadata || data.meta || { title: jsonFile };
-        } catch {
-            metadata = { title: jsonFile };
+        if (versiones.length > 0) {
+            // Documento con subcarpetas de versión
+            const versionDir = path.join(docDir, versiones[0]);
+            const jsonFile = buscarJsonEnVersion(versionDir);
+
+            catalogo.push({
+                documentId: nombre.toUpperCase(),
+                id: nombre,
+                title: nombre,
+                versions: versiones,
+                version: versiones[0],
+                file: jsonFile ? path.join(versiones[0], jsonFile) : null
+            });
+        } else {
+            // Documento plano
+            const jsonFile = buscarJsonEnRaiz(docDir);
+            if (!jsonFile) continue;
+
+            let metadata = {};
+            try {
+                metadata = JSON.parse(fs.readFileSync(path.join(docDir, jsonFile), 'utf8'));
+            } catch {
+                metadata = {};
+            }
+
+            catalogo.push({
+                documentId: nombre.toUpperCase(),
+                id: nombre,
+                title: metadata.title || nombre,
+                versions: ['v1'],
+                version: '1.0.0',
+                file: jsonFile
+            });
         }
-
-        catalogo.push({
-            id: doc.nombre,
-            title: metadata.title || doc.nombre,
-            version: metadata.version || '1.0.0',
-            file: jsonFile
-        });
     }
 
+    fs.mkdirSync(path.dirname(CATALOGO_PATH), { recursive: true });
     fs.writeFileSync(CATALOGO_PATH, JSON.stringify(catalogo, null, 2));
     console.log('✅ catálogo generado con ' + catalogo.length + ' documento(s).');
 }
 
-try {
-    main();
-} catch (error) {
-    console.error('❌ Error:', error);
-    process.exit(1);
-}
+main();

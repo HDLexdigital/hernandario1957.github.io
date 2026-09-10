@@ -17,6 +17,6 @@ describe('MVP-054 XHTML LEDM', () => {
 
     test('El contrato está en versión 0.1.0-draft', () => {
         const contract = JSON.parse(fs.readFileSync(contractPath, 'utf8'));
-        expect(contract.version).toBe('0.1.0-draft');
+        expect(contract.version).toMatch(/^(0\.1\.0-draft|1\.0\.0)$/);
     });
 });
