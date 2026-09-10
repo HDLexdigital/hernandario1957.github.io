@@ -57,3 +57,4 @@ publicaciones/defecto-*
 docs/*.sdr/
 src/core/*.bak
 ipc/responses/*.json
+src/core/compiladores/*.bak
