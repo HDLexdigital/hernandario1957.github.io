@@ -64,7 +64,9 @@
       "prioridad": "MEDIO",
       "titulo": "Extractor de enlaces externos reporta 0 items",
       "descripcion": "externalLinksTotal es 0 aunque los dashboards tienen enlaces externos potenciales.",
-      "tratamiento": "Verificar extractor y confirmar si realmente no hay enlaces externos o si el extractor los ignora."
+      "tratamiento": "Verificar extractor y confirmar si realmente no hay enlaces externos o si el extractor los ignora.",
+      "estado": "cerrado-no-aplicable",
+      "resolucion": "Verificado: no hay enlaces externos reales en los dashboards. El dominio lexdigitalhd.com se considera interno. externalLinksTotal: 0 es correcto."
     }
   ],
   "acceptance_criteria": [
