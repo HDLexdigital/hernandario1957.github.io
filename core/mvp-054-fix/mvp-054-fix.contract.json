@@ -31,7 +31,9 @@
       "prioridad": "MEDIO",
       "titulo": "Unicidad basada en heurísticas",
       "descripcion": "El test de unicidad detecta I/O y JSON.parse/stringify, pero puede no detectar duplicación lógica.",
-      "tratamiento": "Complementar con análisis AST que detecte duplicación funcional."
+      "tratamiento": "Complementar con análisis AST que detecte duplicación funcional.",
+      "estado": "cerrado",
+      "resolucion": "Test de unicidad ampliado con 5 reglas estaticas: (1) I/O prohibido en wrappers, (2) sin dependencias scripts->scripts, (3) sin funciones duplicadas, (4) delegacion obligatoria a src/core/compiladores, (5) sin patrones de logica sustantiva. Nota: analisis heuristico, no AST completo."
     },
     {
       "id": "FIX-04",
