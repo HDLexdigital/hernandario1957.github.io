@@ -1079,3 +1079,25 @@
 - Baseline de entrada: v1.0.2-modular-consolidated.
 - Baseline de salida esperado: v1.0.3-modular-hardened.
 - Estado: pausa levantada, implementacion en curso.
+
+
+---
+
+## Cierre MVP-054-FIX — Endurecimiento arquitectonico
+- Contrato: core/mvp-054-fix/mvp-054-fix.contract.json (v1.0.0, closed).
+- 8/8 hallazgos resueltos (7 aplicados + 1 no aplicable).
+- FIX-01: BOM centralizado en utils/fs.js.
+- FIX-02: fachada src/core/compiladores/index.js.
+- FIX-03: test de unicidad ampliado a 5 reglas estaticas.
+- FIX-04: test de deteccion de ciclos en src/core.
+- FIX-05: test de aislamiento de src/core.
+- FIX-06 + FIX-07: unificacion de reporte de anclas.
+- FIX-08: cerrado como no aplicable.
+- Suite: 100 suites / 435 tests en verde.
+
+---
+
+## Pausa de Estabilidad Definitiva — post MVP-054-FIX
+- Estado: repositorio congelado en v1.0.3-modular-hardened.
+- Actividad permitida: auditoria externa y configuracion de infraestructura.
+- Proximo retorno: apertura de MVP-055 (Plugin UXP + InDesign) o necesidad real de produccion.
