@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { limpiarBOM } = require('./utils/fs');
 
 const IPC_DIR = path.join(process.cwd(), 'ipc');
 const REQUESTS_DIR = path.join(IPC_DIR, 'requests');
@@ -22,10 +23,6 @@ function asegurarDirectorios() {
     [IPC_DIR, REQUESTS_DIR, RESPONSES_DIR].forEach(dir => {
         if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     });
-}
-
-function limpiarBOM(texto) {
-    return texto.replace(/^\uFEFF/, '');
 }
 
 function escribirAtomico(ruta, contenido) {

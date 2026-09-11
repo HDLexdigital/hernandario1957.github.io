@@ -6,6 +6,7 @@ const { iniciarHeartbeat, detenerHeartbeat } = require('./heartbeat');
 const { iniciarWatchdog, detenerWatchdog } = require('./watchdog');
 const { construirXHTMLDesdeLEDM } = require('./constructores/xhtml-ledm');
 const { validarTodo } = require('./validators/capas');
+const { limpiarBOM } = require('./utils/fs');
 
 const PORT = process.env.LEXDIGITAL_PORT || 8765;
 const HOST = '127.0.0.1';
@@ -21,10 +22,6 @@ function setCORS(res) {
     res.setHeader('Access-Control-Allow-Origin', CORS_ORIGIN);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-}
-
-function limpiarBOM(texto) {
-    return texto.replace(/^\uFEFF/, '');
 }
 
 const server = http.createServer((req, res) => {
