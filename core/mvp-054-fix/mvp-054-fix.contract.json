@@ -1,8 +1,8 @@
 {
   "id": "MVP-054-FIX",
   "title": "Endurecimiento arquitectónico post auditoría MVP-053",
-  "version": "0.2.0-draft",
-  "status": "planned",
+  "version": "1.0.0",
+  "status": "closed",
   "created": "2026-09-10",
   "updated": "2026-09-11",
   "module": "core/mvp-054-fix",
@@ -49,7 +49,9 @@
       "prioridad": "BAJO",
       "titulo": "Aislamiento para UXP",
       "descripcion": "No se ha verificado si src/core/ puede consumirse como núcleo independiente desde el Plugin UXP.",
-      "tratamiento": "Verificar frontera del core y documentar dependencias que impidan reutilización."
+      "tratamiento": "Verificar frontera del core y documentar dependencias que impidan reutilización.",
+      "estado": "cerrado",
+      "resolucion": "Test Jest de aislamiento creado (core/mvp-054-fix/test/mvp-054-fix-aislamiento.test.js). Verifica que src/core/ no depende de scripts/, core/web/ ni core/api/, y que no escala fuera de su propio directorio."
     },
     {
       "id": "FIX-06",
