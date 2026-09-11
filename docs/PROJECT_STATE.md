@@ -1066,3 +1066,16 @@
 - Estado: planned (sin implementación).
 - Baseline congelado: v1.0.2-modular-consolidated.
 - Hallazgos: BOM (ALTO), Fachada (MEDIO), AST (MEDIO), ciclos (BAJO), UXP (BAJO).
+
+
+---
+
+## Levantamiento de pausa — MVP-054-FIX
+- Fecha: 2026-09-11
+- Causa: bugs reales detectados en produccion publica.
+- Evidencia: audit-summary.json reporta "anchors: SIN DATOS" y "externalLinksTotal: 0".
+- Contrato: core/mvp-054-fix/mvp-054-fix.contract.json (v0.2.0-draft).
+- Alcance: 8 hallazgos (FIX-01 a FIX-08).
+- Baseline de entrada: v1.0.2-modular-consolidated.
+- Baseline de salida esperado: v1.0.3-modular-hardened.
+- Estado: pausa levantada, implementacion en curso.

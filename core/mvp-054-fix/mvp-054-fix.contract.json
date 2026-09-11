@@ -1,10 +1,10 @@
 {
   "id": "MVP-054-FIX",
   "title": "Endurecimiento arquitectónico post auditoría MVP-053",
-  "version": "0.1.0-draft",
+  "version": "0.2.0-draft",
   "status": "planned",
   "created": "2026-09-10",
-  "updated": "2026-09-10",
+  "updated": "2026-09-11",
   "module": "core/mvp-054-fix",
   "parent": "MVP-053",
   "baseline": "v1.0.2-modular-consolidated",
@@ -44,6 +44,27 @@
       "titulo": "Aislamiento para UXP",
       "descripcion": "No se ha verificado si src/core/ puede consumirse como núcleo independiente desde el Plugin UXP.",
       "tratamiento": "Verificar frontera del core y documentar dependencias que impidan reutilización."
+    },
+    {
+      "id": "FIX-06",
+      "prioridad": "ALTO",
+      "titulo": "Inconsistencia de nombres en reporte de anclas",
+      "descripcion": "El validador anchors.js escribe public/anchors.json, pero audit-summary.js espera public/anchors-report.json.",
+      "tratamiento": "Unificar el nombre del archivo generado. Definir uno canonico y ajustar productor y consumidor."
+    },
+    {
+      "id": "FIX-07",
+      "prioridad": "ALTO",
+      "titulo": "Validador de anclas no encuentra contenido",
+      "descripcion": "El catalogo apunta a rutas .html que no existen en public/, por lo que anchors.json queda vacio ([]).",
+      "tratamiento": "Revisar como el validador construye las rutas y garantizar que encuentre los HTML reales."
+    },
+    {
+      "id": "FIX-08",
+      "prioridad": "MEDIO",
+      "titulo": "Extractor de enlaces externos reporta 0 items",
+      "descripcion": "externalLinksTotal es 0 aunque los dashboards tienen enlaces externos potenciales.",
+      "tratamiento": "Verificar extractor y confirmar si realmente no hay enlaces externos o si el extractor los ignora."
     }
   ],
   "acceptance_criteria": [

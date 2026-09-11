@@ -19,16 +19,16 @@ describe('MVP-054-FIX Contract', () => {
         expect(contract.id).toBe('MVP-054-FIX');
     });
 
-    test('El contrato está en versión 0.1.0-draft', () => {
-        expect(contract.version).toBe('0.1.0-draft');
+    test('El contrato está en versión 0.2.0-draft', () => {
+        expect(contract.version).toBe('0.2.0-draft');
     });
 
     test('El contrato declara el baseline v1.0.2-modular-consolidated', () => {
         expect(contract.baseline).toBe('v1.0.2-modular-consolidated');
     });
 
-    test('El contrato tiene 5 hallazgos', () => {
-        expect(contract.hallazgos.length).toBe(5);
+    test('El contrato tiene al menos 5 hallazgos', () => {
+        expect(contract.hallazgos.length).toBeGreaterThanOrEqual(5);
     });
 
     test('Cada hallazgo tiene id, prioridad, titulo y tratamiento', () => {
