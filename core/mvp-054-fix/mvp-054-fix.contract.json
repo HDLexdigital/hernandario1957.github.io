@@ -22,7 +22,9 @@
       "prioridad": "MEDIO",
       "titulo": "Ausencia de patrón fachada",
       "descripcion": "No existe un index.js que centralice los exports de src/core/compiladores/.",
-      "tratamiento": "Evaluar la creación de src/core/compiladores/index.js como API conveniente. Se acepta solo si aporta una frontera útil; no es requisito impuesto."
+      "tratamiento": "Evaluar la creación de src/core/compiladores/index.js como API conveniente. Se acepta solo si aporta una frontera útil; no es requisito impuesto.",
+      "estado": "cerrado",
+      "resolucion": "Creado src/core/compiladores/index.js como fachada con 29 modulos (11 troncales, 15 dashboards, 3 pdf). No se modificaron wrappers ni consumidores. Se adopta cuando exista un caso real de uso."
     },
     {
       "id": "FIX-03",
