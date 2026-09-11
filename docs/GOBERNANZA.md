@@ -103,3 +103,43 @@ Reducir la carga cognitiva del integrador humano:
 - Menos pérdida de contexto entre hilos.
 - Más foco en criterio editorial.
 
+
+
+---
+
+## Transición Windows ↔ Linux Mint (VirtualBox)
+
+### Contexto
+
+Linux Mint es el entorno principal del pipeline. Windows se usa solo para InDesign y extracción.
+
+### Reglas durante la transición
+
+1. No tocar código del proyecto desde Windows.
+2. No hacer commits desde Windows.
+3. Solo extraer material desde InDesign y transferirlo.
+4. No cambiar el baseline hasta volver a Linux Mint.
+5. Mantener la pausa de estabilidad activa.
+
+### Carpeta compartida
+
+Z:\\LexDigital\\Recursos\\AUTOMATIZAR INDESIGN\\referencia-indesign
+
+En Linux Mint se accede como:
+
+/media/sf_LexDigital/referencia-indesign
+
+### Material a extraer desde InDesign
+
+- Estilos de párrafo (CSV).
+- Estilos de carácter (CSV).
+- Export Tagging por estilo.
+- Roles ARIA por estilo.
+- Documento mínimo reproducible (.idml).
+
+### Al volver a Linux Mint
+
+1. Copiar material a docs/referencia/indesign-modelo-libro/.
+2. Verificar contenido.
+3. Commit del material de referencia.
+4. Continuar con MVP-055.
