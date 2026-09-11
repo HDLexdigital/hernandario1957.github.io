@@ -14,9 +14,10 @@ describe('MVP-047 Anchors Builder', () => {
     expect(fs.existsSync(OUTPUT_PATH)).toBe(true);
   });
 
-  test('el contenido es un array', () => {
+  test('el contenido tiene items', () => {
     const data = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf8'));
-    expect(Array.isArray(data)).toBe(true);
+    expect(Array.isArray(data.items)).toBe(true);
+    expect(data.status).toBe('OK');
   });
 
   test('cada ancla tiene las propiedades requeridas', () => {
@@ -33,7 +34,7 @@ describe('MVP-047 Anchors Builder', () => {
 
   test('las URLs de las anclas contienen el símbolo # y el id', () => {
     const data = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf8'));
-    data.forEach(anchor => {
+    data.items.forEach(anchor => {
       expect(anchor.url).toContain('#');
       expect(anchor.url).toContain(anchor.id);
     });

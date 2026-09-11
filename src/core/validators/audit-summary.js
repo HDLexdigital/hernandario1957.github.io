@@ -20,7 +20,7 @@ function readJSON(file) {
 function compilarAuditSummary() {
     const integrity = readJSON('integrity-report.json');
     const external = readJSON('external-links-report.json');
-    const anchors = readJSON('anchors-report.json');
+    const anchors = readJSON('anchors.json');
 
     const integrityStatus = integrity ? integrity.status : 'SIN DATOS';
     const externalStatus = external ? external.status : 'SIN DATOS';
