@@ -40,7 +40,9 @@
       "prioridad": "BAJO",
       "titulo": "Posibles ciclos de dependencia",
       "descripcion": "No se ha auditado si existen ciclos entre módulos de src/core/.",
-      "tratamiento": "Auditoría de dependencias entre módulos y reporte."
+      "tratamiento": "Auditoría de dependencias entre módulos y reporte.",
+      "estado": "cerrado",
+      "resolucion": "Test Jest de deteccion de ciclos creado (core/mvp-054-fix/test/mvp-054-fix-ciclos.test.js). Recorre src/core/, construye grafo de dependencias locales y aplica DFS con estados unvisited/visiting/visited. Resultado: sin ciclos detectados."
     },
     {
       "id": "FIX-05",
