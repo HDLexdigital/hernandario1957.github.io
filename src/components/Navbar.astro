@@ -1,0 +1,52 @@
+---
+// src/components/Navbar.astro
+---
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="nav-logo">Mi Sitio</a>
+    <div class="nav-links">
+      <a href="/" class="nav-item">Inicio</a>
+      <a href="/proyectos" class="nav-item">Proyectos</a>
+      <a href="/contacto" class="nav-item">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  }
+  .nav-container {
+    max-width: 50rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-weight: 700;
+    color: #4f46e5;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .nav-item {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+  .nav-item:hover {
+    color: #4f46e5;
+  }
+</style>

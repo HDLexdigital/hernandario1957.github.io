@@ -1,0 +1,13 @@
+# Dependencias
+node_modules/
+
+# Salidas de compilación
+dist/
+.astro/
+
+# Archivos de entorno y logs
+.env
+.env.*
+*.log
+npm-debug.log*
+.DS_Store

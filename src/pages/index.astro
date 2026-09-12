@@ -1,0 +1,16 @@
+---
+import LayoutBase from '@layouts/LayoutBase.astro';
+
+const nodeVersion = process.version;
+---
+
+<LayoutBase title="Inicio | Mi Sitio Astro v22">
+  <main>
+    <h1>¡Estructura Profesional Lista!</h1>
+    <p>Tu sitio web está corriendo bajo el entorno de desarrollo de Astro.</p>
+    <div style="margin-top: 1.5rem;">
+      <span style="font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; font-weight: bold;">Entorno</span>
+      <p class="badge">Node.js: {nodeVersion} (Linux Mint)</p>
+    </div>
+  </main>
+</LayoutBase>

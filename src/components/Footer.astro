@@ -1,0 +1,39 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="footer-container">
+    <p>&copy; {currentYear} Mi Sitio Web. Todos los derechos reservados.</p>
+    <p class="footer-tagline">Construido con Astro & Node.js v22</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding: 1.5rem 2rem;
+    margin-top: 3rem;
+    box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.05);
+  }
+  .footer-container {
+    max-width: 50rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  .footer-tagline {
+    font-weight: 500;
+    color: #4b5563;
+  }
+</style>
