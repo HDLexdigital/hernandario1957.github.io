@@ -1,68 +1,161 @@
 ---
-import Navbar from '@components/Navbar.astro';
-import Footer from '@components/Footer.astro';
+import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 interface Props {
   title: string;
+  description?: string;
+  currentPath?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = 'Plataforma de Publicación y Validación Jurídica',
+  currentPath = Astro.url.pathname,
+} = Astro.props;
+
+const navLinks = [
+  { href: '/',               label: 'Inicio' },
+  { href: '/normativa',      label: 'Normativa' },
+  { href: '/catalogo',       label: 'Catálogo' },
+  { href: '/jurisprudencia', label: 'Jurisprudencia' },
+  { href: '/doctrina',       label: 'Doctrina' },
+  { href: '/validacion',     label: 'Validación' },
+  { href: '/nosotros',       label: 'Nosotros' },
+];
+
+const year = new Date().getFullYear();
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
 
+<!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
-    <style>
-      html, body {
-        height: 100%;
-      }
-      body { 
-        background: #f9fafb; 
-        color: #1f2937;      
-        font-family: system-ui, -apple-system, sans-serif; 
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-      }
-      .content-wrapper {
-        flex: 1;
-        padding-bottom: 2rem;
-      }
-      main { 
-        max-width: 32rem; 
-        margin: 0 auto; 
-        background: #ffffff; 
-        padding: 2rem; 
-        border-radius: 0.75rem; 
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); 
-        border: 1px solid #e5e7eb;
-      }
-      h1 { 
-        color: #4f46e5; 
-        margin-top: 0;
-      }
-      p {
-        color: #4b5563;
-        line-height: 1.5;
-      }
-      .badge { 
-        background: #f3f4f6; 
-        padding: 0.75rem 1rem; 
-        border-radius: 0.375rem; 
-        font-family: monospace; 
-        color: #059669; 
-        border: 1px solid #e5e7eb;
-        font-weight: bold;
-      }
-    </style>
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme") || "auto";
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var effective = stored === "auto" ? (prefersDark ? "dark" : "light") : stored;
+          var root = document.documentElement;
+          root.classList.remove("dark", "sepia");
+          if (effective === "dark") root.classList.add("dark");
+          else if (effective === "sepia") root.classList.add("sepia");
+          root.dataset.theme = effective;
+        } catch (e) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} · LexDigitalHD</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
   </head>
-  <body>
-    <div class="content-wrapper">
-      <Navbar />
+
+  <body class="min-h-screen bg-surface text-content font-sans antialiased flex flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:rounded focus:bg-brand-600 focus:px-3 focus:py-2 focus:text-white">
+      Saltar al contenido
+    </a>
+
+    <header class="sticky top-0 z-40 border-b border-border/70 bg-surface/80 backdrop-blur">
+      <div class="container flex h-16 items-center justify-between gap-4">
+        <a href="/" class="flex items-center shrink-0" aria-label="LexDigitalHD — Inicio">
+          <img src="/logo-lexdigital.png" alt="LexDigitalHD" class="h-12 w-auto rounded bg-white p-1 shadow-sm" />
+        </a>
+
+        <nav class="hidden md:flex items-center gap-1" aria-label="Principal">
+          {navLinks.map(({ href, label }) => (
+            <a
+              href={href}
+              aria-current={isActive(href) ? 'page' : undefined}
+              class:list={[
+                'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                isActive(href)
+                  ? 'bg-brand-600/15 text-brand-300'
+                  : 'text-content-muted hover:bg-surface-raised hover:text-content',
+              ]}
+            >{label}</a>
+          ))}
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <a href="/buscar" class="hidden sm:inline-flex h-9 items-center rounded-md border border-border px-3 text-sm text-content-muted hover:border-border-strong hover:text-content">Buscar</a>
+          <ThemeToggle />
+ <a href="/ingresar" class="inline-flex h-9 items-center rounded-md bg-brand-600 px-3 text-sm font-medium text-white hover:bg-brand-500">Ingresar</a>
+          <button type="button" id="menu-toggle" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-content-muted hover:text-content" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-menu" class="hidden md:hidden border-t border-border bg-surface" aria-label="Principal móvil">
+        <ul class="container py-2">
+          {navLinks.map(({ href, label }) => (
+            <li>
+              <a href={href} class:list={['block rounded-md px-3 py-2 text-sm font-medium', isActive(href) ? 'bg-brand-600/15 text-brand-300' : 'text-content-muted hover:bg-surface-raised hover:text-white']}>{label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="flex-1">
       <slot />
-    </div>
-    <Footer />
+    </main>
+
+    <footer class="border-t border-border bg-surface mt-16">
+      <div class="container py-12 grid gap-8 md:grid-cols-4">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3"><img src="/logo-lexdigital.png" alt="LexDigitalHD" class="h-11 w-auto rounded bg-white p-1 shadow-sm" /><span class="font-serif text-lg font-semibold">Lex<span class="text-brand-400">Digital</span><span class="text-accent">HD</span></span></div>
+          <p class="mt-3 max-w-md text-sm text-content-muted/80">
+            Plataforma de publicación y validación jurídica. Normativa, jurisprudencia y doctrina con trazabilidad y sellado digital.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-content">Contenido</h3>
+          <ul class="mt-3 space-y-2 text-sm text-content-muted/80">
+            <li><a href="/normativa" class="hover:text-content">Normativa</a></li>
+            <li><a href="/jurisprudencia" class="hover:text-content">Jurisprudencia</a></li>
+            <li><a href="/doctrina" class="hover:text-content">Doctrina</a></li>
+            <li><a href="/validacion" class="hover:text-content">Validación</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-content">Institución</h3>
+          <ul class="mt-3 space-y-2 text-sm text-content-muted/80">
+            <li><a href="/nosotros" class="hover:text-content">Nosotros</a></li>
+            <li><a href="/contacto" class="hover:text-content">Contacto</a></li>
+            <li><a href="/terminos" class="hover:text-content">Términos</a></li>
+            <li><a href="/privacidad" class="hover:text-content">Privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-border">
+        <div class="container flex flex-col sm:flex-row items-center justify-between gap-2 py-4 text-xs text-content-muted/60">
+          <p>© {year} LexDigitalHD. Todos los derechos reservados.</p>
+          <p class="font-mono">build: {Astro.generator}</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      btn?.addEventListener('click', () => {
+        const open = menu?.classList.toggle('hidden') === false;
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      });
+    </script>
   </body>
 </html>

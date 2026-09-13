@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutBase from '../../layouts/LayoutBase.astro';
+import NormaCard from '../../components/NormaCard.astro';
+
+const normas = await getCollection('normas');
+const sorted = normas.sort((a, b) => {
+  const da = a.data.fecha ? +a.data.fecha : 0;
+  const db = b.data.fecha ? +b.data.fecha : 0;
+  return db - da;
+});
+
+const tipos = ['ley', 'decreto', 'resolucion', 'ordenanza'];
+---
+
+<LayoutBase title="Normativa" description="Colección de normas jurídicas con metadatos, índice y trazabilidad.">
+  <section class="container py-12">
+    <header class="mb-8">
+      <p class="font-mono text-xs uppercase tracking-widest text-brand-400 mb-2">Fuente primaria</p>
+      <h1 class="font-serif text-4xl font-semibold tracking-tight text-content mb-3">Normativa</h1>
+      <p class="text-content-muted max-w-2xl">
+        Colección de normas jurídicas con metadatos, índice temático y trazabilidad.
+      </p>
+    </header>
+
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <input
+        id="search-normas"
+        type="search"
+        placeholder="Buscar por título, número o materia..."
+        class="flex-1 rounded-md border border-border bg-surface-muted px-4 py-2.5 text-sm text-content placeholder-content-subtle focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/40"
+        aria-label="Buscar normas"
+      />
+      <select id="filter-tipo" class="rounded-md border border-border bg-surface-muted px-3 py-2.5 text-sm text-content" aria-label="Filtrar por tipo">
+        <option value="">Todos los tipos</option>
+        {tipos.map(t => <option value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
+      </select>
+    </div>
+
+    <div id="normas-grid" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {sorted.map(n => (
+        <NormaCard
+          slug={n.slug}
+          title={n.data.title}
+          tipo={n.data.tipo}
+          numero={n.data.numero}
+          fecha={n.data.fecha}
+          resumen={n.data.resumen}
+          materia={n.data.materia}
+          vigente={n.data.vigente}
+        />
+      ))}
+    </div>
+
+    <p id="empty-msg" class="hidden text-center py-12 text-content-muted">
+      No se encontraron normas con esos criterios.
+    </p>
+  </section>
+
+  <script>
+    const input = document.getElementById('search-normas') as HTMLInputElement | null;
+    const select = document.getElementById('filter-tipo') as HTMLSelectElement | null;
+    const grid = document.getElementById('normas-grid');
+    const empty = document.getElementById('empty-msg');
+    if (input && grid && empty) {
+      const filter = () => {
+        const q = (input.value || '').toLowerCase().trim();
+        const t = select?.value || '';
+        let visible = 0;
+        grid.querySelectorAll('article').forEach((el) => {
+          const text = (el.textContent || '').toLowerCase();
+          const matchQ = !q || text.includes(q);
+          const matchT = !t || text.includes(t.toLowerCase());
+          const show = matchQ && matchT;
+          (el as HTMLElement).style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        empty.classList.toggle('hidden', visible > 0);
+      };
+      input.addEventListener('input', filter);
+      select?.addEventListener('change', filter);
+    }
+  </script>
+</LayoutBase>

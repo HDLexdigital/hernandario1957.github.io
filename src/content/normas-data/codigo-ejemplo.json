@@ -1,0 +1,9 @@
+{
+  "titulo": "Código de Ejemplo y Demostración Jurídica",
+  "descripcion": "Norma modelo diseñada para probar la integración directa de datos JSON, metadatos de versión y accesibilidad.",
+  "formato": "XHTML",
+  "slug": "codigo-ejemplo",
+  "version": "1.0.0",
+  "estadoVigencia": "Vigente",
+  "contenidoHtml": "<h2>Capítulo I: Disposiciones Generales</h2><p><strong>Artículo 1.</strong> El presente código regula la infraestructura base del sistema LexDigitalHD 2.0, asegurando la integridad estructural de los textos oficiales desde la fuente editorial.</p><p><strong>Artículo 2.</strong> Toda norma integrada al catálogo debe cumplir estrictamente con los contratos de metadatos validados por esquemas automatizados.</p>"
+}

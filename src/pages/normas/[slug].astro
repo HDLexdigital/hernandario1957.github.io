@@ -1,0 +1,28 @@
+---
+import LayoutNorma from '../../layouts/LayoutNorma.astro';
+
+export async function getStaticPaths() {
+  const normasFiles = import.meta.glob<{
+    titulo: string;
+    descripcion: string;
+    formato: string;
+    slug: string;
+    version: string;
+    estadoVigencia: string;
+    contenidoHtml: string;
+}>('../../../src/content/normas/*.json', { eager: true });
+
+  const normas = Object.values(normasFiles);
+
+  return normas.map(norma => ({
+    params: { slug: norma.slug },
+    props: { norma },
+  }));
+}
+
+const { norma } = Astro.props;
+---
+
+<LayoutNorma titulo={norma.titulo} descripcion={norma.descripcion} version={norma.version} estadoVigencia={norma.estadoVigencia}>
+  <div set:html={norma.contenidoHtml} />
+</LayoutNorma>

@@ -1,0 +1,16 @@
+<div id="reading-progress" class="fixed top-0 left-0 right-0 h-0.5 bg-brand-600 z-50 origin-left" style="transform: scaleX(0)"></div>
+
+<script>
+  const bar = document.getElementById('reading-progress');
+  if (bar) {
+    const update = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const scrolled = max > 0 ? h.scrollTop / max : 0;
+      bar.style.transform = 'scaleX(' + Math.min(scrolled, 1) + ')';
+    };
+    document.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+</script>

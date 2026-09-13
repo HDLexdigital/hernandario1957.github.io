@@ -1,0 +1,208 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutBase from '../../layouts/LayoutBase.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Precio from '../../components/Precio.astro';
+
+export async function getStaticPaths() {
+  const publicaciones = await getCollection('publicaciones');
+  return publicaciones.map((p) => ({
+    params: { slug: p.slug },
+    props: { entry: p },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+
+const formatoLabel: Record<string, string> = {
+  'html': 'HTML — lectura online',
+  'epub': 'EPUB — e-reader',
+  'pdf-accesible': 'PDF/UA — accesible',
+  'pdf-fijo': 'PDF/A — impresión',
+  'pwa': 'PWA — offline instalable',
+};
+
+const fmtCOP = (n: number) =>
+  new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    maximumFractionDigits: 0,
+  }).format(n);
+
+const precioFinal = d.descuentoPorcentaje
+  ? d.precioCOP * (1 - d.descuentoPorcentaje / 100)
+  : d.precioCOP;
+---
+
+<LayoutBase title={d.titulo} description={d.resumenCorto}>
+  <div class="container py-8 max-w-6xl">
+    <Breadcrumbs items={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Catálogo', href: '/catalogo' },
+      { label: d.titulo },
+    ]} />
+
+    <div class="mt-6 grid gap-10 lg:grid-cols-[300px_minmax(0,1fr)]">
+      <!-- Portada -->
+      <div>
+        <div class="overflow-hidden rounded-lg border border-border bg-surface-muted p-6">
+          <img
+            src={d.portada}
+            alt={d.portadaAlt}
+            class="h-auto w-full object-contain"
+          />
+        </div>
+      </div>
+
+      <!-- Ficha -->
+      <div>
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          {d.coleccion && (
+            <span class="inline-flex items-center rounded-md border border-border bg-surface-muted px-2.5 py-1 text-xs font-medium text-content-muted">
+              {d.coleccion}
+            </span>
+          )}
+          {d.edicion > 1 && (
+            <span class="inline-flex items-center rounded-md bg-brand-600/15 border border-brand-600/30 px-2.5 py-1 text-xs font-medium text-brand-300">
+              {d.edicion}ª edición
+            </span>
+          )}
+        </div>
+
+        <h1 class="font-serif text-3xl md:text-4xl font-semibold tracking-tight text-content mb-2 text-balance">
+          {d.titulo}
+        </h1>
+
+        {d.subtitulo && (
+          <p class="text-lg text-content-muted mb-4">{d.subtitulo}</p>
+        )}
+
+        <p class="text-sm text-content-muted mb-6">
+          Por <span class="text-content font-medium">{d.autores.join(', ')}</span>
+        </p>
+
+        <!-- Precio -->
+        <div class="mb-6 rounded-lg border border-border bg-surface-muted p-5">
+          <div class="flex items-end justify-between gap-4 flex-wrap">
+            <div>
+              {d.tipoAcceso === 'pago' ? (
+                <>
+                  {d.descuentoPorcentaje && d.descuentoPorcentaje > 0 && (
+                    <div class="text-xs text-content-subtle line-through">
+                      {fmtCOP(d.precioCOP)}
+                    </div>
+                  )}
+                  <div class="text-2xl font-bold text-content">
+                    {fmtCOP(precioFinal)}
+                  </div>
+                  {d.precioUSD && (
+                    <div class="text-xs text-content-muted mt-1">
+                      ~ US$ {d.precioUSD}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Precio
+                  tipoAcceso={d.tipoAcceso}
+                  precioCOP={d.precioCOP}
+                  precioUSD={d.precioUSD}
+                />
+              )}
+            </div>
+
+            <div class="flex flex-col gap-2">
+              {d.tipoAcceso === 'pago' && (
+                <button
+                  type="button"
+                  class="inline-flex h-10 items-center rounded-md bg-brand-600 px-5 text-sm font-medium text-white transition-colors hover:bg-brand-500"
+                >
+                  Comprar ahora
+                </button>
+              )}
+              {d.tipoAcceso === 'gratis' && (
+                <button
+                  type="button"
+                  class="inline-flex h-10 items-center rounded-md bg-emerald-600 px-5 text-sm font-medium text-white transition-colors hover:bg-emerald-500"
+                >
+                  Descargar gratis
+                </button>
+              )}
+              {d.tipoAcceso === 'suscripcion' && (
+                <button
+                  type="button"
+                  class="inline-flex h-10 items-center rounded-md bg-purple-600 px-5 text-sm font-medium text-white transition-colors hover:bg-purple-500"
+                >
+                  Suscribirse
+                </button>
+              )}
+              <button
+                type="button"
+                class="inline-flex h-10 items-center rounded-md border border-border px-5 text-sm font-medium text-content-muted transition-colors hover:border-border-strong hover:text-content"
+              >
+                Vista previa
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formatos -->
+        <div class="mb-6">
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-content-subtle mb-3">
+            Formatos disponibles
+          </h2>
+          <ul class="space-y-2">
+            {d.formatos.map((f) => (
+              <li class="flex items-center gap-3 text-sm text-content-muted">
+                <span class="h-1.5 w-1.5 rounded-full bg-brand-500" aria-hidden="true"></span>
+                {formatoLabel[f] || f}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Metadata -->
+        <div class="grid grid-cols-2 gap-4 text-xs border-t border-border pt-5">
+          {d.paginas && (
+            <div>
+              <div class="text-content-subtle mb-1">Páginas</div>
+              <div class="text-content font-medium">{d.paginas}</div>
+            </div>
+          )}
+          {d.isbn && (
+            <div>
+              <div class="text-content-subtle mb-1">ISBN</div>
+              <div class="text-content font-medium font-mono">{d.isbn}</div>
+            </div>
+          )}
+          <div>
+            <div class="text-content-subtle mb-1">Publicación</div>
+            <div class="text-content font-medium">
+              {d.fechaPublicacion.toLocaleDateString('es-CO', { year: 'numeric', month: 'long' })}
+            </div>
+          </div>
+          <div>
+            <div class="text-content-subtle mb-1">Versión</div>
+            <div class="text-content font-medium font-mono">{d.version}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Descripción larga -->
+    <section class="mt-12 border-t border-border pt-8">
+      <h2 class="font-serif text-2xl font-semibold text-content mb-4">
+        Sobre esta obra
+      </h2>
+      {d.resumenLargo && (
+        <p class="text-content-muted max-w-3xl leading-relaxed mb-6">
+          {d.resumenLargo}
+        </p>
+      )}
+      <article class="prose prose-invert max-w-3xl [&>h1]:hidden [&>h2]:font-serif [&>h2]:text-xl [&>h2]:font-semibold [&>h2]:text-content [&>h2]:mt-8 [&>h2]:mb-3 [&>p]:my-4 [&>p]:text-content-muted [&>p]:leading-relaxed">
+        <Content />
+      </article>
+    </section>
+  </div>
+</LayoutBase>

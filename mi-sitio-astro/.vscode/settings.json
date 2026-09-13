@@ -1,7 +1,0 @@
-{
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "astro-build.astro-vscode",
-  "[astro]": {
-    "editor.defaultFormatter": "astro-build.astro-vscode"
-  }
-}

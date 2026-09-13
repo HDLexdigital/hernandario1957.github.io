@@ -1,0 +1,18 @@
+[Unit]
+Description=LexDigitalHD 2.0 IPC Watchdog Service
+After=network.target
+
+[Service]
+Type=simple
+User=hernan
+WorkingDirectory=/home/hernan/projects/lexdigitalhd
+ExecStart=/usr/bin/node server/index.js
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=lex-watchdog
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

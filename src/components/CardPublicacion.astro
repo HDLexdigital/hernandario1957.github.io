@@ -1,0 +1,103 @@
+---
+import Precio from './Precio.astro';
+
+interface Props {
+  slug: string;
+  titulo: string;
+  autores: string[];
+  resumenCorto: string;
+  portada: string;
+  portadaAlt: string;
+  tipoAcceso: 'gratis' | 'pago' | 'suscripcion';
+  precioCOP: number;
+  precioUSD?: number;
+  descuentoPorcentaje?: number;
+  formatos: string[];
+  destacado?: boolean;
+  novedad?: boolean;
+}
+
+const {
+  slug,
+  titulo,
+  autores,
+  resumenCorto,
+  portada,
+  portadaAlt,
+  tipoAcceso,
+  precioCOP,
+  precioUSD,
+  descuentoPorcentaje = 0,
+  formatos,
+  destacado = false,
+  novedad = false,
+} = Astro.props;
+
+const formatoLabel: Record<string, string> = {
+  'html': 'HTML',
+  'epub': 'EPUB',
+  'pdf-accesible': 'PDF/UA',
+  'pdf-fijo': 'PDF',
+  'pwa': 'PWA',
+};
+---
+
+<article class="group flex flex-col overflow-hidden rounded-lg border border-border bg-surface-muted transition-all hover:border-border-strong hover:shadow-md dark:hover:ring-2 dark:hover:ring-brand-500/40">
+  <a href={'/publicaciones/' + slug} class="relative block aspect-[3/4] overflow-hidden bg-surface">
+    <img
+      src={portada}
+      alt={portadaAlt}
+      class="h-full w-full object-contain p-6 transition-transform duration-300 group-hover:scale-105"
+      loading="lazy"
+    />
+    {destacado && (
+      <span class="absolute left-2 top-2 rounded-md bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ink-950">
+        Destacado
+      </span>
+    )}
+    {novedad && !destacado && (
+      <span class="absolute left-2 top-2 rounded-md bg-brand-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+        Novedad
+      </span>
+    )}
+  </a>
+
+  <div class="flex flex-1 flex-col gap-3 p-4">
+    <div class="flex-1">
+      <h3 class="font-serif text-base font-semibold leading-snug text-content line-clamp-2">
+        <a href={'/publicaciones/' + slug} class="transition-colors hover:text-brand-400">
+          {titulo}
+        </a>
+      </h3>
+      <p class="mt-1 text-xs text-content-muted line-clamp-1">
+        {autores.join(' · ')}
+      </p>
+      <p class="mt-2 text-xs text-content-muted line-clamp-3">
+        {resumenCorto}
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-1">
+      {formatos.map((f) => (
+        <span class="rounded border border-border bg-surface px-1.5 py-0.5 font-mono text-[10px] text-content-muted">
+          {formatoLabel[f] || f}
+        </span>
+      ))}
+    </div>
+
+    <div class="mt-1 flex items-end justify-between gap-2 border-t border-border pt-3">
+      <Precio
+        tipoAcceso={tipoAcceso}
+        precioCOP={precioCOP}
+        precioUSD={precioUSD}
+        descuento={descuentoPorcentaje}
+      />
+      <a
+        href={'/publicaciones/' + slug}
+        class="inline-flex h-8 items-center rounded-md bg-brand-600 px-3 text-xs font-medium text-white transition-colors hover:bg-brand-500"
+      >
+        Ver
+      </a>
+    </div>
+  </div>
+</article>

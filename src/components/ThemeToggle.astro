@@ -1,0 +1,68 @@
+---
+// Selector de tema: light | dark | auto
+---
+
+<div
+  class="flex items-center gap-1 rounded-md border border-border bg-surface p-1"
+  role="group"
+  aria-label="Selector de tema"
+>
+  <button
+    type="button"
+    data-theme-set="light"
+    class="theme-btn rounded px-2 py-1 text-xs font-medium"
+    aria-label="Modo claro"
+    title="Modo claro"
+  >☀️</button>
+  <button
+    type="button"
+    data-theme-set="dark"
+    class="theme-btn rounded px-2 py-1 text-xs font-medium"
+    aria-label="Modo oscuro"
+    title="Modo oscuro"
+  >🌙</button>
+  <button
+    type="button"
+    data-theme-set="auto"
+    class="theme-btn rounded px-2 py-1 text-xs font-medium"
+    aria-label="Modo automático"
+    title="Automático (según sistema)"
+  >🖥️</button>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-set]');
+  const root = document.documentElement;
+
+  function applyTheme(mode: string) {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const effective = mode === 'auto' ? (prefersDark ? 'dark' : 'light') : mode;
+
+    root.classList.remove('dark', 'sepia');
+    if (effective === 'dark') root.classList.add('dark');
+    else if (effective === 'sepia') root.classList.add('sepia');
+    root.dataset.theme = effective;
+
+    try { localStorage.setItem('theme', mode); } catch (e) {}
+
+    buttons.forEach((b) => {
+      const isActive = b.dataset.themeSet === mode;
+      b.classList.toggle('bg-brand-600', isActive);
+      b.classList.toggle('text-white', isActive);
+      b.classList.toggle('text-content-muted', !isActive);
+    });
+  }
+
+  buttons.forEach((b) => {
+    b.addEventListener('click', () => {
+      const mode = b.dataset.themeSet || 'auto';
+      applyTheme(mode);
+    });
+  });
+
+  // Marcar el botón activo al cargar
+  try {
+    const stored = localStorage.getItem('theme') || 'auto';
+    applyTheme(stored);
+  } catch (e) {}
+</script>

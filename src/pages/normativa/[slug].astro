@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutBase from '../../layouts/LayoutBase.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ReadingProgress from '../../components/ReadingProgress.astro';
+import TocSidebar from '../../components/TocSidebar.astro';
+import CiteButton from '../../components/CiteButton.astro';
+import ControlesLectura from '../../components/ControlesLectura.astro';
+
+export async function getStaticPaths() {
+  const normas = await getCollection('normas');
+  return normas.map(n => ({ params: { slug: n.slug }, props: { entry: n } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
+const d = entry.data;
+
+const todas = (await getCollection('normas')).sort((a, b) => {
+  const da = a.data.fecha ? +a.data.fecha : 0;
+  const db = b.data.fecha ? +b.data.fecha : 0;
+  return db - da;
+});
+const idx = todas.findIndex(n => n.slug === entry.slug);
+const prev = idx > 0 ? todas[idx - 1] : null;
+const next = idx >= 0 && idx < todas.length - 1 ? todas[idx + 1] : null;
+
+const tipoLabel: Record<string, string> = {
+  ley: 'Ley', decreto: 'Decreto', resolucion: 'Resolución', ordenanza: 'Ordenanza'
+};
+const tipoNombre = d.tipo ? (tipoLabel[d.tipo] || d.tipo) : 'Norma';
+const numero = d.numero ? ' ' + d.numero : '';
+---
+
+<LayoutBase title={tipoNombre + numero + ' — ' + d.title} description={d.resumen || d.title}>
+  <ReadingProgress />
+
+  <div class="container py-8 max-w-6xl">
+    <Breadcrumbs items={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Normativa', href: '/normativa' },
+      { label: tipoNombre + numero }
+    ]} />
+
+    <header class="mt-6 mb-8 pb-6 border-b border-border">
+      <div class="flex items-center gap-2 flex-wrap mb-3">
+        {d.tipo && (
+          <span class="inline-flex items-center rounded-md bg-brand-600/15 border border-brand-600/30 px-2.5 py-1 text-xs font-medium text-brand-300">
+            {tipoNombre}{numero}
+          </span>
+        )}
+        {d.vigente
+          ? <span class="inline-flex items-center rounded-md bg-emerald-600/15 border border-emerald-600/30 px-2.5 py-1 text-xs font-medium text-emerald-300">Vigente</span>
+          : <span class="inline-flex items-center rounded-md bg-red-600/15 border border-red-600/30 px-2.5 py-1 text-xs font-medium text-red-300">Derogada</span>}
+        {d.materia && (
+          <span class="inline-flex items-center rounded-md border border-border bg-surface-muted px-2.5 py-1 text-xs font-medium text-content-muted capitalize">
+            {d.materia}
+          </span>
+        )}
+      </div>
+
+      <h1 class="font-serif text-3xl md:text-4xl font-semibold tracking-tight text-content mb-4 text-balance">
+        {d.title}
+      </h1>
+
+      {d.resumen && <p class="text-lg text-content-muted max-w-3xl">{d.resumen}</p>}
+
+      <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-content-subtle">
+        {d.fecha && (
+          <span>Publicada: <time datetime={d.fecha.toISOString()}>{d.fecha.toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}</time></span>
+        )}
+        <span>ID: <span class="font-mono">{entry.slug}</span></span>
+      </div>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        <CiteButton title={d.title} tipo={d.tipo} numero={d.numero} fecha={d.fecha} slug={entry.slug} />
+      </div>
+    </header>
+
+    <ControlesLectura />
+
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_240px]">
+      <article id="norma-content" class="
+        [&>h1]:hidden
+        [&>h2]:font-serif [&>h2]:text-xl [&>h2]:font-semibold [&>h2]:text-content [&>h2]:mt-10 [&>h2]:mb-3 [&>h2]:scroll-mt-24
+        [&>p]:my-4 [&>p]:text-content-muted [&>p]:leading-relaxed
+        [&_a]:text-brand-400 [&_a:hover]:text-brand-300 [&_a]:underline [&_a]:underline-offset-2
+      ">
+        <Content />
+      </article>
+
+      <TocSidebar headings={headings} />
+    </div>
+
+    <nav class="mt-16 pt-8 border-t border-border grid gap-4 sm:grid-cols-2">
+      {prev ? (
+        <a href={'/normativa/' + prev.slug} class="group rounded-lg border border-border bg-surface-muted p-4 hover:border-border-strong transition-all">
+          <span class="text-xs text-content-subtle">← Anterior</span>
+          <p class="mt-1 text-sm font-medium text-content group-hover:text-brand-400 line-clamp-2">{prev.data.title}</p>
+        </a>
+      ) : <span></span>}
+      {next ? (
+        <a href={'/normativa/' + next.slug} class="group rounded-lg border border-border bg-surface-muted p-4 hover:border-border-strong transition-all sm:text-right">
+          <span class="text-xs text-content-subtle">Siguiente →</span>
+          <p class="mt-1 text-sm font-medium text-content group-hover:text-brand-400 line-clamp-2">{next.data.title}</p>
+        </a>
+      ) : <span></span>}
+    </nav>
+  </div>
+</LayoutBase>

@@ -1,0 +1,28 @@
+---
+interface Heading { depth: number; slug: string; text: string; }
+interface Props { headings: Heading[]; }
+const { headings } = Astro.props;
+const filtered = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+<aside class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto hidden lg:block">
+  <h2 class="text-xs font-semibold uppercase tracking-wider text-content-subtle mb-3">Índice</h2>
+  {filtered.length > 0 ? (
+    <nav aria-label="Índice de la norma">
+      <ul class="space-y-1 text-sm border-l border-border">
+        {filtered.map(h => (
+          <li class:list={[h.depth === 3 && 'pl-3']}>
+            <a
+              href={'#' + h.slug}
+              class="block rounded-r px-3 py-1 text-content-muted hover:text-content hover:bg-surface-raised hover:border-l-2 hover:border-brand-600 transition-all -ml-px border-l-2 border-transparent"
+            >
+              {h.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  ) : (
+    <p class="text-xs text-content-subtle">Sin índice disponible.</p>
+  )}
+</aside>
