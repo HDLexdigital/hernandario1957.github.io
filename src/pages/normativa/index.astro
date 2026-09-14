@@ -24,14 +24,15 @@ const tipos = ['ley', 'decreto', 'resolucion', 'ordenanza'];
     </header>
 
     <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <label for="search-normas" class="sr-only">Buscar normas</label>
       <input
         id="search-normas"
         type="search"
         placeholder="Buscar por título, número o materia..."
         class="flex-1 rounded-md border border-border bg-surface-muted px-4 py-2.5 text-sm text-content placeholder-content-placeholder focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/40"
-        aria-label="Buscar normas"
       />
-      <select id="filter-tipo" class="rounded-md border border-border bg-surface-muted px-3 py-2.5 text-sm text-content" aria-label="Filtrar por tipo">
+      <label for="filter-tipo" class="sr-only">Filtrar por tipo de norma</label>
+      <select id="filter-tipo" class="rounded-md border border-border bg-surface-muted px-3 py-2.5 text-sm text-content">
         <option value="">Todos los tipos</option>
         {tipos.map(t => <option value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
       </select>
