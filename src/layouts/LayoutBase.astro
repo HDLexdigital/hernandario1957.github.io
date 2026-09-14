@@ -45,7 +45,7 @@ const isActive = (href: string) =>
       }
     </script>
 
-    <script src="/scripts/cart.js" is:inline></script>
+    <script src="/scripts/cart.js" is:inline defer></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} · LexDigitalHD</title>
@@ -155,7 +155,7 @@ const isActive = (href: string) =>
       </div>
 
       <div class="border-t border-border">
-        <div class="container flex flex-col sm:flex-row items-center justify-between gap-2 py-4 text-xs text-content-subtle">
+        <div class="container flex flex-col sm:flex-row items-center justify-between gap-2 py-4 text-xs text-content-muted">
           <p>© {year} LexDigitalHD. Todos los derechos reservados.</p>
           <p class="font-mono">build: {Astro.generator}</p>
         </div>
