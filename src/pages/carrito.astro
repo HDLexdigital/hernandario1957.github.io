@@ -1,0 +1,154 @@
+---
+import LayoutBase from '../layouts/LayoutBase.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+
+<LayoutBase title="Carrito" description="Revisá los productos antes de finalizar la compra.">
+  <div class="container py-8 max-w-4xl min-h-[60vh]">
+    <Breadcrumbs items={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Catálogo', href: '/catalogo' },
+      { label: 'Carrito' },
+    ]} />
+
+    <header class="mt-6 mb-8">
+      <h1 class="font-serif text-3xl md:text-4xl font-semibold tracking-tight text-content mb-2">
+        Tu carrito
+      </h1>
+      <p id="cart-summary" class="text-content-muted">Cargando...</p>
+    </header>
+
+    <div id="cart-empty" class="hidden rounded-lg border border-border bg-surface-muted p-12 text-center">
+      <p class="text-2xl mb-3" aria-hidden="true">🛒</p>
+      <h2 class="font-serif text-xl font-semibold text-content mb-2">Tu carrito está vacío</h2>
+      <p class="text-content-muted mb-6">Agregá publicaciones del catálogo para empezar.</p>
+      <a href="/catalogo" class="btn-primary">Explorar catálogo</a>
+    </div>
+
+    <div id="cart-content" class="hidden">
+      <ul id="cart-items" class="divide-y divide-border rounded-lg border border-border bg-surface-muted"></ul>
+
+      <div class="mt-6 rounded-lg border border-border bg-surface-muted p-5">
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between text-content-muted">
+            <span>Subtotal</span>
+            <span id="cart-subtotal" class="font-medium text-content">COL$ 0</span>
+          </div>
+          <div class="flex justify-between text-content-muted">
+            <span>IVA</span>
+            <span class="font-medium text-content">Exento</span>
+          </div>
+          <div class="flex justify-between border-t border-border pt-3 text-base">
+            <span class="font-semibold text-content">Total</span>
+            <span id="cart-total" class="font-bold text-content">COL$ 0</span>
+          </div>
+        </div>
+
+        <div class="mt-5 flex flex-col sm:flex-row gap-3">
+          <a href="/catalogo" class="btn-ghost flex-1">Seguir explorando</a>
+          <a href="/checkout" class="btn-primary flex-1">Ir al checkout</a>
+        </div>
+      </div>
+
+      <div class="mt-4 text-center">
+        <button type="button" id="cart-clear" class="text-xs text-content-subtle underline underline-offset-2 hover:text-content-muted">
+          Vaciar carrito
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fmtCOP = (n) =>
+      new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
+
+    function render() {
+      const cart = window.LexCart;
+      if (!cart) return;
+      const items = cart.getAll();
+      const empty = document.getElementById('cart-empty');
+      const content = document.getElementById('cart-content');
+      const list = document.getElementById('cart-items');
+      const summary = document.getElementById('cart-summary');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const totalEl = document.getElementById('cart-total');
+      if (!empty || !content || !list || !summary || !subtotalEl || !totalEl) return;
+
+      if (items.length === 0) {
+        empty.classList.remove('hidden');
+        content.classList.add('hidden');
+        summary.textContent = 'No hay productos en el carrito.';
+        return;
+      }
+
+      empty.classList.add('hidden');
+      content.classList.remove('hidden');
+      summary.textContent = items.length + ' producto' + (items.length > 1 ? 's' : '') + ' en el carrito';
+
+      list.innerHTML = items.map((item) => {
+        const lineTotal = (item.precioCOP || 0) * (item.cantidad || 1);
+        return '<li class="flex items-center gap-4 p-4">' +
+          '<a href="/publicaciones/' + item.slug + '" class="flex-shrink-0">' +
+            '<img src="' + item.portada + '" alt="' + item.titulo + '" class="h-20 w-16 rounded border border-border bg-surface object-contain p-1" />' +
+          '</a>' +
+          '<div class="flex-1 min-w-0">' +
+            '<a href="/publicaciones/' + item.slug + '" class="font-serif text-sm font-semibold text-content hover:text-brand-400 line-clamp-2">' + item.titulo + '</a>' +
+            '<p class="mt-1 text-xs text-content-muted">' + fmtCOP(item.precioCOP) + ' c/u</p>' +
+            '<div class="mt-2 flex items-center gap-3">' +
+              '<div class="inline-flex items-center rounded-md border border-border">' +
+                '<button type="button" class="qty-dec h-7 w-7 text-content-muted hover:text-content" data-sku="' + item.sku + '" aria-label="Disminuir cantidad">−</button>' +
+                '<span class="w-8 text-center text-xs font-medium text-content">' + (item.cantidad || 1) + '</span>' +
+                '<button type="button" class="qty-inc h-7 w-7 text-content-muted hover:text-content" data-sku="' + item.sku + '" aria-label="Aumentar cantidad">+</button>' +
+              '</div>' +
+              '<button type="button" class="remove-item text-xs text-red-400 hover:text-red-300 underline underline-offset-2" data-sku="' + item.sku + '">Quitar</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="text-right flex-shrink-0">' +
+            '<div class="font-semibold text-content">' + fmtCOP(lineTotal) + '</div>' +
+          '</div>' +
+        '</li>';
+      }).join('');
+
+      const subtotal = cart.subtotal();
+      subtotalEl.textContent = fmtCOP(subtotal);
+      totalEl.textContent = fmtCOP(subtotal);
+
+      list.querySelectorAll('.qty-dec').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const sku = btn.dataset.sku;
+          const item = cart.getAll().find((i) => i.sku === sku);
+          if (item) cart.setQuantity(sku, (item.cantidad || 1) - 1);
+        });
+      });
+      list.querySelectorAll('.qty-inc').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const sku = btn.dataset.sku;
+          const item = cart.getAll().find((i) => i.sku === sku);
+          if (item) cart.setQuantity(sku, (item.cantidad || 1) + 1);
+        });
+      });
+      list.querySelectorAll('.remove-item').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const sku = btn.dataset.sku;
+          if (sku) cart.remove(sku);
+        });
+      });
+    }
+
+    function init() {
+      render();
+      const cart = window.LexCart;
+      if (cart) window.addEventListener(cart.EVENT_NAME, render);
+      const clearBtn = document.getElementById('cart-clear');
+      clearBtn?.addEventListener('click', () => {
+        if (confirm('¿Vaciar todo el carrito?')) window.LexCart.clear();
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</LayoutBase>

@@ -4,25 +4,27 @@
 
 @layer base {
   :root {
-    --surface: 255 255 255;
-    --surface-muted: 248 250 252;
-    --surface-raised: 241 245 249;
+    color-scheme: light;
+    --surface: 244 246 249;
+    --surface-muted: 235 239 244;
+    --surface-raised: 226 232 240;
     --content: 15 23 42;
     --content-muted: 51 65 85;
     --content-subtle: 100 116 139;
-    --border: 226 232 240;
-    --border-strong: 203 213 225;
+    --border: 203 213 225;
+    --border-strong: 148 163 184;
   }
 
   .dark {
-    --surface: 15 23 42;
-    --surface-muted: 30 41 59;
-    --surface-raised: 51 65 85;
+    color-scheme: dark;
+    --surface: 11 37 69;
+    --surface-muted: 19 64 116;
+    --surface-raised: 30 80 136;
     --content: 226 232 240;
     --content-muted: 148 163 184;
     --content-subtle: 100 116 139;
-    --border: 51 65 85;
-    --border-strong: 71 85 105;
+    --border: 30 80 136;
+    --border-strong: 74 120 166;
   }
 
   .sepia {
@@ -36,7 +38,7 @@
     --border-strong: 200 175 130;
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scrollbar-gutter: stable; overflow-y: scroll; }
 
   body {
     @apply bg-surface text-content;
@@ -51,7 +53,7 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors;
   }
-  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-500; }
+  .btn-primary { @apply btn bg-accent text-brand-700 hover:bg-accent-soft; }
   .btn-ghost   { @apply btn border border-border text-content hover:border-border-strong; }
   .card        { @apply rounded-lg border border-border bg-surface-muted p-5 shadow-sm; }
 }

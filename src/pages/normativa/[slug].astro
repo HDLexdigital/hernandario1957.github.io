@@ -45,13 +45,13 @@ const numero = d.numero ? ' ' + d.numero : '';
     <header class="mt-6 mb-8 pb-6 border-b border-border">
       <div class="flex items-center gap-2 flex-wrap mb-3">
         {d.tipo && (
-          <span class="inline-flex items-center rounded-md bg-brand-600/15 border border-brand-600/30 px-2.5 py-1 text-xs font-medium text-brand-300">
+          <span class="inline-flex items-center rounded-md bg-brand-600/15 border border-brand-600/30 px-2.5 py-1 text-xs font-medium text-content/70">
             {tipoNombre}{numero}
           </span>
         )}
         {d.vigente
-          ? <span class="inline-flex items-center rounded-md bg-emerald-600/15 border border-emerald-600/30 px-2.5 py-1 text-xs font-medium text-emerald-300">Vigente</span>
-          : <span class="inline-flex items-center rounded-md bg-red-600/15 border border-red-600/30 px-2.5 py-1 text-xs font-medium text-red-300">Derogada</span>}
+          ? <span class="inline-flex items-center rounded-md bg-emerald-600/15 border border-emerald-600/30 px-2.5 py-1 text-xs font-medium text-content/70">Vigente</span>
+          : <span class="inline-flex items-center rounded-md bg-red-600/15 border border-red-600/30 px-2.5 py-1 text-xs font-medium text-content/70">Derogada</span>}
         {d.materia && (
           <span class="inline-flex items-center rounded-md border border-border bg-surface-muted px-2.5 py-1 text-xs font-medium text-content-muted capitalize">
             {d.materia}

@@ -1,0 +1,63 @@
+---
+// Ícono de carrito con contador, se sincroniza con window.LexCart
+---
+
+<a
+  href="/carrito"
+  id="cart-icon"
+  class="relative inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-content-muted transition-colors hover:border-border-strong hover:text-content"
+  aria-label="Ver carrito"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-5 w-5"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+  </svg>
+  <span
+    id="cart-count"
+    class="absolute -right-1 -top-1 hidden h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-brand-600 px-1 text-[10px] font-bold text-white"
+    aria-hidden="true"
+  >
+    0
+  </span>
+</a>
+
+<script>
+  function updateCartCount() {
+    const cart = (window as any).LexCart;
+    if (!cart) return;
+
+    const count = cart.count();
+    const badge = document.getElementById('cart-count');
+    if (!badge) return;
+
+    if (count > 0) {
+      badge.textContent = String(count);
+      badge.classList.remove('hidden');
+      badge.classList.add('flex');
+    } else {
+      badge.classList.add('hidden');
+      badge.classList.remove('flex');
+    }
+  }
+
+  function initCartIcon() {
+    updateCartCount();
+    const cart = (window as any).LexCart;
+    if (cart) {
+      window.addEventListener(cart.EVENT_NAME, updateCartCount);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCartIcon);
+  } else {
+    initCartIcon();
+  }
+</script>

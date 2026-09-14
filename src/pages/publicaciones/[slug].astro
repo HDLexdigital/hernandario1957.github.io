@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import LayoutBase from '../../layouts/LayoutBase.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Precio from '../../components/Precio.astro';
+import BotonCarrito from '../../components/BotonCarrito.astro';
 
 export async function getStaticPaths() {
   const publicaciones = await getCollection('publicaciones');
@@ -44,8 +45,7 @@ const precioFinal = d.descuentoPorcentaje
       { label: d.titulo },
     ]} />
 
-    <div class="mt-6 grid gap-10 lg:grid-cols-[300px_minmax(0,1fr)]">
-      <!-- Portada -->
+    <div class="mt-6 grid gap-10 lg:grid-cols-[300px_minmax(0,1fr)] lg:min-h-[75vh] lg:items-start">
       <div>
         <div class="overflow-hidden rounded-lg border border-border bg-surface-muted p-6">
           <img
@@ -56,7 +56,6 @@ const precioFinal = d.descuentoPorcentaje
         </div>
       </div>
 
-      <!-- Ficha -->
       <div>
         <div class="flex flex-wrap items-center gap-2 mb-3">
           {d.coleccion && (
@@ -83,7 +82,6 @@ const precioFinal = d.descuentoPorcentaje
           Por <span class="text-content font-medium">{d.autores.join(', ')}</span>
         </p>
 
-        <!-- Precio -->
         <div class="mb-6 rounded-lg border border-border bg-surface-muted p-5">
           <div class="flex items-end justify-between gap-4 flex-wrap">
             <div>
@@ -114,12 +112,13 @@ const precioFinal = d.descuentoPorcentaje
 
             <div class="flex flex-col gap-2">
               {d.tipoAcceso === 'pago' && (
-                <button
-                  type="button"
-                  class="inline-flex h-10 items-center rounded-md bg-brand-600 px-5 text-sm font-medium text-white transition-colors hover:bg-brand-500"
-                >
-                  Comprar ahora
-                </button>
+                <BotonCarrito
+                  sku={d.sku}
+                  titulo={d.titulo}
+                  precioCOP={d.precioCOP}
+                  portada={d.portada}
+                  slug={entry.slug}
+                />
               )}
               {d.tipoAcceso === 'gratis' && (
                 <button
@@ -147,7 +146,6 @@ const precioFinal = d.descuentoPorcentaje
           </div>
         </div>
 
-        <!-- Formatos -->
         <div class="mb-6">
           <h2 class="text-xs font-semibold uppercase tracking-wider text-content-subtle mb-3">
             Formatos disponibles
@@ -162,7 +160,6 @@ const precioFinal = d.descuentoPorcentaje
           </ul>
         </div>
 
-        <!-- Metadata -->
         <div class="grid grid-cols-2 gap-4 text-xs border-t border-border pt-5">
           {d.paginas && (
             <div>
@@ -190,7 +187,6 @@ const precioFinal = d.descuentoPorcentaje
       </div>
     </div>
 
-    <!-- Descripción larga -->
     <section class="mt-12 border-t border-border pt-8">
       <h2 class="font-serif text-2xl font-semibold text-content mb-4">
         Sobre esta obra

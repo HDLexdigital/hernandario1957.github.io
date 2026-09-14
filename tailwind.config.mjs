@@ -6,28 +6,28 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: '#eef4ff', 100: '#d9e6ff', 200: '#b3cdff', 300: '#7da8ff',
-          400: '#4d84ff', 500: '#1e5eff', 600: '#0047AB', 700: '#003a8c',
-          800: '#002e70', 900: '#002354', 950: '#001433'
+          50: '#F0F5FB', 100: '#D9E4F0', 200: '#B3C9E1', 300: '#7DA3C5',
+          400: '#4A78A6', 500: '#1E5088', 600: '#134074', 700: '#0B2545',
+          800: '#081A33', 900: '#050F1F', 950: '#020810'
         },
         ink: {
           50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 700: '#334155',
           800: '#1e293b', 900: '#0f172a', 950: '#020617'
         },
-        accent: { DEFAULT: '#c9a227', soft: '#e6c766' },
+        accent: { DEFAULT: '#FFB300', soft: '#FFC933', deep: '#CC8F00' },
         surface: {
           DEFAULT: 'rgb(var(--surface) / <alpha-value>)',
-          muted:   'rgb(var(--surface-muted) / <alpha-value>)',
-          raised:  'rgb(var(--surface-raised) / <alpha-value>)'
+          muted: 'rgb(var(--surface-muted) / <alpha-value>)',
+          raised: 'rgb(var(--surface-raised) / <alpha-value>)'
         },
         content: {
           DEFAULT: 'rgb(var(--content) / <alpha-value>)',
-          muted:   'rgb(var(--content-muted) / <alpha-value>)',
-          subtle:  'rgb(var(--content-subtle) / <alpha-value>)'
+          muted: 'rgb(var(--content-muted) / <alpha-value>)',
+          subtle: 'rgb(var(--content-subtle) / <alpha-value>)'
         },
         border: {
           DEFAULT: 'rgb(var(--border) / <alpha-value>)',
-          strong:  'rgb(var(--border-strong) / <alpha-value>)'
+          strong: 'rgb(var(--border-strong) / <alpha-value>)'
         }
       },
       fontFamily: {
