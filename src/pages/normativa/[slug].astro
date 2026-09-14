@@ -50,7 +50,7 @@ const numero = d.numero ? ' ' + d.numero : '';
           </span>
         )}
         {d.vigente
-          ? <span class="inline-flex items-center rounded-md bg-emerald-600/15 border border-emerald-600/30 px-2.5 py-1 text-xs font-medium text-content/70">Vigente</span>
+          ? <span class="inline-flex items-center rounded-md bg-emerald-700/15 border border-emerald-700/30 px-2.5 py-1 text-xs font-medium text-content/70">Vigente</span>
           : <span class="inline-flex items-center rounded-md bg-red-600/15 border border-red-600/30 px-2.5 py-1 text-xs font-medium text-content/70">Derogada</span>}
         {d.materia && (
           <span class="inline-flex items-center rounded-md border border-border bg-surface-muted px-2.5 py-1 text-xs font-medium text-content-muted capitalize">
@@ -94,13 +94,13 @@ const numero = d.numero ? ' ' + d.numero : '';
 
     <nav class="mt-16 pt-8 border-t border-border grid gap-4 sm:grid-cols-2">
       {prev ? (
-        <a href={'/normativa/' + prev.slug} class="group rounded-lg border border-border bg-surface-muted p-4 hover:border-border-strong transition-all">
+        <a href={'/normativa/' + prev.slug} class="group rounded-lg border border-border bg-surface-card p-4 hover:border-border-strong transition-all">
           <span class="text-xs text-content-subtle">← Anterior</span>
           <p class="mt-1 text-sm font-medium text-content group-hover:text-brand-400 line-clamp-2">{prev.data.title}</p>
         </a>
       ) : <span></span>}
       {next ? (
-        <a href={'/normativa/' + next.slug} class="group rounded-lg border border-border bg-surface-muted p-4 hover:border-border-strong transition-all sm:text-right">
+        <a href={'/normativa/' + next.slug} class="group rounded-lg border border-border bg-surface-card p-4 hover:border-border-strong transition-all sm:text-right">
           <span class="text-xs text-content-subtle">Siguiente →</span>
           <p class="mt-1 text-sm font-medium text-content group-hover:text-brand-400 line-clamp-2">{next.data.title}</p>
         </a>

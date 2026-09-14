@@ -21,7 +21,7 @@ const formatoLabel: Record<string, string> = {
   'html': 'HTML — lectura online',
   'epub': 'EPUB — e-reader',
   'pdf-accesible': 'PDF/UA — accesible',
-  'pdf-fijo': 'PDF/A — impresión',
+  'pdf-fijo': 'PDF',
   'pwa': 'PWA — offline instalable',
 };
 
@@ -47,7 +47,7 @@ const precioFinal = d.descuentoPorcentaje
 
     <div class="mt-6 grid gap-10 lg:grid-cols-[300px_minmax(0,1fr)] lg:min-h-[75vh] lg:items-start">
       <div>
-        <div class="overflow-hidden rounded-lg border border-border bg-surface-muted p-6">
+        <div class="overflow-hidden rounded-lg border border-border bg-surface-card p-6">
           <img
             src={d.portada}
             alt={d.portadaAlt}
@@ -64,7 +64,7 @@ const precioFinal = d.descuentoPorcentaje
             </span>
           )}
           {d.edicion > 1 && (
-            <span class="inline-flex items-center rounded-md bg-brand-600/15 border border-brand-600/30 px-2.5 py-1 text-xs font-medium text-brand-300">
+            <span class="inline-flex items-center rounded-md bg-accent border border-accent-soft px-2.5 py-1 text-xs font-bold text-brand-700">
               {d.edicion}ª edición
             </span>
           )}
@@ -82,7 +82,7 @@ const precioFinal = d.descuentoPorcentaje
           Por <span class="text-content font-medium">{d.autores.join(', ')}</span>
         </p>
 
-        <div class="mb-6 rounded-lg border border-border bg-surface-muted p-5">
+        <div class="mb-6 rounded-lg border border-border bg-surface-card p-5">
           <div class="flex items-end justify-between gap-4 flex-wrap">
             <div>
               {d.tipoAcceso === 'pago' ? (
@@ -123,7 +123,7 @@ const precioFinal = d.descuentoPorcentaje
               {d.tipoAcceso === 'gratis' && (
                 <button
                   type="button"
-                  class="inline-flex h-10 items-center rounded-md bg-emerald-600 px-5 text-sm font-medium text-white transition-colors hover:bg-emerald-500"
+                  class="inline-flex h-10 items-center rounded-md bg-emerald-700 px-5 text-sm font-medium text-white transition-colors hover:bg-emerald-600"
                 >
                   Descargar gratis
                 </button>
@@ -131,7 +131,7 @@ const precioFinal = d.descuentoPorcentaje
               {d.tipoAcceso === 'suscripcion' && (
                 <button
                   type="button"
-                  class="inline-flex h-10 items-center rounded-md bg-purple-600 px-5 text-sm font-medium text-white transition-colors hover:bg-purple-500"
+                  class="inline-flex h-10 items-center rounded-md bg-brand-600 px-5 text-sm font-medium text-white transition-colors hover:bg-brand-500"
                 >
                   Suscribirse
                 </button>

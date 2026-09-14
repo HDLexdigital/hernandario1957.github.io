@@ -35,18 +35,16 @@ const isActive = (href: string) =>
   <head>
     <script is:inline>
       (function () {
-        try {
-          var stored = localStorage.getItem("theme") || "auto";
-          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          var effective = stored === "auto" ? (prefersDark ? "dark" : "light") : stored;
-          var root = document.documentElement;
-          root.classList.remove("dark", "sepia");
-          if (effective === "dark") root.classList.add("dark");
-          else if (effective === "sepia") root.classList.add("sepia");
-          root.dataset.theme = effective;
-        } catch (e) {}
+        // script anti-FOUC ...
       })();
     </script>
+
+    <script is:inline>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+    </script>
+
     <script src="/scripts/cart.js" is:inline></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -67,7 +65,7 @@ const isActive = (href: string) =>
       Saltar al contenido
     </a>
 
-    <header class="sticky top-0 z-40 border-b border-border/70 bg-surface/80 backdrop-blur">
+    <header class="sticky top-0 z-40 border-b border-border-strong bg-surface-muted shadow-sm">
       <div class="container flex h-16 items-center justify-between gap-4">
         <a href="/" class="flex items-center shrink-0" aria-label="LexDigitalHD — Inicio">
           <img src="/logo-lexdigital.png" alt="LexDigitalHD" class="h-12 w-auto rounded bg-white p-1 shadow-sm" />
@@ -81,7 +79,7 @@ const isActive = (href: string) =>
               class:list={[
                 'rounded-md px-3 py-2 text-sm font-medium transition-colors',
                 isActive(href)
-                  ? 'bg-brand-600/15 text-brand-300'
+                  ? 'bg-brand-600 text-white font-semibold'
                   : 'text-content-muted hover:bg-surface-raised hover:text-content',
               ]}
             >{label}</a>
@@ -111,7 +109,7 @@ const isActive = (href: string) =>
                 class:list={[
                   'block rounded-md px-3 py-2 text-sm font-medium',
                   isActive(href)
-                    ? 'bg-brand-600/15 text-brand-300'
+                    ? 'bg-brand-600 text-white font-semibold'
                     : 'text-content-muted hover:bg-surface-raised hover:text-content',
                 ]}
               >{label}</a>

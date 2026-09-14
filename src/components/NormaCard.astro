@@ -17,12 +17,12 @@ const tipoLabel: Record<string, string> = {
 const tipoColor: Record<string, string> = {
   ley: 'bg-brand-600/15 text-content/70 border-brand-600/30',
   decreto: 'bg-amber-600/15 text-content/70 border-amber-600/30',
-  resolucion: 'bg-emerald-600/15 text-content/70 border-emerald-600/30',
+  resolucion: 'bg-emerald-700/15 text-content/70 border-emerald-700/30',
   ordenanza: 'bg-purple-600/15 text-content/70 border-purple-600/30'
 };
 ---
 
-<article class="group rounded-lg border border-border bg-surface-muted p-5 transition-all hover:border-border-strong hover:shadow-md dark:hover:ring-2 dark:hover:ring-brand-500/40">
+<article class="relative group rounded-lg border border-border bg-surface-card p-5 transition-all hover:border-border-strong hover:shadow-md dark:hover:ring-2 dark:hover:ring-brand-500/40">
   <div class="flex items-center gap-2 flex-wrap mb-3">
     {tipo && (
       <span class:list={['inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium', tipoColor[tipo] || tipoColor.ley]}>
@@ -34,7 +34,7 @@ const tipoColor: Record<string, string> = {
   </div>
 
   <h3 class="font-serif text-lg font-semibold text-content leading-snug">
-    <a href={'/normativa/' + slug} class="hover:text-brand-400 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-600 rounded">
+    <a href={'/normativa/' + slug} class="after:absolute after:inset-0 hover:text-brand-400 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-600 rounded">
       {title}
     </a>
   </h3>

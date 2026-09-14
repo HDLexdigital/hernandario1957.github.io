@@ -18,12 +18,14 @@ export default {
         surface: {
           DEFAULT: 'rgb(var(--surface) / <alpha-value>)',
           muted: 'rgb(var(--surface-muted) / <alpha-value>)',
-          raised: 'rgb(var(--surface-raised) / <alpha-value>)'
+          raised: 'rgb(var(--surface-raised) / <alpha-value>)',
+          card: 'rgb(var(--surface-card) / <alpha-value>)'
         },
         content: {
           DEFAULT: 'rgb(var(--content) / <alpha-value>)',
           muted: 'rgb(var(--content-muted) / <alpha-value>)',
-          subtle: 'rgb(var(--content-subtle) / <alpha-value>)'
+          subtle: 'rgb(var(--content-subtle) / <alpha-value>)',
+          placeholder: 'rgb(var(--content-placeholder) / <alpha-value>)'
         },
         border: {
           DEFAULT: 'rgb(var(--border) / <alpha-value>)',

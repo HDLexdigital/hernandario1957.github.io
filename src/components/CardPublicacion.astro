@@ -42,7 +42,7 @@ const formatoLabel: Record<string, string> = {
 };
 ---
 
-<article class="group flex flex-col overflow-hidden rounded-lg border border-border bg-surface-muted transition-all hover:border-border-strong hover:shadow-md dark:hover:ring-2 dark:hover:ring-brand-500/40">
+<article class="relative group flex flex-col overflow-hidden rounded-lg border border-border bg-surface-card transition-all hover:border-border-strong hover:shadow-md dark:hover:ring-2 dark:hover:ring-brand-500/40">
   <a href={'/publicaciones/' + slug} class="relative block aspect-[3/4] overflow-hidden bg-surface">
     <img
       src={portada}
@@ -65,7 +65,7 @@ const formatoLabel: Record<string, string> = {
   <div class="flex flex-1 flex-col gap-3 p-4">
     <div class="flex-1">
       <h3 class="font-serif text-base font-semibold leading-snug text-content line-clamp-2">
-        <a href={'/publicaciones/' + slug} class="transition-colors hover:text-brand-400">
+        <a href={'/publicaciones/' + slug} class="after:absolute after:inset-0 transition-colors hover:text-brand-400">
           {titulo}
         </a>
       </h3>
@@ -94,7 +94,7 @@ const formatoLabel: Record<string, string> = {
       />
       <a
         href={'/publicaciones/' + slug}
-        class="inline-flex h-8 items-center rounded-md bg-accent px-3 text-xs font-medium text-brand-700 transition-colors hover:bg-accent-soft"
+        class="relative z-10 inline-flex h-8 items-center rounded-md bg-accent px-3 text-xs font-medium text-brand-700 transition-colors hover:bg-accent-soft"
       >
         Ver
       </a>
