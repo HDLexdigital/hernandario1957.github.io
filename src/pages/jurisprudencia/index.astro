@@ -1,0 +1,37 @@
+---
+import LayoutBase from '../../layouts/LayoutBase.astro';
+import BuscadorJurisprudencia from '../../components/BuscadorJurisprudencia.astro';
+import CardJurisprudencia from '../../components/CardJurisprudencia.astro';
+---
+
+<LayoutBase title="Jurisprudencia | LexDigitalHD">
+  <section class="container py-12 md:py-16">
+    <header class="mb-10">
+      <h1 class="font-serif text-4xl font-semibold tracking-tight text-content">Jurisprudencia</h1>
+      <p class="mt-3 max-w-2xl text-lg text-content-muted">
+        Búsqueda avanzada de fallos clasificados por materia, tribunal y año.
+      </p>
+    </header>
+
+    <!-- Buscador Integrado -->
+    <BuscadorJurisprudencia />
+
+    <!-- Resultados -->
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <CardJurisprudencia 
+        slug="c-124-26" 
+        title="Sentencia C-124/26: Validez del sellado temporal" 
+        tribunal="Corte Constitucional"
+        fecha={new Date("2026-03-12")} 
+        resumen="La Corte establece los criterios de admisibilidad y trazabilidad digital para expedientes judiciales electrónicos y su control de versiones."
+      />
+      <CardJurisprudencia 
+        slug="su-092-25" 
+        title="Sentencia SU-092/25: Unificación sobre firmas digitales" 
+        tribunal="Corte Constitucional"
+        fecha={new Date("2025-08-20")} 
+        resumen="Se unifica la jurisprudencia respecto al valor probatorio de las firmas electrónicas certificadas en el proceso civil."
+      />
+    </div>
+  </section>
+</LayoutBase>

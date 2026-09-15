@@ -1,0 +1,88 @@
+---
+// src/components/BuscadorJurisprudencia.astro
+---
+
+<section class="rounded-lg border border-border bg-surface-card p-5 mb-8 shadow-sm transition-all" aria-labelledby="search-heading">
+  <!-- Título oculto visualmente pero leído por lectores de pantalla (Tailwind sr-only) -->
+  <h2 id="search-heading" class="sr-only">Búsqueda de documentos y jurisprudencia</h2>
+  
+  <form role="search" class="search-form flex flex-wrap items-start gap-4">
+    
+    <div class="flex-1 min-w-[250px] flex flex-col gap-1.5">
+      <label for="juris-search" class="text-sm font-semibold text-content">Palabra clave, radicado o tema</label>
+      <input 
+        type="search" 
+        id="juris-search" 
+        name="q" 
+        placeholder="Ej. Sellado temporal electrónico..." 
+        required 
+        aria-describedby="search-hint"
+        class="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-content transition-colors focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/40"
+      >
+      <span id="search-hint" class="text-xs text-content-muted">Ingrese al menos 3 caracteres.</span>
+    </div>
+
+    <div class="flex-1 min-w-[200px] flex flex-col gap-1.5">
+      <label for="tribunal-filter" class="text-sm font-semibold text-content">Filtro por Tribunal</label>
+      <select 
+        id="tribunal-filter" 
+        name="tribunal"
+        class="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-content transition-colors focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/40"
+      >
+        <option value="">Todos los tribunales</option>
+        <option value="corte-constitucional">Corte Constitucional</option>
+        <option value="corte-suprema">Corte Suprema de Justicia</option>
+        <option value="consejo-estado">Consejo de Estado</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col justify-end pt-6">
+      <button 
+        type="submit" 
+        class="inline-flex h-9 items-center justify-center rounded-md bg-accent px-5 py-2 text-sm font-medium text-brand-700 transition-colors hover:bg-accent-soft focus:outline-none focus:ring-2 focus:ring-brand-600"
+        aria-label="Ejecutar búsqueda"
+      >
+        Buscar
+      </button>
+    </div>
+  </form>
+</section>
+
+<script>
+  function initSearchForm() {
+    const searchForm = document.querySelector('.search-form');
+    const searchInput = document.getElementById('juris-search') as HTMLInputElement;
+    const tribunalSelect = document.getElementById('tribunal-filter') as HTMLSelectElement;
+    
+    if (searchForm && searchInput) {
+      searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        const query = searchInput.value.trim();
+        const tribunal = tribunalSelect ? tribunalSelect.value : 'todos';
+        
+        if (query.length >= 3) {
+          console.log(`[Búsqueda] Consultando: "${query}" en tribunal: ${tribunal}`);
+          
+          // Efecto visual temporal en el botón
+          const btn = searchForm.querySelector('button[type="submit"]');
+          if (btn) {
+            const origText = btn.textContent;
+            btn.textContent = 'Buscando...';
+            setTimeout(() => { btn.textContent = origText; }, 1000);
+          }
+        } else {
+          console.warn('[Advertencia] La búsqueda requiere al menos 3 caracteres.');
+          searchInput.focus();
+        }
+      });
+    }
+  }
+
+  // Soporte para las transiciones de vista (View Transitions) de Astro
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearchForm);
+  } else {
+    initSearchForm();
+  }
+</script>

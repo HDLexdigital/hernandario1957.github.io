@@ -1,0 +1,27 @@
+<!-- Sección de Búsqueda de Jurisprudencia -->
+<section class="search-section" aria-labelledby="search-heading">
+    <!-- Título oculto visualmente pero leído por tecnologías de asistencia -->
+    <h2 id="search-heading" class="visually-hidden">Búsqueda de documentos jurídicos</h2>
+    
+    <form role="search" class="search-form" action="/buscar" method="GET">
+        <div class="search-group">
+            <label for="juris-search">Palabra clave, radicado o tema</label>
+            <input type="search" id="juris-search" name="q" placeholder="Ej. Sellado temporal electrónico..." required aria-describedby="search-hint">
+            <span id="search-hint" class="hint-text">Ingrese al menos 3 caracteres.</span>
+        </div>
+
+        <div class="filter-group">
+            <label for="tribunal-filter">Tribunal</label>
+            <select id="tribunal-filter" name="tribunal">
+                <option value="">Todos los tribunales</option>
+                <option value="corte-constitucional">Corte Constitucional</option>
+                <option value="corte-suprema">Corte Suprema de Justicia</option>
+                <option value="consejo-estado">Consejo de Estado</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-primary" aria-label="Ejecutar búsqueda">
+            Buscar
+        </button>
+    </form>
+</section>

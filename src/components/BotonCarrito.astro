@@ -6,23 +6,22 @@ interface Props {
   portada: string;
   slug: string;
 }
-
 const { sku, titulo, precioCOP, portada, slug } = Astro.props;
 const payload = { sku, titulo, precioCOP, portada, slug };
 ---
-
 <button
   type="button"
   class="cart-add-btn inline-flex h-10 items-center rounded-md bg-accent px-5 text-sm font-medium text-brand-700 transition-colors hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
   data-payload={JSON.stringify(payload)}
   aria-label={'Agregar ' + titulo + ' al carrito'}
 >
-  <span class="cart-add-label">Agregar al carrito</span>
+  <span class="cart-add-label" aria-live="polite">Agregar al carrito</span>
 </button>
 
 <a
   href="/carrito"
   class="cart-in-cart hidden inline-flex h-10 items-center rounded-md border border-emerald-700/40 bg-emerald-700/15 px-5 text-sm font-medium text-emerald-500 transition-colors hover:bg-emerald-700/25"
+  aria-label="Ver el carrito de compras"
 >
   ✓ En el carrito
 </a>
@@ -34,26 +33,27 @@ const payload = { sku, titulo, precioCOP, portada, slug };
     if (!cart) return;
     if (cart.has(payload.sku)) {
       btn.classList.add('hidden');
+      btn.setAttribute('aria-hidden', 'true');
       inCartLink.classList.remove('hidden');
+      inCartLink.removeAttribute('aria-hidden');
     } else {
       btn.classList.remove('hidden');
+      btn.removeAttribute('aria-hidden');
       inCartLink.classList.add('hidden');
+      inCartLink.setAttribute('aria-hidden', 'true');
     }
   }
 
   function initCartButtons() {
     const cart = (window as any).LexCart;
     if (!cart) return;
-
     document.querySelectorAll<HTMLButtonElement>('.cart-add-btn').forEach((btn) => {
       const wrapper = btn.parentElement;
       const inCartLink = wrapper?.querySelector<HTMLAnchorElement>('.cart-in-cart');
       if (!inCartLink) return;
-
       btn.addEventListener('click', () => {
         const payload = JSON.parse(btn.dataset.payload || '{}');
         cart.add(payload);
-
         const label = btn.querySelector('.cart-add-label');
         if (label) {
           const orig = label.textContent || '';
@@ -62,19 +62,9 @@ const payload = { sku, titulo, precioCOP, portada, slug };
         }
         refresh(btn, inCartLink);
       });
-
       refresh(btn, inCartLink);
     });
-
-    window.addEventListener(cart.EVENT_NAME, () => {
-      document.querySelectorAll<HTMLButtonElement>('.cart-add-btn').forEach((btn) => {
-        const wrapper = btn.parentElement;
-        const inCartLink = wrapper?.querySelector<HTMLAnchorElement>('.cart-in-cart');
-        if (inCartLink) refresh(btn, inCartLink);
-      });
-    });
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCartButtons);
   } else {

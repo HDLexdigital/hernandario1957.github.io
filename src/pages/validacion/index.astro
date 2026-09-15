@@ -1,0 +1,23 @@
+---
+import LayoutBase from '../../layouts/LayoutBase.astro';
+import HistorialVersiones from '../../components/HistorialVersiones.astro';
+
+// Datos de prueba
+const historialPrueba = [
+  { id: '1', version: 'v2.1', fecha: new Date("2026-03-15T14:32:00"), modificacion: 'Actualización de anexo técnico', hash: '8f4c9a2d3b1a8f4c9a2d3b1a' },
+  { id: '2', version: 'v1.0', fecha: new Date("2025-11-05T16:00:00"), modificacion: 'Publicación original sellada', hash: '99x8y7z6w5v499x8y7z6w5v4' }
+];
+---
+
+<LayoutBase title="Validación | LexDigitalHD">
+  <section class="container py-12 md:py-16">
+    <header class="mb-10">
+      <h1 class="font-serif text-4xl font-semibold tracking-tight text-content">Validación Documental</h1>
+      <p class="mt-3 max-w-2xl text-lg text-content-muted">
+        Comprobá la autenticidad e integridad de los documentos mediante hash criptográfico y sello verificable.
+      </p>
+    </header>
+
+    <HistorialVersiones versiones={historialPrueba} />
+  </section>
+</LayoutBase>

@@ -14,10 +14,10 @@ const tipos = ['ley', 'decreto', 'resolucion', 'ordenanza'];
 ---
 
 <LayoutBase title="Normativa" description="Colección de normas jurídicas con metadatos, índice y trazabilidad.">
-  <section class="container py-12">
+  <section class="container py-12" aria-labelledby="titulo-normativa">
     <header class="mb-8">
       <p class="font-mono text-xs uppercase tracking-widest text-brand-400 mb-2">Fuente primaria</p>
-      <h1 class="font-serif text-4xl font-semibold tracking-tight text-content mb-3">Normativa</h1>
+      <h1 id="titulo-normativa" class="font-serif text-4xl font-semibold tracking-tight text-content mb-3">Normativa</h1>
       <p class="text-content-muted max-w-2xl">
         Colección de normas jurídicas con metadatos, índice temático y trazabilidad.
       </p>
@@ -38,7 +38,13 @@ const tipos = ['ley', 'decreto', 'resolucion', 'ordenanza'];
       </select>
     </div>
 
-    <div id="normas-grid" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <h2 id="titulo-normas" class="sr-only">Normas disponibles</h2>
+
+    <div
+      id="normas-grid"
+      class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+      aria-labelledby="titulo-normas"
+    >
       {sorted.map(n => (
         <NormaCard
           slug={n.slug}

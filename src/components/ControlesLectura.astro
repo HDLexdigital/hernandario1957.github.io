@@ -1,16 +1,13 @@
 ---
-// Controles de tamaño de fuente para la lectura de la norma
+// Controles de tamaño de fuente accesibles
 ---
-
 <div class="mb-6 flex flex-wrap items-center gap-2 rounded-lg border border-border bg-surface-muted px-3 py-2" role="region" aria-label="Herramientas de lectura">
   <span id="fontSizeLabel" class="mr-1 text-xs font-medium text-content-muted">Tamaño de texto:</span>
-  <button type="button" id="btnDecreaseFont" class="rounded-md border border-border-strong bg-surface px-2.5 py-1 text-xs font-semibold text-content transition-colors hover:bg-surface-raised focus:outline-none focus:ring-2 focus:ring-brand-600" aria-labelledby="fontSizeLabel" title="Disminuir tamaño de fuente">A-</button>
-  <button type="button" id="btnResetFont" class="rounded-md border border-border-strong bg-surface px-2.5 py-1 text-xs font-semibold text-content transition-colors hover:bg-surface-raised focus:outline-none focus:ring-2 focus:ring-brand-600" aria-labelledby="fontSizeLabel" title="Restablecer tamaño predeterminado">Normal</button>
-  <button type="button" id="btnIncreaseFont" class="rounded-md border border-border-strong bg-surface px-2.5 py-1 text-xs font-semibold text-content transition-colors hover:bg-surface-raised focus:outline-none focus:ring-2 focus:ring-brand-600" aria-labelledby="fontSizeLabel" title="Aumentar tamaño de fuente">A+</button>
+  <button type="button" id="btnDecreaseFont" class="rounded-md border border-border-strong bg-surface px-2.5 py-1 text-xs font-semibold text-content transition-colors hover:bg-surface-raised focus:outline-none focus:ring-2 focus:ring-brand-600" aria-labelledby="fontSizeLabel" title="Disminuir tamaño de fuente" aria-controls="norma-content">A-</button>
+  <button type="button" id="btnResetFont" class="rounded-md border border-border-strong bg-surface px-2.5 py-1 text-xs font-semibold text-content transition-colors hover:bg-surface-raised focus:outline-none focus:ring-2 focus:ring-brand-600" aria-labelledby="fontSizeLabel" title="Restablecer tamaño predeterminado" aria-controls="norma-content">Normal</button>
+  <button type="button" id="btnIncreaseFont" class="rounded-md border border-border-strong bg-surface px-2.5 py-1 text-xs font-semibold text-content transition-colors hover:bg-surface-raised focus:outline-none focus:ring-2 focus:ring-brand-600" aria-labelledby="fontSizeLabel" title="Aumentar tamaño de fuente" aria-controls="norma-content">A+</button>
 </div>
-
 <div id="srAnnouncer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-
 <script is:inline>
   window.addEventListener("DOMContentLoaded", function () {
     var content = document.getElementById('norma-content');
@@ -18,35 +15,20 @@
     var btnInc = document.getElementById('btnIncreaseFont');
     var btnDec = document.getElementById('btnDecreaseFont');
     var btnRes = document.getElementById('btnResetFont');
-
     if (!content) return;
-
     var sizes = ['0.95rem', '1.05rem', '1.15rem', '1.3rem', '1.5rem'];
     var names = ['Pequeño', 'Normal', 'Grande', 'Muy grande', 'Máximo'];
     var idx = 1;
-
-    try {
-      var saved = localStorage.getItem('lex_font_size_index');
-      if (saved !== null) {
-        idx = parseInt(saved, 10);
-        if (idx < 0 || idx >= sizes.length) idx = 1;
-        content.style.fontSize = sizes[idx];
-      }
-    } catch (e) {}
-
     function announce(msg) {
       if (!announcer) return;
       announcer.textContent = '';
       setTimeout(function () { announcer.textContent = msg; }, 50);
     }
-
     function apply(i) {
       idx = i;
       content.style.fontSize = sizes[idx];
-      try { localStorage.setItem('lex_font_size_index', String(idx)); } catch (e) {}
-      announce('Tamaño de texto: ' + names[idx]);
+      announce('Tamaño de texto ajustado a: ' + names[idx]);
     }
-
     if (btnInc) btnInc.addEventListener('click', function () { if (idx < sizes.length - 1) apply(idx + 1); });
     if (btnDec) btnDec.addEventListener('click', function () { if (idx > 0) apply(idx - 1); });
     if (btnRes) btnRes.addEventListener('click', function () { apply(1); });

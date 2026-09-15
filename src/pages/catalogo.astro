@@ -17,12 +17,12 @@ const materias = [...new Set(sorted.flatMap((p) => p.data.materia))].sort();
   title="Catálogo"
   description="Publicaciones jurídicas en múltiples formatos. Normativa, doctrina y jurisprudencia."
 >
-  <section class="container py-12">
+  <section class="container py-12" aria-labelledby="titulo-catalogo">
     <header class="mb-8">
       <p class="font-mono text-xs uppercase tracking-widest text-brand-600 mb-2">
         Publicaciones
       </p>
-      <h1 class="font-serif text-4xl font-semibold tracking-tight text-content mb-3">
+      <h1 id="titulo-catalogo" class="font-serif text-4xl font-semibold tracking-tight text-content mb-3">
         Catálogo
       </h1>
       <p class="text-content-muted max-w-2xl">
@@ -48,7 +48,13 @@ const materias = [...new Set(sorted.flatMap((p) => p.data.materia))].sort();
       </select>
     </div>
 
-    <div id="publicaciones-grid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <h2 id="titulo-publicaciones" class="sr-only">Publicaciones disponibles</h2>
+
+    <div
+      id="publicaciones-grid"
+      class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+      aria-labelledby="titulo-publicaciones"
+    >
       {sorted.map((p) => (
         <CardPublicacion
           slug={p.slug}
@@ -97,4 +103,3 @@ const materias = [...new Set(sorted.flatMap((p) => p.data.materia))].sort();
       select?.addEventListener('change', filter);
     }
   </script>
-</LayoutBase>
