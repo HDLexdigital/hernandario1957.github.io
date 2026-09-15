@@ -1,0 +1,78 @@
+---
+// Componente Astro para la interfaz de validación documental
+---
+
+<div class="validador-container">
+  <h3>Módulo de Validación Documental</h3>
+  <textarea id="textoDocumento" placeholder="Pega aquí el contenido de la norma o documento a verificar..."></textarea>
+  <button id="btnValidar">Verificar Autenticidad</button>
+  <div id="resultadoValidacion" class="resultado"></div>
+</div>
+
+<script>
+  const btn = document.getElementById('btnValidar');
+  const textarea = document.getElementById('textoDocumento') as HTMLTextAreaElement;
+  const resultadoDiv = document.getElementById('resultadoValidacion') as HTMLDivElement;
+
+  if (btn && textarea && resultadoDiv) {
+    btn.addEventListener('click', async () => {
+      const contenidoTexto = textarea.value;
+      if (!contenidoTexto.trim()) {
+        alert("Por favor ingresa un texto para validar.");
+        return;
+      }
+
+      resultadoDiv.innerText = "Validando hash criptográfico...";
+
+      try {
+        const respuesta = await fetch('https://tu-backend-en-cloud-run.a.run.app/api/validar-documento', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contenidoTexto })
+        });
+
+        const datos = await respuesta.json();
+
+        if (datos.valido) {
+          resultadoDiv.innerHTML = `<p style="color: green;"><strong>✅ ${datos.mensaje}</strong><br>Norma: ${datos.detalles.titulo} (Versión: ${datos.detalles.version})</p>`;
+        } else {
+          resultadoDiv.innerHTML = `<p style="color: red;"><strong>❌ ${datos.mensaje}</strong></p>`;
+        }
+      } catch (error) {
+        resultadoDiv.innerText = "Error de conexión con el servidor de validación.";
+        console.error(error);
+      }
+    });
+  }
+</script>
+
+<style>
+  .validador-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: system-ui, sans-serif;
+  }
+  textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  button {
+    padding: 0.75rem 1.5rem;
+    background-color: #0052cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .resultado {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+  }
+</style>
