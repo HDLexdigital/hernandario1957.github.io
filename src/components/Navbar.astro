@@ -1,14 +1,33 @@
 ---
 // src/components/Navbar.astro
+const pathname = new URL(Astro.request.url).pathname;
 ---
-<nav class="navbar">
+<nav class="navbar" aria-label="Navegación principal">
   <div class="nav-container">
-    <a href="/" class="nav-logo">Mi Sitio</a>
-    <div class="nav-links">
-      <a href="/" class="nav-item">Inicio</a>
-      <a href="/proyectos" class="nav-item">Proyectos</a>
-      <a href="/contacto" class="nav-item">Contacto</a>
-    </div>
+    <a href="/" class="nav-logo" aria-label="Mi Sitio - Ir al inicio">Mi Sitio</a>
+    <ul class="nav-links" role="list">
+      <li>
+        <a 
+          href="/" 
+          class="nav-item" 
+          aria-current={pathname === "/" ? "page" : undefined}
+        >Inicio</a>
+      </li>
+      <li>
+        <a 
+          href="/proyectos" 
+          class="nav-item" 
+          aria-current={pathname.startsWith("/proyectos") ? "page" : undefined}
+        >Proyectos</a>
+      </li>
+      <li>
+        <a 
+          href="/contacto" 
+          class="nav-item" 
+          aria-current={pathname.startsWith("/contacto") ? "page" : undefined}
+        >Contacto</a>
+      </li>
+    </ul>
   </div>
 </nav>
 
@@ -33,10 +52,18 @@
     text-decoration: none;
     font-size: 1.25rem;
     font-family: system-ui, -apple-system, sans-serif;
+    border-radius: 0.25rem;
+  }
+  .nav-logo:focus-visible {
+    outline: 2px solid #4f46e5;
+    outline-offset: 4px;
   }
   .nav-links {
     display: flex;
     gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
   .nav-item {
     text-decoration: none;
@@ -45,8 +72,21 @@
     font-family: system-ui, -apple-system, sans-serif;
     font-size: 0.95rem;
     transition: color 0.2s;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
   }
   .nav-item:hover {
     color: #4f46e5;
+  }
+  /* Estilo clave para accesibilidad por teclado */
+  .nav-item:focus-visible {
+    outline: 2px solid #4f46e5;
+    outline-offset: 2px;
+    color: #4f46e5;
+  }
+  /* Estilo para la página activa indicada por aria-current */
+  .nav-item[aria-current="page"] {
+    color: #4f46e5;
+    font-weight: 700;
   }
 </style>
