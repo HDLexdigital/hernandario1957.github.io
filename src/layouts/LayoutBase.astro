@@ -1,177 +1,62 @@
 ---
-
-interface Props {
-
-  titulo: string;
-
-  descripcion: string;
-
-  version: string;
-
-  estadoVigencia: string;
-
-}
-
-
-
-const { titulo, descripcion, version, estadoVigencia } = Astro.props;
-
-
-
-const badgeColor = 
-
-  estadoVigencia === 'Vigente' ? 'bg-emerald-600/10 text-emerald-500 border-emerald-600/20' :
-
-  estadoVigencia === 'Modificado Parcialmente' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 
-
-  'bg-rose-500/10 text-rose-400 border-rose-500/20';
-
+// Importamos tu Layout original
+import LayoutNorma from '../layouts/LayoutNorma.astro';
 ---
 
-
-
-<!DOCTYPE html>
-
-<html lang="es" id="html-root">
-
-  <head>
-
-    <meta charset="UTF-8" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>{titulo} | LexDigitalHD</title>
-
-    <meta name="description" content={descripcion} />
-
-    <link rel="stylesheet" href="/pwa-register.js" />
-
-  </head>
-
-  <body class="bg-surface-muted text-content antialiased font-sans m-0 p-0 transition-colors duration-200" id="body-root">
-
-    
-
-    <!-- Barra de Accesibilidad WCAG 2.2 AA -->
-
-    <div class="bg-surface border-b border-border py-2 px-6 text-xs text-content-muted flex flex-wrap justify-between items-center gap-4 sticky top-0 z-30 shadow-md">
-
-      <div class="flex items-center gap-2">
-
-        <span class="font-semibold text-content">Accesibilidad WCAG 2.2 AA:</span>
-
-        <span class="bg-brand-500/10 text-brand-400 px-2 py-0.5 rounded border border-brand-500/20 font-mono">Lectura Optimizada</span>
-
-      </div>
-
-      <div class="flex items-center gap-3">
-
-        <button id="btn-contraste" class="px-2.5 py-1 rounded bg-surface-raised hover:bg-border text-content border border-border-strong transition-colors focus:ring-2 focus:ring-brand-500" aria-label="Cambiar contraste visual">
-
-          🌓 Contraste Alto
-
-        </button>
-
-        <div class="flex items-center gap-1 bg-surface-raised px-2 py-1 rounded border border-border-strong">
-
-          <span>Texto:</span>
-
-          <button id="btn-text-sm" class="px-1.5 hover:text-brand-400 font-bold focus:outline-none" aria-label="Reducir tamaño de letra">A-</button>
-
-          <button id="btn-text-md" class="px-1.5 hover:text-brand-400 font-bold focus:outline-none" aria-label="Tamaño normal">A</button>
-
-          <button id="btn-text-lg" class="px-1.5 hover:text-brand-400 font-bold focus:outline-none" aria-label="Aumentar tamaño de letra">A+</button>
-
-        </div>
-
-      </div>
-
+<!-- Le enviamos los datos obligatorios a tu Layout para que no marque error -->
+<LayoutNorma 
+  titulo="Doctrina Jurídica" 
+  descripcion="Colección curada de ensayos y estudios jurídicos de alto nivel con validación por hash."
+  version="1.0"
+  estadoVigencia="Actualizado" 
+>
+  
+  <section class="max-w-5xl mx-auto py-6">
+    <!-- Introducción -->
+    <div class="mb-10 text-center">
+      <h1 class="text-4xl font-bold text-gray-100 mb-4">Doctrina Jurídica</h1>
+      <p class="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto">
+        La doctrina constituye un pilar fundamental para la comprensión y evolución del ordenamiento jurídico. A través de nuestra tecnología de control de versiones y validación por hash, aseguramos que el análisis que usted consulta se mantenga verificable y seguro en el tiempo.
+      </p>
     </div>
 
+    <!-- Categorías de Búsqueda -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button class="px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-full hover:bg-blue-700 transition shadow-sm">
+        Todas las publicaciones
+      </button>
+      <button class="px-4 py-2 bg-surface-raised text-gray-300 text-sm font-medium rounded-full border border-gray-600 hover:bg-gray-700 transition">
+        Derecho Tecnológico
+      </button>
+      <button class="px-4 py-2 bg-surface-raised text-gray-300 text-sm font-medium rounded-full border border-gray-600 hover:bg-gray-700 transition">
+        Derecho Constitucional
+      </button>
+    </div>
 
-
-    <!-- Header Principal -->
-
-    <header class="border-b border-border bg-surface/80 backdrop-blur sticky top-[41px] z-20 shadow-lg">
-
-      <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-
-        <a href="/" class="font-bold tracking-tight text-content hover:text-brand-400 transition-colors flex items-center gap-2 focus:ring-2 focus:ring-brand-500 rounded p-1">
-
-          <span>LexDigitalHD</span>
-
-          <span class="text-xs font-normal text-content-muted bg-surface-raised px-2 py-0.5 rounded border border-border-strong">2.0</span>
-
-        </a>
-
-        <div class="flex items-center gap-3">
-
-          <span class={`text-xs px-2.5 py-1 rounded-full border font-medium ${badgeColor}`}>
-
-            {estadoVigencia}
-
-          </span>
-
-          <span class="text-xs text-content-muted font-mono bg-surface-raised px-2 py-1 rounded border border-border-strong">v{version}</span>
-
+    <!-- Artículos Destacados con Sello de Trazabilidad -->
+    <div class="space-y-8">
+      
+      <!-- Artículo 1 -->
+      <article class="bg-surface-raised p-6 rounded-xl shadow-sm border border-gray-700">
+        <h2 class="text-2xl font-bold text-blue-400 mb-2">La admisibilidad de la prueba digital y el sellado criptográfico</h2>
+        <div class="text-sm text-gray-400 mb-4">
+          <span class="font-semibold text-gray-300">Por Dr. Carlos Mendoza</span> • 10 de septiembre de 2026
         </div>
-
-      </div>
-
-    </header>
-
-
-
-    <!-- Contenido con restricción estricta de ancho de línea (75ch) para legibilidad -->
-
-    <main class="max-w-3xl mx-auto px-6 py-12">
-
-      <article id="article-content" class="prose prose-invert max-w-[75ch] mx-auto leading-relaxed text-base transition-all duration-200">
-
-        <h1 class="text-3xl font-extrabold tracking-tight text-content mb-4">{titulo}</h1>
-
-        <p class="text-lg text-content-muted font-normal mb-8 pb-4 border-b border-border">{descripcion}</p>
-
+        <p class="text-gray-300 mb-6">
+          Un análisis exhaustivo sobre los criterios jurisprudenciales recientes frente a la presentación de documentos electrónicos asegurados mediante firmas digitales.
+        </p>
         
-
-        <div class="space-y-4 text-content">
-
-          <slot />
-
+        <!-- Sello -->
+        <div class="p-4 bg-gray-900 border border-gray-700 rounded-lg text-sm text-gray-300 font-mono">
+          <div class="flex items-center text-green-500 font-semibold mb-2">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Documento Íntegro y Verificado
+          </div>
+          <p><strong>Versión:</strong> v1.0</p>
+          <p class="truncate"><strong>Hash SHA-256:</strong> <span class="text-gray-500">a8f5f167f44f4964e6c998dee827110c...</span></p>
         </div>
-
       </article>
 
-    </main>
-
-
-
-    <!-- Footer -->
-
-    <footer class="border-t border-border bg-surface mt-20 py-8 text-center text-xs text-content-subtle">
-
-      <p>LexDigitalHD — Plataforma de Publicación y Validación Jurídica bajo estrictos estándares WCAG 2.2 AA.</p>
-
-    </footer>
-
-
-
-    <!-- Script de Interactividad Accesible -->
-
-    <script>
-
-      // Control de tamaño de texto
-
-      const article = document.getElementById('article-content');
-
-      document.getElementById('btn-text-sm')?.addEventListener('click', () => {
-
-        if(article) article.style.fontSize = '0.9rem';
-
-      });
-
-      document.getElementById('btn-text-md')?.addEventListener('click', () => {
-
-        if(article) article.style.fontSize = '1rem';
-
-      });
+    </div>
+  </section>
+</LayoutNorma>
