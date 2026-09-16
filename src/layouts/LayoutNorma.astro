@@ -30,15 +30,15 @@ const badgeColor =
 ---
 
 <!DOCTYPE html>
-<html lang="es" id="html-root">
+<html lang="es" id="html-root" class="dark"> <!-- Añadimos 'class="dark"' aquí -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{titulo} | LexDigitalHD</title>
     <meta name="description" content={descripcion} />
-    <link rel="stylesheet" href="/pwa-register.js" />
+    <!-- Asegúrate de tener la ruta correcta a tu global.css aquí arriba si la habías puesto -->
   </head>
-  <body class="bg-surface-muted text-content antialiased font-sans m-0 p-0 transition-colors duration-200" id="body-root">
+  <body class="bg-surface text-content antialiased font-sans m-0 p-0 transition-colors duration-200 dark" id="body-root">
     
     <!-- Barra de Accesibilidad WCAG 2.2 AA -->
     <div class="bg-surface border-b border-border py-2 px-6 text-xs text-content-muted flex flex-wrap justify-between items-center gap-4 sticky top-0 z-30 shadow-md">
