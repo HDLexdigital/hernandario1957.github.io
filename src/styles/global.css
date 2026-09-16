@@ -44,7 +44,10 @@
     --border-strong: 200 175 130;
   }
 
-  html { scrollbar-gutter: stable; overflow-y: scroll; }
+  html {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+  }
 
   body {
     @apply bg-surface text-content;
@@ -52,18 +55,28 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  ::selection { @apply bg-brand-600/40 text-white; }
+  ::selection {
+    @apply bg-brand-600/40 text-white;
+  }
 }
 
 @layer components {
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors;
   }
-  .btn-primary { @apply btn bg-accent text-brand-700 hover:bg-accent-soft; }
-  .btn-ghost   { @apply btn border border-border text-content hover:border-border-strong; }
-  .card        { @apply rounded-lg border border-border bg-surface-muted p-5 shadow-sm; }
+  .btn-primary {
+    @apply btn bg-accent text-brand-700 hover:bg-accent-soft;
+  }
+  .btn-ghost {
+    @apply btn border border-border text-content hover:border-border-strong;
+  }
+  .card {
+    @apply rounded-lg border border-border bg-surface-muted p-5 shadow-sm;
+  }
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
+  .text-balance {
+    text-wrap: balance;
+  }
 }

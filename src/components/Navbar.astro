@@ -1,92 +1,52 @@
 ---
-// src/components/Navbar.astro
-const pathname = new URL(Astro.request.url).pathname;
----
-<nav class="navbar" aria-label="Navegación principal">
-  <div class="nav-container">
-    <a href="/" class="nav-logo" aria-label="Mi Sitio - Ir al inicio">Mi Sitio</a>
-    <ul class="nav-links" role="list">
-      <li>
-        <a 
-          href="/" 
-          class="nav-item" 
-          aria-current={pathname === "/" ? "page" : undefined}
-        >Inicio</a>
-      </li>
-      <li>
-        <a 
-          href="/proyectos" 
-          class="nav-item" 
-          aria-current={pathname.startsWith("/proyectos") ? "page" : undefined}
-        >Proyectos</a>
-      </li>
-      <li>
-        <a 
-          href="/contacto" 
-          class="nav-item" 
-          aria-current={pathname.startsWith("/contacto") ? "page" : undefined}
-        >Contacto</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+import ThemeToggle from './ThemeToggle.astro';
 
-<style>
-  .navbar {
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 1rem 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  }
-  .nav-container {
-    max-width: 50rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .nav-logo {
-    font-weight: 700;
-    color: #4f46e5;
-    text-decoration: none;
-    font-size: 1.25rem;
-    font-family: system-ui, -apple-system, sans-serif;
-    border-radius: 0.25rem;
-  }
-  .nav-logo:focus-visible {
-    outline: 2px solid #4f46e5;
-    outline-offset: 4px;
-  }
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .nav-item {
-    text-decoration: none;
-    color: #4b5563;
-    font-weight: 500;
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 0.95rem;
-    transition: color 0.2s;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-  }
-  .nav-item:hover {
-    color: #4f46e5;
-  }
-  /* Estilo clave para accesibilidad por teclado */
-  .nav-item:focus-visible {
-    outline: 2px solid #4f46e5;
-    outline-offset: 2px;
-    color: #4f46e5;
-  }
-  /* Estilo para la página activa indicada por aria-current */
-  .nav-item[aria-current="page"] {
-    color: #4f46e5;
-    font-weight: 700;
-  }
-</style>
+const pathname = new URL(Astro.request.url).pathname;
+
+const navItems = [
+  { href: '/', label: 'Inicio', match: pathname === '/' },
+  { href: '/catalogo', label: 'Catálogo', match: pathname.startsWith('/catalogo') },
+  { href: '/normativa', label: 'Normativa', match: pathname.startsWith('/normativa') },
+  { href: '/jurisprudencia', label: 'Jurisprudencia', match: pathname.startsWith('/jurisprudencia') },
+  { href: '/doctrina', label: 'Doctrina', match: pathname.startsWith('/doctrina') },
+  { href: '/validacion', label: 'Validación', match: pathname.startsWith('/validacion') }
+];
+---
+
+<header class="border-b border-border bg-surface/95 backdrop-blur sticky top-0 z-30">
+  <div class="container">
+    <div class="flex min-h-16 items-center justify-between gap-4">
+      <a
+        href="/"
+        class="shrink-0 rounded-md font-serif text-lg font-semibold tracking-tight text-content transition-colors hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600"
+        aria-label="LexDigitalHD — Ir al inicio"
+      >
+        LexDigitalHD
+      </a>
+
+      <nav
+        class="hidden md:flex items-center gap-1"
+        aria-label="Navegación principal"
+      >
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+              item.match
+                ? 'bg-surface-muted text-brand-600'
+                : 'text-content-muted hover:bg-surface-muted hover:text-content'
+            ]}
+            aria-current={item.match ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <ThemeToggle />
+      </div>
+    </div>
+  </div>
+</header>

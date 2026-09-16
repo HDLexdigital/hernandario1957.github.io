@@ -1,62 +1,35 @@
 ---
-// Importamos tu Layout original
-import LayoutNorma from '../layouts/LayoutNorma.astro';
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'LexDigitalHD',
+  description = 'Publicación y validación jurídica con trazabilidad digital.'
+} = Astro.props;
 ---
 
-<!-- Le enviamos los datos obligatorios a tu Layout para que no marque error -->
-<LayoutNorma 
-  titulo="Doctrina Jurídica" 
-  descripcion="Colección curada de ensayos y estudios jurídicos de alto nivel con validación por hash."
-  version="1.0"
-  estadoVigencia="Actualizado" 
->
-  
-  <section class="max-w-5xl mx-auto py-6">
-    <!-- Introducción -->
-    <div class="mb-10 text-center">
-      <h1 class="text-4xl font-bold text-gray-100 mb-4">Doctrina Jurídica</h1>
-      <p class="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto">
-        La doctrina constituye un pilar fundamental para la comprensión y evolución del ordenamiento jurídico. A través de nuestra tecnología de control de versiones y validación por hash, aseguramos que el análisis que usted consulta se mantenga verificable y seguro en el tiempo.
-      </p>
-    </div>
+<!DOCTYPE html>
+<html lang="es" id="html-root">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
 
-    <!-- Categorías de Búsqueda -->
-    <div class="flex flex-wrap justify-center gap-3 mb-12">
-      <button class="px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-full hover:bg-blue-700 transition shadow-sm">
-        Todas las publicaciones
-      </button>
-      <button class="px-4 py-2 bg-surface-raised text-gray-300 text-sm font-medium rounded-full border border-gray-600 hover:bg-gray-700 transition">
-        Derecho Tecnológico
-      </button>
-      <button class="px-4 py-2 bg-surface-raised text-gray-300 text-sm font-medium rounded-full border border-gray-600 hover:bg-gray-700 transition">
-        Derecho Constitucional
-      </button>
-    </div>
+  <body class="bg-surface text-content antialiased font-sans m-0 p-0">
+    <Navbar />
 
-    <!-- Artículos Destacados con Sello de Trazabilidad -->
-    <div class="space-y-8">
-      
-      <!-- Artículo 1 -->
-      <article class="bg-surface-raised p-6 rounded-xl shadow-sm border border-gray-700">
-        <h2 class="text-2xl font-bold text-blue-400 mb-2">La admisibilidad de la prueba digital y el sellado criptográfico</h2>
-        <div class="text-sm text-gray-400 mb-4">
-          <span class="font-semibold text-gray-300">Por Dr. Carlos Mendoza</span> • 10 de septiembre de 2026
-        </div>
-        <p class="text-gray-300 mb-6">
-          Un análisis exhaustivo sobre los criterios jurisprudenciales recientes frente a la presentación de documentos electrónicos asegurados mediante firmas digitales.
-        </p>
-        
-        <!-- Sello -->
-        <div class="p-4 bg-gray-900 border border-gray-700 rounded-lg text-sm text-gray-300 font-mono">
-          <div class="flex items-center text-green-500 font-semibold mb-2">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Documento Íntegro y Verificado
-          </div>
-          <p><strong>Versión:</strong> v1.0</p>
-          <p class="truncate"><strong>Hash SHA-256:</strong> <span class="text-gray-500">a8f5f167f44f4964e6c998dee827110c...</span></p>
-        </div>
-      </article>
+    <main class="min-h-[75vh]">
+      <slot />
+    </main>
 
-    </div>
-  </section>
-</LayoutNorma>
+    <Footer />
+  </body>
+</html>

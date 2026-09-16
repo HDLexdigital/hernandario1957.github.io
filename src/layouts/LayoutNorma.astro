@@ -1,131 +1,56 @@
 ---
-// Importación crucial para que los estilos de Tailwind funcionen en la nube
-import '../styles/global.css';
+import LayoutBase from './LayoutBase.astro';
 
 interface Props {
   titulo: string;
   descripcion: string;
-  version?: string;          // Opcional por si es doctrina y no norma
-  estadoVigencia?: string;   // Opcional por si es doctrina y no norma
+  version?: string;
+  estadoVigencia?: string;
 }
 
 const { titulo, descripcion, version, estadoVigencia } = Astro.props;
 
-// Calculamos el color del badge solo si existe el estadoVigencia
-const badgeColor = 
-  estadoVigencia === 'Vigente' ? 'bg-emerald-600/10 text-emerald-500 border-emerald-600/20' :
-  estadoVigencia === 'Modificado Parcialmente' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 
-  'bg-rose-500/10 text-rose-400 border-rose-500/20';
+const badgeColor =
+  estadoVigencia === 'Vigente'
+    ? 'bg-emerald-600/10 text-emerald-500 border-emerald-600/20'
+    : estadoVigencia === 'Modificado Parcialmente'
+      ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+      : 'bg-surface-muted text-content-muted border-border';
 ---
 
-<!DOCTYPE html>
-<html lang="es" id="html-root" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{titulo} | LexDigitalHD</title>
-    <meta name="description" content={descripcion} />
-  </head>
-  <body class="bg-surface text-content antialiased font-sans m-0 p-0 transition-colors duration-200 dark" id="body-root">
-    
-    <!-- Barra de Accesibilidad WCAG 2.2 AA -->
-    <div class="bg-surface border-b border-border py-2 px-6 text-xs text-content-muted flex flex-wrap justify-between items-center gap-4 sticky top-0 z-30 shadow-md">
-      <div class="flex items-center gap-2">
-        <span class="font-semibold text-content">Accesibilidad WCAG 2.2 AA:</span>
-        <span class="bg-brand-500/10 text-brand-400 px-2 py-0.5 rounded border border-brand-500/20 font-mono">Lectura Optimizada</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <button id="btn-contraste" class="px-2.5 py-1 rounded bg-surface-raised hover:bg-border text-content border border-border-strong transition-colors focus:ring-2 focus:ring-brand-500" aria-label="Cambiar contraste visual">
-          🌓 Contraste Alto
-        </button>
-        <div class="flex items-center gap-1 bg-surface-raised px-2 py-1 rounded border border-border-strong">
-          <span>Texto:</span>
-          <button id="btn-text-sm" class="px-1.5 hover:text-brand-400 font-bold focus:outline-none" aria-label="Reducir tamaño de letra">A-</button>
-          <button id="btn-text-md" class="px-1.5 hover:text-brand-400 font-bold focus:outline-none" aria-label="Tamaño normal">A</button>
-          <button id="btn-text-lg" class="px-1.5 hover:text-brand-400 font-bold focus:outline-none" aria-label="Aumentar tamaño de letra">A+</button>
+<LayoutBase title={`${titulo} | LexDigitalHD`} description={descripcion}>
+  <div class="border-b border-border bg-surface">
+    <div class="container py-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p class="text-xs font-medium uppercase tracking-wide text-content-muted">
+            Publicación jurídica
+          </p>
+          <h1 class="mt-1 font-serif text-2xl font-semibold text-content">
+            {titulo}
+          </h1>
         </div>
-      </div>
-    </div>
 
-    <!-- Header Principal con Menú de Navegación -->
-    <header class="border-b border-border bg-surface/80 backdrop-blur sticky top-[41px] z-20 shadow-lg">
-      <div class="max-w-5xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-4">
-        
-        <!-- Logo -->
-        <a href="/" class="font-bold tracking-tight text-content hover:text-brand-400 transition-colors flex items-center gap-2 focus:ring-2 focus:ring-brand-500 rounded p-1">
-          <span>LexDigitalHD</span>
-          <span class="text-xs font-normal text-content-muted bg-surface-raised px-2 py-0.5 rounded border border-border-strong">2.0</span>
-        </a>
-
-        <!-- Menú de Navegación -->
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-          <a href="/" class="text-content-muted hover:text-brand-400 transition-colors">Inicio</a>
-          <a href="/normativa" class="text-content-muted hover:text-brand-400 transition-colors">Normativa</a>
-          <a href="/doctrina" class="text-content-muted hover:text-brand-400 transition-colors">Doctrina</a>
-        </nav>
-
-        <!-- Etiquetas de Estado -->
-        <div class="flex items-center gap-3">
+        <div class="flex flex-wrap items-center gap-2">
           {estadoVigencia && (
-            <span class={`text-xs px-2.5 py-1 rounded-full border font-medium ${badgeColor}`}>
+            <span class={`rounded-full border px-2.5 py-1 text-xs font-medium ${badgeColor}`}>
               {estadoVigencia}
             </span>
           )}
+
           {version && (
-            <span class="text-xs text-content-muted font-mono bg-surface-raised px-2 py-1 rounded border border-border-strong">
+            <span class="rounded border border-border-strong bg-surface-muted px-2 py-1 text-xs font-mono text-content-muted">
               v{version}
             </span>
           )}
         </div>
-
       </div>
-    </header>
 
-    <!-- Contenido Principal optimizado (permite flexibilidad total a secciones como Doctrina) -->
-    <main class="min-h-[75vh]">
-      <article id="article-content" class="transition-all duration-200">
-        <slot />
-      </article>
-    </main>
+      <p class="mt-2 max-w-3xl text-sm leading-relaxed text-content-muted">
+        {descripcion}
+      </p>
+    </div>
+  </div>
 
-    <!-- Footer -->
-    <footer class="border-t border-border bg-surface mt-20 py-8 text-center text-xs text-content-subtle">
-      <p>LexDigitalHD — Plataforma de Publicación y Validación Jurídica bajo estrictos estándares WCAG 2.2 AA.</p>
-      <div class="mt-4 flex justify-center gap-4">
-        <a href="/doctrina" class="hover:text-brand-400 transition-colors">Ir a Doctrina</a>
-        <a href="/" class="hover:text-brand-400 transition-colors">Volver al Inicio</a>
-      </div>
-    </footer>
-
-    <!-- Script de Interactividad Accesible -->
-    <script>
-      // Control de tamaño de texto
-      const article = document.getElementById('article-content');
-      document.getElementById('btn-text-sm')?.addEventListener('click', () => {
-        if(article) article.style.fontSize = '0.9rem';
-      });
-      document.getElementById('btn-text-md')?.addEventListener('click', () => {
-        if(article) article.style.fontSize = '1rem';
-      });
-      document.getElementById('btn-text-lg')?.addEventListener('click', () => {
-        if(article) article.style.fontSize = '1.15rem';
-      });
-
-      // Control de contraste alto institucional
-      let highContrast = false;
-      document.getElementById('btn-contraste')?.addEventListener('click', () => {
-        highContrast = !highContrast;
-        const body = document.getElementById('body-root');
-        if (highContrast) {
-          body?.classList.remove('bg-surface', 'text-content');
-          body?.classList.add('bg-black', 'text-white');
-          if(article) article.style.color = '#ffffff';
-        } else {
-          body?.classList.remove('bg-black', 'text-white');
-          body?.classList.add('bg-surface', 'text-content');
-          if(article) article.style.color = '';
-        }
-      });
-    </script>
-  </body>
-</html>
+  <slot />
+</LayoutBase>
