@@ -1,4 +1,18 @@
 ---
+---
+// Importación crucial para que los estilos de Tailwind funcionen en la nube
+import '../styles/global.css';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  version?: string;
+  estadoVigencia?: string;
+}
+
+const { titulo, descripcion, version, estadoVigencia } = Astro.props;
+// ... (el resto de tu código continúa igual)
+
 interface Props {
   titulo: string;
   descripcion: string;
