@@ -51,5 +51,58 @@ import LayoutBase from '../layouts/LayoutBase.astro';
 
     </div>
   </div>
+---
+import LayoutBase from '../layouts/LayoutBase.astro';
+---
+
+<LayoutBase title="Panel Watchdog & IPC | LexDigitalHD" description="Monitoreo en tiempo real de compilación local.">
+  
+  <div class="max-w-4xl mx-auto px-6 py-16">
+    <div class="bg-surface-muted/40 border border-border rounded-2xl p-8 md:p-10 shadow-2xl backdrop-blur">
+      
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 pb-6 border-b border-border gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-content mb-1">Estado del Servicio Watchdog (IPC)</h1>
+          <p class="text-content-muted text-xs">Monitoreo activo de compilación local desde Adobe InDesign y WSL2.</p>
+        </div>
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-600/10 text-emerald-500 border border-emerald-600/20 text-xs font-mono font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+          Activo & Escuchando
+        </span>
+      </div>
+
+      <div class="space-y-6 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-surface border border-border/80 p-4 rounded-xl">
+            <span class="text-content-subtle block mb-1 font-normal uppercase tracking-wider text-[10px]">Directorio Monitoreado</span>
+            <code class="text-brand-400 font-mono text-xs">src/content/normas/</code>
+          </div>
+          <div class="bg-surface border border-border/80 p-4 rounded-xl">
+            <span class="text-content-subtle block mb-1 font-normal uppercase tracking-wider text-[10px]">Ciclo de Sondeo</span>
+            <span class="text-content font-mono text-xs font-semibold">2000 ms</span>
+          </div>
+          <div class="bg-surface border border-border/80 p-4 rounded-xl">
+            <span class="text-content-subtle block mb-1 font-normal uppercase tracking-wider text-[10px]">Esquema de Validación</span>
+            <span class="text-emerald-500 font-mono text-xs font-semibold">Zod v3 (Estricto)</span>
+          </div>
+        </div>
+
+        <div class="bg-surface border border-border/90 rounded-xl p-5 font-mono text-[11px] text-content space-y-2 shadow-inner">
+          <div class="text-content-subtle pb-2 border-b border-border font-bold tracking-widest">LOG DE EJECUCIÓN RECIENTE (SYSTEMD WATCHDOG)</div>
+          <div>[INFO] 2026-09-12 15:00:10 - Servicio iniciado en entorno Linux Mint.</div>
+          <div>[SUCCESS] 2026-09-12 15:01:05 - Archivo JSON detectado: <span class="text-brand-400">codigo-ejemplo.json</span></div>
+          <div>[VALIDATION] 2026-09-12 15:01:05 - Validación de esquema Zod exitosa.</div>
+          <div class="text-emerald-500">[READY] 2026-09-12 15:01:06 - Compilación estática actualizada en memoria.</div>
+        </div>
+
+        <div class="pt-4">
+          <a href="/" class="inline-flex items-center gap-2 text-content-muted hover:text-content text-xs font-medium transition-colors">
+            &larr; Volver a la Página de Inicio
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 </LayoutBase>
