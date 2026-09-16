@@ -1,12 +1,17 @@
 ---
 import LayoutBase from '../layouts/LayoutBase.astro';
 
-// Arreglo actualizado para incluir los pilares exactos de tu plataforma
 const destacados = [
+  {
+    href: '/catalogo',
+    titulo: 'Catálogo',
+    descripcion: 'Publicaciones jurídicas en HTML, EPUB, PDF accesible, PDF fijo y PWA.',
+    icono: '📖'
+  },
   {
     href: '/normativa',
     titulo: 'Normativa',
-    descripcion: 'Leyes, decretos y resoluciones con índice temático y trazabilidad.',
+    descripcion: 'Leyes, decretos y resoluciones con índice temático y búsqueda full-text.',
     icono: '⚖️'
   },
   {
@@ -16,71 +21,62 @@ const destacados = [
     icono: '📚'
   },
   {
-    href: '/doctrina', // ¡Añadimos tu nueva sección!
+    href: '/doctrina',
     titulo: 'Doctrina',
     descripcion: 'Colección curada de ensayos y estudios jurídicos de alto nivel.',
-    icono: '📖'
+    icono: '🖋️'
   },
   {
     href: '/validacion',
     titulo: 'Validación',
-    descripcion: 'Comprueba la autenticidad e integridad de documentos mediante hash.',
+    descripcion: 'Comprobá autenticidad e integridad de documentos mediante hash y sello.',
     icono: '🔒'
   }
 ];
 ---
 
 <LayoutBase title="Inicio | LexDigitalHD">
-  <section class="max-w-6xl mx-auto px-6 py-16 md:py-24 min-h-[80vh] flex flex-col justify-center">
-    
-    <!-- Encabezado Principal -->
-    <p class="font-mono text-xs uppercase tracking-widest text-brand-400 font-semibold mb-3">
-      LexDigitalHD 2.0
+  <section class="container py-16 md:py-24 min-h-[80vh] flex flex-col justify-center">
+    <p class="font-mono text-xs uppercase tracking-widest text-brand-600">
+      Plataforma jurídica
     </p>
-    <h1 class="font-sans text-4xl md:text-5xl font-extrabold tracking-tight text-content text-balance leading-tight">
-      Publicación y validación jurídica <br class="hidden md:block"/> con trazabilidad digital
+    <h1 class="mt-3 font-serif text-4xl md:text-5xl font-semibold tracking-tight text-balance">
+      Publicación y validación jurídica con trazabilidad digital
     </h1>
-    <p class="mt-6 max-w-2xl text-lg text-content-muted leading-relaxed">
+    <p class="mt-5 max-w-2xl text-lg text-content-muted/80">
       Normativa, jurisprudencia y doctrina en un solo lugar, con sellado
-      verificable y control de versiones garantizado.
+      verificable y control de versiones.
     </p>
 
-    <!-- Botones de Acción Rápida (Adaptados a tu paleta oscura) -->
-    <div class="mt-10 flex flex-wrap gap-4">
-      <a href="/normativa" class="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-white text-sm font-bold rounded-lg transition-colors focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-surface shadow-sm">
-        Explorar Normativa
-      </a>
-      <a href="/doctrina" class="px-6 py-3 bg-surface-raised border border-border-strong text-content hover:text-brand-400 text-sm font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-brand-500 shadow-sm">
-        Leer Doctrina
-      </a>
-      <a href="/validacion" class="px-6 py-3 bg-surface-raised border border-border-strong text-content hover:text-brand-400 text-sm font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-brand-500 shadow-sm">
-        Verificar Documento
-      </a>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/catalogo" class="btn-primary">Ver catálogo</a>
+      <a href="/normativa" class="btn-ghost">Explorar normativa</a>
+      <a href="/doctrina" class="btn-ghost">Leer doctrina</a>
+      <a href="/validacion" class="btn-ghost">Verificar documento</a>
     </div>
 
-    <!-- Cuadrícula de Tarjetas -->
-    <div class="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- Ajustamos el grid para acomodar las 5 tarjetas armónicamente -->
+    <div class="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
       {destacados.map((d) => (
         <a
           href={d.href}
-          class="group bg-surface-raised border border-border-strong p-6 rounded-xl flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+          class="group card flex flex-col gap-3 transition-all duration-200 hover:-translate-y-1 hover:border-brand-600/60 hover:shadow-lg dark:hover:ring-2 dark:hover:ring-brand-500/40 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2 focus:ring-offset-surface"
         >
-          <span class="text-3xl bg-surface p-3 rounded-lg w-fit border border-border" aria-hidden="true">{d.icono}</span>
-          <h2 class="font-bold text-xl text-content transition-colors group-hover:text-brand-400">
+          <span class="text-3xl" aria-hidden="true">{d.icono}</span>
+          <h2 class="font-serif text-lg font-semibold text-content transition-colors group-hover:text-brand-400">
             {d.titulo}
           </h2>
-          <p class="text-sm text-content-muted leading-relaxed">
+          <p class="text-sm text-content-muted/80">
             {d.descripcion}
           </p>
-          <span class="mt-auto pt-4 inline-flex items-center gap-1 text-xs font-bold text-brand-400 opacity-0 transition-opacity group-hover:opacity-100">
-            Explorar sección
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <span class="mt-2 inline-flex items-center gap-1 text-xs font-medium text-brand-400 opacity-0 transition-opacity group-hover:opacity-100">
+            Explorar
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </span>
         </a>
       ))}
     </div>
-
   </section>
 </LayoutBase>
