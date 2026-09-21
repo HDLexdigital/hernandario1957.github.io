@@ -1,34 +1,76 @@
-/**
- * @file EpubAdapter.ts
- * @description Proyector pasivo a EPUB3. 
- * Extrae los metadatos Dublin Core del contrato inmutable para construir el manifiesto OPF.
- */
+import { Writable } from 'stream';
 import { IOutputAdapter } from './IOutputAdapter';
 import { C01_03_ContractMultisource, DublinCoreMetadata } from '../contracts/C01-03-multisource';
+import { ContractFormat, IVirtualFileSystem } from '../contracts/MVP-057-transaction';
 
 export class EpubAdapter implements IOutputAdapter {
-  public readonly formatName = 'EPUB3-Standard';
+  public readonly formatId = ContractFormat.EPUB3;
 
-  public async process(contract: C01_03_ContractMultisource): Promise<void> {
-    console.log(`\n[${this.formatName}] Iniciando empaquetado...`);
+  public async process(
+    contract: C01_03_ContractMultisource, 
+    vfs: IVirtualFileSystem,
+    abortSignal: AbortSignal
+  ): Promise<void> {
     
-    // Extracción de solo lectura del contrato
     const metadata = contract.manifest.dublinCore;
-    const directives = contract.targetDirectives.epub3;
-    const documentId = contract.semanticTree.documentId;
+    const docId = contract.semanticTree.documentId;
+    const timestamp = contract.timestamp;
 
-    console.log(`[${this.formatName}] Generando package.opf (Dublin Core Mapeado)`);
-    console.log(`[${this.formatName}] Directiva fuentes fallback: ${directives.includeFallbackFonts}`);
+    // 1. Escribir mimetype (Requisito estricto del estándar EPUB, sin declaración XML)
+    await this.writeFileSafely(vfs, abortSignal, 'mimetype', 'application/epub+zip');
 
-    // Proyección pasiva del OPF (Open Packaging Format)
-    const opfContent = this.generatePackageOpf(metadata, documentId, contract.timestamp);
+    // 2. Escribir META-INF/container.xml
+    const containerXml = `<?xml version="1.0" encoding="UTF-8"?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="OEBPS/package.opf" media-type="application/oebps-package+xml"/>
+  </rootfiles>
+</container>`;
+    await this.writeFileSafely(vfs, abortSignal, 'META-INF/container.xml', containerXml);
 
-    console.log(`[${this.formatName}] ✅ Manifiesto OPF generado en memoria para: ${metadata.identifier}`);
+    // 3. Escribir OEBPS/package.opf
+    const opfContent = this.generatePackageOpf(metadata, docId, timestamp);
+    await this.writeFileSafely(vfs, abortSignal, 'OEBPS/package.opf', opfContent);
   }
 
   /**
-   * Genera el archivo package.opf requerido por el estándar EPUB3.
+   * Envoltorio seguro para vincular la creación del stream, la escritura y la señal de aborto a una Promesa.
    */
+  private async writeFileSafely(vfs: IVirtualFileSystem, signal: AbortSignal, filename: string, content: string): Promise<void> {
+    if (signal.aborted) {
+      throw new Error(`[VFS-${this.formatId}] Interrumpido antes de crear: ${filename}`);
+    }
+
+    return new Promise(async (resolve, reject) => {
+      let stream: Writable;
+      try {
+        stream = await vfs.createWriteStream(filename);
+      } catch (err) {
+        return reject(err);
+      }
+
+      // Vínculos de terminación física
+      stream.on('finish', resolve);
+      stream.on('error', reject);
+
+      // Cancelación coordinada
+      const onAbort = () => {
+        stream.destroy(new Error(`[VFS-${this.formatId}] Cancelación propagada. Stream destruido en ${filename}`));
+      };
+      signal.addEventListener('abort', onAbort);
+
+      // Limpieza de memoria para el listener
+      stream.on('close', () => signal.removeEventListener('abort', onAbort));
+
+      try {
+        stream.write(content);
+        stream.end();
+      } catch (err) {
+        stream.destroy(err as Error);
+      }
+    });
+  }
+
   private generatePackageOpf(dc: DublinCoreMetadata, docId: string, timestamp: string): string {
     return `<?xml version="1.0" encoding="UTF-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" unique-identifier="pub-id" version="3.0">
@@ -40,21 +82,14 @@ export class EpubAdapter implements IOutputAdapter {
     <meta property="dcterms:modified">${timestamp}</meta>
   </metadata>
   <manifest>
-    <!-- Los items XHTML se inyectarán aquí en etapas posteriores -->
     <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
   </manifest>
   <spine>
-    <!-- Orden de lectura de los fragmentos modulares -->
   </spine>
 </package>`;
   }
 
   private escapeXml(unsafe: string): string {
-    return unsafe
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+    return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
   }
 }
