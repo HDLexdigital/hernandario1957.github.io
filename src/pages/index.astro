@@ -1,0 +1,99 @@
+---
+import * as fs from 'fs/promises';
+import * as path from 'path';
+
+let htmlContent = "<p>No se encontró ninguna compilación.</p>";
+let txId = "Ninguna";
+
+try {
+  // 1. Fase 1: Resolver la última transacción válida desde el índice
+  // (Usamos el hash del test de integración completo de la Estrella de 5 Puntas)
+  const hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const indexPath = path.resolve(process.cwd(), `dist/indexes/${hash}.json`);
+  
+  const indexRaw = await fs.readFile(indexPath, 'utf8');
+  const indexData = JSON.parse(indexRaw);
+  txId = indexData.currentTxId;
+
+  // 2. Fase 2: Resolver el XHTML físico generado por el Motor
+  const xhtmlPath = path.resolve(process.cwd(), `dist/builds/${txId}/xhtml/index.xhtml`);
+  const rawXhtml = await fs.readFile(xhtmlPath, 'utf8');
+
+  // 3. Extracción Segura: Tomar solo el interior del body para no duplicar etiquetas <html>
+  const bodyMatch = rawXhtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  if (bodyMatch) {
+    htmlContent = bodyMatch[1];
+  } else {
+    htmlContent = rawXhtml;
+  }
+} catch (err) {
+  console.error("[ASTRO] Error leyendo el artefacto:", err);
+  htmlContent = `<p style="color:red;">Error cargando el contrato C01-03: ${err.message}</p>`;
+}
+---
+
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LexDigitalHD - Visor del Contrato</title>
+  <style>
+    /* Fase 4: Inyección de LexCodex CSS Básico (Para probar la semántica) */
+    :root {
+      --lex-text: #2c3e50;
+      --lex-bg: #fdfdfc;
+      --lex-accent: #8e44ad;
+      --lex-border: #bdc3c7;
+    }
+    body {
+      font-family: "Georgia", serif;
+      background-color: var(--lex-bg);
+      color: var(--lex-text);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+    .status-bar {
+      font-family: system-ui, sans-serif;
+      background: #e8f8f5;
+      border: 1px solid #1abc9c;
+      color: #16a085;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 3rem;
+    }
+    h1 {
+      font-family: system-ui, sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid var(--lex-border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    section.chapter {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--lex-border);
+    }
+    p {
+      text-align: justify;
+      margin-bottom: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="status-bar">
+    <strong>🟢 LEX-DIGITAL MOTOR ACTIVO</strong> | Renderizando Transacción: <code>{txId}</code>
+  </div>
+
+  <!-- Fase 3: Render SSR (Inyección del árbol transaccional) -->
+  <main>
+    <Fragment set:html={htmlContent} />
+  </main>
+
+</body>
+</html>
