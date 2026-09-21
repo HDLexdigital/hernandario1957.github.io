@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://lexdigitalhd.com/schemas/C01-03-multisource.schema.json",
+  "title": "C01-03-CONTRACT-MULTISOURCE",
+  "description": "Contrato de Frontera Estricto para MVP-056",
+  "type": "object",
+  "definitions": {
+    "SemanticNode": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["title", "chapter", "article", "paragraph", "list", "footnote"] },
+        "content": { "type": "string" },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SemanticNode" }
+        }
+      },
+      "required": ["id", "type"],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "version": { 
+      "type": "string", 
+      "const": "1.0.0" 
+    },
+    "timestamp": { 
+      "type": "string", 
+      "format": "date-time" 
+    },
+    "sourceHash": { 
+      "type": "string",
+      "description": "Firma SHA-256 del árbol semántico para trazabilidad determinista",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "manifest": {
+      "type": "object",
+      "properties": {
+        "dublinCore": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "creator": { "type": "string" },
+            "language": { "type": "string", "pattern": "^[a-z]{2}(-[A-Z]{2})?$" },
+            "identifier": { "type": "string" }
+          },
+          "required": ["title", "creator", "language", "identifier"],
+          "additionalProperties": false
+        },
+        "a11y": {
+          "type": "object",
+          "properties": {
+            "wcagLevel": { "type": "string", "enum": ["A", "AA", "AAA"] }
+          },
+          "required": ["wcagLevel"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["dublinCore", "a11y"],
+      "additionalProperties": false
+    },
+    "semanticTree": {
+      "type": "object",
+      "properties": {
+        "documentId": { "type": "string" },
+        "nodes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SemanticNode" }
+        }
+      },
+      "required": ["documentId", "nodes"],
+      "additionalProperties": false
+    },
+    "targetDirectives": {
+      "type": "object",
+      "properties": {
+        "xhtml": { 
+          "type": "object", 
+          "properties": { "modularizeBy": { "type": "string", "enum": ["chapter", "article", "none"] } },
+          "required": ["modularizeBy"],
+          "additionalProperties": false 
+        },
+        "epub3": { 
+          "type": "object", 
+          "properties": { "includeFallbackFonts": { "type": "boolean" } },
+          "required": ["includeFallbackFonts"],
+          "additionalProperties": false 
+        },
+        "pdfUa": { 
+          "type": "object", 
+          "properties": { "taggingStrategy": { "type": "string", "enum": ["strict", "auto"] } },
+          "required": ["taggingStrategy"],
+          "additionalProperties": false 
+        },
+        "pdfPrint": { 
+          "type": "object", 
+          "properties": { "colorProfile": { "type": "string", "enum": ["CMYK-FOGRA39", "Grayscale"] } },
+          "required": ["colorProfile"],
+          "additionalProperties": false 
+        },
+        "pwa": { 
+          "type": "object", 
+          "properties": { "offlineStrategy": { "type": "string", "enum": ["cache-first", "network-first"] } },
+          "required": ["offlineStrategy"],
+          "additionalProperties": false 
+        }
+      },
+      "required": ["xhtml", "epub3", "pdfUa", "pdfPrint", "pwa"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["version", "timestamp", "sourceHash", "manifest", "semanticTree", "targetDirectives"],
+  "additionalProperties": false
+}
