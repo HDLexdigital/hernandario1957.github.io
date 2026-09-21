@@ -1,57 +1,71 @@
-/**
- * @file MultisourceEngine.ts
- * @description Orquestador central del MVP-056. 
- * Ejerce la disciplina arquitectónica: Valida atómicamente y distribuye
- * el payload inmutable a los adaptadores registrados.
- */
 import { MultisourceValidator } from '../validadores/C01-03-multisource.validator';
 import { IOutputAdapter } from '../adapters/IOutputAdapter';
+import { TransactionManager } from './TransactionManager';
+import { ContractFormat } from '../contracts/MVP-057-transaction';
 
 export class MultisourceEngine {
-  private validator: MultisourceValidator;
-  private adapters: IOutputAdapter[] = [];
+  private validator = new MultisourceValidator();
+  private adapters = new Map<ContractFormat, IOutputAdapter>();
 
-  constructor() {
-    // La instanciación del validador carga el Schema síncronamente.
-    // Si el Schema no existe o está corrupto, el proceso muere aquí (Cero Inercia).
-    this.validator = new MultisourceValidator();
-  }
-
-  /**
-   * Inyecta un adaptador pasivo en el ciclo de vida del motor.
-   */
   public registerAdapter(adapter: IOutputAdapter): void {
-    this.adapters.push(adapter);
+    if (this.adapters.has(adapter.formatId)) {
+      throw new Error(`[ENGINE] Adaptador para ${adapter.formatId} ya registrado.`);
+    }
+    this.adapters.set(adapter.formatId, adapter);
+  }
+
+  public async execute(rawPayload: unknown): Promise<void> {
+    this.validateRegistryComplete();
+
+    const validContract = this.validator.validate(rawPayload);
+    const txManager = new TransactionManager(validContract.sourceHash);
+    const abortController = new AbortController();
+
+    try {
+      await txManager.begin();
+      
+      const promises = Array.from(this.adapters.values()).map(async (adapter) => {
+        try {
+          // CRÍTICO-01: Se entrega el VFS Enjaulado, no el txManager
+          const isolatedVFS = txManager.allocateVFS(adapter.formatId);
+          await adapter.process(validContract, isolatedVFS, abortController.signal);
+        } catch (err) {
+          abortController.abort(`[ENGINE] Fallo desencadenado por ${adapter.formatId}`);
+          throw err;
+        }
+      });
+
+      const results = await Promise.allSettled(promises);
+      
+      const failures = results.filter(r => r.status === 'rejected');
+      if (failures.length > 0) {
+        throw new Error(`Transacción abortada. Hilos fallidos: ${failures.length}`);
+      }
+
+      await txManager.seal();
+      await txManager.commit();
+      
+    } catch (globalError: any) {
+      await txManager.rollback();
+      throw globalError;
+    }
   }
 
   /**
-   * Inicia el flujo de procesamiento multisalida.
-   * @param rawPayload JSON crudo proveniente de la ingesta estructurada.
+   * ALTO-06: Verificación de conjuntos, no solo de cantidad.
    */
-  public async execute(rawPayload: unknown): Promise<void> {
-    console.log('[ENGINE] Iniciando evaluación del contrato multisalida...');
+  private validateRegistryComplete(): void {
+    const requiredFormats = new Set(Object.values(ContractFormat));
+    const registeredFormats = new Set(this.adapters.keys());
     
-    // 1. PATRÓN FAIL-FAST: Validación y Congelamiento del Payload
-    // Si esto falla, lanza una excepción atómica y nada se procesa.
-    const validContract = this.validator.validate(rawPayload);
+    if (requiredFormats.size !== registeredFormats.size) {
+      throw new Error(`[ENGINE] Registro inválido. Faltan adaptadores.`);
+    }
     
-    console.log(`[ENGINE] Contrato C01-03 validado exitosamente.`);
-    console.log(`[ENGINE] Hash Origen Semántico: ${validContract.sourceHash}`);
-    console.log(`[ENGINE] Despachando a ${this.adapters.length} adaptadores pasivos...`);
-
-    // 2. PROYECCIÓN: Ejecución concurrente de adaptadores pasivos
-    const executionPromises = this.adapters.map(adapter => {
-      console.log(`[ENGINE] -> Proyectando formato: ${adapter.formatName}`);
-      return adapter.process(validContract).catch(err => {
-        // En caso de fallo en un adaptador específico, reportamos sin detener 
-        // necesariamente a los demás, pero marcando el error en el pipeline.
-        console.error(`[FATAL] Error en adaptador [${adapter.formatName}]:`, err.message);
-        throw err;
-      });
-    });
-
-    await Promise.all(executionPromises);
-    
-    console.log('[ENGINE] Ciclo de proyección Multisalida completado (MVP-056).');
+    for (const req of requiredFormats) {
+      if (!registeredFormats.has(req)) {
+        throw new Error(`[ENGINE] Registro inválido. Falta adaptador explícito: ${req}`);
+      }
+    }
   }
 }
