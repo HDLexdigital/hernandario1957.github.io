@@ -23,4 +23,20 @@ export class CorporaPathResolver {
   public static getIndexesDir(corpusSlug: string): string {
     return path.resolve(this.getCorpusDir(corpusSlug), 'indexes');
   }
+
+  public static getVersionsPath(corpusSlug: string): string {
+    return path.resolve(this.getIndexesDir(corpusSlug), 'versions.json');
+  }
+
+  public static getImpactPath(corpusSlug: string): string {
+    return path.resolve(this.getIndexesDir(corpusSlug), 'impact-metrics.json');
+  }
+
+  public static getSearchPath(corpusSlug: string): string {
+    return path.resolve(this.getIndexesDir(corpusSlug), 'search.json');
+  }
+
+  public static getGraphPath(corpusSlug: string): string {
+    return path.resolve(this.getIndexesDir(corpusSlug), 'graph.json');
+  }
 }
