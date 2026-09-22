@@ -1,0 +1,94 @@
+---
+import { HistoricalService } from '../../services/HistoricalService';
+
+const url = Astro.url;
+const yearParam = url.searchParams.get('year');
+const selectedYear = yearParam ? parseInt(yearParam, 10) : 2026;
+
+const historicalService = new HistoricalService();
+const snapshot = await historicalService.getConstitutionSnapshot(selectedYear);
+---
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>LexDigitalHD - Explorador Histórico ({snapshot.targetYear})</title>
+  <style>
+    :root { --bg: #f8f9fa; --primary: #1b365d; --accent: #27ae60; --text: #2c3e50; }
+    body { font-family: system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; }
+    header { background: var(--primary); color: white; padding: 2rem; text-align: center; }
+    .container { max-width: 950px; margin: 2rem auto; padding: 0 1.5rem; }
+    
+    .toolbar { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    select { padding: 0.6rem 1rem; font-size: 1rem; border-radius: 4px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer; }
+    
+    .section-title { font-size: 1.2rem; color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.3rem; margin-top: 2rem; }
+    .article-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); margin-bottom: 1.2rem; border-left: 4px solid var(--accent); }
+    .article-meta { font-size: 0.85rem; color: #64748b; margin-bottom: 0.5rem; display: flex; gap: 1rem; }
+    .badge { background: #e2e8f0; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+    .nav-links { margin-top: 3rem; text-align: center; padding-bottom: 2rem; }
+    a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 style="margin: 0; font-size: 2rem;">LexDigitalHD 🏛️</h1>
+    <p style="margin: 0.5rem 0 0; opacity: 0.85;">Explorador de Memoria Normativa y Contexto Temporal</p>
+  </header>
+
+  <main class="container">
+    
+    <div class="toolbar">
+      <div>
+        <h2 style="margin: 0; font-size: 1.3rem; color: var(--primary);">Constitución Vigente al Año {snapshot.targetYear}</h2>
+        <p style="margin: 0.2rem 0 0; font-size: 0.9rem; color: #64748b;">Corte normativo al: {snapshot.effectiveDate}</p>
+      </div>
+      <div>
+        <label for="yearSelect" style="font-weight: bold; margin-right: 0.5rem;">Año de Consulta:</label>
+        <select id="yearSelect" onchange="location.href='?year=' + this.value;">
+          <option value="1991" selected={snapshot.targetYear === 1991}>1991 (Original)</option>
+          <option value="2005" selected={snapshot.targetYear === 2005}>2005</option>
+          <option value="2015" selected={snapshot.targetYear === 2015}>2015</option>
+          <option value="2026" selected={snapshot.targetYear === 2026}>2026 (Actual)</option>
+        </select>
+      </div>
+    </div>
+
+    {snapshot.chapters.length > 0 && (
+      <>
+        <h3 class="section-title">Estructura Capitular</h3>
+        {snapshot.chapters.map((ch: any) => (
+          <div class="article-card" style="border-left-color: var(--primary);">
+            <div class="article-meta">
+              <span class="badge">Capítulo</span>
+              <span>Vigencia: {ch.effectiveDate}</span>
+            </div>
+            <h4 style="margin: 0 0 0.5rem; color: var(--primary);">{ch.title}</h4>
+            <p style="margin: 0; color: #475569; font-size: 0.95rem;">{ch.content}</p>
+          </div>
+        ))}
+      </>
+    )}
+
+    <h3 class="section-title">Articulado Vigente</h3>
+    {snapshot.articles.map((art: any) => (
+      <div class="article-card">
+        <div class="article-meta">
+          <span class="badge">Versión: {art.activeVersionId}</span>
+          <span>Vigencia desde: {art.effectiveDate}</span>
+        </div>
+        <h4 style="margin: 0 0 0.5rem; color: var(--primary);">{art.title}</h4>
+        <p style="margin: 0; color: #475569;">{art.content}</p>
+      </div>
+    ))}
+
+    <div class="nav-links">
+      <a href="/admin">← Volver al Control Plane</a> | 
+      <a href="/admin/diff">Abrir Comparador Jurídico (Diff) →</a>
+    </div>
+
+  </main>
+
+</body>
+</html>

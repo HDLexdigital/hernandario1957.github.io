@@ -1,134 +1,199 @@
 ---
+import * as fs from 'fs/promises';
+import * as path from 'path';
+
+// Utilidad para leer artefactos de forma segura (Tolerante a fallos)
+async function safeReadJson(relativePath: string) {
+  try {
+    const raw = await fs.readFile(path.resolve(process.cwd(), relativePath), 'utf8');
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+// 1. Recopilar telemetría de los artefactos
+const currentRelease = await safeReadJson('dist/releases/current.json');
+const previousRelease = await safeReadJson('dist/releases/previous.json');
+const impactData = await safeReadJson('dist/indexes/impact-metrics.json');
+const historyData = await safeReadJson('dist/builds/history.json');
+const versionsData = await safeReadJson('dist/indexes/versions.json');
+
+// 2. Procesar y estructurar datos para la vista
+const transactions = Array.isArray(historyData) ? historyData : (historyData?.transactions || []);
+const latestTxs = transactions.slice(-5).reverse(); // Últimos 5 builds
+
+const totalBuilds = transactions.length;
+const failedBuilds = transactions.filter((tx: any) => tx.status === 'failed').length;
+const successRate = totalBuilds === 0 ? 0 : Math.round(((totalBuilds - failedBuilds) / totalBuilds) * 100);
+
+const mutatedArticles = impactData?.mostMutatedArticles?.slice(0, 5) || [];
+const totalNodes = versionsData?.nodes?.length || 0;
 ---
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>LexDigitalHD - Control Plane</title>
+  <title>LexDigitalHD - Observability Dashboard</title>
   <style>
-    :root { --bg: #f4f6f7; --sidebar: #2c3e50; --accent: #27ae60; --text: #333; --panel: #fff; }
-    body { font-family: system-ui, sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); color: var(--text); }
-    aside { width: 260px; background: var(--sidebar); color: #fff; padding: 1.5rem; display: flex; flex-direction: column; }
-    aside h2 { color: #ecf0f1; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #34495e; padding-bottom: 1rem; margin-top: 0; }
-    .nav-btn { background: transparent; border: none; color: #bdc3c7; text-align: left; padding: 0.8rem; margin-bottom: 0.5rem; cursor: pointer; border-radius: 4px; font-size: 1rem; transition: 0.2s; }
-    .nav-btn:hover, .nav-btn.active { background: #34495e; color: #fff; }
+    :root { --bg: #f4f7f6; --sidebar: #1a252f; --panel: #ffffff; --text: #2c3e50; --accent: #3498db; --success: #2ecc71; --danger: #e74c3c; --warning: #f1c40f; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); color: var(--text); }
     
-    main { flex: 1; padding: 2.5rem; overflow-y: auto; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    /* Layout */
+    aside { width: 260px; background: var(--sidebar); color: #ecf0f1; padding: 1.5rem; display: flex; flex-direction: column; }
+    main { flex: 1; padding: 2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 2rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     
-    .card { background: var(--panel); padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
-    .btn-primary { background: var(--accent); color: white; border: none; padding: 0.8rem 1.5rem; font-size: 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    .btn-primary:hover { background: #219653; }
+    /* Componentes */
+    .card { background: var(--panel); padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
+    h2, h3 { margin-top: 0; color: var(--sidebar); }
+    .metric-value { font-size: 2rem; font-weight: bold; margin: 0.5rem 0; color: var(--sidebar); }
+    .metric-label { font-size: 0.85rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; }
     
-    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #ecf0f1; }
-    th { background: #f9f9f9; color: #7f8c8d; font-weight: 600; }
-    .status-badge { padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-    .status-processing { background: #f39c12; color: #fff; }
-    .status-success { background: #27ae60; color: #fff; }
-    .status-failed { background: #c0392b; color: #fff; }
-    .status-published { background: #2980b9; color: #fff; }
-    code { background: #eee; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.85rem; color: #e67e22; }
+    /* Badges & Status */
+    .badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .badge.success { background: #d5f5e3; color: #1e8449; }
+    .badge.failed { background: #fadbd8; color: #943126; }
+    
+    /* Gráfica de Barras CSS */
+    .bar-chart { margin-top: 1rem; }
+    .bar-row { display: flex; align-items: center; margin-bottom: 0.8rem; }
+    .bar-label { width: 100px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar-track { flex: 1; height: 8px; background: #ecf0f1; border-radius: 4px; margin: 0 1rem; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--accent); border-radius: 4px; }
+    .bar-value { width: 30px; font-size: 0.8rem; color: #7f8c8d; text-align: right; }
+    
+    /* Timeline de Releases */
+    .release-box { padding: 1rem; border-radius: 6px; border-left: 4px solid var(--accent); background: #f8fafc; margin-bottom: 1rem; }
+    .release-box.previous { border-left-color: #bdc3c7; opacity: 0.8; }
   </style>
 </head>
 <body>
 
   <aside>
-    <h2>LexDigitalHD<br><span style="font-size: 0.8rem; color: #95a5a6;">Control Plane</span></h2>
-    <button class="nav-btn active">📊 Historial y Estado</button>
-    <button class="nav-btn">⚙️ Centro de Compilación</button>
-    <button class="nav-btn">🛡️ Integridad</button>
-    <div style="flex:1"></div>
-    <a href="/" style="color: #bdc3c7; text-decoration: none; font-size: 0.9rem;">← Volver al sitio público</a>
+    <h2 style="border-bottom: 1px solid #2c3e50; padding-bottom: 1rem;">LexDigitalHD<br><span style="font-size: 0.8rem; font-weight: 400; color: #95a5a6;">Observability Center</span></h2>
+    <a href="/admin" style="color: #fff; text-decoration: none; padding: 0.8rem; background: #2c3e50; border-radius: 4px; margin-bottom: 0.5rem;">📊 Panel Ejecutivo</a>
+    <a href="/history" style="color: #bdc3c7; text-decoration: none; padding: 0.8rem;">🏛️ Explorador Histórico</a>
+    <a href="/admin/diff" style="color: #bdc3c7; text-decoration: none; padding: 0.8rem;">⚖️ Comparador Jurídico</a>
+    <a href="/" style="color: #bdc3c7; text-decoration: none; padding: 0.8rem; margin-top: auto;">← Volver al Portal</a>
   </aside>
 
   <main>
-    <div class="header">
-      <h1 style="margin: 0;">Historial Transaccional</h1>
-      <button id="btnBuild" class="btn-primary">▶ Generar Nuevo Build</button>
+    <!-- 1. MÉTRICAS EJECUTIVAS -->
+    <div class="grid-4">
+      <div class="card" style="border-bottom: 4px solid var(--success);">
+        <div class="metric-label">Pipeline Health</div>
+        <div class="metric-value">{successRate}%</div>
+        <div style="font-size: 0.8rem; color: #7f8c8d;">{totalBuilds} Builds Totales</div>
+      </div>
+      <div class="card" style="border-bottom: 4px solid var(--accent);">
+        <div class="metric-label">Nodos Normativos</div>
+        <div class="metric-value">{totalNodes}</div>
+        <div style="font-size: 0.8rem; color: #7f8c8d;">Indexados en versions.json</div>
+      </div>
+      <div class="card" style="border-bottom: 4px solid var(--warning);">
+        <div class="metric-label">Impacto Global</div>
+        <div class="metric-value">{impactData ? impactData.globalStabilityIndex : 0}</div>
+        <div style="font-size: 0.8rem; color: #7f8c8d;">Reformas Históricas</div>
+      </div>
+      <div class="card" style="border-bottom: 4px solid var(--sidebar);">
+        <div class="metric-label">Estado de Producción</div>
+        <div class="metric-value" style="font-size: 1.2rem; margin-top: 1rem;">
+          {currentRelease ? <span class="badge success">PUBLICADO</span> : <span class="badge failed">SIN DESPLIEGUE</span>}
+        </div>
+      </div>
     </div>
 
+    <div class="grid-2">
+      <!-- 2. OBSERVABILIDAD DE RELEASES -->
+      <div class="card">
+        <h3>Despliegues (PublishWorker)</h3>
+        
+        {currentRelease ? (
+          <div class="release-box">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong>Producción (Activo)</strong>
+              <span class="badge success">Current</span>
+            </div>
+            <div style="font-size: 0.85rem; color: #555;">
+              <div><strong>TX-ID:</strong> {currentRelease.activeTxId}</div>
+              <div><strong>Fecha:</strong> {new Date(currentRelease.publishedAt).toLocaleString()}</div>
+              <div><strong>Por:</strong> {currentRelease.publishedBy}</div>
+            </div>
+          </div>
+        ) : (
+          <p style="color: #7f8c8d; font-size: 0.9rem;">No hay versión publicada en producción.</p>
+        )}
+
+        {previousRelease && (
+          <div class="release-box previous">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong>Versión de Respaldo</strong>
+              <span class="badge" style="background: #e2e8f0; color: #475569;">Rollback Target</span>
+            </div>
+            <div style="font-size: 0.85rem; color: #555;">
+              <div><strong>TX-ID:</strong> {previousRelease.activeTxId}</div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- 3. IMPACT ANALYZER VISUAL -->
+      <div class="card">
+        <h3>Analizador de Impacto Normativo</h3>
+        <p style="font-size: 0.85rem; color: #7f8c8d; margin-top: -0.5rem;">Artículos con mayor tasa de mutación histórica.</p>
+        
+        {mutatedArticles.length > 0 ? (
+          <div class="bar-chart">
+            {mutatedArticles.map((art: any) => {
+              const maxScore = mutatedArticles[0].mutationIndexScore || 1;
+              const width = Math.max(5, (art.mutationIndexScore / maxScore) * 100);
+              
+              return (
+                <div class="bar-row">
+                  <div class="bar-label" title={art.title}>{art.nodeId}</div>
+                  <div class="bar-track">
+                    <div class="bar-fill" style={`width: ${width}%;`}></div>
+                  </div>
+                  <div class="bar-value">{art.totalReforms} ref.</div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <p style="color: #7f8c8d; font-size: 0.9rem;">Ejecuta el MVP-068 para generar métricas de impacto.</p>
+        )}
+      </div>
+    </div>
+
+    <!-- 4. SALUD DEL PIPELINE EDITORIAL -->
     <div class="card">
-      <table id="historyTable">
+      <h3>Transacciones Recientes (Ledger)</h3>
+      <table style="width: 100%; text-align: left; border-collapse: collapse; margin-top: 1rem;">
         <thead>
-          <tr>
-            <th>TX-ID</th>
-            <th>Documento</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Artefactos (Hashes)</th>
+          <tr style="border-bottom: 2px solid #ecf0f1; color: #7f8c8d; font-size: 0.85rem;">
+            <th style="padding: 0.5rem;">TX-ID</th>
+            <th style="padding: 0.5rem;">Fecha</th>
+            <th style="padding: 0.5rem;">Estado</th>
+            <th style="padding: 0.5rem;">Artefactos Criptográficos</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td colspan="5" style="text-align: center; color: #7f8c8d;">Cargando ledger...</td></tr>
+          {latestTxs.map((tx: any) => (
+            <tr style="border-bottom: 1px solid #ecf0f1; font-size: 0.9rem;">
+              <td style="padding: 0.8rem; font-family: monospace;">{tx.txId}</td>
+              <td style="padding: 0.8rem;">{new Date(tx.timestamp).toLocaleString()}</td>
+              <td style="padding: 0.8rem;">
+                <span class={`badge ${tx.status === 'success' ? 'success' : 'failed'}`}>{tx.status}</span>
+              </td>
+              <td style="padding: 0.8rem; font-size: 0.8rem; color: #7f8c8d;">
+                {Object.keys(tx.artifacts || {}).join(' • ') || 'Ninguno'}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
   </main>
-
-  <script>
-    const API_URL = 'http://localhost:3001/api';
-    
-    // Función para cargar el historial
-    async function loadHistory() {
-      try {
-        const res = await fetch(`${API_URL}/history`);
-        const data = await res.json();
-        
-        const tbody = document.querySelector('#historyTable tbody');
-        tbody.innerHTML = '';
-        
-        if (!data.transactions || data.transactions.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay transacciones registradas.</td></tr>';
-          return;
-        }
-
-        data.transactions.forEach(tx => {
-          const date = new Date(tx.timestamp).toLocaleString('es-CO');
-          const artifactsHtml = Object.entries(tx.artifacts).map(([key, record]) => 
-            `<div><strong>${key.toUpperCase()}:</strong> <code>${record.sha256.substring(0, 8)}...</code></div>`
-          ).join('') || '<span style="color:#999">Pendiente</span>';
-
-          tbody.innerHTML += `
-            <tr>
-              <td><code style="color: #34495e">${tx.txId.split('-')[0]}...</code></td>
-              <td><strong>${tx.documentId}</strong></td>
-              <td>${date}</td>
-              <td><span class="status-badge status-${tx.status}">${tx.status}</span></td>
-              <td style="font-size: 0.85rem">${artifactsHtml}</td>
-            </tr>
-          `;
-        });
-      } catch (err) {
-        console.error("Error cargando historial:", err);
-        document.querySelector('#historyTable tbody').innerHTML = `<tr><td colspan="5" style="color: red;">Error de conexión con el Orquestador API en el puerto 3001.</td></tr>`;
-      }
-    }
-
-    // Evento para disparar un nuevo build
-    document.getElementById('btnBuild').addEventListener('click', async () => {
-      try {
-        const btn = document.getElementById('btnBuild');
-        btn.disabled = true;
-        btn.innerText = 'Iniciando...';
-
-        await fetch(`${API_URL}/build`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ documentId: 'constitucion', sourceHash: 'hash-' + Date.now() })
-        });
-        
-        await loadHistory();
-        btn.disabled = false;
-        btn.innerText = '▶ Generar Nuevo Build';
-      } catch (err) {
-        alert('Fallo al conectar con la API de compilación.');
-      }
-    });
-
-    // Carga inicial
-    loadHistory();
-    // Auto-refresco cada 5 segundos para simular tiempo real
-    setInterval(loadHistory, 5000);
-  </script>
 </body>
 </html>
