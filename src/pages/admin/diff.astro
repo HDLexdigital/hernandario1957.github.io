@@ -1,0 +1,68 @@
+---
+import { DiffEngineService } from '../../services/DiffEngineService';
+
+// Generamos un diff de prueba al cargar la vista para demostración visual
+const engine = new DiffEngineService();
+const text1 = "Artículo 13. Todas las personas nacen libres e iguales ante la ley y recibirán protección temporal.";
+const text2 = "Artículo 13. Todas las personas nacen libres e iguales ante la ley y recibirán protección especial.";
+const diffResult = engine.computeWordDiff(text1, text2);
+---
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>LexDigitalHD - Comparador Jurídico (Diff Engine)</title>
+  <style>
+    :root { --bg: #f4f6f7; --sidebar: #2c3e50; --accent: #27ae60; --text: #333; --panel: #fff; }
+    body { font-family: system-ui, sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); color: var(--text); }
+    aside { width: 260px; background: var(--sidebar); color: #fff; padding: 1.5rem; display: flex; flex-direction: column; }
+    aside h2 { font-size: 1.2rem; text-transform: uppercase; border-bottom: 1px solid #34495e; padding-bottom: 1rem; margin-top: 0; }
+    .nav-btn { background: transparent; border: none; color: #bdc3c7; text-align: left; padding: 0.8rem; margin-bottom: 0.5rem; cursor: pointer; border-radius: 4px; font-size: 1rem; }
+    .nav-btn:hover, .nav-btn.active { background: #34495e; color: #fff; }
+    main { flex: 1; padding: 2.5rem; overflow-y: auto; }
+    .card { background: var(--panel); padding: 2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .diff-container { font-size: 1.1rem; line-height: 1.8; background: #fafafa; padding: 1.5rem; border: 1px solid #e1e4e8; border-radius: 6px; margin-top: 1rem; }
+    .added { background: #e6ffed; color: #22863a; padding: 0.1rem 0.3rem; border-radius: 3px; font-weight: 500; }
+    .removed { background: #ffeef0; color: #b31d28; text-decoration: line-through; padding: 0.1rem 0.3rem; border-radius: 3px; font-weight: 500; }
+    .unchanged { color: #24292e; }
+    .meta { display: flex; gap: 2rem; margin-bottom: 1rem; font-size: 0.9rem; color: #586069; }
+  </style>
+</head>
+<body>
+
+  <aside>
+    <h2>LexDigitalHD<br><span style="font-size: 0.8rem; color: #95a5a6;">Control Plane</span></h2>
+    <a href="/admin" style="text-decoration: none;"><button class="nav-btn">📊 Historial y Estado</button></a>
+    <button class="nav-btn active">⚖️ Comparador Jurídico (Diff)</button>
+    <a href="/" style="color: #bdc3c7; text-decoration: none; font-size: 0.9rem; margin-top: auto;">← Volver al sitio público</a>
+  </aside>
+
+  <main>
+    <div style="margin-bottom: 2rem;">
+      <h1 style="margin: 0;">Comparador Normativo</h1>
+      <p style="color: #666; margin-top: 0.5rem;">Análisis de metamorfosis legislativa entre versiones (Artículo 13)</p>
+    </div>
+
+    <div class="card">
+      <div class="meta">
+        <div><strong>Nodo:</strong> art-13</div>
+        <div><strong>Versión Base:</strong> v1991 (1991-07-04)</div>
+        <div><strong>Versión Destino:</strong> v2026 (2026-01-15)</div>
+      </div>
+      
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">Resultado del Diff Estructurado</h3>
+      
+      <div class="diff-container">
+        {diffResult.map((change) => {
+          if (change.type === 'added') {
+            return <span class="added">+{change.text} </span>;
+          } else if (change.type === 'removed') {
+            return <span class="removed">-{change.text} </span>;
+          } else {
+            return <span class="unchanged">{change.text} </span>;
+          }
+        })}
+      </div>
+    </div>
+  </main>
+</body>
+</html>

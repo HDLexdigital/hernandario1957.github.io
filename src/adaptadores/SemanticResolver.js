@@ -1,4 +1,5 @@
 'use strict';
+const { resolverTipoBase, tipoAEtiqueta } = require('./TypeResolver');
 
 function _sanitizeSelector(styleName) {
     if (!styleName) return '';
@@ -53,6 +54,16 @@ function indexSemanticMap(semanticMap) {
 
 // Resolver ontológico requerido por compilarLexmotor
 function resolveStyleName(styleName, strict = false, options = {}, context = {}) {
+    const sanitized = _sanitizeSelector(styleName);
+    const tipoSemantico = resolverTipoBase(styleName);
+    const tagFinal = tipoSemantico ? tipoAEtiqueta(tipoSemantico) : 'p';
+    return {
+        tag: tagFinal,
+        class: sanitized,
+        resolvedTag: tagFinal,
+        resolvedClass: sanitized
+    };
+}, context = {}) {
     const sanitized = _sanitizeSelector(styleName);
     return {
         tag: 'p',

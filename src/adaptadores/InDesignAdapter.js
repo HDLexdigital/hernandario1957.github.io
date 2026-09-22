@@ -14,27 +14,14 @@ const { resolverPresentation } = require('./PresentationResolver');
 // ============================================================================
 function limpiarTexto(texto) {
     if (!texto) return '';
-    return texto
-        .replace(/\uFEFF/g, '')                         // BOM
-        .replace(/\r?\n/g, ' ')                         // saltos de línea
-        .replace(/[ \t]+/g, ' ')                        // múltiples espacios
-        .trim();
+    return texto.replace(/\uFEFF/g, '');
 }
 
 // ============================================================================
 // ELIMINACIÓN DE DUPLICADOS COMUNES
 // ============================================================================
 function eliminarDuplicados(texto) {
-    let limpio = texto;
-
-    // X(X)
-    limpio = limpio.replace(/^(.+?)\s*\(\s*\1\s*\)\s*(.*)$/, '$1 $2');
-    // X. .(X)
-    limpio = limpio.replace(/^(.+?)\.\s*\(\s*\1\s*\)\s*(.*)$/, '$1 $2');
-    // X()X
-    limpio = limpio.replace(/^(.+?)\(\)\s*\1\s*(.*)$/, '$1 $2');
-
-    return limpio.replace(/[ \t]+/g, ' ').trim();
+    return texto;
 }
 
 function adaptarInDesign({ jsonCrudo, semanticMap }) {
@@ -101,19 +88,42 @@ function adaptarInDesign({ jsonCrudo, semanticMap }) {
     const mappedCharacters = new Set();
 
     if (semMap.styles && Array.isArray(semMap.styles)) {
-        semMap.styles.forEach(style => {
-            const name = style.originalName;
-            const type = style.type;
-            if (name && style.exportTagging && style.exportTagging.epub) {
-                styleBridge[name] = {
-                    className: style.exportTagging.epub.className || null,
-                    tag: style.exportTagging.epub.tag || null,
-                    presentation: style.presentation || null
-                };
-                if (type === 'paragraph') mappedParagraphs.add(name);
-                if (type === 'character') mappedCharacters.add(name);
+        // Soporte robusto para paragraphStyles y characterStyles del style-model.json
+        const processStylesCollection = (collection, type) => {
+            if (!collection) return;
+            for (const style of Object.values(collection)) {
+                const name = style?.metadata?.originalName;
+                const epubTag = style?.exportTagging?.epub || style?.semantic;
+                if (name) {
+                    styleBridge[name] = {
+                        className: epubTag?.className || style?.semantic?.class || null,
+                        tag: epubTag?.tag || style?.semantic?.tag || 'p',
+                        presentation: style?.presentation || null
+                    };
+                    if (type === 'paragraph') mappedParagraphs.add(name);
+                    if (type === 'character') mappedCharacters.add(name);
+                }
             }
-        });
+        };
+
+        if (Array.isArray(semMap.styles)) {
+            semMap.styles.forEach(style => {
+                const name = style.originalName;
+                const type = style.type;
+                if (name) {
+                    styleBridge[name] = {
+                        className: style?.exportTagging?.epub?.className || null,
+                        tag: style?.exportTagging?.epub?.tag || 'p',
+                        presentation: style?.presentation || null
+                    };
+                    if (type === 'paragraph') mappedParagraphs.add(name);
+                    if (type === 'character') mappedCharacters.add(name);
+                }
+            });
+        }
+
+        processStylesCollection(semMap.paragraphStyles, 'paragraph');
+        processStylesCollection(semMap.characterStyles, 'character');
     }
 
     // =========================================================================

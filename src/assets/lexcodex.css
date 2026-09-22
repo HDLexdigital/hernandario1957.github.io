@@ -1,0 +1,9 @@
+
+/* ESTILO DE CARÁCTER: C18_TT_GLOSS */
+.c18-tt-gloss {
+    font-style: italic;
+    color: #0054a8;
+    background-color: rgba(0, 115, 255, 0.08);
+    padding: 1px 3px;
+    border-radius: 3px;
+}
