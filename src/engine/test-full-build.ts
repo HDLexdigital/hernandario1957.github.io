@@ -5,12 +5,11 @@ import { PdfUaAdapter } from '../adapters/PdfUaAdapter';
 import { PdfPrintAdapter } from '../adapters/PdfPrintAdapter';
 import { PwaAdapter } from '../adapters/PwaAdapter';
 import { SemanticIndexer } from './SemanticIndexer';
+import { SearchIndexer } from './SearchIndexer';
 import { MultisourceValidator } from '../validadores/C01-03-multisource.validator';
-import * as fs from 'fs/promises';
-import * as path from 'path';
 
 async function runFullBuild() {
-  console.log('--- INICIANDO COMPILACIÓN Y INDEXACIÓN SEMÁNTICA (MVP-060) ---\n');
+  console.log('--- INICIANDO COMPILACIÓN TOTAL Y GENERACIÓN DE ÍNDICES ---\n');
   const engine = new MultisourceEngine();
   
   engine.registerAdapter(new XhtmlAdapter());
@@ -24,7 +23,7 @@ async function runFullBuild() {
     timestamp: new Date().toISOString(),
     sourceHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     manifest: {
-      dublinCore: { title: "Constitución Política de Colombia", creator: "Asamblea Nacional Constituyente", language: "es-CO", identifier: "urn:lex:co:const" },
+      dublinCore: { title: "Constitución Política", creator: "Asamblea", language: "es-CO", identifier: "urn:lex:co:const" },
       a11y: { wcagLevel: "AA" }
     },
     semanticTree: { 
@@ -34,12 +33,12 @@ async function runFullBuild() {
         { 
           id: "cap1", 
           type: "chapter", 
-          content: "CAPÍTULO I. De los principios fundamentales",
+          content: "CAPÍTULO I",
           children: [
             { 
               id: "art13", 
               type: "article", 
-              content: "Artículo 13. Todas las personas nacen libres e iguales...",
+              content: "Artículo 13",
               children: [
                 { id: "p1", type: "paragraph", content: "El Estado promoverá las condiciones para que la igualdad sea real y efectiva..." }
               ]
@@ -55,17 +54,20 @@ async function runFullBuild() {
   };
 
   try {
-    // 1. Ejecutar el motor transaccional
     await engine.execute(validPayload);
     
-    // 2. Generar el índice semántico directamente desde el contrato validado
     const validator = new MultisourceValidator();
     const contract = validator.validate(validPayload);
     
-    const indexer = new SemanticIndexer();
-    await indexer.generateAndPersist(contract);
+    // Generar TOC Semántico
+    const semanticIndexer = new SemanticIndexer();
+    await semanticIndexer.generateAndPersist(contract);
 
-    console.log(`\n✅ COMPILACIÓN E INDEXACIÓN SEMÁNTICA EXITOSAS.`);
+    // Generar Índice de Búsqueda
+    const searchIndexer = new SearchIndexer();
+    await searchIndexer.generateAndPersist(contract);
+
+    console.log(`\n✅ ARTEFACTOS Y MOTOR DE BÚSQUEDA GENERADOS EXITOSAMENTE.`);
   } catch (error) {
     console.error('❌ FALLO:', error);
   }

@@ -1,0 +1,88 @@
+---
+import * as fs from 'fs/promises';
+import * as path from 'path';
+
+// Leemos el artefacto de búsqueda generado por nuestro motor
+let searchRaw = '{"entries": []}';
+try {
+  const hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const searchIndexPath = path.resolve(process.cwd(), `dist/indexes/search-${hash}.json`);
+  searchRaw = await fs.readFile(searchIndexPath, 'utf8');
+} catch (e) {
+  console.error("[ASTRO-ERROR] No se pudo leer el índice de búsqueda.");
+}
+---
+
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Buscador Jurídico - LexDigitalHD</title>
+  <style>
+    :root { --bg: #fcfcfc; --text: #2c3e50; --border: #dcdde1; --accent: #2980b9; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+    input[type="text"] { width: 100%; padding: 1rem; font-size: 1.2rem; border: 2px solid var(--border); border-radius: 6px; margin-bottom: 2rem; box-sizing: border-box; }
+    input[type="text"]:focus { outline: none; border-color: var(--accent); }
+    .result-card { background: white; border: 1px solid var(--border); padding: 1.5rem; border-radius: 6px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .result-card h3 { margin-top: 0; }
+    .result-card a { color: var(--accent); text-decoration: none; }
+    .result-card a:hover { text-decoration: underline; }
+    .result-card p { font-family: "Georgia", serif; color: #555; }
+    .highlight { background-color: #ffeaa7; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <nav style="margin-bottom: 2rem;">
+    <a href="/" style="color: var(--accent); text-decoration: none;">← Volver al inicio</a>
+  </nav>
+
+  <h1>Buscador Semántico</h1>
+  <input type="text" id="searchInput" placeholder="Ingresa un término (ej. 'igualdad', 'artículo 13')..." autocomplete="off" />
+  
+  <div id="results">
+    <p style="color: #7f8c8d;">Esperando tu consulta...</p>
+  </div>
+
+  <!-- El script inyecta el JSON de búsqueda directamente en el cliente -->
+  <script define:vars={{ searchData: searchRaw }}>
+    const index = JSON.parse(searchData).entries;
+    const input = document.getElementById('searchInput');
+    const resultsDiv = document.getElementById('results');
+
+    input.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      
+      if (query.length < 3) {
+        resultsDiv.innerHTML = '<p style="color: #7f8c8d;">Escribe al menos 3 letras para iniciar la búsqueda...</p>';
+        return;
+      }
+
+      // Filtrar el índice en milisegundos
+      const matches = index.filter(item => 
+        item.content.includes(query) || item.title.toLowerCase().includes(query)
+      );
+
+      if (matches.length === 0) {
+        resultsDiv.innerHTML = '<p style="color: #e74c3c;">No se encontraron resultados para esta consulta.</p>';
+        return;
+      }
+
+      // Renderizar resultados con resaltado simple
+      resultsDiv.innerHTML = matches.map(match => {
+        // Un resaltado visual muy básico para el MVP
+        const regex = new RegExp(`(${query})`, 'gi');
+        const highlightedContent = match.content.replace(regex, '<span class="highlight">$1</span>');
+        
+        return `
+          <div class="result-card">
+            <h3><a href="${match.href}">${match.title}</a></h3>
+            <p>${highlightedContent.substring(0, 250)}...</p>
+          </div>
+        `;
+      }).join('');
+    });
+  </script>
+
+</body>
+</html>
