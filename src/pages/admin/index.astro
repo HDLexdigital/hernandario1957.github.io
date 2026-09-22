@@ -1,0 +1,134 @@
+---
+---
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>LexDigitalHD - Control Plane</title>
+  <style>
+    :root { --bg: #f4f6f7; --sidebar: #2c3e50; --accent: #27ae60; --text: #333; --panel: #fff; }
+    body { font-family: system-ui, sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); color: var(--text); }
+    aside { width: 260px; background: var(--sidebar); color: #fff; padding: 1.5rem; display: flex; flex-direction: column; }
+    aside h2 { color: #ecf0f1; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #34495e; padding-bottom: 1rem; margin-top: 0; }
+    .nav-btn { background: transparent; border: none; color: #bdc3c7; text-align: left; padding: 0.8rem; margin-bottom: 0.5rem; cursor: pointer; border-radius: 4px; font-size: 1rem; transition: 0.2s; }
+    .nav-btn:hover, .nav-btn.active { background: #34495e; color: #fff; }
+    
+    main { flex: 1; padding: 2.5rem; overflow-y: auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    
+    .card { background: var(--panel); padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
+    .btn-primary { background: var(--accent); color: white; border: none; padding: 0.8rem 1.5rem; font-size: 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-primary:hover { background: #219653; }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #ecf0f1; }
+    th { background: #f9f9f9; color: #7f8c8d; font-weight: 600; }
+    .status-badge { padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+    .status-processing { background: #f39c12; color: #fff; }
+    .status-success { background: #27ae60; color: #fff; }
+    .status-failed { background: #c0392b; color: #fff; }
+    .status-published { background: #2980b9; color: #fff; }
+    code { background: #eee; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.85rem; color: #e67e22; }
+  </style>
+</head>
+<body>
+
+  <aside>
+    <h2>LexDigitalHD<br><span style="font-size: 0.8rem; color: #95a5a6;">Control Plane</span></h2>
+    <button class="nav-btn active">📊 Historial y Estado</button>
+    <button class="nav-btn">⚙️ Centro de Compilación</button>
+    <button class="nav-btn">🛡️ Integridad</button>
+    <div style="flex:1"></div>
+    <a href="/" style="color: #bdc3c7; text-decoration: none; font-size: 0.9rem;">← Volver al sitio público</a>
+  </aside>
+
+  <main>
+    <div class="header">
+      <h1 style="margin: 0;">Historial Transaccional</h1>
+      <button id="btnBuild" class="btn-primary">▶ Generar Nuevo Build</button>
+    </div>
+
+    <div class="card">
+      <table id="historyTable">
+        <thead>
+          <tr>
+            <th>TX-ID</th>
+            <th>Documento</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Artefactos (Hashes)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="5" style="text-align: center; color: #7f8c8d;">Cargando ledger...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    const API_URL = 'http://localhost:3001/api';
+    
+    // Función para cargar el historial
+    async function loadHistory() {
+      try {
+        const res = await fetch(`${API_URL}/history`);
+        const data = await res.json();
+        
+        const tbody = document.querySelector('#historyTable tbody');
+        tbody.innerHTML = '';
+        
+        if (!data.transactions || data.transactions.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay transacciones registradas.</td></tr>';
+          return;
+        }
+
+        data.transactions.forEach(tx => {
+          const date = new Date(tx.timestamp).toLocaleString('es-CO');
+          const artifactsHtml = Object.entries(tx.artifacts).map(([key, record]) => 
+            `<div><strong>${key.toUpperCase()}:</strong> <code>${record.sha256.substring(0, 8)}...</code></div>`
+          ).join('') || '<span style="color:#999">Pendiente</span>';
+
+          tbody.innerHTML += `
+            <tr>
+              <td><code style="color: #34495e">${tx.txId.split('-')[0]}...</code></td>
+              <td><strong>${tx.documentId}</strong></td>
+              <td>${date}</td>
+              <td><span class="status-badge status-${tx.status}">${tx.status}</span></td>
+              <td style="font-size: 0.85rem">${artifactsHtml}</td>
+            </tr>
+          `;
+        });
+      } catch (err) {
+        console.error("Error cargando historial:", err);
+        document.querySelector('#historyTable tbody').innerHTML = `<tr><td colspan="5" style="color: red;">Error de conexión con el Orquestador API en el puerto 3001.</td></tr>`;
+      }
+    }
+
+    // Evento para disparar un nuevo build
+    document.getElementById('btnBuild').addEventListener('click', async () => {
+      try {
+        const btn = document.getElementById('btnBuild');
+        btn.disabled = true;
+        btn.innerText = 'Iniciando...';
+
+        await fetch(`${API_URL}/build`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ documentId: 'constitucion', sourceHash: 'hash-' + Date.now() })
+        });
+        
+        await loadHistory();
+        btn.disabled = false;
+        btn.innerText = '▶ Generar Nuevo Build';
+      } catch (err) {
+        alert('Fallo al conectar con la API de compilación.');
+      }
+    });
+
+    // Carga inicial
+    loadHistory();
+    // Auto-refresco cada 5 segundos para simular tiempo real
+    setInterval(loadHistory, 5000);
+  </script>
+</body>
+</html>
