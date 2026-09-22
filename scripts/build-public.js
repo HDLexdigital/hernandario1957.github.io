@@ -23,6 +23,18 @@ function ejecutar(comando, descripcion) {
     }
 }
 
+function ejecutarEstricto(comando, descripcion) {
+    console.log('\n▶ ' + descripcion + ' (Fail-Closed)...');
+    try {
+        execSync(comando, { cwd: RAIZ, stdio: 'inherit' });
+        console.log('✅ ' + descripcion + ' completado.');
+        return true;
+    } catch (error) {
+        console.error('❌ ERROR CRÍTICO: ' + descripcion + ' falló. Abortando publicación.');
+        process.exit(1);
+    }
+}
+
 function archivoExiste(nombre) {
     return fs.existsSync(path.join(PUBLIC, nombre));
 }
@@ -62,6 +74,14 @@ function main() {
         }
     });
 
+    // BARRERA FAIL-CLOSED: Compilación y sincronización de API estática
+    ejecutarEstricto('npx tsx scripts/build-static-api.ts', 'Compilación y sincronización de API v1');
+
+    if (!archivoExiste('api/v1/api-manifest.sha256')) {
+        console.error('❌ Falta artefacto crítico: public/api/v1/api-manifest.sha256');
+        process.exit(1);
+    }
+
     ejecutar('node scripts/build-integrity-report.js', 'Generando reporte de integridad');
     ejecutar('node scripts/build-external-links-report.js', 'Generando reporte de enlaces externos');
     ejecutar('node scripts/build-audit-summary.js', 'Generando resumen de auditoría');
@@ -96,7 +116,7 @@ function main() {
         if (data.status !== 'OK') process.exit(1);
     }
 
-    console.log('\n✅ Build público completado correctamente.');
+    console.log('\n✅ Build público completado correctamente con API v1 integrada.');
 }
 
 main();
