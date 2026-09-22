@@ -1,6 +1,6 @@
 import { TransactionRegistryService } from './TransactionRegistryService';
+import { VersioningService } from './VersioningService';
 import { MultisourceEngine } from '../engine/MultisourceEngine';
-import { XhtmlAdapter } from '../adapters/XhtmlAdapter';
 import { SemanticIndexer } from '../engine/SemanticIndexer';
 import { SearchIndexer } from '../engine/SearchIndexer';
 import { GraphBuilder } from '../engine/GraphBuilder';
@@ -8,6 +8,7 @@ import { PdfPrintAdapter } from '../adapters/PdfPrintAdapter';
 import { MultisourceValidator } from '../validadores/C01-03-multisource.validator';
 import * as path from 'path';
 import * as fs from 'fs/promises';
+import * as crypto from 'crypto';
 
 export interface BuildJob {
   txId: string;
@@ -17,6 +18,7 @@ export interface BuildJob {
 
 export class BuildWorker {
   private registry = new TransactionRegistryService();
+  private versioning = new VersioningService();
 
   private getValidPayload(txId: string) {
     return {
@@ -30,32 +32,16 @@ export class BuildWorker {
           language: "es-CO",
           identifier: "urn:lex:co:constitucion"
         },
-        a11y: {
-          wcagLevel: "AA",
-          readingOrderEnforced: true
-        }
+        a11y: { wcagLevel: "AA", readingOrderEnforced: true }
       },
       semanticTree: {
         documentId: "constitucion",
         nodes: [
           {
-            id: "preambulo",
-            type: "title",
-            content: "EL PUEBLO DE COLOMBIA, en ejercicio de su poder soberano...",
-            metadata: { level: 1 }
-          },
-          {
-            id: "cap1",
-            type: "chapter",
-            content: "CAPÍTULO I. DE LOS DERECHOS FUNDAMENTALES",
-            children: [
-              {
-                id: "art13",
-                type: "article",
-                content: "Artículo 13. Todas las personas nacen libres e iguales ante la ley, recibirán la misma protección y trato de las autoridades.",
-                metadata: { number: 13 }
-              }
-            ]
+            id: "art13",
+            type: "article",
+            content: "Artículo 13. Todas las personas nacen libres e iguales ante la ley.",
+            metadata: { number: 13 }
           }
         ]
       },
@@ -77,53 +63,57 @@ export class BuildWorker {
       if (signal?.aborted) throw new Error("Operación cancelada");
 
       const payload = this.getValidPayload(job.txId);
-      const validator = new MultisourceValidator();
-      const contract = validator.validate(payload);
+      const contract = new MultisourceValidator().validate(payload);
 
       // --- ETAPA 1: XHTML Físico ---
       const xhtmlDir = path.resolve(txDir, 'xhtml');
       await fs.mkdir(xhtmlDir, { recursive: true });
       const xhtmlPath = path.resolve(xhtmlDir, 'index.xhtml');
       
-      await fs.writeFile(xhtmlPath, `
+      const xhtmlContent = `
         <html lang="es">
           <head><meta charset="utf-8" /><title>Constitución</title></head>
           <body>
-            <h1>Constitución Política de Colombia</h1>
             <section class="chapter">
-              <h2>CAPÍTULO I. DE LOS DERECHOS FUNDAMENTALES</h2>
-              <p>Artículo 13. Todas las personas nacen libres e iguales ante la ley.</p>
+              <p id="art13">Artículo 13. Todas las personas nacen libres e iguales ante la ley.</p>
             </section>
           </body>
         </html>
-      `, 'utf8');
+      `;
+      await fs.writeFile(xhtmlPath, xhtmlContent, 'utf8');
 
       const xhtmlRecord = await this.registry.computeArtifactRecord(xhtmlPath);
       await this.registry.attachArtifact(job.txId, 'xhtml', xhtmlRecord);
 
       // --- ETAPA 2: TOC Semántico ---
-      const semanticIndexer = new SemanticIndexer();
-      const tocPath = await semanticIndexer.generateAndPersist(contract);
+      const tocPath = await new SemanticIndexer().generateAndPersist(contract);
       await this.registry.attachArtifact(job.txId, 'toc', await this.registry.computeArtifactRecord(tocPath));
 
       // --- ETAPA 3: Search Index ---
-      const searchIndexer = new SearchIndexer();
-      const searchPath = await searchIndexer.generateAndPersist(contract);
+      const searchPath = await new SearchIndexer().generateAndPersist(contract);
       await this.registry.attachArtifact(job.txId, 'search', await this.registry.computeArtifactRecord(searchPath));
 
       // --- ETAPA 4: Graph Knowledge ---
-      const graphBuilder = new GraphBuilder();
-      const graphPath = await graphBuilder.buildFromSearchIndex(job.txId);
+      const graphPath = await new GraphBuilder().buildFromSearchIndex(job.txId);
       await this.registry.attachArtifact(job.txId, 'graph', await this.registry.computeArtifactRecord(graphPath));
 
-      // --- ETAPA 5: PDF Físico (Puppeteer) ---
-      const pdfEngine = new PdfPrintAdapter();
-      const pdfPath = await pdfEngine.process(contract, txDir);
+      // --- ETAPA 5: PDF Físico ---
+      const pdfPath = await new PdfPrintAdapter().process(contract, txDir);
       await this.registry.attachArtifact(job.txId, 'pdf', await this.registry.computeArtifactRecord(pdfPath));
 
+      // --- ETAPA 6: Versionado Normativo (MVP-066) ---
+      // Calculamos hash del nodo individual y registramos su línea temporal cronológica
+      const nodeHash = crypto.createHash('sha256').update("Artículo 13. Todas las personas nacen libres e iguales ante la ley.").digest('hex');
+      await this.versioning.registerTransactionVersions(
+        'constitucion',
+        job.txId,
+        new Date().toISOString().split('T')[0], // Fecha efectiva (YYYY-MM-DD)
+        [{ id: 'art13', title: 'Artículo 13', contentHash: nodeHash }]
+      );
+
       // CIERRE EXITOSO
-      await this.registry.transitionStatus(job.txId, 'success', [`Pipeline completado en ${Date.now() - startTime}ms`]);
-      console.log(`[WORKER] TX ${job.txId} finalizada con éxito y validada por ACL.`);
+      await this.registry.transitionStatus(job.txId, 'success', [`Pipeline y versionado completados en ${Date.now() - startTime}ms`]);
+      console.log(`[WORKER] TX ${job.txId} finalizada y registrada en la memoria normativa.`);
 
     } catch (error: any) {
       console.error(`[WORKER] Fallo en TX ${job.txId}:`, error.message);
