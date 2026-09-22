@@ -1,0 +1,93 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "LexDigitalHD Computable Legal Infrastructure API",
+    "version": "1.0.0",
+    "description": "API headless de lectura para consulta de textos normativos inmutables y métricas derivadas del grafo unificado. Las métricas de centralidad y propagación tienen naturaleza exclusivamente computacional."
+  },
+  "servers": [
+    {
+      "url": "https://lexdigitalhd.com/api/v1",
+      "description": "Producción estática / edge gateway"
+    }
+  ],
+  "paths": {
+    "/corpora": {
+      "get": {
+        "summary": "Listar corpora normativos disponibles",
+        "responses": {
+          "200": {
+            "description": "Catálogo de colecciones normativas activas."
+          }
+        }
+      }
+    },
+    "/resolve/{globalId}": {
+      "get": {
+        "summary": "Resolver un identificador canónico global",
+        "parameters": [
+          {
+            "name": "globalId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "co:constitucion:art:86"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna el nodo normativo primario, su ruta canónica y referencias asociadas."
+          },
+          "404": {
+            "description": "El globalId no existe en el registro de versiones vigente."
+          }
+        }
+      }
+    },
+    "/graph/impact": {
+      "post": {
+        "summary": "Simular propagación de impacto transversal (Métrica Computacional)",
+        "description": "Calcula el árbol de dependencias basado en aristas de citas auditadas. No constituye concepto jurídico vinculante.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "modifiedGlobalId": {
+                    "type": "string",
+                    "example": "co:constitucion:art:86"
+                  },
+                  "maxDepth": {
+                    "type": "integer",
+                    "default": 3,
+                    "maximum": 5
+                  }
+                },
+                "required": ["modifiedGlobalId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Árbol computado de artículos dependientes afectados."
+          }
+        }
+      }
+    },
+    "/metrics/centrality": {
+      "get": {
+        "summary": "Consultar ranking de centralidad (PageRank analítico)",
+        "responses": {
+          "200": {
+            "description": "Listado de nodos ordenados por authorityScore computacional."
+          }
+        }
+      }
+    }
+  }
+}
