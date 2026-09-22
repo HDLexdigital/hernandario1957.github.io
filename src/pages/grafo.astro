@@ -1,0 +1,97 @@
+---
+import * as fs from 'fs/promises';
+import * as path from 'path';
+
+let graphRaw = '{"nodes":[],"edges":[]}';
+try {
+  const hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const graphPath = path.resolve(process.cwd(), `dist/indexes/graph-${hash}.json`);
+  graphRaw = await fs.readFile(graphPath, 'utf8');
+} catch (e) {
+  console.error("[ASTRO-ERROR] No se pudo leer el artefacto del grafo.");
+}
+---
+
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Grafo Jurídico - LexDigitalHD</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.26.0/cytoscape.min.js"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; padding: 0; background: #1e272e; color: #fff; display: flex; flex-direction: column; height: 100vh; }
+    header { padding: 1rem 2rem; background: #2f3640; border-bottom: 1px solid #353b48; display: flex; justify-content: space-between; align-items: center; }
+    header a { color: #00a8ff; text-decoration: none; }
+    #cy { flex: 1; display: block; }
+    .badge { background: #e1b12c; color: #2f3640; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1 style="margin: 0; font-size: 1.2rem;">Topología Normativa <span class="badge">BETA</span></h1>
+      <span style="font-size: 0.8rem; color: #718093;">Mapa de dependencias y referencias cruzadas</span>
+    </div>
+    <a href="/">← Volver al inicio</a>
+  </header>
+
+  <div id="cy"></div>
+
+  <script define:vars={{ graphData: graphRaw }}>
+    const elements = JSON.parse(graphData);
+
+    const cy = cytoscape({
+      container: document.getElementById('cy'),
+      elements: elements,
+      style: [
+        {
+          selector: 'node',
+          style: {
+            'background-color': '#00a8ff',
+            'label': 'data(label)',
+            'color': '#fff',
+            'text-valign': 'bottom',
+            'text-halign': 'center',
+            'text-margin-y': 5,
+            'font-size': '10px',
+            'width': 20,
+            'height': 20
+          }
+        },
+        {
+          selector: 'node[type="section"]',
+          style: {
+            'background-color': '#9c88ff',
+            'shape': 'square',
+            'width': 25,
+            'height': 25
+          }
+        },
+        {
+          selector: 'edge',
+          style: {
+            'width': 2,
+            'line-color': '#353b48',
+            'target-arrow-color': '#353b48',
+            'target-arrow-shape': 'triangle',
+            'curve-style': 'bezier',
+            'opacity': 0.8
+          }
+        }
+      ],
+      layout: {
+        name: 'cose', // Layout de fuerzas para distribuir los nodos orgánicamente
+        padding: 50,
+        nodeRepulsion: 4000,
+        idealEdgeLength: 100
+      }
+    });
+
+    // Evento de clic: Navegar al artículo al tocar un nodo
+    cy.on('tap', 'node', function(evt){
+      const node = evt.target;
+      window.location.href = node.data('href');
+    });
+  </script>
+</body>
+</html>
