@@ -2,7 +2,6 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-// Utilidad para leer artefactos de forma segura (Tolerante a fallos)
 async function safeReadJson(relativePath: string) {
   try {
     const raw = await fs.readFile(path.resolve(process.cwd(), relativePath), 'utf8');
@@ -12,16 +11,16 @@ async function safeReadJson(relativePath: string) {
   }
 }
 
-// 1. Recopilar telemetría de los artefactos
+// Telemetría local y remota
 const currentRelease = await safeReadJson('dist/releases/current.json');
 const previousRelease = await safeReadJson('dist/releases/previous.json');
+const remotePointer = await safeReadJson('dist/cloud-mirror/current.json');
 const impactData = await safeReadJson('dist/indexes/impact-metrics.json');
 const historyData = await safeReadJson('dist/builds/history.json');
 const versionsData = await safeReadJson('dist/indexes/versions.json');
 
-// 2. Procesar y estructurar datos para la vista
 const transactions = Array.isArray(historyData) ? historyData : (historyData?.transactions || []);
-const latestTxs = transactions.slice(-5).reverse(); // Últimos 5 builds
+const latestTxs = transactions.slice(-6).reverse();
 
 const totalBuilds = transactions.length;
 const failedBuilds = transactions.filter((tx: any) => tx.status === 'failed').length;
@@ -33,29 +32,32 @@ const totalNodes = versionsData?.nodes?.length || 0;
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>LexDigitalHD - Observability Dashboard</title>
+  <title>LexDigitalHD - Observability & Control Center</title>
   <style>
     :root { --bg: #f4f7f6; --sidebar: #1a252f; --panel: #ffffff; --text: #2c3e50; --accent: #3498db; --success: #2ecc71; --danger: #e74c3c; --warning: #f1c40f; }
     body { font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); color: var(--text); }
     
-    /* Layout */
     aside { width: 260px; background: var(--sidebar); color: #ecf0f1; padding: 1.5rem; display: flex; flex-direction: column; }
     main { flex: 1; padding: 2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 2rem; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     
-    /* Componentes */
     .card { background: var(--panel); padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
     h2, h3 { margin-top: 0; color: var(--sidebar); }
     .metric-value { font-size: 2rem; font-weight: bold; margin: 0.5rem 0; color: var(--sidebar); }
     .metric-label { font-size: 0.85rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; }
     
-    /* Badges & Status */
     .badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
     .badge.success { background: #d5f5e3; color: #1e8449; }
     .badge.failed { background: #fadbd8; color: #943126; }
+    .badge.rolled-back { background: #fef9e7; color: #b7950b; }
     
-    /* Gráfica de Barras CSS */
+    .btn { padding: 0.6rem 1.2rem; border-radius: 4px; border: none; font-weight: 600; cursor: pointer; font-size: 0.85rem; transition: background 0.2s; }
+    .btn-sync { background: var(--accent); color: white; }
+    .btn-sync:hover { background: #2980b9; }
+    .btn-rollback { background: var(--danger); color: white; margin-left: 0.5rem; }
+    .btn-rollback:hover { background: #c0392b; }
+    
     .bar-chart { margin-top: 1rem; }
     .bar-row { display: flex; align-items: center; margin-bottom: 0.8rem; }
     .bar-label { width: 100px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -63,15 +65,14 @@ const totalNodes = versionsData?.nodes?.length || 0;
     .bar-fill { height: 100%; background: var(--accent); border-radius: 4px; }
     .bar-value { width: 30px; font-size: 0.8rem; color: #7f8c8d; text-align: right; }
     
-    /* Timeline de Releases */
     .release-box { padding: 1rem; border-radius: 6px; border-left: 4px solid var(--accent); background: #f8fafc; margin-bottom: 1rem; }
-    .release-box.previous { border-left-color: #bdc3c7; opacity: 0.8; }
+    .release-box.previous { border-left-color: #bdc3c7; opacity: 0.85; }
   </style>
 </head>
 <body>
 
   <aside>
-    <h2 style="border-bottom: 1px solid #2c3e50; padding-bottom: 1rem;">LexDigitalHD<br><span style="font-size: 0.8rem; font-weight: 400; color: #95a5a6;">Observability Center</span></h2>
+    <h2 style="border-bottom: 1px solid #2c3e50; padding-bottom: 1rem;">LexDigitalHD<br><span style="font-size: 0.8rem; font-weight: 400; color: #95a5a6;">Control Plane</span></h2>
     <a href="/admin" style="color: #fff; text-decoration: none; padding: 0.8rem; background: #2c3e50; border-radius: 4px; margin-bottom: 0.5rem;">📊 Panel Ejecutivo</a>
     <a href="/history" style="color: #bdc3c7; text-decoration: none; padding: 0.8rem;">🏛️ Explorador Histórico</a>
     <a href="/admin/diff" style="color: #bdc3c7; text-decoration: none; padding: 0.8rem;">⚖️ Comparador Jurídico</a>
@@ -84,55 +85,71 @@ const totalNodes = versionsData?.nodes?.length || 0;
       <div class="card" style="border-bottom: 4px solid var(--success);">
         <div class="metric-label">Pipeline Health</div>
         <div class="metric-value">{successRate}%</div>
-        <div style="font-size: 0.8rem; color: #7f8c8d;">{totalBuilds} Builds Totales</div>
+        <div style="font-size: 0.8rem; color: #7f8c8d;">{totalBuilds} Builds Registrados</div>
       </div>
       <div class="card" style="border-bottom: 4px solid var(--accent);">
         <div class="metric-label">Nodos Normativos</div>
         <div class="metric-value">{totalNodes}</div>
-        <div style="font-size: 0.8rem; color: #7f8c8d;">Indexados en versions.json</div>
+        <div style="font-size: 0.8rem; color: #7f8c8d;">Índice versions.json</div>
       </div>
       <div class="card" style="border-bottom: 4px solid var(--warning);">
         <div class="metric-label">Impacto Global</div>
         <div class="metric-value">{impactData ? impactData.globalStabilityIndex : 0}</div>
-        <div style="font-size: 0.8rem; color: #7f8c8d;">Reformas Históricas</div>
+        <div style="font-size: 0.8rem; color: #7f8c8d;">Mutaciones Históricas</div>
       </div>
       <div class="card" style="border-bottom: 4px solid var(--sidebar);">
-        <div class="metric-label">Estado de Producción</div>
-        <div class="metric-value" style="font-size: 1.2rem; margin-top: 1rem;">
-          {currentRelease ? <span class="badge success">PUBLICADO</span> : <span class="badge failed">SIN DESPLIEGUE</span>}
+        <div class="metric-label">Puntero Remoto Cloud</div>
+        <div class="metric-value" style="font-size: 1.1rem; margin-top: 0.8rem;">
+          {remotePointer ? (
+            <span class="badge success">☁️ {remotePointer.provider}</span>
+          ) : (
+            <span class="badge failed">DESCONECTADO</span>
+          )}
         </div>
       </div>
     </div>
 
+    <!-- 2. DESPLIEGUE Y ACCIONES DE PUBLICACIÓN / ROLLBACK -->
     <div class="grid-2">
-      <!-- 2. OBSERVABILIDAD DE RELEASES -->
       <div class="card">
-        <h3>Despliegues (PublishWorker)</h3>
-        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="margin: 0;">Gestión de Releases & Cloud</h3>
+          <div>
+            <button class="btn btn-sync" onclick="triggerSync()">☁️ Replicar Nube</button>
+            {previousRelease && (
+              <button class="btn btn-rollback" onclick="triggerRollback()">🔄 Rollback</button>
+            )}
+          </div>
+        </div>
+
         {currentRelease ? (
           <div class="release-box">
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-              <strong>Producción (Activo)</strong>
+              <strong>Producción Activa (Local)</strong>
               <span class="badge success">Current</span>
             </div>
             <div style="font-size: 0.85rem; color: #555;">
-              <div><strong>TX-ID:</strong> {currentRelease.activeTxId}</div>
+              <div><strong>TX-ID:</strong> <code>{currentRelease.activeTxId}</code></div>
               <div><strong>Fecha:</strong> {new Date(currentRelease.publishedAt).toLocaleString()}</div>
-              <div><strong>Por:</strong> {currentRelease.publishedBy}</div>
+              {currentRelease.restoredFromRollbackOf && (
+                <div style="color: #b7950b; margin-top: 0.2rem;">
+                  ⚠️ Restaurado tras rollback de: <code>{currentRelease.restoredFromRollbackOf}</code>
+                </div>
+              )}
             </div>
           </div>
         ) : (
-          <p style="color: #7f8c8d; font-size: 0.9rem;">No hay versión publicada en producción.</p>
+          <p style="color: #7f8c8d; font-size: 0.9rem;">Sin release local activa.</p>
         )}
 
         {previousRelease && (
           <div class="release-box previous">
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-              <strong>Versión de Respaldo</strong>
+              <strong>Objetivo de Reversión (Previous)</strong>
               <span class="badge" style="background: #e2e8f0; color: #475569;">Rollback Target</span>
             </div>
             <div style="font-size: 0.85rem; color: #555;">
-              <div><strong>TX-ID:</strong> {previousRelease.activeTxId}</div>
+              <div><strong>TX-ID:</strong> <code>{previousRelease.activeTxId}</code></div>
             </div>
           </div>
         )}
@@ -141,7 +158,7 @@ const totalNodes = versionsData?.nodes?.length || 0;
       <!-- 3. IMPACT ANALYZER VISUAL -->
       <div class="card">
         <h3>Analizador de Impacto Normativo</h3>
-        <p style="font-size: 0.85rem; color: #7f8c8d; margin-top: -0.5rem;">Artículos con mayor tasa de mutación histórica.</p>
+        <p style="font-size: 0.85rem; color: #7f8c8d; margin-top: -0.5rem;">Top artículos reformados.</p>
         
         {mutatedArticles.length > 0 ? (
           <div class="bar-chart">
@@ -161,39 +178,82 @@ const totalNodes = versionsData?.nodes?.length || 0;
             })}
           </div>
         ) : (
-          <p style="color: #7f8c8d; font-size: 0.9rem;">Ejecuta el MVP-068 para generar métricas de impacto.</p>
+          <p style="color: #7f8c8d; font-size: 0.9rem;">Ejecuta el MVP-068 para generar métricas.</p>
         )}
       </div>
     </div>
 
-    <!-- 4. SALUD DEL PIPELINE EDITORIAL -->
+    <!-- 4. HISTORIAL Y AUDITORÍA DEL LEDGER -->
     <div class="card">
-      <h3>Transacciones Recientes (Ledger)</h3>
+      <h3>Auditoría de Transacciones (Ledger)</h3>
       <table style="width: 100%; text-align: left; border-collapse: collapse; margin-top: 1rem;">
         <thead>
           <tr style="border-bottom: 2px solid #ecf0f1; color: #7f8c8d; font-size: 0.85rem;">
             <th style="padding: 0.5rem;">TX-ID</th>
             <th style="padding: 0.5rem;">Fecha</th>
             <th style="padding: 0.5rem;">Estado</th>
-            <th style="padding: 0.5rem;">Artefactos Criptográficos</th>
+            <th style="padding: 0.5rem;">Logs y Trazabilidad</th>
           </tr>
         </thead>
         <tbody>
-          {latestTxs.map((tx: any) => (
-            <tr style="border-bottom: 1px solid #ecf0f1; font-size: 0.9rem;">
-              <td style="padding: 0.8rem; font-family: monospace;">{tx.txId}</td>
-              <td style="padding: 0.8rem;">{new Date(tx.timestamp).toLocaleString()}</td>
-              <td style="padding: 0.8rem;">
-                <span class={`badge ${tx.status === 'success' ? 'success' : 'failed'}`}>{tx.status}</span>
-              </td>
-              <td style="padding: 0.8rem; font-size: 0.8rem; color: #7f8c8d;">
-                {Object.keys(tx.artifacts || {}).join(' • ') || 'Ninguno'}
-              </td>
-            </tr>
-          ))}
+          {latestTxs.map((tx: any) => {
+            let badgeClass = 'failed';
+            if (tx.status === 'success') badgeClass = 'success';
+            if (tx.status === 'published' || tx.status === 'published-remote') badgeClass = 'success';
+            if (tx.status === 'rolled-back') badgeClass = 'rolled-back';
+
+            return (
+              <tr style="border-bottom: 1px solid #ecf0f1; font-size: 0.85rem;">
+                <td style="padding: 0.8rem; font-family: monospace;">{tx.txId}</td>
+                <td style="padding: 0.8rem;">{new Date(tx.timestamp).toLocaleString()}</td>
+                <td style="padding: 0.8rem;">
+                  <span class={`badge ${badgeClass}`}>{tx.status}</span>
+                </td>
+                <td style="padding: 0.8rem; color: #555;">
+                  {tx.logs && tx.logs.length > 0 ? tx.logs[tx.logs.length - 1] : 'Sin logs'}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
   </main>
+
+  <script>
+    async function triggerSync() {
+      if (!confirm("¿Desea replicar atómicamente la release activa hacia la nube?")) return;
+      const res = await fetch('/api/cloud/sync', { method: 'POST' });
+      const data = await res.json();
+      if (data.success) {
+        alert("✅ Sincronización remota completada.");
+        location.reload();
+      } else {
+        alert("❌ Error: " + data.error);
+      }
+    }
+
+    async function triggerRollback() {
+      const ok = confirm("⚠️ ATENCIÓN: Está a punto de revertir la producción al release anterior.\n\n¿Desea continuar?");
+      if (!ok) return;
+
+      const res = await fetch('/api/cloud/rollback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ authorizedBy: 'Hernán Durango (Dashboard)' })
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert("🔄 Rollback completado exitosamente.");
+        location.reload();
+      } else {
+        alert("❌ Error en Rollback: " + data.error);
+      }
+    }
+
+    // Exponer funciones al scope global del navegador
+    (window as any).triggerSync = triggerSync;
+    (window as any).triggerRollback = triggerRollback;
+  </script>
 </body>
 </html>
