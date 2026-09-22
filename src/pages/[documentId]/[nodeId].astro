@@ -1,0 +1,85 @@
+---
+import * as fs from 'fs/promises';
+import * as path from 'path';
+import { CrossReferenceResolver } from '../../engine/CrossReferenceResolver';
+
+export async function getStaticPaths() {
+  try {
+    const hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+    const tocPath = path.resolve(process.cwd(), `dist/indexes/toc-${hash}.json`);
+    
+    console.log(`[ASTRO-DEBUG] Leyendo TOC desde: ${tocPath}`);
+    const tocRaw = await fs.readFile(tocPath, 'utf8');
+    const tocData = JSON.parse(tocRaw);
+
+    console.log(`[ASTRO-DEBUG] Entradas encontradas: ${tocData.entries.length}`);
+
+    return tocData.entries.map((entry: any) => {
+      const segments = entry.href.split('/').filter(Boolean);
+      return {
+        params: {
+          documentId: segments[0],
+          nodeId: segments[1]
+        },
+        props: { entry, toc: tocData }
+      };
+    });
+  } catch (e: any) {
+    console.error("[ASTRO-ERROR] Falló getStaticPaths:", e.message);
+    return [];
+  }
+}
+
+const { entry, toc } = Astro.props;
+let contentHtml = `<p>Contenido no disponible.</p>`;
+
+try {
+  let rawText = `El Estado promoverá las condiciones para que la igualdad sea real y efectiva, tal como se menciona en el artículo 13 y en concordancia con las normas superiores.`;
+  
+  if (entry.id === 'art13') {
+    rawText = `Todas las personas nacen libres e iguales antes la ley, sin discriminación alguna. (Ver también el artículo 13).`;
+  }
+
+  const resolvedText = CrossReferenceResolver.resolve(rawText, toc);
+  contentHtml = `<h2>${entry.title}</h2><p>${resolvedText}</p>`;
+} catch (err: any) {
+  contentHtml = `<p style="color:red">Error renderizando: ${err.message}</p>`;
+}
+---
+
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>{entry.title} - LexDigitalHD</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #fdfdfc; color: #2c3e50; display: flex; height: 100vh; margin: 0; }
+    aside { width: 320px; background: #f4f6f7; border-right: 1px solid #dcdde1; padding: 1.5rem; }
+    main { flex: 1; padding: 3rem; font-family: "Georgia", serif; line-height: 1.7; font-size: 1.1rem; }
+    a.internal-xref { color: #e67e22; text-decoration: underline; font-weight: bold; }
+    a.internal-xref:hover { color: #d35400; }
+    aside a { text-decoration: none; color: #2c3e50; display: block; padding: 0.3rem; }
+    aside a.active { background: #2980b9; color: white; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <aside>
+    <h2>Índice Jurídico</h2>
+    <ul>
+      {toc.entries.map((item: any) => {
+        const isActive = item.href === Astro.url.pathname;
+        return (
+          <li style={`padding-left: ${(item.level - 1) * 12}px; list-style: none;`}>
+            <a href={item.href} class={isActive ? 'active' : ''}>{item.title}</a>
+          </li>
+        );
+      })}
+    </ul>
+  </aside>
+
+  <main>
+    <Fragment set:html={contentHtml} />
+  </main>
+
+</body>
+</html>
