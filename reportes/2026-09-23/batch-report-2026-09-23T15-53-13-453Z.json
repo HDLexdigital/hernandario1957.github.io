@@ -1,0 +1,23 @@
+{
+  "coreVersion": "1.0.0-frozen",
+  "contractVersion": "1.0.0",
+  "batchId": "2026-09-23T15:53:13.453Z",
+  "profile": "WEB",
+  "processed": 2,
+  "succeeded": 2,
+  "failed": 0,
+  "errors": {},
+  "durationMs": 3,
+  "documents": [
+    {
+      "file": "prueba-lote-01.json",
+      "status": "SUCCESS",
+      "durationMs": 3
+    },
+    {
+      "file": "prueba-lote-02.json",
+      "status": "SUCCESS",
+      "durationMs": 0
+    }
+  ]
+}

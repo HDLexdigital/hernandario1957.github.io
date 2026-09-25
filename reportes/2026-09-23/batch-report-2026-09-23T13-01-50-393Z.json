@@ -1,0 +1,16 @@
+{
+  "batchId": "2026-09-23T13:01:50.393Z",
+  "profile": "WEB",
+  "processed": 1,
+  "succeeded": 1,
+  "failed": 0,
+  "errors": {},
+  "durationMs": 3,
+  "documents": [
+    {
+      "file": "doc1.json",
+      "status": "SUCCESS",
+      "durationMs": 2
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "styleName": "P01_TITLE_H1",
+    "texto": "CONSTITUCIÓN POLÍTICA DE COLOMBIA",
+    "lang": "es-CO"
+  },
+  {
+    "styleName": "P02_CHAPTER",
+    "texto": "TÍTULO I\nDE LOS PRINCIPIOS FUNDAMENTALES"
+  },
+  {
+    "styleName": "P03_ARTICLE",
+    "texto": "Artículo 1. Colombia es un Estado social de derecho, organizado en forma de República unitaria."
+  },
+  {
+    "styleName": "P04_BODY",
+    "texto": "Son fines esenciales del Estado: servir a la comunidad y garantizar la efectividad de los principios.",
+    "lang": "es-CO"
+  },
+  {
+    "styleName": "P05_DECORATIVE",
+    "texto": "***"
+  }
+]

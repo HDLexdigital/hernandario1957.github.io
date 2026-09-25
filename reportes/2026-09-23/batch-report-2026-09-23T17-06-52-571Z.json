@@ -1,0 +1,43 @@
+{
+  "coreVersion": "1.0.0-frozen",
+  "contractVersion": "1.0.0",
+  "batchId": "2026-09-23T17:06:52.571Z",
+  "profile": "WEB",
+  "processed": 6,
+  "succeeded": 6,
+  "failed": 0,
+  "errors": {},
+  "durationMs": 5,
+  "documents": [
+    {
+      "file": "prueba-lote-01.json",
+      "status": "SUCCESS",
+      "durationMs": 3
+    },
+    {
+      "file": "prueba-lote-02.json",
+      "status": "SUCCESS",
+      "durationMs": 0
+    },
+    {
+      "file": "prueba-lote-03.json",
+      "status": "SUCCESS",
+      "durationMs": 1
+    },
+    {
+      "file": "prueba-lote-04.json",
+      "status": "SUCCESS",
+      "durationMs": 1
+    },
+    {
+      "file": "prueba-lote-05.json",
+      "status": "SUCCESS",
+      "durationMs": 0
+    },
+    {
+      "file": "prueba-lote-06.json",
+      "status": "SUCCESS",
+      "durationMs": 0
+    }
+  ]
+}

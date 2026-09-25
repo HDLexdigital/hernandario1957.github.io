@@ -1,80 +1,46 @@
-'use strict';
-const { resolverTipoBase, tipoAEtiqueta } = require('./TypeResolver');
+const reAccentMap = {'á':'a', 'é':'e', 'í':'i', 'ó':'o', 'ú':'u', 'ñ':'n', 'Á':'a', 'É':'e', 'Í':'i', 'Ó':'o', 'Ú':'u', 'Ñ':'n'};
 
-function _sanitizeSelector(styleName) {
-    if (!styleName) return '';
-
-    let sanitized = styleName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    sanitized = sanitized.toLowerCase();
-    sanitized = sanitized.replace(/[\[\]()]/g, '');
-    sanitized = sanitized.replace(/\s+/g, '-');
-    sanitized = sanitized.replace(/[^a-z0-9-_]/g, '');
-
-    if (/^\d/.test(sanitized)) {
-        sanitized = 'estilo-' + sanitized;
+function _sanitizeSelector(name) {
+    if (!name) return "estilo";
+    let str = String(name).replace(/\[\vert{}\]/g, "");
+    for (let k in reAccentMap) {
+        if (Object.prototype.hasOwnProperty.call(reAccentMap, k)) {
+            str = str.split(k).join(reAccentMap[k]);
+        }
     }
-
-    return sanitized;
+    str = str.replace(/[^a-zA-Z0-9_-]/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "").toLowerCase();
+    if (!str) return "estilo";
+    if (/^[0-9]/.test(str)) str = "estilo-" + str;
+    return str;
 }
 
 function indexSemanticMap(semanticMap) {
     const index = {};
-    if (!semanticMap) return index;
-
-    if (semanticMap.paragraphStyles) {
-        for (const style of Object.values(semanticMap.paragraphStyles)) {
-            const name = style?.metadata?.originalName;
-            if (name) index[name] = style;
+    if (!semanticMap || !Array.isArray(semanticMap.styles)) return index;
+    for (let i = 0; i < semanticMap.styles.length; i++) {
+        const item = semanticMap.styles[i];
+        if (item && item.originalName) {
+            const epub = (item.exportTagging && item.exportTagging.epub) ? item.exportTagging.epub : {};
+            index[item.originalName] = {
+                tag: (epub.tag && epub.tag !== "") ? epub.tag : null,
+                className: (epub.className && epub.className !== "") ? epub.className : null
+            };
         }
     }
-    if (semanticMap.characterStyles) {
-        for (const style of Object.values(semanticMap.characterStyles)) {
-            const name = style?.metadata?.originalName;
-            if (name) index[name] = style;
-        }
-    }
-
-    if (Array.isArray(semanticMap.styles)) {
-        for (const style of semanticMap.styles) {
-            const name = style?.originalName || style?.metadata?.originalName || style?.name;
-            if (name) index[name] = style;
-        }
-    }
-
-    if (!semanticMap.paragraphStyles && !semanticMap.characterStyles && !Array.isArray(semanticMap.styles)) {
-        for (const [key, value] of Object.entries(semanticMap)) {
-            if (key !== 'document' && key !== 'documentName' && key !== 'exportDate') {
-                index[key] = value;
-            }
-        }
-    }
-
     return index;
 }
 
-// Resolver ontológico requerido por compilarLexmotor
-function resolveStyleName(styleName, strict = false, options = {}, context = {}) {
-    const sanitized = _sanitizeSelector(styleName);
-    const tipoSemantico = resolverTipoBase(styleName);
-    const tagFinal = tipoSemantico ? tipoAEtiqueta(tipoSemantico) : 'p';
-    return {
-        tag: tagFinal,
-        class: sanitized,
-        resolvedTag: tagFinal,
-        resolvedClass: sanitized
-    };
-}, context = {}) {
-    const sanitized = _sanitizeSelector(styleName);
-    return {
-        tag: 'p',
-        class: sanitized,
-        resolvedTag: 'p',
-        resolvedClass: sanitized
-    };
+function resolveStyleName(styleName, isCharacter, profileStyleMap, indexedSemanticMap) {
+    if (!styleName || styleName === "[Ninguno]" || styleName === "None") {
+        return { styleName, resolvedTag: null, resolvedClass: null };
+    }
+    const profileEntry = (profileStyleMap && profileStyleMap[styleName]) ? profileStyleMap[styleName] : null;
+    const semanticEntry = (indexedSemanticMap && indexedSemanticMap[styleName]) ? indexedSemanticMap[styleName] : null;
+
+    let resolvedTag = (profileEntry && profileEntry.tag) ? profileEntry.tag : ((semanticEntry && semanticEntry.tag) ? semanticEntry.tag : (isCharacter ? "span" : "p"));
+    let resolvedClass = (profileEntry && (profileEntry.class || profileEntry.className)) ? (profileEntry.class || profileEntry.className) : ((semanticEntry && semanticEntry.className) ? semanticEntry.className : _sanitizeSelector(styleName));
+
+    return { styleName, resolvedTag, resolvedClass };
 }
 
-module.exports = {
-    _sanitizeSelector,
-    indexSemanticMap,
-    resolveStyleName
-};
+module.exports = { indexSemanticMap, resolveStyleName, _sanitizeSelector };

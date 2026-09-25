@@ -1,0 +1,95 @@
+{
+  "fecha": "2026-09-21T19:50:50.902Z",
+  "tiempoTotalMs": 1103.428032,
+  "fases": [
+    {
+      "nombre": "1. Carga de artefactos nativos",
+      "tiempoMs": 2.5873900000000276,
+      "memoriaInicial": {
+        "rss": 89047040,
+        "heapUsed": 16468512,
+        "heapTotal": 23142400,
+        "external": 3799767
+      },
+      "memoriaFinal": {
+        "rss": 89047040,
+        "heapUsed": 16920704,
+        "heapTotal": 23142400,
+        "external": 3799807
+      },
+      "memoriaUsada": {
+        "rss": 0,
+        "heapUsed": 452192,
+        "heapTotal": 0,
+        "external": 40
+      }
+    },
+    {
+      "nombre": "2. Preparación de párrafos",
+      "tiempoMs": 1.3674369999999954,
+      "memoriaInicial": {
+        "rss": 89047040,
+        "heapUsed": 16923032,
+        "heapTotal": 23142400,
+        "external": 3799807
+      },
+      "memoriaFinal": {
+        "rss": 89047040,
+        "heapUsed": 17455912,
+        "heapTotal": 23142400,
+        "external": 3799807
+      },
+      "memoriaUsada": {
+        "rss": 0,
+        "heapUsed": 532880,
+        "heapTotal": 0,
+        "external": 0
+      }
+    },
+    {
+      "nombre": "3. Generación XHTML",
+      "tiempoMs": 1.355404999999962,
+      "memoriaInicial": {
+        "rss": 89047040,
+        "heapUsed": 17456760,
+        "heapTotal": 23142400,
+        "external": 3799807
+      },
+      "memoriaFinal": {
+        "rss": 89047040,
+        "heapUsed": 17566072,
+        "heapTotal": 23142400,
+        "external": 3799807
+      },
+      "memoriaUsada": {
+        "rss": 0,
+        "heapUsed": 109312,
+        "heapTotal": 0,
+        "external": 0
+      }
+    },
+    {
+      "nombre": "4. Guardado y empaquetado",
+      "tiempoMs": 1097.20505,
+      "memoriaInicial": {
+        "rss": 89047040,
+        "heapUsed": 17566920,
+        "heapTotal": 23142400,
+        "external": 3799807
+      },
+      "memoriaFinal": {
+        "rss": 93351936,
+        "heapUsed": 18106248,
+        "heapTotal": 33628160,
+        "external": 4145398
+      },
+      "memoriaUsada": {
+        "rss": 4304896,
+        "heapUsed": 539328,
+        "heapTotal": 10485760,
+        "external": 345591
+      }
+    }
+  ],
+  "memoriaPico": 93351936
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Mapeo contractual entre estilos InDesign y firmas semánticas (C01-04 v1.0.0)",
+  "mappings": {
+    "P01_TITLE_H1": {
+      "semanticClass": "title",
+      "headingLevel": 1,
+      "htmlElement": "h1",
+      "ariaRole": null,
+      "epubType": "title",
+      "ariaHidden": null
+    },
+    "P02_CHAPTER": {
+      "semanticClass": "chapter",
+      "headingLevel": null,
+      "htmlElement": "section",
+      "ariaRole": "doc-chapter",
+      "epubType": "chapter",
+      "ariaHidden": null
+    },
+    "P03_ARTICLE": {
+      "semanticClass": "article",
+      "headingLevel": null,
+      "htmlElement": "section",
+      "ariaRole": null,
+      "epubType": "division",
+      "ariaHidden": null
+    },
+    "P04_BODY": {
+      "semanticClass": "body",
+      "headingLevel": null,
+      "htmlElement": "p",
+      "ariaRole": null,
+      "epubType": null,
+      "ariaHidden": null
+    },
+    "P05_DECORATIVE": {
+      "semanticClass": "decorative",
+      "headingLevel": null,
+      "htmlElement": "span",
+      "ariaRole": null,
+      "epubType": null,
+      "ariaHidden": true
+    }
+  }
+}
