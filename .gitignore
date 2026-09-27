@@ -61,3 +61,24 @@ src/core/compiladores/*.bak
 # LexDigitalHD Build & Staging
 .lexhd/
 dist/
+
+# Archivos pesados y binarios no rastreados
+*.tar.gz
+*.tgz
+google-cloud-sdk/
+
+# Credenciales y secretos
+.env
+*.env
+personal token
+
+# Scripts temporales de diagnóstico / parches
+*.cjs
+*.tmp
+*.bak
+*.swp
+*.docx
+*.lnk
+
+# Astro build
+.astro/

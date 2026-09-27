@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "hernandario1957.github.io-1",
+			"path": "../hernandario1957.github.io-1"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "hernandario1957.github.io"
+	}
+}

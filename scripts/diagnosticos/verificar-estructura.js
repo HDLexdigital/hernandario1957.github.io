@@ -43,7 +43,7 @@ for (const dup of duplicados) {
 // Probar carga del módulo principal
 console.log('\n--- Prueba de carga ---');
 try {
-    const lexdigital = require('../src');
+    const lexdigital = require(fs.existsSync('./src') ? path.resolve('./src') : path.resolve(__dirname, '../../src'));
     console.log('✅ Módulo principal cargado correctamente');
     console.log('   Versión: ' + lexdigital.version);
 } catch (e) {

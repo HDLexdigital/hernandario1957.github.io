@@ -1,7 +1,7 @@
 /**
  * Pruebas Unitarias para SemanticResolver.js
  */
-const { indexSemanticMap, resolveStyleName, _sanitizeSelector } = require('../src/adaptadores/SemanticResolver.js');
+const { indexSemanticMap, resolveStyleName, _sanitizeSelector } = require('../core/adaptadores/SemanticResolver.js');
 
 describe('SemanticResolver - Unit Tests', () => {
 

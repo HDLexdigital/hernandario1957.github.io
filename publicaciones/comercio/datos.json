@@ -1,0 +1,74 @@
+{
+  "documento": {
+    "tipo": "Ley",
+    "metadatos": {
+      "numero": "2",
+      "fecha": "22 de Agosto de 1916",
+      "emisor": "LA ASAMBLEA NACIONAL DE PANAMÁ",
+      "titulo": "POR LA CUAL SE APRUEBAN LOS CÓDIGOS PENAL, DE COMERCIO, DE MINAS, FISCAL, CIVIL Y JUDICIAL, ELABORADOS POR LA COMISIÓN CODIFICADORA"
+    },
+    "cuerpo_ley": [
+      {
+        "tipo": "Promulgacion",
+        "encabezado": "DECRETA:",
+        "elementos": [
+          {
+            "tipo": "Articulo",
+            "numero": "1",
+            "texto": "Apruébanse los Códigos Penal, de Comercio, de Minas, Fiscal, Civil y Judicial con las modificaciones introducidas por la comisión ad-hoc y que fueron aprobados, los cuales comenzarán a regir desde el día 1o. de julio de 1917."
+          },
+          {
+            "tipo": "Articulo",
+            "numero": "2",
+            "texto": "Dos ejemplares de una edición correcta y esmerada que deberá hacerse inmediatamente, de cada uno de estos Códigos, autorizados con la firma del Presidente de la República y del Secretario de Gobierno y Justicia, serán depositados en el Despacho de este funcionario, dos en la Corte Suprema de Justicia y dos en el Archivo Nacional."
+          },
+          {
+            "tipo": "Articulo",
+            "numero": "3",
+            "texto": "El texto de los ejemplares impresos autorizados del modo que se expresa en el artículo anterior, se tendrá por el texto auténtico de los Códigos en referencia, deberán contener al principio, el texto de la presente Ley; y las firmas autógrafas de que se trata el artículo 2o, serán puestas al pie de ella en el lugar correspondiente en los ejemplares que deben ser autorizados y depositados conforme a dicho artículo."
+          }
+        ],
+        "cierre": {
+          "lugar": "Panamá",
+          "fecha_dado": "21 de Agosto de 1916",
+          "firmantes": [
+            {
+              "cargo": "El Secretario",
+              "nombre": "FABRICIO A. AROSEMENA"
+            }
+          ],
+          "ejecucion": "Publíquese y ejecútese."
+        }
+      }
+    ],
+    "anexos": [
+      {
+        "tipo": "Codigo",
+        "nombre": "Código de Comercio",
+        "cuerpo": [
+          {
+            "tipo": "Titulo",
+            "denominacion": "TÍTULO PRELIMINAR",
+            "elementos": [
+              {
+                "tipo": "Articulo",
+                "numero": "1",
+                "texto": "La Ley comercial rige los actos de comercio, sean o no comerciantes las personas que en ellos intervengan; y las acciones que de ellos resulten o cualesquiera actos relacionados con los mismos se regularán conforme a lo dispuesto en el Código Judicial."
+              },
+              {
+                "tipo": "Articulo",
+                "numero": "2",
+                "texto": "Serán considerados actos de comercio todos los que se refieren al tráfico mercantil, reputándose desde luego como tales, los contratos y títulos siguientes:",
+                "incisos": [
+                  "La compraventa de géneros comerciales o mercancías propiamente dichas, para lucrarse en su reventa o por cualquier otro medio de especulación mercantil;",
+                  "La compraventa de títulos de crédito y valores comerciales así de carácter público, o emitidos por el Gobierno o los Municipios, como de carácter privado, o emitidos por particulares o por sociedades mercantiles, para lucrarse en su reventa o por cualquier otro medio de especulación mercantil;",
+                  "La compraventa de cosas incorporales, como los derechos de los autores, las marcas de fábrica, los privilegios industriales, el nombre, firma o razón comercial, etc., para lucrarse en su reventa o por otro medio de especulación mercantil;"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

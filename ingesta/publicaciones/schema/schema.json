@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LexDigital Style Model Schema",
+  "type": "object",
+  "required": [
+    "document",
+    "paragraphStyles",
+    "characterStyles"
+  ],
+  "properties": {
+    "document": {
+      "type": "object"
+    },
+    "paragraphStyles": {
+      "type": "object"
+    },
+    "characterStyles": {
+      "type": "object"
+    }
+  }
+}

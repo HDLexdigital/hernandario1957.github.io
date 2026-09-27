@@ -2,7 +2,7 @@
     "manifestVersion": 5,
     "id": "com.lexmotor.uxp",
     "name": "Lexmotor Compiler",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "main": "index.html",
     "host": [
         {
@@ -22,13 +22,15 @@
         }
     ],
     "requiredPermissions": {
-    "localFileSystem": "fullAccess",
-    "network": {
-        "domains": [
-            "http://127.0.0.1:3000",
-            "http://localhost:3000"
-        ]
-    },
-    "allowCodeEval": true
-}
+        "localFileSystem": "fullAccess",
+        "network": {
+            "domains": [
+                "http://127.0.0.1:8765",
+                "http://localhost:8765",
+                "http://127.0.0.1:3000",
+                "http://localhost:3000"
+            ]
+        },
+        "allowCodeEval": true
+    }
 }

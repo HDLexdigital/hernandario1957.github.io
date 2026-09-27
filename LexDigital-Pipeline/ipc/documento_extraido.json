@@ -1,0 +1,27 @@
+{
+  "contractVersion": "1.1.0",
+  "metadata": {
+    "source": "Adobe InDesign UXP Plugin",
+    "documentName": "Decreto_Extraido_UXP"
+  },
+  "document": {
+    "nodes": [
+      {
+        "id": "story-0-p-0",
+        "type": "text_node",
+        "content": "DECRETO NÚMERO 100 DE 2026\r",
+        "attributes": {
+          "styleName": "P02_TITLE_MAIN"
+        }
+      },
+      {
+        "id": "story-0-p-1",
+        "type": "text_node",
+        "content": "Artículo 1. Objeto y ámbito de aplicación del decreto.\r",
+        "attributes": {
+          "styleName": "P01_BODY_BASE"
+        }
+      }
+    ]
+  }
+}

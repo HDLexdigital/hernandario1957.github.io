@@ -1,0 +1,23 @@
+{
+  "chapter": {
+    "entity": "chapter",
+    "description": "Unidad de primer nivel estructural",
+    "aliases": {
+      "docx": ["Heading1"],
+      "idml": ["ChapterTitle"],
+      "epub": ["chapter"],
+      "aria": ["doc-chapter"],
+      "pdfua": ["Sect"]
+    },
+    "ldo_context": {
+      "@type": "StructuralEntity",
+      "equivalentClass": [
+        "docx:Heading1",
+        "idml:ChapterTitle",
+        "epub:chapter",
+        "aria:doc-chapter",
+        "pdfua:Sect"
+      ]
+    }
+  }
+}

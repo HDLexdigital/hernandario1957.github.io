@@ -1,0 +1,15 @@
+# Dependencias
+node_modules/
+package-lock.json
+
+# Salidas de procesamiento y artefactos generados
+salidas/
+cache/
+logs/
+*.log
+
+# Archivos de sistema y temporales
+.DS_Store
+Thumbs.db
+*.lnk
+*.tmp

@@ -1,0 +1,21 @@
+{
+  "documento": "ontologia_publicacion_v1",
+  "contenido": [
+    {
+      "estilo": "Articulo_Cuerpo",
+      "texto": "La seguridad social es un derecho.",
+      "fragmentos": []
+    },
+    {
+      "estilo": "Articulo_Cuerpo",
+      "texto": "El Estado organizará el sistema.",
+      "fragmentos": []
+    }
+  ],
+  "metadatos": {
+    "rutaOriginal": "estructura.texto_juridico.numerales",
+    "elementosOriginales": 2,
+    "elementosProcesados": 2,
+    "fecha": "2026-08-02T19:59:51.096Z"
+  }
+}

@@ -27,25 +27,22 @@ function auditarCSS(cssGenerado, xhtmlCompleto) {
         return resultados;
     }
     // 2. Contar reglas CSS
-    const reglas = cssGenerado.match(/\.([a-z0-9-_]+)\s*\{/g) || [];
+    const reglas = cssGenerado.match(/\.([a-zA-Z0-9_-]+)\s*\{/g) || [];
     resultados.totalReglas = reglas.length;
-    // 3. Verificar propiedades
-    if (cssGenerado.includes('font-family')) resultados.propiedades.fontFamily++;
-    if (cssGenerado.includes('font-size')) resultados.propiedades.fontSize++;
-    if (cssGenerado.includes('color:')) resultados.propiedades.color++;
-    if (cssGenerado.includes('margin-top')) resultados.propiedades.marginTop++;
-    if (cssGenerado.includes('margin-bottom')) resultados.propiedades.marginBottom++;
-    if (cssGenerado.includes('padding-left')) resultados.propiedades.paddingLeft++;
-    if (cssGenerado.includes('text-indent')) resultados.propiedades.textIndent++;
+    // 3. Contar ocurrencias reales de propiedades
+    resultados.propiedades.fontFamily = (cssGenerado.match(/font-family\s*:/g) || []).length;
+    resultados.propiedades.fontSize = (cssGenerado.match(/font-size\s*:/g) || []).length;
+    resultados.propiedades.color = (cssGenerado.match(/(?<![a-zA-Z-])color\s*:/g) || []).length;
+    resultados.propiedades.marginTop = (cssGenerado.match(/margin-top\s*:/g) || []).length;
+    resultados.propiedades.marginBottom = (cssGenerado.match(/margin-bottom\s*:/g) || []).length;
+    resultados.propiedades.paddingLeft = (cssGenerado.match(/padding-left\s*:/g) || []).length;
+    resultados.propiedades.textIndent = (cssGenerado.match(/text-indent\s*:/g) || []).length;
     // 4. Verificar valores inválidos
-    if (cssGenerado.includes('color: TITULO') || cssGenerado.includes('color: Cap')) {
-        resultados.errores.push('Color inválido detectado (falta comillas o #)');
-    }
     if (cssGenerado.includes('undefined')) {
-        resultados.errores.push('Valor undefined detectado');
+        resultados.errores.push('Valor undefined detectado en CSS');
     }
     if (cssGenerado.includes('NaN')) {
-        resultados.errores.push('Valor NaN detectado');
+        resultados.errores.push('Valor NaN detectado en CSS');
     }
     // 5. Verificar decimales excesivos
     const decimalesExcesivos = cssGenerado.match(/\d+\.\d{4,}/g) || [];
@@ -53,10 +50,10 @@ function auditarCSS(cssGenerado, xhtmlCompleto) {
         resultados.advertencias.push(decimalesExcesivos.length + ' valores con decimales excesivos');
     }
     // 6. Verificar que las clases CSS existan en el XHTML
-    const clasesCSS = cssGenerado.match(/\.([a-z0-9-_]+)\s*\{/g) || [];
-    for (const regla of clasesCSS) {
+    for (const regla of reglas) {
         const clase = regla.replace(/[.\s{]/g, '');
-        if (xhtmlCompleto && xhtmlCompleto.includes('class="' + clase + '"')) {
+        const regexClase = new RegExp(`class="[^"]*\\b${clase}\\b[^"]*"`);
+        if (xhtmlCompleto && regexClase.test(xhtmlCompleto)) {
             resultados.reglasValidas++;
         } else {
             resultados.advertencias.push('Clase .' + clase + ' definida pero no usada en XHTML');

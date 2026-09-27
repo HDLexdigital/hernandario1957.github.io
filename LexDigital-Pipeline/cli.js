@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const { leerArchivoTextoSeguro } = require('./core/utils/textUtils');
 const args = process.argv.slice(2);
 if (args.length === 0) {
     console.log("❌ Uso incorrecto.");
@@ -14,7 +15,7 @@ if (!fs.existsSync(archivoEntrada)) {
 }
 console.log(`📂 Leyendo archivo fuente: ${path.basename(archivoEntrada)}...`);
 try {
-    const contenidoCrudo = fs.readFileSync(archivoEntrada, 'utf8');
+    const contenidoCrudo = leerArchivoTextoSeguro(archivoEntrada);
     const nombreBase = path.basename(archivoEntrada, path.extname(archivoEntrada));
     const lineas = contenidoCrudo.split(/\r?\n/).filter(l => l.trim().length > 0);
     const listaParrafos = lineas.map((linea, index) => ({

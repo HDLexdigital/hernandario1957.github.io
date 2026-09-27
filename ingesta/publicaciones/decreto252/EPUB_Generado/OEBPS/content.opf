@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="pub-id" version="3.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <dc:identifier id="pub-id">urn:uuid:mu9sd1gvw6b</dc:identifier>
+        <dc:title>Documento Legal</dc:title>
+        <dc:language>es-CO</dc:language>
+        <dc:date>2026-08-31</dc:date>
+        <meta property="dcterms:modified">2026-08-31T22:34:38.674Z</meta>
+    </metadata>
+    <manifest>
+        <item id="toc" href="toc.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+        <item id="content" href="LexCodex_Final.xhtml" media-type="application/xhtml+xml"/>
+        <item id="css" href="assets/lexcodex.css" media-type="text/css"/>
+    </manifest>
+    <spine>
+        <itemref idref="toc"/>
+        <itemref idref="content"/>
+    </spine>
+</package>

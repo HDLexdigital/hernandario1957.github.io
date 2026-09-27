@@ -22,7 +22,33 @@ function normalizarClase(nombreEstilo) {
     return nombreEstilo.replace(/[^a-zA-Z0-9_-]/g, '-').replace(/^-+|-+$/g, '');
 }
 
+const fs = require('fs');
+
+function leerArchivoTextoSeguro(rutaArchivo) {
+    const buffer = fs.readFileSync(rutaArchivo);
+    let texto = '';
+
+    // Detección de BOM / Codificación
+    if (buffer.length >= 2 && buffer[0] === 0xFF && buffer[1] === 0xFE) {
+        // UTF-16 LE
+        texto = buffer.subarray(2).toString('utf16le');
+    } else if (buffer.length >= 2 && buffer[0] === 0xFE && buffer[1] === 0xFF) {
+        // UTF-16 BE
+        texto = buffer.subarray(2).toString('utf16be');
+    } else if (buffer.length >= 3 && buffer[0] === 0xEF && buffer[1] === 0xBB && buffer[2] === 0xBF) {
+        // UTF-8 BOM
+        texto = buffer.subarray(3).toString('utf8');
+    } else {
+        // UTF-8 estándar
+        texto = buffer.toString('utf8');
+    }
+
+    // Limpiar BOM residual y caracteres nulos
+    return texto.replace(/^\uFEFF/, '').replace(/\0/g, '');
+}
+
 module.exports = {
     escaparHTML,
-    normalizarClase
+    normalizarClase,
+    leerArchivoTextoSeguro
 };

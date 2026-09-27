@@ -15,8 +15,9 @@ const MAPEO_ESTILOS = {
         marginLeft: '2mm',
         marginTop: '5mm',
         marginBottom: '1mm',
-        borderBottom: '2pt dotted',
-        backgroundColor: 'Azul Borgona',
+        borderBottom: '2pt dotted #2c5282',
+        backgroundColor: '#2c5282',
+        color: '#ffffff',
         paddingTop: '2mm',
         paddingBottom: '1mm'
     },
@@ -25,23 +26,23 @@ const MAPEO_ESTILOS = {
         fontWeight: 'bold',
         fontSize: '16pt',
         textTransform: 'uppercase',
-        letterSpacing: '0.9em',
-        color: 'TITULO Constitucion',
+        letterSpacing: '0.05em',
+        color: '#1a365d',
         textAlign: 'center',
         marginTop: '5mm',
         marginBottom: '1mm',
-        borderBottom: '2pt dotted',
-        backgroundColor: 'Sombra_Titulo'
+        borderBottom: '2pt dotted #cbd5e0',
+        backgroundColor: '#edf2f7'
     },
     'P02_TITLE_CHAPTER': {
         fontFamily: "'Liberation Serif', sans-serif",
         fontWeight: 'bold',
         fontSize: '14pt',
-        color: 'Capitulo Constitucion',
+        color: '#2b6cb0',
         textAlign: 'center',
         lineHeight: '1.35',
         marginTop: '4mm',
-        borderBottom: '2pt dotted'
+        borderBottom: '2pt dotted #cbd5e0'
     },
     'P02_TITLE_PART': {
         fontFamily: "'Georgia Pro', sans-serif",

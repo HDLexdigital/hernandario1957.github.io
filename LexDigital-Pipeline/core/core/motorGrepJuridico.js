@@ -81,21 +81,26 @@ const REGLAS_BASE = [
     }
 ];
 
+let cacheReglas = null;
+let ultimoMtime = 0;
+
 /**
  * Función que lee dinámicamente el archivo .txt exportado por InDesign
- * desde la ruta donde el usuario decidió guardarlo.
+ * con estrategia de caché en memoria para evitar I/O masivo en bucle.
  */
 function cargarReglasDinamicas() {
-    let reglasDinamicas = [];
-    
-    // Ruta relativa a la carpeta 'config/' dentro de tu proyecto modular
-    // (Asegúrate de guardar allí el .txt cuando el script de InDesign te pregunte dónde ubicarlo)
     const rutaTxtPersonalizada = path.join(__dirname, '../config/ReglasGrepJuridicas.txt');
 
-    if (fs.existsSync(rutaTxtPersonalizada)) {
-        try {
+    try {
+        if (fs.existsSync(rutaTxtPersonalizada)) {
+            const stats = fs.statSync(rutaTxtPersonalizada);
+            if (cacheReglas && stats.mtimeMs === ultimoMtime) {
+                return cacheReglas;
+            }
+
             const contenido = fs.readFileSync(rutaTxtPersonalizada, 'utf-8');
             const lineas = contenido.split(/\r?\n/);
+            const reglasDinamicas = [];
 
             lineas.forEach(linea => {
                 if (linea.trim() !== '') {
@@ -121,13 +126,19 @@ function cargarReglasDinamicas() {
                     }
                 }
             });
-        } catch (e) {
-            console.warn('⚠️ Advertencia al leer reglas dinámicas:', e.message);
+
+            ultimoMtime = stats.mtimeMs;
+            cacheReglas = [...reglasDinamicas, ...REGLAS_BASE];
+            return cacheReglas;
         }
+    } catch (e) {
+        console.warn('⚠️ Advertencia al leer reglas dinámicas:', e.message);
     }
 
-    // Retorna la unión de las reglas dinámicas + las reglas base
-    return [...reglasDinamicas, ...REGLAS_BASE];
+    if (!cacheReglas) {
+        cacheReglas = [...REGLAS_BASE];
+    }
+    return cacheReglas;
 }
 
 function evaluarTokenConGrep(texto) {

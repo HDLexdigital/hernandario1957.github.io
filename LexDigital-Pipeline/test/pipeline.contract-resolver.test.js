@@ -1,17 +1,19 @@
-﻿/**
- * @fileoverview test/integration/pipeline.contract-resolver.test.js
+/**
+ * @fileoverview test/pipeline.contract-resolver.test.js
  * Validación de contratos y robustez de entrada para el motor LexDigital.
  */
 const assert = require('assert');
 const {
     compilarLexmotor,
     validarCompatibilidad
-} = require('../../src/index');
+} = require('../core/index');
+
 const parametrosTest = [
     'test',
-    'styles.css',
+    'Lexdigital_Modular.css',
     { debug: false }
 ];
+
 describe('PIPE-CONTRACT-001 Motor LexDigital', () => {
     test(
         'Vector A: rechaza jsonCrudo cuando no es objeto',
@@ -28,6 +30,7 @@ describe('PIPE-CONTRACT-001 Motor LexDigital', () => {
                 );
         }
     );
+
     test(
         'Vector B: valida compatibilidad estructural del documento',
         () => {
@@ -46,14 +49,14 @@ describe('PIPE-CONTRACT-001 Motor LexDigital', () => {
                     }
                 ]
             };
-            const resultado =
-                validarCompatibilidad(documentoValido);
+            const resultado = validarCompatibilidad(documentoValido);
             assert.strictEqual(
                 typeof resultado.esValido,
                 'boolean'
             );
         }
     );
+
     test(
         'Vector C: compila exitosamente con entrada válida',
         async () => {
@@ -68,16 +71,16 @@ describe('PIPE-CONTRACT-001 Motor LexDigital', () => {
                     }
                 ]
             };
-            const resultado =
-                await compilarLexmotor(
-                    jsonValido,
-                    ...parametrosTest
-                );
+            const resultado = await compilarLexmotor(
+                jsonValido,
+                ...parametrosTest
+            );
             expect(resultado).toBeTruthy();
             expect(typeof resultado.xhtml).toBe('string');
         }
     );
 });
+
 describe('PIPE-CONTRACT-002', () => {
     test(
         'PIPE-CONTRACT-002-A rechaza documentos sin propiedad documento',
@@ -95,6 +98,7 @@ describe('PIPE-CONTRACT-002', () => {
                 );
         }
     );
+
     test(
         'PIPE-CONTRACT-002-B rechaza documento con tipo inválido',
         async () => {
@@ -113,6 +117,7 @@ describe('PIPE-CONTRACT-002', () => {
                 );
         }
     );
+
     test(
         'PIPE-CONTRACT-002-C rechaza documento sin título',
         async () => {
@@ -131,68 +136,9 @@ describe('PIPE-CONTRACT-002', () => {
                 );
         }
     );
-	test(
-    'PIPE-CONTRACT-002-D rechaza documento con título vacío',
-    async () => {
-        const jsonCrudo = {
-            documento: {
-                titulo: ''
-            }
-        };
 
-        await expect(
-            compilarLexmotor(
-                jsonCrudo,
-                ...parametrosTest
-            )
-        )
-        .rejects
-        .toThrow(
-            /el título del documento no puede estar vacío/i
-        );
-    }
-);
-	test(
-		'002-D1: rechaza documento con título de cadena vacía',
-		async () => {
-			const jsonCrudo = {
-				documento: {
-					titulo: ''
-				}
-			};
-
-			await expect(
-				compilarLexmotor(
-					jsonCrudo,
-					...parametrosTest
-				)
-			).rejects.toThrow(
-				/título del documento no puede estar vacío/i
-			);
-		}
-	);
-
-	test(
-		'002-D2: rechaza documento con título de solo espacios',
-		async () => {
-			const jsonCrudo = {
-				documento: {
-					titulo: '   '
-				}
-			};
-
-			await expect(
-				compilarLexmotor(
-					jsonCrudo,
-					...parametrosTest
-				)
-			).rejects.toThrow(
-				/título del documento no puede estar vacío/i
-			);
-		}
-	);
     test(
-        'PIPE-CONTRACT-002-D1 rechaza documento con título de cadena vacía',
+        'PIPE-CONTRACT-002-D rechaza documento con título de cadena vacía',
         async () => {
             const jsonCrudo = {
                 documento: { titulo: '' }
