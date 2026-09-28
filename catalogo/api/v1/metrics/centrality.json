@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "apiVersion": "1.0.0",
+    "generatedAt": "2026-09-28T18:40:25.291Z",
+    "sourceGraphSha256": "e5d037d17514405a8ee308ae292f6714b88f28dcdbcd2adcf6f105b9338fe653",
+    "computationalDisclaimer": "Los puntajes de centralidad y simulaciones de propagación de impacto constituyen métricas de análisis topológico de redes y carecen de valor probatorio o fuerza vinculante sobre la vigencia, jerarquía o aplicabilidad de las disposiciones en el ordenamiento jurídico."
+  },
+  "totalNodesEvaluated": 0,
+  "topCentralNodes": [],
+  "bridgeNodes": []
+}
