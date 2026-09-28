@@ -77,7 +77,7 @@ function construirCatalogo() {
             catalogo.push({
                 documentId: nombre.toUpperCase(),
                 id: nombre,
-                title: metadata.title || nombre,
+                title: metadata.title || metadata.titulo || nombre,
                 versions: ['v1'],
                 version: '1.0.0',
                 file: jsonFile
