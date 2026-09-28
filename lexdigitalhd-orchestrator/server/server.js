@@ -108,9 +108,22 @@ function procesarEvidenciaParaAstro(payload) {
     try {
         fs.writeFileSync(rutaTemporal, JSON.stringify(documentoAstro, null, 2), 'utf8');
         fs.renameSync(rutaTemporal, rutaDestino);
-        console.log(`✅ Documento validado y guardado atómicamente en: ${rutaDestino}`);
+        console.log(`✅ Documento validado y guardado atómicamente en Astro: ${rutaDestino}`);
+
+        // 6. Dual-Write: Guardar también en publicaciones/ para compatibilidad con Cloudflare Pages Legacy
+        const dirPublicaciones = path.resolve(__dirname, '../../publicaciones', documentoAstro.slug);
+        if (!fs.existsSync(dirPublicaciones)) {
+            fs.mkdirSync(dirPublicaciones, { recursive: true });
+        }
+        const rutaPublicaciones = path.join(dirPublicaciones, `${documentoAstro.slug}.json`);
+        const rutaPublicacionesTmp = `${rutaPublicaciones}.tmp`;
+        
+        fs.writeFileSync(rutaPublicacionesTmp, JSON.stringify(documentoAstro, null, 2), 'utf8');
+        fs.renameSync(rutaPublicacionesTmp, rutaPublicaciones);
+        console.log(`✅ Documento guardado en sistema Legacy (publicaciones/): ${rutaPublicaciones}`);
+        
     } catch (fsError) {
-        console.error(`❌ Error al escribir ${rutaDestino}:`, fsError.message);
+        console.error(`❌ Error al escribir archivos:`, fsError.message);
         if (fs.existsSync(rutaTemporal)) fs.unlinkSync(rutaTemporal);
     }
 
