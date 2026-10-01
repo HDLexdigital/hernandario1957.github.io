@@ -1,12 +1,7 @@
 /**
- * Catálogo dinámico de publicaciones — adaptado al markup de la plantilla ColoShop.
- * Reutiliza las clases visuales de la plantilla (product-item, product_info, etc.)
- * pero con datos y lógica propios: carga index.json, filtra por categoría/formato/
- * acceso, y controla qué botones de descarga están habilitados según el "acceso"
- * de cada publicación.
- *
- * Sustituye obtenerEstadoUsuario() por tu lógica real de autenticación cuando
- * conectes un backend.
+ * catalogo.js — Lógica de catálogo de publicaciones LexDigitalHD
+ * Renderiza dinámicamente las tarjetas a partir de index.json,
+ * gestiona filtros interactivos (categoría, formato, acceso) y buscador.
  */
 
 (function () {
@@ -51,6 +46,8 @@
       ? pub.categoria.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")
       : "sin-categoria";
 
+    const rutaPortada = pub.portada || ("images/portadas/" + pub.id + ".webp");
+
     const botonesFormato = Object.entries(pub.formatos || {})
       .map(([formato, ruta]) => {
         if (!permitido) {
@@ -58,7 +55,7 @@
                     <i class="fa ${iconoFormato(formato)}" aria-hidden="true"></i> ${formato.toUpperCase()}
                   </button>`;
         }
-        return `<a class="boton-formato" href="${ruta}" aria-label="Abrir ${formato.toUpperCase()} — ${pub.titulo}">
+        return `<a class="boton-formato" href="${ruta}" aria-label="Abrir ${formato.toUpperCase()} - ${pub.titulo}">
                   <i class="fa ${iconoFormato(formato)}" aria-hidden="true"></i> ${formato.toUpperCase()}
                 </a>`;
       })
@@ -76,12 +73,16 @@
            data-formatos="${Object.keys(pub.formatos || {}).join(",")}" data-acceso="${pub.acceso}"
            data-titulo="${(pub.titulo || "").toLowerCase()}" data-descripcion="${(pub.descripcion || "").toLowerCase()}">
         <div class="product product_filter">
-          <div class="product_image publicacion_portada" aria-hidden="true">
-            <i class="fa fa-file-text-o"></i>
+          <div class="product_image publicacion_portada">
+            <img src="${rutaPortada}" 
+                 alt="Portada de ${pub.titulo}" 
+                 loading="lazy" 
+                 class="img-portada"
+                 onerror="this.onerror=null; this.parentElement.classList.add('portada-fallback'); this.parentElement.innerHTML='<div class=\\'portada-generica\\'><span class=\\'portada-gen-titulo\\'>${pub.titulo}</span><span class=\\'portada-gen-editorial\\'>LexDigitalHD</span></div>';" />
           </div>
           <div class="product_info">
             <span class="etiqueta-categoria">${pub.categoria || ""}</span>
-            <h6 class="product_name"><a href="ficha-publicacion.html" aria-labelledby="titulo-${pub.id}"><span id="titulo-${pub.id}">${pub.titulo}</span></a></h6>
+            <h6 class="product_name"><a href="ficha-publicacion.html?id=${pub.id}" aria-labelledby="titulo-${pub.id}"><span id="titulo-${pub.id}">${pub.titulo}</span></a></h6>
             <p class="publicacion_descripcion">${pub.descripcion || ""}</p>
             <div class="product_price estado-acceso-badge ${pub.acceso}">${etiquetaAcceso(pub.acceso)}</div>
           </div>
@@ -152,10 +153,12 @@
       li.addEventListener("click", () => {
         document.querySelectorAll("#filtro-formato li").forEach((el) => {
           el.classList.remove("active");
-          el.querySelector("i").className = "fa fa-square-o";
+          const icono = el.querySelector("i");
+          if (icono) icono.className = "fa fa-square-o";
         });
         li.classList.add("active");
-        li.querySelector("i").className = "fa fa-check-square";
+        const iconoActivo = li.querySelector("i");
+        if (iconoActivo) iconoActivo.className = "fa fa-check-square";
         estado.formato = li.dataset.formato || "todos";
         renderizarCatalogoCompleto();
       });
@@ -165,10 +168,12 @@
       li.addEventListener("click", () => {
         document.querySelectorAll("#filtro-acceso li").forEach((el) => {
           el.classList.remove("active");
-          el.querySelector("i").className = "fa fa-square-o";
+          const icono = el.querySelector("i");
+          if (icono) icono.className = "fa fa-square-o";
         });
         li.classList.add("active");
-        li.querySelector("i").className = "fa fa-check-square";
+        const iconoActivo = li.querySelector("i");
+        if (iconoActivo) iconoActivo.className = "fa fa-check-square";
         estado.acceso = li.dataset.acceso || "todos";
         renderizarCatalogoCompleto();
       });

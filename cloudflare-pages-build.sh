@@ -23,6 +23,7 @@ node scripts/build-external-links-report.js || true
 node scripts/build-audit-summary.js || true
 
 # Generar dashboards HTML
+node scripts/build-public-portadas.js || true
 node scripts/build-public-home.js || true
 node scripts/build-public-nav.js || true
 node scripts/build-public-search.js || true
@@ -44,3 +45,4 @@ find . -type f -size +25M -not -path './node_modules/*' -delete
 find public -type f -size +25M -delete
 
 echo "✅ Build completado."
+

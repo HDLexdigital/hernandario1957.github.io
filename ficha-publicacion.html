@@ -283,6 +283,34 @@
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="plugins/easing/easing.js"></script>
+
+<script>
+  (async function() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const pubId = params.get('id');
+      const resp = await fetch('index.json');
+      if (!resp.ok) return;
+      const data = await resp.json();
+      const pub = (data.publicaciones || []).find(p => p.id === pubId) || data.publicaciones[0];
+      if (!pub) return;
+
+      const portadaElem = document.querySelector('.publicacion_portada');
+      if (portadaElem) {
+        const rutaPortada = pub.portada || ('images/portadas/' + pub.id + '.webp');
+        portadaElem.innerHTML = '<img src="' + rutaPortada + '" alt="Portada de ' + pub.titulo + '" style="max-height:100%; max-width:100%; object-fit:contain; border-radius:4px; box-shadow:0 8px 24px rgba(0,0,0,0.3);" onerror="this.onerror=null; this.parentElement.innerHTML=\'<i class=\\\'fa fa-book\\\' style=\\\'font-size:90px; color:#cfcfcf;\\\'></i>\';" />';
+      }
+
+      const tituloElem = document.getElementById('titulo-publicacion');
+      if (tituloElem) tituloElem.textContent = pub.titulo;
+
+      const descElem = document.getElementById('descripcion-publicacion');
+      if (descElem) descElem.textContent = pub.descripcion;
+    } catch(e) {
+      console.error('Error cargando ficha:', e);
+    }
+  })();
+</script>
 </body>
 
 </html>

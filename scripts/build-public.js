@@ -88,6 +88,7 @@ function main() {
 
     // Dashboards
     [
+        'build-public-portadas.js',
         'build-public-home.js',
         'build-public-nav.js',
         'build-public-search.js',
@@ -120,3 +121,4 @@ function main() {
 }
 
 main();
+
