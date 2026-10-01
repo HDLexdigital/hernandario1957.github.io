@@ -46,7 +46,7 @@
       ? pub.categoria.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")
       : "sin-categoria";
 
-    const rutaPortada = pub.portada || ("images/portadas/" + pub.id + ".webp");
+    const rutaPortada = (pub.portada || ("images/portadas/" + pub.id + ".webp")) + "?v=20261001";
 
     const botonesFormato = Object.entries(pub.formatos || {})
       .map(([formato, ruta]) => {
@@ -76,7 +76,7 @@
           <div class="product_image publicacion_portada">
             <img src="${rutaPortada}" 
                  alt="Portada de ${pub.titulo}" 
-                 loading="lazy" 
+                 loading="eager" 
                  class="img-portada"
                  onerror="this.onerror=null; this.parentElement.classList.add('portada-fallback'); this.parentElement.innerHTML='<div class=\\'portada-generica\\'><span class=\\'portada-gen-titulo\\'>${pub.titulo}</span><span class=\\'portada-gen-editorial\\'>LexDigitalHD</span></div>';" />
           </div>

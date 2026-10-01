@@ -1,0 +1,17 @@
+{
+  "status": "OK",
+  "generatedAt": "2026-09-28T18:40:25.852Z",
+  "reports": {
+    "integrity": "OK",
+    "externalLinks": "OK",
+    "anchors": "SIN DATOS"
+  },
+  "counts": {
+    "integrityTotal": 15,
+    "integrityErrors": 0,
+    "externalLinksTotal": 0,
+    "externalLinksErrors": 0,
+    "anchorsTotal": 0,
+    "anchorsErrors": 0
+  }
+}

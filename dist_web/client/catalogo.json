@@ -1,0 +1,373 @@
+[
+  {
+    "documentId": "CIDM_REAL",
+    "id": "cidm_real",
+    "title": "cidm_real",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "cidm_real.json"
+  },
+  {
+    "documentId": "COMERCIO",
+    "id": "comercio",
+    "title": "comercio",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "comercio.json"
+  },
+  {
+    "documentId": "CONSTITUCION",
+    "id": "constitucion",
+    "title": "constitucion",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "constitucion.json"
+  },
+  {
+    "documentId": "CONSTITUCION_CO_CIDM",
+    "id": "constitucion_co_cidm",
+    "title": "constitucion_co_cidm",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "constitucion_co_cidm.json"
+  },
+  {
+    "documentId": "CONTITUCIONAPREPARAR",
+    "id": "contitucionapreparar",
+    "title": "contitucionapreparar",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "contitucionapreparar.json"
+  },
+  {
+    "documentId": "DECRETO252",
+    "id": "decreto252",
+    "title": "decreto252",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "decreto252.json"
+  },
+  {
+    "documentId": "DOCUMENTO-A",
+    "id": "documento-a",
+    "title": "documento-a",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "documento-a.ledm.json"
+  },
+  {
+    "documentId": "DOCUMENTO-B",
+    "id": "documento-b",
+    "title": "documento-b",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "documento-b.ledm.json"
+  },
+  {
+    "documentId": "EJEMPLO_03",
+    "id": "ejemplo_03",
+    "title": "ejemplo_03",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "ejemplo_03.json"
+  },
+  {
+    "documentId": "EJEMPLO_03_AST_ENRIQUECIDO",
+    "id": "ejemplo_03_ast_enriquecido",
+    "title": "ejemplo_03_ast_enriquecido",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "ejemplo_03_ast_enriquecido.json"
+  },
+  {
+    "documentId": "FRAGMENTO",
+    "id": "fragmento",
+    "title": "fragmento",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "fragmento.json"
+  },
+  {
+    "documentId": "FRAGMENTO2",
+    "id": "fragmento2",
+    "title": "fragmento2",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "fragmento2.json"
+  },
+  {
+    "documentId": "FRAGMENTO_CONSTITUCION",
+    "id": "fragmento_constitucion",
+    "title": "fragmento_constitucion",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "fragmento_constitucion.json"
+  },
+  {
+    "documentId": "FRAGMENTO_INDD",
+    "id": "fragmento_indd",
+    "title": "fragmento_indd",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "fragmento_indd.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787048272866",
+    "id": "input_req-uxp-1787048272866",
+    "title": "input_req-uxp-1787048272866",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787048272866.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787048479152",
+    "id": "input_req-uxp-1787048479152",
+    "title": "input_req-uxp-1787048479152",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787048479152.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787050532163",
+    "id": "input_req-uxp-1787050532163",
+    "title": "input_req-uxp-1787050532163",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787050532163.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787050829014",
+    "id": "input_req-uxp-1787050829014",
+    "title": "input_req-uxp-1787050829014",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787050829014.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787051067716",
+    "id": "input_req-uxp-1787051067716",
+    "title": "input_req-uxp-1787051067716",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787051067716.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787052898129",
+    "id": "input_req-uxp-1787052898129",
+    "title": "input_req-uxp-1787052898129",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787052898129.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787133542567",
+    "id": "input_req-uxp-1787133542567",
+    "title": "input_req-uxp-1787133542567",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787133542567.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787134110013",
+    "id": "input_req-uxp-1787134110013",
+    "title": "input_req-uxp-1787134110013",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787134110013.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787134565322",
+    "id": "input_req-uxp-1787134565322",
+    "title": "input_req-uxp-1787134565322",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787134565322.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787134804067",
+    "id": "input_req-uxp-1787134804067",
+    "title": "input_req-uxp-1787134804067",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787134804067.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787134995386",
+    "id": "input_req-uxp-1787134995386",
+    "title": "input_req-uxp-1787134995386",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787134995386.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787135104195",
+    "id": "input_req-uxp-1787135104195",
+    "title": "input_req-uxp-1787135104195",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787135104195.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787135442125",
+    "id": "input_req-uxp-1787135442125",
+    "title": "input_req-uxp-1787135442125",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787135442125.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-1787138010552",
+    "id": "input_req-uxp-1787138010552",
+    "title": "input_req-uxp-1787138010552",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-1787138010552.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-TEST-1787237748582",
+    "id": "input_req-uxp-test-1787237748582",
+    "title": "input_req-uxp-test-1787237748582",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-test-1787237748582.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-TEST-1787237838942",
+    "id": "input_req-uxp-test-1787237838942",
+    "title": "input_req-uxp-test-1787237838942",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-test-1787237838942.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-TEST-1787238012454",
+    "id": "input_req-uxp-test-1787238012454",
+    "title": "input_req-uxp-test-1787238012454",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-test-1787238012454.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-TEST-1787238457543",
+    "id": "input_req-uxp-test-1787238457543",
+    "title": "input_req-uxp-test-1787238457543",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-test-1787238457543.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-TEST-1787239112770",
+    "id": "input_req-uxp-test-1787239112770",
+    "title": "input_req-uxp-test-1787239112770",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-test-1787239112770.json"
+  },
+  {
+    "documentId": "INPUT_REQ-UXP-TEST-1787243137787",
+    "id": "input_req-uxp-test-1787243137787",
+    "title": "input_req-uxp-test-1787243137787",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "input_req-uxp-test-1787243137787.json"
+  },
+  {
+    "documentId": "NORMA-VERSIONADA",
+    "id": "norma-versionada",
+    "title": "norma-versionada",
+    "versions": [
+      "v1",
+      "v2"
+    ],
+    "version": "v1",
+    "file": "v1\\documento.ledm.json"
+  },
+  {
+    "documentId": "NOTAS_EXTRAIDAS",
+    "id": "notas_extraidas",
+    "title": "notas_extraidas",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "notas_extraidas.json"
+  },
+  {
+    "documentId": "ONTOLOGIA_PUBLICACION_V1_ADAPTADO",
+    "id": "ontologia_publicacion_v1_adaptado",
+    "title": "ontologia_publicacion_v1_adaptado",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "ontologia_publicacion_v1_adaptado.json"
+  }
+]

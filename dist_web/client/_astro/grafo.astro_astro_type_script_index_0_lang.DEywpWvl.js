@@ -1,0 +1,1 @@
+globalThis.process??={},globalThis.process.env??={};import"https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.26.0/cytoscape.min.js";

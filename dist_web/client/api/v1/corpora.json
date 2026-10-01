@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "apiVersion": "1.0.0",
+    "generatedAt": "2026-09-28T18:40:25.291Z",
+    "sourceGraphSha256": "e5d037d17514405a8ee308ae292f6714b88f28dcdbcd2adcf6f105b9338fe653"
+  },
+  "corpora": [
+    {
+      "corpusId": "co-constitucion-1991",
+      "slug": "constitucion",
+      "title": "Constitución Política de Colombia",
+      "shortTitle": "CP 1991",
+      "jurisdiction": "CO",
+      "type": "constitution",
+      "promulgationDate": "1991-07-04",
+      "status": "active",
+      "endpoints": {
+        "canonicalUrl": "/constitucion",
+        "graphNodesCount": 0
+      }
+    }
+  ]
+}
