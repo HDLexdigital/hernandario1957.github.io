@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexDigitalHD — Dossier Ejecutivo «Proyecto Sí-o-Sí»</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#d4af37">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LexDigitalHD">
+    <link rel="apple-touch-icon" href="/icon.svg">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+
+    <!-- Tarjeta de Presentación / Open Graph para WhatsApp & Mensajería -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="LexDigitalHD — Dossier Ejecutivo «Proyecto Sí-o-Sí»">
+    <meta property="og:description" content="Compilador editorial industrial, PWA accesible y propuesta de cierre inmediato. Director de Taller: Hernán Darío (Donache).">
+    <meta property="og:url" content="https://www.lexdigitalhd.com/dossier_siosi.html">
+    <meta property="og:image" content="https://www.lexdigitalhd.com/fondo-taller.jpg">
+    <meta property="og:site_name" content="Editorial LexDigitalHD">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0c0d10;
+            --bg-surface: #14161c;
+            --bg-card: #1c1f27;
+            --border: #2c313d;
+            --gold: #d4af37;
+            --gold-light: #f5d77f;
+            --gold-dim: rgba(212, 175, 55, 0.15);
+            --text-main: #e6e8ee;
+            --text-muted: #9aa1b2;
+            --cyan: #38bdf8;
+            --green: #10b981;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'EB Garamond', Georgia, serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        .light-mode {
+            --bg-base: #f7f5f0;
+            --bg-surface: #ede9e0;
+            --bg-card: #ffffff;
+            --border: #d4cbba;
+            --gold: #9e7d23;
+            --gold-light: #c29e3a;
+            --gold-dim: rgba(158, 125, 35, 0.12);
+            --text-main: #1f2229;
+            --text-muted: #5e6475;
+            --cyan: #0284c7;
+            --green: #059669;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-base);
+            background-image: linear-gradient(rgba(12, 13, 16, 0.88), rgba(12, 13, 16, 0.94)), url('/fondo-taller.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 19px;
+            line-height: 1.65;
+            transition: background 0.3s, color 0.3s;
+            padding-bottom: 5rem;
+        }
+
+        /* Top Bar */
+        .topbar {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .brand {
+            font-family: var(--font-title);
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 1.25rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .brand-badge {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            background: var(--gold-dim);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .btn-ctrl {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.4rem 0.85rem;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-ctrl:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 2.5rem auto 0;
+            padding: 0 1.5rem;
+        }
+
+        /* Header Hero */
+        .hero {
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-base) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 10%; right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 2.4rem;
+            color: var(--gold);
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .hero-sub {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+        .pact-box {
+            max-width: 820px;
+            margin: 1.5rem auto 0;
+            padding: 1.25rem 2rem;
+            background: var(--gold-dim);
+            border-left: 3px solid var(--gold);
+            border-right: 3px solid var(--gold);
+            border-radius: 6px;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text-main);
+        }
+
+        /* Value Pills */
+        .pills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3.5rem;
+        }
+        .pill-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: 1.4rem;
+            border-radius: 8px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .pill-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--gold);
+        }
+        .pill-title {
+            font-family: var(--font-title);
+            font-size: 1.05rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .pill-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Flow Section */
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .section-header h2 {
+            font-family: var(--font-title);
+            color: var(--gold);
+            font-size: 1.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+        }
+        @media (max-width: 1024px) {
+            .flow-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .flow-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 500px) {
+            .flow-grid { grid-template-columns: 1fr; }
+        }
+        .flow-step {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            position: relative;
+        }
+        .flow-num {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--cyan);
+            margin-bottom: 0.35rem;
+        }
+        .flow-name {
+            font-family: var(--font-title);
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        .flow-body {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* Tabs Section (Proyecto Si o Si) */
+        .tabs-wrapper {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 3.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .tabs-bar {
+            display: flex;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            padding: 1rem 1.4rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-btn:hover {
+            color: var(--gold);
+        }
+        .tab-btn.active {
+            color: var(--gold);
+            border-bottom: 3px solid var(--gold);
+            background: var(--gold-dim);
+            font-weight: 700;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2.5rem;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dossier-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .meta-tag {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+        .meta-tag.gold { color: var(--gold); border-color: var(--gold); }
+        .meta-tag.cyan { color: var(--cyan); border-color: var(--cyan); }
+        .meta-tag.green { color: var(--green); border-color: var(--green); }
+
+        .letter-paper {
+            background: var(--bg-card);
+            border: 1px dashed var(--gold);
+            border-radius: 8px;
+            padding: 2rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.75rem;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
+            white-space: pre-line;
+            outline: none;
+            cursor: text;
+            min-height: 250px;
+            transition: all 0.2s ease;
+        }
+        .letter-paper:focus {
+            border-style: solid;
+            border-color: var(--gold-light);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25), inset 0 0 10px rgba(212, 175, 55, 0.05);
+            background: rgba(28, 31, 39, 0.96);
+        }
+        .edit-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.65rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .edit-badge {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--gold-dim);
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gold);
+            color: #0c0d10;
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.75rem 1.4rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-action:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: var(--gold-dim);
+            box-shadow: none;
+        }
+        .btn-portal {
+            background: rgba(0, 255, 102, 0.08);
+            color: #5cff9d;
+            border: 1px solid rgba(0, 255, 102, 0.45);
+        }
+        .btn-portal:hover {
+            border-color: #00ff66;
+            color: #ffffff;
+            background: rgba(0, 255, 102, 0.22);
+            box-shadow: 0 0 18px rgba(0, 255, 102, 0.35);
+        }
+
+        /* Toast notification */
+        #toast {
+            visibility: hidden;
+            min-width: 280px;
+            background-color: var(--bg-card);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            text-align: center;
+            border-radius: 8px;
+            padding: 14px 20px;
+            position: fixed;
+            z-index: 1000;
+            bottom: 30px;
+            right: 30px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+        #toast.show {
+            visibility: visible;
+            animation: toastIn 0.4s, toastOut 0.4s 2.6s;
+        }
+        @keyframes toastIn { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
+        @keyframes toastOut { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+
+        /* Modal Infografía Interactiva */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 11, 14, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            animation: fadeInModal 0.25s ease-out;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-container {
+            background: var(--bg-surface);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            width: 96vw;
+            max-width: 1280px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.85), 0 0 35px rgba(212, 175, 55, 0.2);
+            overflow: hidden;
+        }
+        .modal-header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title {
+            font-family: var(--font-title);
+            color: var(--gold);
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .modal-body {
+            flex: 1;
+            background: #0d0e11;
+            position: relative;
+        }
+        .modal-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Print styles */
+        @media print {
+            .topbar, .tabs-bar, .action-row, .btn-ctrl, .modal-overlay { display: none !important; }
+            body { background: white !important; color: black !important; font-size: 12pt; }
+            .container { max-width: 100%; margin: 0; padding: 0; }
+            .tab-content { display: block !important; page-break-after: always; padding: 1rem 0; }
+            .hero, .tabs-wrapper, .letter-paper { border: none !important; box-shadow: none !important; background: transparent !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- RADAR DE ESCAPE (WEBVIEW DETECTOR) -->
+    <div id="webview-banner" style="display: none; background: #0c0d10; border-bottom: 2px solid var(--gold); padding: 1rem; text-align: center; color: var(--gold); z-index: 9999; position: relative; font-family: var(--font-body); box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+        <strong style="font-family: var(--font-title); font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">⚠️ Estás navegando dentro de WhatsApp</strong>
+        <p style="font-size: 0.95rem; margin-bottom: 0; color: #e6e8ee;">Para poder instalar nuestra <strong>App Interactiva</strong> y acceder a ella sin internet, toca los 3 puntitos arriba a la derecha (⋮) y elige <strong>«Abrir en Chrome»</strong> o <strong>«Abrir en el Navegador»</strong>.</p>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            var isWebView = (ua.indexOf('FBAN') > -1) || (ua.indexOf('FBAV') > -1) || (ua.indexOf('Instagram') > -1) || (ua.indexOf('WhatsApp') > -1) || (ua.indexOf('Line') > -1);
+            
+            if (!isWebView && /Android.*(wv|\.0\.0\.0)/.test(ua)) {
+                isWebView = true;
+            }
+            
+            if (isWebView) {
+                document.getElementById('webview-banner').style.display = 'block';
+            }
+        });
+    </script>
+
+    <header class="topbar">
+        <div class="brand">
+            <a href="https://www.lexdigitalhd.com" target="_blank" style="color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;" title="Visitar el Portal Oficial LexDigitalHD">📜 LexDigitalHD</a>
+            <a href="#tabsBar" class="brand-badge" style="cursor: pointer; text-decoration: none; transition: transform 0.2s;" title="Bajar a las 7 Cartas de Cierre Inmediato" onclick="document.getElementById('tabsBar')?.scrollIntoView({behavior: 'smooth'})">⚡ PROYECTO SÍ-O-SÍ</a>
+        </div>
+        <div class="controls">
+            <a href="arriero.html?v=12s" class="btn-ctrl" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" title="Ver la obra del Arriero Cuántico y la invocación de Sizas">🐉 Arriero &amp; Sizas</a>
+            <button onclick="openInfografiaModal()" class="btn-ctrl" style="display: inline-flex; align-items: center; gap: 0.35rem; border-color: var(--gold); color: var(--gold);" title="Desplegar el visor de la Infografía Técnica Interactiva">📊 Desplegar Infografía</button>
+            <a href="https://www.lexdigitalhd.com" target="_blank" class="btn-ctrl btn-portal" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;" title="Desplegar y explorar el Portal Oficial LexDigitalHD">🏛️ Portal LexDigitalHD</a>
+            <button class="btn-ctrl" id="btnSound" onclick="toggleSound()">🔔 Audio: ON</button>
+            <button class="btn-ctrl" onclick="toggleTheme()">🌓 Modo</button>
+            <button class="btn-ctrl" onclick="window.print()">🖨️ Imprimir / PDF</button>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Editorial LexDigitalHD</h1>
+            <p class="hero-sub">De un paraje de las montañas de Antioquia al mundo entero · La Conquista de «La Última Milla»</p>
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold); letter-spacing: 1px;">
+                48 AÑOS DE OFICIO TIPOGRÁFICO · COMPILADOR INDUSTRIAL CON INTELIGENCIA ARTIFICIAL
+            </p>
+            <div class="pact-box">
+                «Siempre que un ser humano busque en una ley su libertad, o en una sentencia su consuelo, 
+                necesitará una tipografía que no lo fatigue, una retícula que ordene el pensamiento 
+                y un libro que respete su tiempo.»
+            </div>
+
+            <!-- Botonera de Despliegue Rápido -->
+            <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 1.75rem;">
+                <button onclick="openInfografiaModal()" class="btn-action" style="font-size: 0.95rem; padding: 0.75rem 1.4rem; cursor: pointer;">
+                    📊 Desplegar Infografía Técnica (Visor Interactivo)
+                </button>
+                <a href="https://www.lexdigitalhd.com" target="_blank" class="btn-action btn-portal" style="font-size: 0.95rem; padding: 0.75rem 1.4rem; text-decoration: none;">
+                    🏛️ Desplegar www.lexdigitalhd.com (Portal Oficial) ➔
+                </a>
+                <a href="arriero.html?v=12s" class="btn-action btn-secondary" style="font-size: 0.95rem; padding: 0.75rem 1.4rem; text-decoration: none; color: #5cff9d; border-color: rgba(0,255,102,0.4);">
+                    🐉 Arriero &amp; Sizas (12s)
+                </a>
+            </div>
+        </section>
+
+        <!-- Tres Pilares Canónicos -->
+        <section class="pills-grid">
+            <div class="pill-card">
+                <div class="pill-title">♿ Inclusión & Accesibilidad Universal</div>
+                <div class="pill-desc">
+                    Cumplimiento pleno de las directivas <strong>WCAG 2.1 AA, PDF/UA y la Ley Europea de Accesibilidad (EAA)</strong>. Estructuras semánticas vivas para lectores de pantalla de personas ciegas, contraste dinámico y tipografía transformable.
+                </div>
+            </div>
+            <div class="pill-card">
+                <div class="pill-title">📚 Transmutación Modular</div>
+                <div class="pill-desc">
+                    Quien domina la complejidad de un código legal, domina con holgura cualquier género: <strong>novelas, ensayos, textos matemáticos y fichas didácticas</strong> para colegios y educación universitaria a distancia.
+                </div>
+            </div>
+            <div class="pill-card">
+                <div class="pill-title">⚡ La Última Milla (PWA Offline)</div>
+                <div class="pill-desc">
+                    El <strong>bolsilibro manuciano instantáneo</strong>: abre en menos de 800 ms a través de WhatsApp o enlace web. Vive para siempre en el celular más modesto y funciona <strong>100% sin conexión a internet</strong>.
+                </div>
+            </div>
+        </section>
+
+        <!-- Manual de Gobernanza y Flujo Editorial Jurídico -->
+        <section class="section-header">
+            <h2>Manual de Gobernanza y Flujo Editorial Jurídico</h2>
+            <p>Las 5 Fases Deterministas: Rigor institucional, trazabilidad forense y soberanía tipográfica</p>
+        </section>
+
+        <section class="flow-grid">
+            <div class="flow-step">
+                <div class="flow-num">FASE 1 · VIGILANCIA OFICIAL</div>
+                <div class="flow-name">Alerta & Recepción Institucional</div>
+                <div class="flow-body">Supervisión <em>Human-in-the-Loop</em>. Monitoreo de boletines y gacetas exclusivamente desde dominios oficiales (<code>.gov.co</code>). Cotejo directo e inalterabilidad de origen.</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">FASE 2 · DEPURACIÓN BASE</div>
+                <div class="flow-name">Cotejo & Saneamiento Word</div>
+                <div class="flow-body">Control estricto de cambios. Supresión de metadatos ocultos. Estandarización tipográfica y espacios inseparables obligatorios en abreviaturas (<code>Art.</code>, <code>No.</code>, <code>Par.</code>).</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">FASE 3 · COMPOSICIÓN UXP</div>
+                <div class="flow-name">Maquetación & Geometría Áurea</div>
+                <div class="flow-body">Automatización en Adobe InDesign. Estilos jerárquicos normalizados, proporción áurea 2:3, métrica en cíceros (4.51 mm), validación GREP y tolerancia cero a viudas/huérfanas.</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">FASE 4 · CONTRATO CANÓNICO</div>
+                <div class="flow-name">Validación JSON + Zod & Hash</div>
+                <div class="flow-body">Paradigma <em>Contract-First</em>. Serialización determinista y tipado fuerte (Zod). Inmutabilidad sellada mediante <strong>Hash criptográfico SHA-256</strong> (Contrato DUE-010).</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">FASE 5 · ÚLTIMA MILLA</div>
+                <div class="flow-name">Publicación Multiformato & PWA</div>
+                <div class="flow-body">Salida quíntuple simultánea: InDesign INDD, PDF/X-1a imprenta, EPUB3 Amazon, PDF/UA accesible y la <strong>Progressive Web App (PWA offline)</strong> con WCAG 2.2 AA.</div>
+            </div>
+        </section>
+
+        <!-- Diagrama de Arquitectura & Gobernanza -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; margin-bottom: 3.5rem; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
+            <div style="font-family: var(--font-title); color: var(--gold); font-size: 1.2rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">
+                📐 Diagrama Canónico de Gobernanza & Arquitectura Editorial
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+                Mapa oficial de validación determinista, contratos canónicos (DUE-010) y flujo de custodia.
+            </p>
+            <div style="overflow-x: auto; max-width: 100%; border-radius: 8px; border: 1px solid var(--border); background: #0c0d10; padding: 0.5rem;">
+                <img src="/diagrama-gobernanza.png" alt="Manual de Gobernanza y Flujo Editorial Jurídico LexDigitalHD" style="max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 6px;">
+            </div>
+            <div style="margin-top: 1.25rem;">
+                <a href="/diagrama-gobernanza.png" target="_blank" class="btn-ctrl" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; padding: 0.5rem 1.25rem;">
+                    🔍 Abrir Diagrama en Alta Resolución (1312×1199)
+                </a>
+            </div>
+        </div>
+
+        <!-- Dossier Tabs Section -->
+        <section class="section-header">
+            <h2>Dossier de Cierre Inmediato: Las Cartas de Honor</h2>
+            <p>Pliegos personalizados para resolución de liquidez hoy mismo con palabra de caballero</p>
+        </section>
+
+        <section class="tabs-wrapper">
+            <nav class="tabs-bar" id="tabsBar">
+                <button class="tab-btn active" onclick="switchTab(0)">1. Juanma</button>
+                <button class="tab-btn" onclick="switchTab(1)">2. Nicolás Aristizábal</button>
+                <button class="tab-btn" onclick="switchTab(2)">3. Antonio (Cobel.es)</button>
+                <button class="tab-btn" onclick="switchTab(3)">4. Portobelo (Panamá)</button>
+                <button class="tab-btn" onclick="switchTab(4)">5. Dr. Santos (Abogado)</button>
+                <button class="tab-btn" onclick="switchTab(5)">6. Fernando Alviar</button>
+                <button class="tab-btn" onclick="switchTab(6)">7. Teresita (Hermana)</button>
+            </nav>
+
+            <!-- TAB 1: JUANMA -->
+            <div class="tab-content active" id="tab-0">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">PRIMERA OLA DE DISPARO</span>
+                    <span class="meta-tag cyan">TONO: Fraternal, Espiritual & Académico</span>
+                    <span class="meta-tag green">OBJETIVO: Préstamo Puente 6 Meses (EUR)</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(0)" title="Vaciar espacio para pegar nuevo texto">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(0)" title="Guardar cambios">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-0" contenteditable="true" spellcheck="false">Querido Juanma:
+
+Qué alegría tan inmensa me dio recibir tu mensaje preguntando por nosotros tras el sismo del Chocó. En medio de los movimientos de la tierra y de las curvas de la vida, saber que hay hermanos en el espíritu que se acuerdan de uno a la distancia es una bendición que atesoro con el corazón.
+
+Aún guardo muy vivas aquellas conversaciones de horas que compartimos, tu generosidad inolvidable en momentos difíciles y el gran favor de haberme puesto en contacto con Antonio en Cobel, donde ya cumplo tres años de labor constante.
+
+Te escribo hoy desde un paraje de las montañas de Antioquia para compartirte algo en lo que sé que vibrarás conmigo: mi viejo sueño de elevar el oficio tipográfico no se quedó en un anhelo. Tras años de trabajo silencioso, he logrado fusionar mis 48 años de oficio con el poder de la inteligencia artificial, construyendo un compilador industrial capaz de procesar textos complejos, científicos y normativos con una belleza y precisión que honran al ser humano.
+
+Recordarás aquel libro de matemáticas que elaboré para la UNIR en España. Hoy esa experiencia ha madurado en un sistema capaz de absorber con igual soltura textos matemáticos rigurosos, manuales para educación a distancia, novelas y tratados jurídicos.
+
+Pero lo más hermoso, Juanma, y sé cuánto sabrás interpretar esto proyectado en el ámbito universitario e intelectual, es que le hemos inyectado Accesibilidad Universal e Inclusión Total. Nuestra maquinaria genera documentos preparados para personas con discapacidad visual o limitaciones de lectura: textos que dialogan a la perfección con lectores de pantalla, fórmulas matemáticas accesibles, contraste tipográfico adaptable y cumplimiento estricto de las directivas europeas de accesibilidad (EAA y WCAG). La ciencia, las matemáticas y la ley dejan de ser una muralla para quien no puede ver.
+
+Y como coronación, hemos conquistado «La Última Milla»: convertimos la obra en un bolsilibro interactivo (PWA) que abre al instante en el celular con un solo clic, sin contraseñas y funcionando 100% sin conexión a internet, ideal para la educación en cualquier rincón del mundo.
+
+Hoy estamos en la puerta de salida para abrir este taller al mundo. No busco socios para diluir este proyecto nacido de mis entrañas; busco a los amigos del alma para un impulso puente en esta última milla.
+
+Si está en tus posibilidades apoyarme con un préstamo puente por 6 meses con las condiciones y retornos que acordemos con honor de caballeros, empeño mi palabra y el fruto de este taller para cumplirte con creces. Y si no fuera el momento económico, tu bendición, tu consejo y tu amistad siguen siendo para mí un regalo sagrado.
+
+Te mando un abrazo fraterno desde estas montañas.
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-0')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-0" target="_blank" onclick="prepareWhatsApp(0)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver Infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 2: NICOLAS ARISTIZABAL -->
+            <div class="tab-content" id="tab-1">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">PRIMERA OLA DE DISPARO</span>
+                    <span class="meta-tag cyan">TONO: Verdad Moral, Sobriedad & Gratitud de Vida</span>
+                    <span class="meta-tag green">OBJETIVO: Préstamo Puente + Participación Futura en Utilidades</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(1)" title="Vaciar espacio para pegar nuevo texto">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(1)" title="Guardar cambios">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-1" contenteditable="true" spellcheck="false">Estimado Nicolás:
+
+Cada vez que miro hacia atrás y recorro con gratitud mi vida, tu nombre aparece con una luz imborrable. Fuiste el mejor patrono que tuve, pero sobre todo fuiste el hermano que me abrió las puertas de su propio hogar por dos años cuando inicié a parar de beber. Viviste de cerca mis días más oscuros rumbo al fondo, y fuiste testigo de mis primeros pasos tambaleantes hacia la recuperación. Esas son deudas del alma que no se pagan con dinero, sino viviendo con honradez y dignidad.
+
+Tu frase en nuestra última charla: «es bienvenido cuando quiera venir», me dio un aliento enorme. Hoy no llego a tus puertas tambaleante ni derrotado; llego de pie, con la cabeza en alto, con 48 años de oficio a cuestas y con la obra cumbre de mi vida entre las manos.
+
+Tú, que evolucionaste de un departamento de diseño a convertirte en un gran impresor en todas las dimensiones de la industria gráfica, vas a comprender mejor que nadie lo que he forjado: en un paraje de estas montañas de Antioquia he levantado LexDigitalHD, una fábrica que automatiza la diagramación al nivel más refinado de la imprenta clásica, integrando inteligencia artificial.
+
+Aunque comenzamos resolviendo el laberinto de las publicaciones legales, la máquina está concebida para la versatilidad de la imprenta total: desde novelas y ensayos de alta literatura, hasta fichas didácticas para colegios, manuales técnicos y material educativo, todo maquetado a velocidad industrial y listo para mandar a prensas offset, máquinas digitales o Amazon, si se quiere.
+
+Pero dimos un paso más allá que te llenará de orgullo como impresor: hicimos que el libro sea universalmente accesible e inclusivo. Nuestro compilador dota a cada página de estructuras semánticas para que las personas con discapacidad visual puedan «escuchar y navegar» el libro a través de lectores de pantalla sin perder una sola jerarquía. Es el matrimonio entre la estética de Gutenberg y la justicia social moderna.
+
+Y en lo digital, lanzamos el pliego a la pantalla del celular en un formato PWA liviano como una pluma, que abre en un segundo por WhatsApp y funciona 100% sin internet.
+
+Nicolás: he llevado esta maquinaria hasta el umbral del éxito a pulso limpio. Me encuentro en «La Última Milla» y necesito un impulso financiero puente por 6 meses para cubrir compromisos inmediatos y encender la producción comercial al 100%.
+
+No te pido una limosna ni busco que asumas riesgos como socio. Te pido un préstamo puente de honor, con la palabra de un hombre al que tú viste renacer. Y hago ante ti un pacto solemne: cuando LexDigitalHD comience a generar sus utilidades industriales, quiero hacerte partícipe de ellas a ti, a tu señora y a tus dos hijos, como testimonio vivo de mi gratitud y de la victoria que tú me ayudaste a construir, independiente de la respuesta que surja de este mensaje. Cuando miro a mi alrededor, con la claridad de los años, y el recuento de las vidas que han pasado por mis caminos, quiero poner en tus manos y en las manos de tus hijos, con su autorización, este legado en sus manos, cuando mis pasos ya no crucen estas tierras y mi señora no esté disponible, que tú, seas el que en sus manos y las de tus hijos, impulsen esto más allá de estos ciclos cortos de vida a que estamos sometidos. Es simplemente soltar en el sendero de la historia, lo que hicimos con los granos de arena que pusimos en el reloj del tiempo.
+
+Si puedes abrirme este puente hoy, hablemos de la suma que esté a tu alcance y cuadramos los detalles con seriedad absoluta.
+
+Un abrazo inmenso para ti y para tu hermosa familia.
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-1')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-1" target="_blank" onclick="prepareWhatsApp(1)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver Infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 3: ANTONIO (COBEL.ES) -->
+            <div class="tab-content" id="tab-2">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">SEGUNDA OLA DE DISPARO</span>
+                    <span class="meta-tag cyan">TONO: Ética Cristiana & Cumplimiento Europeo (EAA)</span>
+                    <span class="meta-tag green">OBJETIVO: Adelanto 2-3 Meses (600€-900€) o Paquete PWA</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(2)" title="Vaciar espacio para pegar nuevo texto">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(2)" title="Guardar cambios">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-2" contenteditable="true" spellcheck="false">Estimado Antonio:
+
+Le envío un saludo muy cordial y mis oraciones desde un paraje de las montañas de Antioquia, agradecido siempre por estos tres años de labor ininterrumpida al servicio de Cobel Ediciones.
+
+Como usted bien sabe, la palabra escrita que transmite la fe, la doctrina y la elevación espiritual exige una dignidad tipográfica que inspire sosiego y devoción en quien la lee, trátese de un tratado teológico, una vida de santos, una novela moral, una guía didáctica de catequesis o una disertación espiritual tan propia de Cobel Ediciones.
+
+Durante este tiempo, además de nuestras labores cotidianas en maquetación, asistencia web y correos masivos, he concluido el desarrollo de una tecnología editorial que encaja de forma providencial con los desafíos actuales del libro religioso y general en España y Europa:
+
+1. Cumplimiento de la Directiva Europea de Accesibilidad (EAA): A partir de las nuevas exigencias comunitarias en la UE, las publicaciones digitales deben ser plenamente accesibles para personas con discapacidad visual, adultos mayores o lectores con dificultades sensoriales. Nuestro sistema genera publicaciones preparadas para lectura por voz asistida, contrastes adaptables y fuentes transformables sin alterar la pureza del diseño.
+2. Versatilidad Editorial Completa: Nuestra maquinaria procesa con la misma perfección ensayos espirituales, biografías, devocionarios, fichas didácticas de formación, entre otros tantos temas, y publicaciones de corte jurídico, que es la estrategia con la que iniciamos este empeño.
+3. El Bolsilibro Pastoral (PWA Offline): Podemos transformar cualquier obra en una publicación interactiva que sus fieles y suscriptores abren en su teléfono desde un simple enlace web o mensaje de WhatsApp en menos de un segundo, y que funciona 100% sin conexión a internet, para llevar al alcance de sus manos a retiros, templos o viajes.
+
+Con motivo de la puesta a punto final de esta infraestructura, me encuentro en una etapa de consolidación financiera de mi taller. Quisiera proponerle con toda confianza una alternativa que sería de inmenso alivio y bendición para mi taller en este momento:
+• Un anticipo extraordinario de 2 o 3 mensualidades de mis honorarios habituales (300 €/mes), y dispuestos a asumir las condiciones que considere adecuadas a su posibilidad con la garantía absoluta que su respuesta tendrá de mi parte la acostumbrada diligencia con que hago sus trabajos.
+
+Mi compromiso con usted y con Cobel es total y transparente, respaldado por la fidelidad con la que siempre hemos trabajado.
+
+Quedo a su disposición para que lo conversemos. Un saludo fraterno en el espíritu,
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-2')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-2" target="_blank" onclick="prepareWhatsApp(2)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver Infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 4: PORTOBELO -->
+            <div class="tab-content" id="tab-3">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">SEGUNDA OLA DE DISPARO</span>
+                    <span class="meta-tag cyan">TONO: Ejecutivo B2B & Prestigio Técnico</span>
+                    <span class="meta-tag green">OBJETIVO: Préstamo Puente Respaldado en Trabajo & Oficio</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(3)" title="Vaciar espacio para pegar nuevo texto">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(3)" title="Guardar cambios">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-3" contenteditable="true" spellcheck="false">Apreciados Don Luis, Don Juan y Felipe:
+
+Les envío un saludo muy especial desde las montañas de Colombia, con el aprecio y respeto de siempre por el equipo de Editorial Portobelo.
+
+En nuestro trabajo conjunto hemos consolidado un flujo muy eficiente, avanzando desde las primeras obras, asegurando que los archivos no solo queden impecables para las máquinas disponibles en su empresa y la impresión en Colombia, sino que pasen sin tropiezos los filtros de Amazon en formato EPUB.
+
+Hoy me dirijo a ustedes, porque he completado una innovación que transformará la competitividad de Portobelo en Panamá: un compilador industrial automatizado tanto para códigos jurídicos como para manuales universitarios, módulos de educación a distancia y ensayos académicos.
+
+Ventajas Críticas Inmediatas para Portobelo:
+1. Inclusión y Accesibilidad para Estudiantes con Discapacidad: Cumplimiento de estándares de accesibilidad digital para que estudiantes con baja visión o discapacidad motriz puedan estudiar los códigos y textos universitarios panameños mediante lectores de pantalla, un requisito cada vez más exigido en el ámbito académico.
+2. Amazon EPUB sin errores: Salidas limpias y deterministas en minutos.
+3. La Joya del Estudiante y el Abogado: El formato PWA interactivo. El cliente de Portobelo compra el código o manual y lo lleva en su celular: busca artículos en un segundo por voz o texto, sin necesidad de gastar datos ni tener internet.
+
+Propuesta Comercial de Cierre Inmediato:
+Les propongo un Acuerdo de Volumen Prepagado para los códigos y libros del próximo semestre.
+Con motivo de la puesta a punto final de esta infraestructura, me encuentro en una etapa de consolidación financiera de mi taller. Quisiera proponerles con toda confianza una alternativa que sería de inmenso alivio y bendición para mi taller en este momento:
+
+Pido un préstamo, respaldado en la palabra de un hombre que durante este tiempo que laboramos juntos, han podido comprobar la calidad y oportunidad de mi trabajo y una reseña de mi personalidad sin necesidad de enmarcarla en un mar de dudas.
+Estoy dispuesto a asumir las condiciones que consideren adecuadas a su posibilidad con la garantía absoluta que su respuesta tendrá de mi parte la acostumbrada diligencia con que hago sus trabajos.
+
+Felipe y Don Juan: ustedes son hombres prácticos de números y tecnología; saben el valor que esto representa, especialmente si la curiosidad de don Felipe se agudiza y se propone dar una mirada al interior de los procesos del taller. Estoy seguro que el asombro, especialmente en estos terrenos tecnológicos actuales, forma parte de su diario desempeño.
+
+Quedo atento a su respuesta.
+
+Con el aprecio de siempre,
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-3')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-3" target="_blank" onclick="prepareWhatsApp(3)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver Infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 5: SANTOS -->
+            <div class="tab-content" id="tab-4">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">GENERACIÓN DE CONFIANZA</span>
+                    <span class="meta-tag cyan">TONO: Rigor Forense & Cadena de Custodia</span>
+                    <span class="meta-tag green">OBJETIVO: Confianza en Predio & Estandarización Legal</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(4)" title="Vaciar espacio para pegar nuevo texto">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(4)" title="Guardar cambios">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-4" contenteditable="true" spellcheck="false">Apreciado Doctor Santos:
+
+Espero se encuentre muy bien en medio de sus innumerables ocupaciones. Deseo agradecerle la cordialidad y la diligencia con la que hemos venido adelantando los trámites jurídicos para la legalización del terreno donde construyo mi casa aquí en La Palma.
+
+Quería robarle un par de minutos para compartirle un aspecto de mi vida profesional que considero de mutuo interés. Como tipógrafo con cerca de cinco décadas de ejercicio, he fundado Editorial LexDigitalHD, un proyecto tecnológico que ataca directamente un problema que usted, como hombre de leyes, conoce a la perfección: el desorden, la pesadez y la precariedad formal de los memoriales, escrituras y expedientes judiciales.
+
+Hemos desarrollado un flujo de trabajo que toma cualquier documento jurídico en bruto y le aplica:
+1. Cadena de Custodia Criptográfica (Hash SHA-256): Certeza absoluta de que el contenido no ha sido alterado ni en una coma.
+2. Composición Tipográfica Canónica: Aplicación de retícula áurea y tipografía de descanso visual (Garamond), diseñada para eliminar la fatiga cognitiva de jueces y magistrados al revisar argumentos complejos.
+3. Despliegue Inmediato en Celular (PWA Accesible): El cliente o el juzgado recibe un enlace seguro que abre el expediente en menos de un segundo, legible incluso en veredas o zonas sin señal de internet, e integrable con lectores de pantalla para personas con discapacidad visual.
+
+Quise enseñarle esto para que conozca la solidez, la seriedad y el alcance de la empresa que dirijo desde este predio, y ponerme a su entera disposición si en su despacho o entre sus colegas requieren estandarizar o presentar memoriales de casación, tutelas complejas o tratados notariales con la máxima prestancia del país.
+
+Seguimos adelante con nuestro proceso del predio y cuenta con un servidor leal para cualquier requerimiento editorial o forense.
+
+Cordialmente,
+
+Hernán Darío (Donache)
+Director de Taller · Editorial LexDigitalHD</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-4')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-4" target="_blank" onclick="prepareWhatsApp(4)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver Infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 6: FERNANDO ALVIAR -->
+            <div class="tab-content" id="tab-5">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">TERCERA OLA · ALIANZA GREMIAL</span>
+                    <span class="meta-tag cyan">TONO: Purismo de Corrección & Recuerdos del Ferrini</span>
+                    <span class="meta-tag green">OBJETIVO: Alianza Gremial & Libros Impresos/Digitales en 48h</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(5)" title="Vaciar espacio para pegar nuevo texto">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(5)" title="Guardar cambios">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-5" contenteditable="true" spellcheck="false">Maestro Fernando:
+
+Un saludo afectuoso con la admiración de siempre. Recuerdo con gran beneplácito nuestros cinco años de trabajo hombro a hombro en el Ferrini y su liderazgo impecable al frente de la Asociación de Correctores de Colombia (Correcta). Nadie en este país sabe mejor que usted lo que significa sufrir cuando una mala diagramación mutila el trabajo minucioso de un corrector de estilo.
+
+Durante años has tenido la generosidad de elogiar mi oficio tipográfico. Hoy quiero contarte con orgullo que ese perfeccionismo que usted y yo compartimos lo he encapsulado en una obra industrial: he programado un compilador editorial automatizado que bauticé en la intimidad con el espíritu de /Chibalete.
+
+Mire cómo protege este sistema el trabajo del corrector:
+• Respeto absoluto al texto: No altera diacríticos, comillas latinas, versalitas ni divisiones de palabras.
+• Cero tolerancia a viudas y huérfanas: El motor gráfico balancea los párrafos automáticamente sin necesidad de dar «machetazos» de interlineado falso.
+• Métrica en Cíceros y Canon de Van de Graaf: La página impresa recupera el reposo de las ediciones de arte.
+• Versatilidad Completa: Capaz de maquetar fichas didácticas pedagógicas escolares, novelas literarias, ensayos o textos matemáticos.
+• Salida PWA digital accesible: El libro final se consulta en cualquier pantalla como un verdadero bolsilibro accesible para lectores ciegos, sin deformar la retícula y sin requerir internet.
+
+Sé que usted promueve con frecuencia mi trabajo entre colegas y editoriales. Quiero invitarlo a que sea de los primeros en ver una demostración en vivo de este motor. Sería un honor supremo que podamos ofrecer a sus clientes y a los asociados de Correcta un canal donde sus textos corregidos se conviertan, en 48 horas, en libros impresos y digitales con sello de calidad forense.
+
+Tomémonos un café pronto para enseñarle la galera en vivo.
+
+Un fuerte abrazo,
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-5')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-5" target="_blank" onclick="prepareWhatsApp(5)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver Infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 7: TERESITA -->
+            <div class="tab-content" id="tab-6">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">FAMILIA & DIGNIDAD</span>
+                    <span class="meta-tag cyan">TONO: Amor Fraterno, Paz & Sobriedad</span>
+                    <span class="meta-tag green">OBJETIVO: Apoyo Solidario / Préstamo Familiar</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(6)" title="Vaciar espacio para pegar nuevo texto">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(6)" title="Guardar cambios">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-6" contenteditable="true" spellcheck="false">Querida Teresita:
+
+Te escribo con el cariño y el agradecimiento de siempre por haber estado a mi lado en tantos momentos de la vida. Sé que mi historia ha tenido curvas difíciles, épocas de inestabilidad y limitaciones que en el pasado generaron angustia y reservas en la familia. Comprendo y respeto profundamente esas huellas.
+
+Hoy te escribo desde la paz y la sobriedad que Dios y mi disciplina me han regalado. En este rincón de las montañas de Antioquia no he estado perdiendo el tiempo: he volcado mis 48 años de oficio en construir una empresa tecnológica y editorial de la que tú y toda la familia pueden sentirse profundamente orgullosos.
+
+He desarrollado un sistema informático único que toma libros y documentos legales y los convierte en publicaciones digitales y de imprenta de altísimo nivel, accesibles incluso para personas con discapacidad visual, y que la gente puede leer en sus celulares en un segundo y sin gastar datos. Es una obra real, registrada y en funcionamiento.
+
+Estamos ya en la puerta de salida hacia el mercado real, afinando los últimos detalles de esta «Última Milla». Te comparto esto no para traer zozobras ni para pedirte limosnas, sino para mostrarte con la frente en alto en qué se convirtió tu hermano. 
+
+Si en este momento está en tus manos facilitarme un apoyo o un préstamo puente a corto plazo para sortear unos compromisos inmediatos mientras arranca la facturación plena, te lo recibiré con inmensa gratitud y con el compromiso formal de reintegrártelo con la seriedad de un hombre maduro y responsable. Y si no te es posible, saber que cuento con tu afecto y que puedes ver con tus propios ojos este logro es ya una enorme alegría para mí.
+
+Te mando un abrazo grande y lleno de bendiciones.
+
+Hernán Darío</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-6')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-6" target="_blank" onclick="prepareWhatsApp(6)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver Infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Conclusión & Último Estado: Invitación al Portal Oficial LexDigitalHD -->
+        <section class="final-state-section" style="margin-top: 3.5rem; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 2.75rem 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+            <div style="font-family: var(--font-title); color: var(--gold); font-size: 1.35rem; margin-bottom: 0.6rem; letter-spacing: 1.5px; text-transform: uppercase;">
+                🏛️ Editorial LexDigitalHD · La República de las Letras
+            </div>
+            <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 680px; margin: 0 auto 1.5rem; line-height: 1.6;">
+                La Última Milla de la palabra libre: lo invitamos a recorrer nuestra plataforma integral, catálogo de publicaciones, biblioteca jurídica y tecnología de gobernanza determinista.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <button onclick="openInfografiaModal()" class="btn-action" style="font-size: 1rem; padding: 0.85rem 1.8rem; cursor: pointer;">
+                    📊 Desplegar Infografía Técnica
+                </button>
+                <a href="https://www.lexdigitalhd.com" target="_blank" class="btn-action btn-portal" style="font-size: 1.05rem; padding: 0.95rem 2.2rem; border-radius: 8px; display: inline-flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+                    🏛️ Ir a www.lexdigitalhd.com (Portal Oficial) ➔
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal para Desplegar la Infografía Técnica Interactiva -->
+    <div id="infografiaModal" class="modal-overlay" onclick="handleModalOverlayClick(event)">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>📊 Infografía Técnica Interactiva · Cadena Editorial &amp; Gobernanza</span>
+                </div>
+                <div class="modal-actions">
+                    <a href="infografia.html" target="_blank" class="btn-ctrl" style="text-decoration: none; color: var(--gold); border-color: var(--gold);" title="Abrir en pestaña nueva e independiente">
+                        ⛶ Abrir en Pestaña Completa
+                    </a>
+                    <button onclick="closeInfografiaModal()" class="btn-ctrl" style="color: #ff6b6b; border-color: #ff6b6b;" title="Cerrar visor">
+                        ✕ Cerrar
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <iframe id="infografiaIframe" class="modal-iframe" src="" title="Visor de Infografía Técnica LexDigitalHD"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast">🔔 Texto copiado al portapapeles</div>
+
+    <script>
+        // Modal Infografía Controls
+        function openInfografiaModal() {
+            playLeadClank();
+            const modal = document.getElementById('infografiaModal');
+            const iframe = document.getElementById('infografiaIframe');
+            if (!iframe.src || iframe.src === 'about:blank' || iframe.src.indexOf('infografia.html') === -1) {
+                iframe.src = 'infografia.html';
+            }
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeInfografiaModal() {
+            playLeadClank();
+            const modal = document.getElementById('infografiaModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function handleModalOverlayClick(event) {
+            if (event.target.id === 'infografiaModal') {
+                closeInfografiaModal();
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('infografiaModal');
+                if (modal && modal.classList.contains('active')) {
+                    closeInfografiaModal();
+                }
+            }
+        });
+        // Audio Synthesizer (Native Web Audio API)
+        let soundEnabled = true;
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playLeadClank() {
+            if (!soundEnabled) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+            osc.frequency.exponentialRampToValueAtTime(146.83, audioCtx.currentTime + 0.12);
+            
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.15);
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('btnSound');
+            btn.textContent = soundEnabled ? '🔔 Audio: ON' : '🔕 Audio: OFF';
+            if (soundEnabled) playLeadClank();
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            playLeadClank();
+        }
+
+        function switchTab(index) {
+            playLeadClank();
+            const btns = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            btns.forEach((b, i) => b.classList.toggle('active', i === index));
+            contents.forEach((c, i) => c.classList.toggle('active', i === index));
+        }
+
+        const PUBLIC_DOSSIER_URL = "https://www.lexdigitalhd.com/dossier_siosi.html";
+        const PUBLIC_PORTAL_URL = "https://www.lexdigitalhd.com";
+
+        function copyText(elementId) {
+            playLeadClank();
+            const text = document.getElementById(elementId).innerText;
+            const fullMessage = "📜 DOSSIER EJECUTIVO «PROYECTO SÍ-O-SÍ»:\n" + PUBLIC_DOSSIER_URL + "\n\n" + text + "\n\n🏛️ Visita nuestro Portal Oficial & Catálogo:\n" + PUBLIC_PORTAL_URL;
+            navigator.clipboard.writeText(fullMessage).then(() => {
+                showToast("📜 Pliego + Enlaces copiados al portapapeles");
+            });
+        }
+
+        function prepareWhatsApp(index) {
+            playLeadClank();
+            const text = document.getElementById('text-' + index).innerText;
+            const fullMessage = "📜 DOSSIER EJECUTIVO «PROYECTO SÍ-O-SÍ»:\n" + PUBLIC_DOSSIER_URL + "\n\n" + text + "\n\n🏛️ Visita nuestro Portal Oficial & Catálogo:\n" + PUBLIC_PORTAL_URL;
+            const link = document.getElementById('wa-' + index);
+            link.href = "https://wa.me/?text=" + encodeURIComponent(fullMessage);
+        }
+
+        function sendOnlyLink() {
+            playLeadClank();
+            const msg = "📜 *DOSSIER EJECUTIVO «PROYECTO SÍ-O-SÍ»*\n" +
+                        "Editorial LexDigitalHD\n\n" +
+                        "Toca el siguiente enlace para abrir nuestro dossier interactivo (abre al instante y funciona 100% sin internet):\n" +
+                        PUBLIC_DOSSIER_URL + "\n\n" +
+                        "🏛️ Portal Oficial: " + PUBLIC_PORTAL_URL;
+            window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        // Funciones para Edición Directa, Vaciar y Guardar
+        function clearLetter(index) {
+            playLeadClank();
+            const el = document.getElementById('text-' + index);
+            if (el) {
+                el.innerText = "";
+                el.focus();
+                showToast("🗑️ Espacio vaciado. Listo para escribir o pegar tu nuevo texto");
+            }
+        }
+
+        function saveLetter(index) {
+            playLeadClank();
+            const el = document.getElementById('text-' + index);
+            if (el) {
+                const content = el.innerText;
+                localStorage.setItem('dossier_letter_' + index, content);
+                showToast("💾 Texto guardado en el navegador con éxito");
+            }
+        }
+
+        // Cargar textos guardados en localStorage al iniciar
+        window.addEventListener('DOMContentLoaded', () => {
+            for (let i = 0; i <= 6; i++) {
+                const saved = localStorage.getItem('dossier_letter_' + i);
+                if (saved) {
+                    const el = document.getElementById('text-' + i);
+                    if (el) el.innerText = saved;
+                }
+            }
+        });
+
+        // Registro de Service Worker para PWA Offline & Instalación en 1 toque
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('[PWA LexDigitalHD] Registrado:', reg.scope))
+                    .catch(err => console.log('[PWA LexDigitalHD] Error registro SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>
