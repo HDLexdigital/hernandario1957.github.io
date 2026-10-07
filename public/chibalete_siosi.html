@@ -59,7 +59,7 @@
                         const blob = new Blob([JSON.stringify(JSON.parse(cajaNegra), null, 2)], { type: 'application/json' });
                         const a = document.createElement('a');
                         a.href = URL.createObjectURL(blob);
-                        a.download = 'CajaNegra_LexDigital_Dossier.json';
+                        a.download = 'CajaNegra_LexDigital_Chibalete.json';
                         a.click();
                         alert("🐧 [/pingüi] (Bate sus alas y entrega la Caja Negra) Archivo descargado con éxito.");
                     } else {
@@ -356,7 +356,7 @@
             font-size: 0.85rem;
             color: var(--cyan);
             margin-bottom: 0.35rem;
-            font-weight: 700; /* Negrita para colores de onda larga */
+            font-weight: 700;
         }
         .flow-name {
             font-family: var(--font-title);
@@ -653,6 +653,16 @@
         body.light-mode .hero-badge {
             font-weight: 800;
         }
+        body.light-mode .meta-tag.cyan {
+            color: #005082;
+            border-color: #005082;
+            font-weight: 800;
+        }
+        body.light-mode .meta-tag.green {
+            color: #3f5223;
+            border-color: #3f5223;
+            font-weight: 800;
+        }
         
         body.light-mode [style*="color: #5cff9d"] {
             color: #3f5223 !important; /* Verde militar */
@@ -690,19 +700,19 @@
             <a href="https://www.lexdigitalhd.com" target="_blank" style="color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;" title="Visitar el Portal Oficial LexDigitalHD">
                 <img src="logo_lexdigital_lr.png" alt="Logo LexDigitalHD" style="height: 28px; width: auto; border-radius: 4px;"> LexDigitalHD
             </a>
-            <span class="brand-badge">⚡ PROYECTO SÍ-O-SÍ</span>
+            <span class="brand-badge" style="cursor: pointer; text-decoration: none; transition: transform 0.2s;" title="Bajar a las 7 Cartas de Cierre Inmediato" onclick="document.getElementById('tabsBar')?.scrollIntoView({behavior: 'smooth'})">⚡ PROYECTO SÍ-O-SÍ</span>
         </div>
         <div class="controls">
-            <a href="arriero.html" class="btn-ctrl" style="text-decoration: none; gap: 0.35rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" title="Ver la obra del Arriero Cuántico y la invocación de Sizas" aria-label="Ver la obra del Arriero Cuántico y la invocación de Sizas">🐉 Arriero &amp; Sizas</a>
-            <button onclick="openInfografiaModal()" class="btn-ctrl" style="gap: 0.35rem; border-color: var(--gold); color: var(--gold);" title="Desplegar el visor de la Infografía técnica interactiva" aria-haspopup="dialog" aria-label="Desplegar infografía">📊 Infografía</button>
-            <a href="https://www.lexdigitalhd.com" target="_blank" class="btn-ctrl btn-portal" style="text-decoration: none; gap: 0.35rem;" title="Desplegar y explorar el Portal Oficial LexDigitalHD" aria-label="Portal LexDigitalHD (Abre en pestaña nueva)">🏛️ Portal Oficial</a>
+            <a href="arriero.html" class="btn-ctrl" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" title="Ver la obra del Arriero Cuántico y la invocación de Sizas" aria-label="Ver la obra del Arriero Cuántico y la invocación de Sizas">🐉 Arriero &amp; Sizas</a>
+            <button onclick="openInfografiaModal()" class="btn-ctrl" style="display: inline-flex; align-items: center; gap: 0.35rem; border-color: var(--gold); color: var(--gold);" title="Desplegar el visor de la Infografía técnica interactiva" aria-haspopup="dialog" aria-label="Desplegar infografía">📊 Desplegar infografía</button>
+            <a href="https://www.lexdigitalhd.com" target="_blank" class="btn-ctrl btn-portal" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;" title="Desplegar y explorar el Portal Oficial LexDigitalHD" aria-label="Portal LexDigitalHD (Abre en pestaña nueva)">🏛️ Portal LexDigitalHD</a>
             <button class="btn-ctrl" id="btnSound" onclick="toggleSound()" aria-label="Desactivar sonido" aria-pressed="true">🔔 Audio: ON</button>
-            <button class="btn-ctrl" onclick="toggleTheme()" aria-label="Alternar modo de color oscuro o claro">🌓 Modo Visión</button>
+            <button class="btn-ctrl" onclick="toggleTheme()" aria-label="Alternar modo de color oscuro o claro">🌓 Modo</button>
             <button class="btn-ctrl" onclick="terminarLectura()" aria-label="Terminar la lectura y cerrar el dossier" style="color: #ff4a4a; border-color: #ff4a4a;">🚪 Terminar Lectura</button>
         </div>
         <script type="text/javascript">
             function terminarLectura() {
-                if(confirm("¿Deseas terminar la lectura y cerrar el dossier?")) {
+                if(confirm("¿Deseas terminar la lectura y salir del Chibalete?")) {
                     window.close();
                     document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; background:var(--bg-base); color:var(--text-main); font-family:var(--font-title); text-align:center; padding:2rem;'><h2>Lectura Terminada</h2><p style='font-family:var(--font-body); margin-top:1rem;'>Puedes cerrar esta aplicación de forma segura.</p></div>";
                 }
@@ -817,6 +827,372 @@
             </div>
         </div>
 
+        <!-- Dossier Tabs Section -->
+        <section class="section-header">
+            <h2>Dossier de Cierre Inmediato: Las Cartas de Honor</h2>
+            <p>Pliegos personalizados para resolución de liquidez hoy mismo con palabra de caballero</p>
+        </section>
+
+        <section class="tabs-wrapper">
+            <nav class="tabs-bar" id="tabsBar" role="tablist" aria-label="Cartas de Cierre Inmediato">
+                <button class="tab-btn active" onclick="switchTab(0)" role="tab" aria-selected="true" aria-controls="tab-0" id="tab-btn-0" tabindex="0">1. Juanma</button>
+                <button class="tab-btn" onclick="switchTab(1)" role="tab" aria-selected="false" aria-controls="tab-1" id="tab-btn-1" tabindex="-1">2. Nicolás Aristizábal</button>
+                <button class="tab-btn" onclick="switchTab(2)" role="tab" aria-selected="false" aria-controls="tab-2" id="tab-btn-2" tabindex="-1">3. Antonio (Cobel.es)</button>
+                <button class="tab-btn" onclick="switchTab(3)" role="tab" aria-selected="false" aria-controls="tab-3" id="tab-btn-3" tabindex="-1">4. Portobelo (Panamá)</button>
+                <button class="tab-btn" onclick="switchTab(4)" role="tab" aria-selected="false" aria-controls="tab-4" id="tab-btn-4" tabindex="-1">5. Dr. Santos (Abogado)</button>
+                <button class="tab-btn" onclick="switchTab(5)" role="tab" aria-selected="false" aria-controls="tab-5" id="tab-btn-5" tabindex="-1">6. Fernando Alviar</button>
+                <button class="tab-btn" onclick="switchTab(6)" role="tab" aria-selected="false" aria-controls="tab-6" id="tab-btn-6" tabindex="-1">7. Teresita (Hermana)</button>
+            </nav>
+
+            <!-- TAB 1: JUANMA -->
+            <div class="tab-content active" id="tab-0" role="tabpanel" aria-labelledby="tab-btn-0" tabindex="0">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">PRIMERA OLA DE DISPARO</span>
+                    <span class="meta-tag cyan">TONO: Fraternal, Espiritual &amp; Académico</span>
+                    <span class="meta-tag green">OBJETIVO: Préstamo Puente 6 Meses (EUR)</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(0)" title="Vaciar espacio para pegar nuevo texto" aria-label="Vaciar espacio de la carta">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(0)" title="Guardar cambios" aria-label="Guardar contenido de la carta">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-0" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Contenido editable de la carta">Querido Juanma:
+
+Qué alegría tan inmensa me dio recibir tu mensaje preguntando por nosotros tras el sismo del Chocó. En medio de los movimientos de la tierra y de las curvas de la vida, saber que hay hermanos en el espíritu que se acuerdan de uno a la distancia es una bendición que atesoro con el corazón.
+
+Aún guardo muy vivas aquellas conversaciones de horas que compartimos, tu generosidad inolvidable en momentos difíciles y el gran favor de haberme puesto en contacto con Antonio en Cobel, donde ya cumplo tres años de labor constante.
+
+Te escribo hoy desde un paraje de las montañas de Antioquia para compartirte algo en lo que sé que vibrarás conmigo: mi viejo sueño de elevar el oficio tipográfico no se quedó en un anhelo. Tras años de trabajo silencioso, he logrado fusionar mis 48 años de oficio con el poder de la inteligencia artificial, construyendo un compilador industrial capaz de procesar textos complejos, científicos y normativos con una belleza y precisión que honran al ser humano.
+
+Recordarás aquel libro de matemáticas que elaboré para la UNIR en España. Hoy esa experiencia ha madurado en un sistema capaz de absorber con igual soltura textos matemáticos rigurosos, manuales para educación a distancia, novelas y tratados jurídicos.
+
+Pero lo más hermoso, Juanma, y sé cuánto sabrás interpretar esto proyectado en el ámbito universitario e intelectual, es que le hemos inyectado Accesibilidad Universal e Inclusión Total. Nuestra maquinaria genera documentos preparados para personas con discapacidad visual o limitaciones de lectura: textos que dialogan a la perfección con lectores de pantalla, fórmulas matemáticas accesibles, contraste tipográfico adaptable y cumplimiento estricto de las directivas europeas de accesibilidad (EAA y WCAG). La ciencia, las matemáticas y la ley dejan de ser una muralla para quien no puede ver.
+
+Y como coronación, hemos conquistado «La Última Milla»: convertimos la obra en un bolsilibro interactivo (PWA) que abre al instante en el celular con un solo clic, sin contraseñas y funcionando 100% sin conexión a internet, ideal para la educación en cualquier rincón del mundo.
+
+Hoy nos encontramos en la recta final, realizando pruebas reales con documentos extensos y ultimando la plataforma web, con la meta de iniciar oficialmente nuestras actividades productivas en el mes de diciembre. No busco socios para diluir este proyecto nacido de mis entrañas; busco a los amigos del alma para un impulso puente en esta última milla.
+
+Si está en tus posibilidades apoyarme con un préstamo puente por 6 meses con las condiciones y retornos que acordemos con honor de caballeros, empeño mi palabra y el fruto de este taller para cumplirte con creces. Y si no fuera el momento económico, tu bendición, tu consejo y tu amistad siguen siendo para mí un regalo sagrado.
+
+Te mando un abrazo fraterno desde estas montañas.
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-0')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-0" target="_blank" onclick="prepareWhatsApp(0)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 2: NICOLAS ARISTIZABAL -->
+            <div class="tab-content" id="tab-1" role="tabpanel" aria-labelledby="tab-btn-1" tabindex="0" hidden="true">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">PRIMERA OLA DE DISPARO</span>
+                    <span class="meta-tag cyan">TONO: Verdad Moral, Sobriedad &amp; Gratitud de Vida</span>
+                    <span class="meta-tag green">OBJETIVO: Préstamo Puente + Participación Futura en Utilidades</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(1)" title="Vaciar espacio para pegar nuevo texto" aria-label="Vaciar espacio de la carta">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(1)" title="Guardar cambios" aria-label="Guardar contenido de la carta">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-1" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Contenido editable de la carta">Estimado Nicolás:
+
+Cada vez que miro hacia atrás y recorro con gratitud mi vida, tu nombre aparece con una luz imborrable. Fuiste el mejor patrono que tuve, pero sobre todo fuiste el hermano que me abrió las puertas de su propio hogar por dos años cuando inicié a parar de beber. Viviste de cerca mis días más oscuros rumbo al fondo, y fuiste testigo de mis primeros pasos tambaleantes hacia la recuperación. Esas son deudas del alma que no se pagan con dinero, sino viviendo con honradez y dignidad.
+
+Tu frase en nuestra última charla: «es bienvenido cuando quiera venir», me dio un aliento enorme. Hoy no llego a tus puertas tambaleante ni derrotado; llego de pie, con la cabeza en alto, con 48 años de oficio a cuestas y con la obra cumbre de mi vida entre las manos.
+
+Tú, que evolucionaste de un departamento de diseño a convertirte en un gran impresor en todas las dimensiones de la industria gráfica, vas a comprender mejor que nadie lo que he forjado: en un paraje de estas montañas de Antioquia he levantado LexDigitalHD, una fábrica que automatiza la diagramación al nivel más refinado de la imprenta clásica, integrando inteligencia artificial.
+
+Aunque comenzamos resolviendo el laberinto de las publicaciones legales, la máquina está concebida para la versatilidad de la imprenta total: desde novelas y ensayos de alta literatura, hasta fichas didácticas para colegios, manuales técnicos y material educativo, todo maquetado a velocidad industrial y listo para mandar a prensas offset, máquinas digitales o Amazon, si se quiere.
+
+Pero dimos un paso más allá que te llenará de orgullo como impresor: hicimos que el libro sea universalmente accesible e inclusivo. Nuestro compilador dota a cada página de estructuras semánticas para que las personas con discapacidad visual puedan «escuchar y navegar» el libro a través de lectores de pantalla sin perder una sola jerarquía. Es el matrimonio entre la estética de Gutenberg y la justicia social moderna.
+
+Y en lo digital, lanzamos el pliego a la pantalla del celular en un formato PWA liviano como una pluma, que abre en un segundo por WhatsApp y funciona 100% sin internet.
+
+Nicolás: he llevado esta maquinaria hasta el umbral del éxito a pulso limpio. Actualmente realizamos pruebas rigurosas con documentos extensos para garantizar resultados impecables, proyectando el inicio oficial de actividades productivas para el mes de diciembre, una vez se finalice nuestro sitio web. Me encuentro en «La Última Milla» y necesito un impulso financiero puente por 6 meses para sostener esta etapa final y encender la producción comercial al 100% en ese momento.
+
+No te pido una limosna ni busco que asumas riesgos como socio. Te pido un préstamo puente de honor, con la palabra de un hombre al que tú viste renacer. Y hago ante ti un pacto solemne: cuando LexDigitalHD comience a generar sus utilidades industriales, quiero hacerte partícipe de ellas a ti, a tu señora y a tus dos hijos, como testimonio vivo de mi gratitud y de la victoria que tú me ayudaste a construir, independiente de la respuesta que surja de este mensaje. Cuando miro a mi alrededor, con la claridad de los años, y el recuento de las vidas que han pasado por mis caminos, quiero poner en tus manos y en las manos de tus hijos, con su autorización, este legado en sus manos, cuando mis pasos ya no crucen estas tierras y mi señora no esté disponible, que tú, seas el que en sus manos y las de tus hijos, impulsen esto más allá de estos ciclos cortos de vida a que estamos sometidos. Es simplemente soltar en el sendero de la historia, lo que hicimos con los granos de arena que pusimos en el reloj del tiempo.
+
+Si puedes abrirme este puente hoy, hablemos de la suma que esté a tu alcance y cuadramos los detalles con seriedad absoluta.
+
+Un abrazo inmenso para ti y para tu hermosa familia.
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-1')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-1" target="_blank" onclick="prepareWhatsApp(1)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 3: ANTONIO (COBEL.ES) -->
+            <div class="tab-content" id="tab-2" role="tabpanel" aria-labelledby="tab-btn-2" tabindex="0" hidden="true">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">SEGUNDA OLA DE DISPARO</span>
+                    <span class="meta-tag cyan">TONO: Ética Cristiana &amp; Cumplimiento Europeo (EAA)</span>
+                    <span class="meta-tag green">OBJETIVO: Adelanto 2-3 Meses (600€-900€) o Paquete PWA</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(2)" title="Vaciar espacio para pegar nuevo texto" aria-label="Vaciar espacio de la carta">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(2)" title="Guardar cambios" aria-label="Guardar contenido de la carta">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-2" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Contenido editable de la carta">Estimado Antonio:
+
+Le envío un saludo muy cordial y mis oraciones desde un paraje de las montañas de Antioquia, agradecido siempre por estos tres años de labor ininterrumpida al servicio de Cobel Ediciones.
+
+Como usted bien sabe, la palabra escrita que transmite la fe, la doctrina y la elevación espiritual exige una dignidad tipográfica que inspire sosiego y devoción en quien la lee, trátese de un tratado teológico, una vida de santos, una novela moral, una guía didáctica de catequesis o una disertación espiritual tan propia de Cobel Ediciones.
+
+Durante este tiempo, además de nuestras labores cotidianas en maquetación, asistencia web y correos masivos, he concluido el desarrollo de una tecnología editorial que encaja de forma providencial con los desafíos actuales del libro religioso y general en España y Europa:
+
+1. Cumplimiento de la Directiva Europea de Accesibilidad (EAA): A partir de las nuevas exigencias comunitarias en la UE, las publicaciones digitales deben ser plenamente accesibles para personas con discapacidad visual, adultos mayores o lectores con dificultades sensoriales. Nuestro sistema genera publicaciones preparadas para lectura por voz asistida, contrastes adaptables y fuentes transformables sin alterar la pureza del diseño.
+2. Versatilidad Editorial Completa: Nuestra maquinaria procesa con la misma perfección ensayos espirituales, biografías, devocionarios, fichas didácticas de formación, entre otros tantos temas, y publicaciones de corte jurídico, que es la estrategia con la que iniciamos este empeño.
+3. El Bolsilibro Pastoral (PWA Offline): Podemos transformar cualquier obra en una publicación interactiva que sus fieles y suscriptores abren en su teléfono desde un simple enlace web o mensaje de WhatsApp en menos de un segundo, y que funciona 100% sin conexión a internet, para llevar al alcance de sus manos a retiros, templos o viajes.
+
+Actualmente me encuentro realizando pruebas reales con documentos extensos y finalizando la construcción de nuestro sitio web, proyectando el inicio oficial de nuestras actividades productivas para el mes de diciembre. Con motivo de la puesta a punto final de esta infraestructura, me hallo en una etapa de consolidación financiera de mi taller. Quisiera proponerle con toda confianza una alternativa que sería de inmenso alivio y bendición en este momento de preparación:
+• Un anticipo extraordinario de 2 o 3 mensualidades de mis honorarios habituales (300 €/mes), y dispuestos a asumir las condiciones que considere adecuadas a su posibilidad con la garantía absoluta que su respuesta tendrá de mi parte la acostumbrada diligencia con que hago sus trabajos.
+
+Mi compromiso con usted y con Cobel es total y transparente, respaldado por la fidelidad con la que siempre hemos trabajado.
+
+Quedo a su disposición para que lo conversemos. Un saludo fraterno en el espíritu,
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-2')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-2" target="_blank" onclick="prepareWhatsApp(2)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 4: PORTOBELO -->
+            <div class="tab-content" id="tab-3" role="tabpanel" aria-labelledby="tab-btn-3" tabindex="0" hidden="true">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">SEGUNDA OLA DE DISPARO</span>
+                    <span class="meta-tag cyan">TONO: Ejecutivo B2B &amp; Prestigio Técnico</span>
+                    <span class="meta-tag green">OBJETIVO: Préstamo Puente Respaldado en Trabajo &amp; Oficio</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(3)" title="Vaciar espacio para pegar nuevo texto" aria-label="Vaciar espacio de la carta">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(3)" title="Guardar cambios" aria-label="Guardar contenido de la carta">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-3" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Contenido editable de la carta">Apreciados Don Luis, Don Juan y Felipe:
+
+Les envío un saludo muy especial desde las montañas de Colombia, con el aprecio y respeto de siempre por el equipo de Editorial Portobelo.
+
+En nuestro trabajo conjunto hemos consolidado un flujo muy eficiente, avanzando desde las primeras obras, asegurando que los archivos no solo queden impecables para las máquinas disponibles en su empresa y la impresión en Colombia, sino que pasen sin tropiezos los filtros de Amazon en formato EPUB.
+
+Hoy me dirijo a ustedes, porque he completado una innovación que transformará la competitividad de Portobelo en Panamá: un compilador industrial automatizado tanto para códigos jurídicos como para manuales universitarios, módulos de educación a distancia y ensayos académicos.
+
+Ventajas Críticas Inmediatas para Portobelo:
+1. Inclusión y Accesibilidad para Estudiantes con Discapacidad: Cumplimiento de estándares de accesibilidad digital para que estudiantes con baja visión o discapacidad motriz puedan estudiar los códigos y textos universitarios panameños mediante lectores de pantalla, un requisito cada vez más exigido en el ámbito académico.
+2. Amazon EPUB sin errores: Salidas limpias y deterministas en minutos.
+3. La Joya del Estudiante y el Abogado: El formato PWA interactivo. El cliente de Portobelo compra el código o manual y lo lleva en su celular: busca artículos en un segundo por voz o texto, sin necesidad de gastar datos ni tener internet.
+
+Propuesta Comercial de Cierre Inmediato:
+Les propongo un Acuerdo de Volumen Prepagado para los códigos y libros del próximo semestre.
+Actualmente realizamos las últimas pruebas reales con documentos extensos y finalizamos nuestro sitio web, de cara al inicio formal de nuestras actividades productivas en el mes de diciembre. Con motivo de esta puesta a punto definitiva de nuestra infraestructura, me encuentro en una etapa de consolidación financiera del taller. Quisiera proponerles con toda confianza una alternativa que sería de inmenso alivio y bendición para arrancar motores:
+
+Pido un préstamo, respaldado en la palabra de un hombre que durante este tiempo que laboramos juntos, han podido comprobar la calidad y oportunidad de mi trabajo y una reseña de mi personalidad sin necesidad de enmarcarla en un mar de dudas.
+Estoy dispuesto a asumir las condiciones que consideren adecuadas a su posibilidad con la garantía absoluta que su respuesta tendrá de mi parte la acostumbrada diligencia con que hago sus trabajos.
+
+Felipe y Don Juan: ustedes son hombres prácticos de números y tecnología; saben el valor que esto representa, especialmente si la curiosidad de don Felipe se agudiza y se propone dar una mirada al interior de los procesos del taller. Estoy seguro que el asombro, especialmente en estos terrenos tecnológicos actuales, forma parte de su diario desempeño.
+
+Quedo atento a su respuesta.
+
+Con el aprecio de siempre,
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-3')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-3" target="_blank" onclick="prepareWhatsApp(3)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 5: SANTOS -->
+            <div class="tab-content" id="tab-4" role="tabpanel" aria-labelledby="tab-btn-4" tabindex="0" hidden="true">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">GENERACIÓN DE CONFIANZA</span>
+                    <span class="meta-tag cyan">TONO: Rigor Forense &amp; Cadena de Custodia</span>
+                    <span class="meta-tag green">OBJETIVO: Confianza en Predio &amp; Estandarización Legal</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(4)" title="Vaciar espacio para pegar nuevo texto" aria-label="Vaciar espacio de la carta">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(4)" title="Guardar cambios" aria-label="Guardar contenido de la carta">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-4" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Contenido editable de la carta">Apreciado Doctor Santos:
+
+Espero se encuentre muy bien en medio de sus innumerables ocupaciones. Deseo agradecerle la cordialidad y la diligencia con la que hemos venido adelantando los trámites jurídicos para la legalización del terreno donde construyo mi casa aquí en La Palma.
+
+Quería robarle un par de minutos para compartirle un aspecto de mi vida profesional que considero de mutuo interés. Como tipógrafo con cerca de cinco décadas de ejercicio, he fundado Editorial LexDigitalHD, un proyecto tecnológico que ataca directamente un problema que usted, como hombre de leyes, conoce a la perfección: el desorden, la pesadez y la precariedad formal de los memoriales, escrituras y expedientes judiciales.
+
+Hemos desarrollado un flujo de trabajo que toma cualquier documento jurídico en bruto y le aplica:
+1. Cadena de Custodia Criptográfica (Hash SHA-256): Certeza absoluta de que el contenido no ha sido alterado ni en una coma.
+2. Composición Tipográfica Canónica: Aplicación de retícula áurea y tipografía de descanso visual sin remates (Sans-Serif de alta legibilidad), diseñada para eliminar la fatiga cognitiva al revisar argumentos en dispositivos móviles y pantallas de alto contraste.
+3. Despliegue Inmediato en Celular (PWA Accesible): El cliente o el juzgado recibe un enlace seguro que abre el expediente en menos de un segundo, legible incluso en veredas o zonas sin señal de internet, e integrable con lectores de pantalla para personas con discapacidad visual.
+
+Quise enseñarle esto para que conozca la solidez, la seriedad y el alcance de la empresa que dirijo desde este predio, y ponerme a su entera disposición si en su despacho o entre sus colegas requieren estandarizar o presentar memoriales de casación, tutelas complejas o tratados notariales con la máxima prestancia del país.
+
+Seguimos adelante con nuestro proceso del predio y cuenta con un servidor leal para cualquier requerimiento editorial o forense.
+
+Cordialmente,
+
+Hernán Darío (Donache)
+Director de Taller · Editorial LexDigitalHD</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-4')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-4" target="_blank" onclick="prepareWhatsApp(4)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 6: FERNANDO ALVIAR -->
+            <div class="tab-content" id="tab-5" role="tabpanel" aria-labelledby="tab-btn-5" tabindex="0" hidden="true">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">TERCERA OLA · ALIANZA GREMIAL</span>
+                    <span class="meta-tag cyan">TONO: Purismo de Corrección &amp; Recuerdos del Ferrini</span>
+                    <span class="meta-tag green">OBJETIVO: Alianza Gremial &amp; Libros Impresos/Digitales en 48h</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(5)" title="Vaciar espacio para pegar nuevo texto" aria-label="Vaciar espacio de la carta">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(5)" title="Guardar cambios" aria-label="Guardar contenido de la carta">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-5" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Contenido editable de la carta">Maestro Fernando:
+
+Un saludo afectuoso con la admiración de siempre. Recuerdo con gran beneplácito nuestros cinco años de trabajo hombro a hombro en el Ferrini y su liderazgo impecable al frente de la Asociación de Correctores de Colombia (Correcta). Nadie en este país sabe mejor que usted lo que significa sufrir cuando una mala diagramación mutila el trabajo minucioso de un corrector de estilo.
+
+Durante años has tenido la generosidad de elogiar mi oficio tipográfico. Hoy quiero contarte con orgullo que ese perfeccionismo que usted y yo compartimos lo he encapsulado en una obra industrial: he programado un compilador editorial automatizado que bauticé en la intimidad con el espíritu de /Chibalete.
+
+Mire cómo protege este sistema el trabajo del corrector:
+• Respeto absoluto al texto: No altera diacríticos, comillas latinas, versalitas ni divisiones de palabras.
+• Cero tolerancia a viudas y huérfanas: El motor gráfico balancea los párrafos automáticamente sin necesidad de dar «machetazos» de interlineado falso.
+• Métrica en Cíceros y Canon de Van de Graaf: La página impresa recupera el reposo de las ediciones de arte.
+• Versatilidad Completa: Capaz de maquetar fichas didácticas pedagógicas escolares, novelas literarias, ensayos o textos matemáticos.
+• Salida PWA digital accesible: El libro final se consulta en cualquier pantalla como un verdadero bolsilibro accesible para lectores ciegos, sin deformar la retícula y sin requerir internet.
+
+Sé que usted promueve con frecuencia mi trabajo entre colegas y editoriales. Quiero invitarlo a que sea de los primeros en ver una demostración en vivo de este motor. Sería un honor supremo que podamos ofrecer a sus clientes y a los asociados de Correcta un canal donde sus textos corregidos se conviertan, en 48 horas, en libros impresos y digitales con sello de calidad forense.
+
+Tomémonos un café pronto para enseñarle la galera en vivo.
+
+Un fuerte abrazo,
+
+Hernán Darío (Donache)</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-5')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-5" target="_blank" onclick="prepareWhatsApp(5)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+            <!-- TAB 7: TERESITA -->
+            <div class="tab-content" id="tab-6" role="tabpanel" aria-labelledby="tab-btn-6" tabindex="0" hidden="true">
+                <div class="dossier-meta">
+                    <span class="meta-tag gold">FAMILIA &amp; DIGNIDAD</span>
+                    <span class="meta-tag cyan">TONO: Amor Fraterno, Paz &amp; Sobriedad</span>
+                    <span class="meta-tag green">OBJETIVO: Apoyo Solidario / Préstamo Familiar</span>
+                </div>
+                <div class="edit-toolbar">
+                    <span class="edit-badge">
+                        ✏️ <strong>Espacio Editable Activo:</strong> Haz clic dentro del recuadro para borrar, escribir o pegar el nuevo contenido.
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="clearLetter(6)" title="Vaciar espacio para pegar nuevo texto" aria-label="Vaciar espacio de la carta">
+                            🗑️ Vaciar Espacio
+                        </button>
+                        <button class="btn-ctrl" style="font-size: 0.78rem; padding: 0.25rem 0.75rem; color: #5cff9d; border-color: rgba(0,255,102,0.4);" onclick="saveLetter(6)" title="Guardar cambios" aria-label="Guardar contenido de la carta">
+                            💾 Guardar
+                        </button>
+                    </div>
+                </div>
+                <div class="letter-paper" id="text-6" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Contenido editable de la carta">Querida Teresita:
+
+Te escribo con el cariño y el agradecimiento de siempre por haber estado a mi lado en tantos momentos de la vida. Sé que mi historia ha tenido curvas difíciles, épocas de inestabilidad y limitaciones que en el pasado generaron angustia y reservas en la familia. Comprendo y respeto profundamente esas huellas.
+
+Hoy te escribo desde la paz y la sobriedad que Dios y mi disciplina me han regalado. En este rincón de las montañas de Antioquia no he estado perdiendo el tiempo: he volcado mis 48 años de oficio en construir una empresa tecnológica y editorial de la que tú y toda la familia pueden sentirse profundamente orgullosos.
+
+He desarrollado un sistema informático único que toma libros y documentos legales y los convierte en publicaciones digitales y de imprenta de altísimo nivel, accesibles incluso para personas con discapacidad visual, y que la gente puede leer en sus celulares en un segundo y sin gastar datos. Es una obra real, registrada y en funcionamiento.
+
+Estamos ya en la puerta de salida hacia el mercado real, afinando los últimos detalles de esta «Última Milla». Te comparto esto no para traer zozobras ni para pedirte limosnas, sino para mostrarte con la frente en alto en qué se convirtió tu hermano. 
+
+Si en este momento está en tus manos facilitarme un apoyo o un préstamo puente a corto plazo para sortear unos compromisos inmediatos mientras arranca la facturación plena, te lo recibiré con inmensa gratitud y con el compromiso formal de reintegrártelo con la seriedad de un hombre maduro y responsable. Y si no te es posible, saber que cuento con tu afecto y que puedes ver con tus propios ojos este logro es ya una enorme alegría para mí.
+
+Te mando un abrazo grande y lleno de bendiciones.
+
+Hernán Darío</div>
+                <div class="action-row">
+                    <button class="btn-action" onclick="copyText('text-6')">📋 Copiar Mensaje</button>
+                    <a class="btn-action btn-secondary" href="https://wa.me/?text=" id="wa-6" target="_blank" onclick="prepareWhatsApp(6)">💬 Enviar Carta por WhatsApp</a>
+                    <button class="btn-action btn-secondary" onclick="sendOnlyLink()">⚡ Enviar Solo Enlace</button>
+                    <button class="btn-action btn-secondary" onclick="openInfografiaModal()" title="Desplegar el visor de la Infografía Técnica">📊 Ver infografía</button>
+                    <a class="btn-action btn-portal" href="https://www.lexdigitalhd.com" target="_blank" title="Visitar la plataforma y catálogo oficial LexDigitalHD">🏛️ Ir a www.lexdigitalhd.com</a>
+                </div>
+            </div>
+
+        </section>
 
         <!-- Conclusión & Último Estado: Invitación al Portal Oficial LexDigitalHD -->
         <section class="final-state-section" style="margin-top: 3.5rem; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 2.75rem 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">

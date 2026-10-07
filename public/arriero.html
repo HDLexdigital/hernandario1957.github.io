@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>LexDigitalHD — El Arriero Cuántico y la Conquista de la Última Milla</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=EB+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #fae08a;
+            --gold-dim: rgba(212, 175, 55, 0.2);
+            --bg-dark: #0a0b0e;
+            --border: #2e3340;
+            --matrix-green: #00ff66;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 30%, #151821 0%, #07080a 100%);
+            color: #e5e7eb;
+            font-family: 'EB Garamond', Georgia, serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            overflow-x: hidden;
+        }
+
+        .header-bar {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            max-width: 1000px;
+        }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+            margin-bottom: 0.35rem;
+        }
+
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Contenedor del Lienzo Interactivo */
+        .artwork-wrapper {
+            position: relative;
+            max-width: 1200px;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.15);
+            border: 2px solid #3d3420;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .artwork-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+        }
+
+        .artwork-wrapper:hover .artwork-img,
+        .artwork-wrapper.show-proclama .artwork-img {
+            transform: scale(1.02);
+            filter: brightness(0.9) contrast(1.05);
+        }
+
+        /* Overlay con la Proclama del Arriero */
+        .proclama-overlay {
+            position: fixed; /* Anclaje al campo visual completo */
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(10, 11, 14, 0.95) 0%, rgba(5, 6, 8, 0.98) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 2.5rem 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            pointer-events: none;
+            z-index: 9000; /* Asegura que tape toda la interfaz */
+            overflow-y: auto; /* Permite scroll si la leyenda es muy larga */
+        }
+
+        .proclama-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* Canvas de Lluvia de Código Matrix */
+        #matrixCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 15;
+        }
+
+        #matrixCanvas.raining {
+            opacity: 0.95;
+        }
+
+        .proclama-border {
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            padding: 2.2rem 2.5rem;
+            position: relative;
+            background: rgba(18, 20, 27, 0.85);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(212, 175, 55, 0.08);
+            max-width: 960px;
+            margin: auto; /* Centrado inteligente sin cortar arriba */
+            transition: transform 0.4s ease, filter 0.6s ease, opacity 0.8s ease;
+            z-index: 20;
+            text-align: center;
+        }
+
+        .proclama-border::before, .proclama-border::after {
+            content: "✦";
+            position: absolute;
+            color: var(--gold);
+            font-size: 1rem;
+        }
+        .proclama-border::before { top: -9px; left: 50%; transform: translateX(-50%); background: #12141b; padding: 0 10px; }
+        .proclama-border::after { bottom: -9px; left: 50%; transform: translateX(-50%); background: #12141b; padding: 0 10px; }
+
+        .proclama-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            display: inline-block;
+        }
+
+        .proclama-text {
+            font-family: sans-serif;
+            font-size: 1.55rem;
+            line-height: 1.5;
+            color: #f3f4f6;
+            font-style: italic;
+            font-weight: 500;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+            letter-spacing: 0.2px;
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+        }
+
+        .proclama-author {
+            margin-top: 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Barra de Tiempo (40 segundos) estilo cuántico */
+        .countdown-bar-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 2px;
+            margin-top: 1.25rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .countdown-bar {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, var(--gold) 0%, #ffdf79 50%, var(--matrix-green) 100%);
+            transform-origin: left;
+            transition: transform 40s linear;
+        }
+
+        .countdown-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: #d1d5db;
+        }
+
+        .countdown-timer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .countdown-timer-badge strong {
+            color: var(--matrix-green);
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px #00ff66;
+            min-width: 1.6ch;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-skip-timer {
+            background: rgba(0, 255, 102, 0.15);
+            border: 1px solid rgba(0, 255, 102, 0.6);
+            color: #5cff9d;
+            padding: 0.35rem 0.85rem;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .btn-skip-timer:hover {
+            background: var(--matrix-green);
+            color: #05070a;
+            box-shadow: 0 0 18px #00ff66;
+            transform: scale(1.03);
+        }
+
+        /* Efecto de Disolución Cuántica / Matrix Glitch */
+        .matrix-dissolving {
+            animation: matrixGlitchFade 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+        }
+
+        @keyframes matrixGlitchFade {
+            0% {
+                opacity: 1;
+                filter: contrast(100%) hue-rotate(0deg);
+                transform: scale(1);
+            }
+            25% {
+                filter: contrast(200%) hue-rotate(90deg) drop-shadow(0 0 20px #00ff66);
+                transform: scale(1.02) skewX(2deg);
+            }
+            50% {
+                filter: contrast(300%) invert(25%) hue-rotate(140deg) drop-shadow(0 0 35px #00ff66);
+                transform: scale(0.98) skewX(-2deg);
+            }
+            80% {
+                opacity: 0.6;
+                filter: blur(2px) contrast(350%) drop-shadow(0 0 50px #00ff66);
+            }
+            100% {
+                opacity: 0;
+                filter: blur(8px) brightness(2.5);
+                transform: translateY(-15px) scale(1.04);
+                visibility: hidden;
+            }
+        }
+
+        /* APARICIÓN ÉPICA DE SIZAS (12 SEGUNDOS CON GUIÑO) */
+        .sizas-apparition-overlay {
+            position: fixed; /* Obligatorio: Anclaje al campo visual (Norma 2) */
+            top: 0; left: 0; right: 0; bottom: 0;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, rgba(0, 15, 8, 0.98) 0%, rgba(2, 6, 4, 1) 100%);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .sizas-apparition-overlay.manifest {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            animation: sizasBeastEntry 40s ease forwards;
+        }
+
+        @keyframes sizasBeastEntry {
+            0% {
+                opacity: 0;
+                transform: scale(0.88);
+                filter: brightness(2) contrast(200%) drop-shadow(0 0 60px #00ff66);
+            }
+            8% {
+                opacity: 1;
+                transform: scale(1);
+                filter: brightness(1.2) contrast(120%) drop-shadow(0 0 50px #00ff66);
+            }
+            75% {
+                opacity: 1;
+                transform: scale(1.02);
+                filter: brightness(1.05) contrast(110%) drop-shadow(0 0 45px #d4af37);
+            }
+            88% {
+                opacity: 1;
+                transform: scale(1.03);
+                filter: brightness(1.2) drop-shadow(0 0 55px #00ff66);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.08);
+                filter: blur(8px) brightness(1.8) drop-shadow(0 0 60px #00ff66);
+                visibility: hidden;
+            }
+        }
+
+        .sizas-frame {
+            position: relative;
+            max-width: 360px;
+            width: 70%;
+            border-radius: 50%;
+            padding: 8px;
+            background: radial-gradient(circle, rgba(0, 255, 102, 0.25) 0%, rgba(212, 175, 55, 0.15) 70%, transparent 100%);
+            box-shadow: 0 0 70px rgba(0, 255, 102, 0.6), inset 0 0 40px rgba(212, 175, 55, 0.4);
+            border: 2px solid rgba(0, 255, 102, 0.7);
+        }
+
+        .sizas-img-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .sizas-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.95);
+            transition: opacity 0.25s ease;
+        }
+
+        .sizas-img-wink {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Cuando se activa el GUIÑO cómplice */
+        .sizas-frame.winking .sizas-img-wink {
+            opacity: 1;
+        }
+        .sizas-frame.winking .sizas-img-normal {
+            opacity: 0;
+        }
+
+        /* Destello estelar en el ojo que guiña (x: ~63%, y: ~45%) */
+        .sizas-wink-sparkle {
+            position: absolute;
+            top: 45%;
+            left: 63%;
+            transform: translate(-50%, -50%) scale(0);
+            color: #ffffff;
+            font-size: 2.2rem;
+            text-shadow: 0 0 15px #00ff66, 0 0 30px #ffff00, 0 0 45px #00ff66;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 20;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease;
+        }
+
+        .sizas-frame.winking .sizas-wink-sparkle {
+            transform: translate(-50%, -50%) scale(1.5) rotate(45deg);
+            opacity: 1;
+            animation: sparklePulse 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes sparklePulse {
+            0% { transform: translate(-50%, -50%) scale(1.2) rotate(30deg); opacity: 0.85; filter: drop-shadow(0 0 10px #00ff66); }
+            100% { transform: translate(-50%, -50%) scale(1.8) rotate(90deg); opacity: 1; filter: drop-shadow(0 0 25px #ffdf79); }
+        }
+
+        .sizas-caption {
+            margin-top: 1rem;
+            text-align: center;
+            max-width: 820px;
+            padding: 0 1.5rem;
+        }
+
+        .sizas-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--matrix-green);
+            letter-spacing: 6px;
+            text-shadow: 0 0 20px #00ff66, 0 2px 10px #000;
+            text-transform: uppercase;
+        }
+
+        .sizas-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: var(--gold-light);
+            letter-spacing: 2px;
+            margin-top: 0.25rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .sizas-role-box {
+            margin-top: 0.85rem;
+            background: rgba(12, 14, 20, 0.88);
+            border-left: 3px solid var(--matrix-green);
+            border-right: 3px solid var(--gold);
+            border-radius: 6px;
+            padding: 0.75rem 1.25rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 255, 102, 0.05);
+        }
+
+        .sizas-role-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .sizas-role-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: #d1d5db;
+        }
+
+        .sizas-role-text strong {
+            color: #5cff9d;
+        }
+
+        /* Barra de Acciones y Descarga Gran Formato */
+        .actions-bar {
+            margin-top: 1.75rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 0.75rem 1.4rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #aa851d 100%);
+            color: #0c0d10;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #fae08a 0%, #d4af37 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-matrix {
+            background: linear-gradient(135deg, #00ff66 0%, #008f39 100%);
+            color: #05070a;
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.35);
+        }
+        .btn-matrix:hover {
+            background: linear-gradient(135deg, #5cff9d 0%, #00cc52 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 255, 102, 0.6);
+        }
+
+        .btn-secondary {
+            background: #191c24;
+            color: #d1d5db;
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .hint {
+            margin-top: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 1.3rem; font-stretch: condensed; }
+            .proclama-text { font-size: 1.15rem; line-height: 1.45; }
+            .proclama-border { padding: 1.5rem 1rem; margin: auto 0; width: 100%; }
+            .proclama-overlay { padding: 1.5rem 1rem; }
+            .sizas-title { font-size: 1.6rem; }
+            .sizas-frame { max-width: 300px; }
+            .countdown-meta { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-bar">
+        <h1 class="title">El Arriero Cuántico y la Conquista de la Última Milla</h1>
+        <div class="subtitle">48 Años de Oficio Editorial · Donache & Manucio · Medellín, Antioquia</div>
+    </header>
+
+    <!-- Contenedor del Lienzo Interactivo -->
+    <main class="artwork-wrapper" id="artworkContainer" tabindex="0" title="Pasa el mouse o haz clic para ver la proclama y la invocación de Sizas">
+        <img src="/arriero-camaleon-marco-hd.jpg" alt="Pintura Costumbrista Cibernética Paisa: Arriero con portátil y recua Transformers con Camaleón y Firma Hache" class="artwork-img" id="mainArtwork">
+        
+        <!-- Overlay 1: Proclama y lluvia Matrix -->
+        <div class="proclama-overlay" id="proclamaOverlay">
+            <canvas id="matrixCanvas"></canvas>
+
+            <div class="proclama-border" id="proclamaCard">
+                <span class="proclama-badge">⚡ Bando Canónico de la Arriería Metafísica · Taller LexDigitalHD ⚡</span>
+                <p class="proclama-text" id="proclamaParagraph">
+                    «¡¡Mula parda setenta y siete veces malparida, piroba, gonorrea, care-chimba, hijueputa, apriete el corvejón que no vamos pal monte sino pal mismísimo éter cuántico!! ¡¡Arre, malparida, que estos cuarenta y ocho años de retorcer teclados, acariciar galeradas de palabras y desvelos en el chibalete tecnológico no se van a quedar atascados en el barrizal!! ¡¡Camina condenada, que la última milla no espera a pendejos ni a flojos!!»
+                </p>
+                <div class="proclama-author">— Hernán Darío (Donache) · Medellín, Colombia —</div>
+                
+                <div class="countdown-bar-container">
+                    <div class="countdown-bar" id="countdownBar"></div>
+                </div>
+
+                <div class="countdown-meta">
+                    <div class="countdown-timer-badge">
+                        <span>⏳ Dilución Matrix e invocación de Sizas en:</span>
+                        <strong id="countdownSecs">40</strong><span>s</span>
+                    </div>
+                    <button type="button" class="btn-skip-timer" onclick="skipToMatrixAndSizas(event)" title="Saltar inmediatamente la espera de 40s y ver Matrix + Sizas">
+                        ⚡ Saltar y ver a Sizas ya
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay 2: Aparición de SIZAS (Pitón + Dragón Chino) durante 40 segundos exactos con guiño y función -->
+        <div class="sizas-apparition-overlay" id="sizasOverlay">
+            <div class="sizas-frame" id="sizasFrame">
+                <div class="sizas-img-wrapper">
+                    <img src="/sizas-dragon.jpg" alt="SIZAS: Comandante Suprema de Marketing & Proyecto Sí-o-Sí" class="sizas-img sizas-img-normal">
+                    <img src="/sizas-dragon-wink.jpg" alt="SIZAS Guiñando el Ojo" class="sizas-img sizas-img-wink">
+                    <div class="sizas-wink-sparkle">✨</div>
+                </div>
+            </div>
+            <div class="sizas-caption">
+                <div class="sizas-title" style="line-height: 1.2;">
+                    <span style="display: block;">¡¡ S I Z A S !!</span>
+                    <span style="display: block; font-size: 0.85em;">¡ D E &nbsp; U N A !</span>
+                </div>
+                <div class="sizas-sub">🐉 Doña Eva Celestina de la Serpiente · Dragón de la Última Milla ⚡</div>
+                <div class="sizas-role-box">
+                    <div class="sizas-role-title">👑 Cédula N.° 06 · LexDigitalHD</div>
+                    <div class="sizas-role-text">
+                        <strong>Comandante Suprema de Marketing, Expansión &amp; Proyecto «Sí-o-Sí»</strong>.<br>
+                        Aliada implacable de la causa: persuade voluntades en juzgados, claustros universitarios, juntas corporativas y terrenos editoriales aún amarrados a las viejas prácticas. Donde otros ven letargo o imposibles, ella ruge desde sus feroces fauces la consigna innegociable:<br><br>
+                        <em>«Hemos empaquetado una experiencia editorial en un ecosistema que pesa menos de 1 MB, se instala en menos de 800 milisegundos, funciona sin conexión a internet y opera a pantalla completa sin distracciones del navegador. Es, en su forma más pura, la materialización del "Caramelo Delicioso" con una envoltura tecnológica de la más alta gama. ¡La palabra libre llegará Sí-o-Sí!»</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="hint">
+        👆 <strong>Secuencia:</strong> Pasa el cursor (o clic en el cuadro) $\rightarrow$ Proclama con cronómetro de <strong>40s</strong> para lectura tranquila $\rightarrow$ Dilución Matrix $\rightarrow$ <strong>Aparición de SIZAS (40s con guiño cómplice)</strong>.
+    </div>
+
+    <!-- Barra de Acciones y Descarga Gran Formato -->
+    <nav class="actions-bar">
+        <button onclick="triggerSizasDirecto()" class="btn btn-matrix" title="Invocar inmediatamente la manifestación de Sizas (40 segundos con guiño)">
+            🐉 ¡Invocar a Sizas Ya! (40s)
+        </button>
+        <button onclick="showWindow()" class="btn btn-secondary" title="Iniciar la lectura canónica de la proclama (40s)">
+            📜 Iniciar Proclama (40s)
+        </button>
+        <a href="/arriero-camaleon-gran-formato.pdf" download="LexDigitalHD_Arriero_Cuantico_Gran_Formato_100x56cm.pdf" class="btn btn-gold" title="Descargar PDF de imprenta a 300 DPI (100 cm x 55.8 cm)">
+            🖨️ Descargar PDF Gran Formato (100×56 cm / 300 DPI)
+        </a>
+        <a href="/sizas-dragon.jpg" target="_blank" class="btn btn-secondary" title="Ver el retrato canónico de Sizas Dragón-Pitón">
+            👁️ Ver a Sizas (Original)
+        </a>
+        <a href="/arriero-camaleon-marco-hd.jpg" target="_blank" class="btn btn-secondary" title="Ver imagen en resolución nativa de 5504x3072 píxeles">
+            🔍 Ver Pintura HD
+        </a>
+        <a href="/infografia.html" class="btn btn-secondary" title="Ver la Infografía Técnica Editorial y los 5 Estadios">
+            📊 Infografía Técnica
+        </a>
+        <a href="/dossier_siosi.html" class="btn btn-secondary" title="Volver al Dossier Ejecutivo del Proyecto Sí-o-Sí">
+            📜 Dossier Sí-o-Sí
+        </a>
+        <a href="/paleontologica.html" class="btn btn-secondary" title="Versión escueta de texto plano para dispositivos muy antiguos como el iPad 2">
+            🦴 Versión Paleontológica (Texto Plano)
+        </a>
+        <a href="/kindle.html" class="btn btn-secondary" title="Versión de alto contraste optimizada para tinta electrónica (E-Ink)">
+            📖 Versión E-Ink (Kindle Paperwhite)
+        </a>
+        <a href="https://www.lexdigitalhd.com" target="_blank" class="btn btn-secondary" style="border-color: rgba(0,255,102,0.4); color: #5cff9d;" title="Explorar el Portal Oficial LexDigitalHD">
+            🏛️ www.lexdigitalhd.com
+        </a>
+    </nav>
+
+    <script>
+        // Purgar cachés viejos del navegador y forzar actualización de Service Worker
+        if ('caches' in window) {
+            caches.keys().then(keys => keys.forEach(k => {
+                if (k !== 'lexdigitalhd-siosi-v5-network-first') caches.delete(k);
+            }));
+        }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(regs => {
+                for (let r of regs) r.update();
+            });
+        }
+
+        const container = document.getElementById('artworkContainer');
+        const overlay = document.getElementById('proclamaOverlay');
+        const card = document.getElementById('proclamaCard');
+        const countdownBar = document.getElementById('countdownBar');
+        const countdownSecsEl = document.getElementById('countdownSecs');
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        const sizasOverlay = document.getElementById('sizasOverlay');
+        const sizasFrame = document.getElementById('sizasFrame');
+
+        let timeoutId = null;
+        let countdownSecsInterval = null;
+        let matrixInterval = null;
+        let sizasTimeoutId = null;
+        let sizasWinkTimeoutId = null;
+        let isSequenceRunning = false;
+        let isSizasShowing = false;
+        let remainingSeconds = 40;
+
+        // Configuración Lluvia Matrix
+        const matrixChars = "01010101LEXDIGITALHD48AÑOSARRIEROACHEMANUCIO101010101SIZAS957§±¶¥$¢";
+        let fontSize = 14;
+        let columns = 0;
+        let drops = [];
+
+        function initMatrix() {
+            canvas.width = overlay.offsetWidth || 1200;
+            canvas.height = overlay.offsetHeight || 675;
+            columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * -30);
+            }
+        }
+
+        function drawMatrixRain() {
+            ctx.fillStyle = "rgba(5, 7, 10, 0.12)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#00ff66";
+            ctx.font = fontSize + "px 'JetBrains Mono', monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                if (Math.random() > 0.88) {
+                    ctx.fillStyle = "#ffffff";
+                } else {
+                    ctx.fillStyle = "#00ff66";
+                }
+
+                ctx.fillText(char, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        function startMatrixEffect() {
+            initMatrix();
+            canvas.classList.add('raining');
+            if (!matrixInterval) {
+                matrixInterval = setInterval(drawMatrixRain, 35);
+            }
+        }
+
+        function stopMatrixEffect() {
+            canvas.classList.remove('raining');
+            if (matrixInterval) {
+                clearInterval(matrixInterval);
+                matrixInterval = null;
+            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function updateCountdownUI(val) {
+            if (countdownSecsEl) {
+                countdownSecsEl.textContent = val;
+            }
+        }
+
+        // 1. Iniciar Proclama (40 segundos)
+        function showWindow() {
+            if (isSequenceRunning || isSizasShowing) return;
+
+            clearTimeout(timeoutId);
+            clearTimeout(sizasTimeoutId);
+            clearTimeout(sizasWinkTimeoutId);
+            clearInterval(countdownSecsInterval);
+            stopMatrixEffect();
+            if (sizasFrame) sizasFrame.classList.remove('winking');
+            sizasOverlay.classList.remove('manifest');
+
+            card.classList.remove('matrix-dissolving');
+            overlay.classList.add('active');
+            container.classList.add('show-proclama');
+
+            // Barra regresiva de 40s y cronómetro numérico
+            remainingSeconds = 40;
+            updateCountdownUI(remainingSeconds);
+
+            countdownBar.style.transition = 'none';
+            countdownBar.style.transform = 'scaleX(1)';
+            setTimeout(() => {
+                countdownBar.style.transition = 'transform 40s linear';
+                countdownBar.style.transform = 'scaleX(0)';
+            }, 50);
+
+            countdownSecsInterval = setInterval(() => {
+                remainingSeconds--;
+                if (remainingSeconds < 0) remainingSeconds = 0;
+                updateCountdownUI(remainingSeconds);
+            }, 1000);
+
+            // Programar dilución Matrix a los 40s exactos
+            timeoutId = setTimeout(() => {
+                clearInterval(countdownSecsInterval);
+                triggerMatrixDissolve();
+            }, 40000);
+        }
+
+        // Función Central de Manifestación de Sizas (40 segundos con guiño cómplice y retorno a dossier)
+        function manifestSizasEntity() {
+            isSizasShowing = true;
+            clearTimeout(sizasTimeoutId);
+            clearTimeout(sizasWinkTimeoutId);
+
+            if (sizasFrame) sizasFrame.classList.remove('winking');
+            sizasOverlay.classList.remove('manifest');
+            void sizasOverlay.offsetWidth; // Forzar reflow en el navegador
+            sizasOverlay.classList.add('manifest');
+
+            // Guiño cómplice con destello ✨ a los 36s (dura hasta los 39s)
+            sizasWinkTimeoutId = setTimeout(() => {
+                if (sizasFrame) sizasFrame.classList.add('winking');
+            }, 36000);
+
+            // Retirar guiño justo antes de la disolución final
+            setTimeout(() => {
+                if (sizasFrame) sizasFrame.classList.remove('winking');
+            }, 39000);
+
+            // Ocultar a SIZAS tras cumplir sus 40 segundos exactos y redirigir al dossier
+            sizasTimeoutId = setTimeout(() => {
+                if (sizasFrame) sizasFrame.classList.remove('winking');
+                sizasOverlay.classList.remove('manifest');
+                container.classList.remove('show-proclama');
+                isSequenceRunning = false;
+                isSizasShowing = false;
+                
+                // Redirigir de vuelta al dossier
+                window.location.href = 'dossier_siosi.html';
+            }, 40000);
+        }
+
+        // 2. Dilución Matrix y luego Aparición de SIZAS (20s)
+        function triggerMatrixDissolve() {
+            if (isSequenceRunning || isSizasShowing) return;
+            isSequenceRunning = true;
+            clearTimeout(timeoutId);
+            clearInterval(countdownSecsInterval);
+
+            // Iniciar Lluvia Matrix y desvanecer la tarjeta
+            startMatrixEffect();
+            card.classList.add('matrix-dissolving');
+
+            // Tras la disolución cuántica (1.6s), manifestar a SIZAS durante 20 segundos
+            setTimeout(() => {
+                overlay.classList.remove('active');
+                stopMatrixEffect();
+                card.classList.remove('matrix-dissolving');
+
+                manifestSizasEntity();
+            }, 1600);
+        }
+
+        // Botón para saltar directo a Matrix y Sizas sin esperar los 40s
+        function skipToMatrixAndSizas(e) {
+            if (e) e.stopPropagation();
+            clearInterval(countdownSecsInterval);
+            triggerMatrixDissolve();
+        }
+
+        // 3. Invocar a Sizas directamente (vía botón directo)
+        function triggerSizasDirecto() {
+            clearTimeout(timeoutId);
+            clearTimeout(sizasTimeoutId);
+            clearTimeout(sizasWinkTimeoutId);
+            clearInterval(countdownSecsInterval);
+            overlay.classList.remove('active');
+            stopMatrixEffect();
+            card.classList.remove('matrix-dissolving');
+
+            container.classList.add('show-proclama');
+            isSequenceRunning = false;
+
+            manifestSizasEntity();
+        }
+
+        // Al pasar el mouse por primera vez o entrar, iniciar la proclama si no está activa
+        container.addEventListener('mouseenter', () => {
+            if (!overlay.classList.contains('active') && !isSequenceRunning && !isSizasShowing) {
+                showWindow();
+            }
+        });
+
+        // Al hacer clic en el lienzo general cuando está cerrado, abrir la proclama
+        container.addEventListener('click', (e) => {
+            if (!overlay.classList.contains('active') && !isSequenceRunning && !isSizasShowing) {
+                showWindow();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (matrixInterval) initMatrix();
+        });
+
+        // Revisar si el parámetro de la URL indica la invocación directa de Sizas (20s)
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('v') === '20s') {
+                setTimeout(() => {
+                    triggerSizasDirecto();
+                }, 500); // Pequeño retraso para asegurar que los elementos estén listos
+            }
+        });
+    </script>
+</body>
+</html>

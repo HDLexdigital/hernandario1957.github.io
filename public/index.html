@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>LexDigitalHD - Estación de Ingesta</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f5; padding: 2rem; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #1e40af; border-bottom: 2px solid #e5e7eb; padding-bottom: 1rem; }
+        .dropzone { border: 2px dashed #3b82f6; border-radius: 8px; padding: 3rem; text-align: center; cursor: pointer; background: #eff6ff; transition: background 0.3s; margin-bottom: 1.5rem; }
+        .dropzone:hover { background: #dbeafe; }
+        .dropzone input { display: none; }
+        pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 8px; overflow-x: auto; max-height: 400px; }
+        .loading { display: none; color: #2563eb; font-weight: bold; margin-bottom: 1rem; }
+        .btn-guia { background-color: #f59e0b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; margin-bottom: 1rem; }
+        .btn-guia:hover { background-color: #d97706; }
+        .cheatsheet { display: none; background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="display: flex; justify-content: space-between; align-items: center;">
+            LexDigitalHD Orchestrator 
+            <span style="font-size: 0.5em; color: #6b7280; font-weight: normal;">Paso 01: Ingesta</span>
+        </h1>
+        
+        <div style="background: #121316; color: #e5e7eb; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #d4af37; font-family: 'Georgia', serif; line-height: 1.6; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+            <p style="margin-top: 0; font-size: 1.15rem; font-style: italic;">
+                «Gravemos en nuestras tipográficas almas que PWA es el majestuoso vehículo que expresará nuestras almas transferidas en palabras y normas tipográficas.»
+            </p>
+            <div style="text-align: right; font-size: 0.85rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px;">
+                — Manifiesto de LexDigitalHD
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap;">
+            <button class="btn-guia" style="margin-bottom: 0;" onclick="toggleGuia()">💡 Ver Guía Rápida de Word</button>
+            <a href="dossier_siosi.html" target="_blank" style="background-color: #d4af37; color: #121316; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#e5c158'" onmouseout="this.style.backgroundColor='#d4af37'">⚡ Abrir Dossier «Proyecto Sí-o-Sí» (PWA)</a>
+        </div>
+        
+        <div class="cheatsheet" id="cheatsheet">
+            <strong>4 Acciones Rápidas en Word antes de subir:</strong>
+            <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+                <li><strong>1. Títulos y Capítulos:</strong> Selecciona y aplica estilos nativos <em>Título 1, Título 2, Título 3</em>.</li>
+                <li><strong>2. Texto Normal:</strong> Presiona Ctrl+E y aplica el estilo <em>Normal</em> para borrar fuentes raras.</li>
+                <li><strong>3. Citas:</strong> Usa el estilo <em>Cita (Quote)</em> para bloques indentados.</li>
+                <li><strong>4. Saltos:</strong> Borra los "Enter" dobles vacíos si los ves.</li>
+            </ul>
+        </div>
+
+        <p>Arrastra aquí un archivo <strong>.docx o .pdf</strong> (o haz clic para seleccionar). El servidor limpiará los formatos y extraerá el texto, generando la estructura JSON en tiempo real.</p>
+        
+        <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+            <p>📁 Selecciona o suelta tu archivo (.docx o .pdf) aquí</p>
+            <input type="file" id="fileInput" accept=".docx,.pdf" onchange="uploadFile(this.files[0])">
+        </div>
+
+        <div class="loading" id="loading">⏳ Procesando manuscrito... (Leyendo, limpiando formatos y analizando estructura...)</div>
+
+        <h3>Libreta Generada (JSON Estructural para InDesign UXP):</h3>
+        <pre id="jsonOutput">El JSON aparecerá aquí cuando subas un archivo.</pre>
+    </div>
+
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        
+        dropzone.ondragover = (e) => { e.preventDefault(); dropzone.style.background = "#bfdbfe"; };
+        dropzone.ondragleave = (e) => { e.preventDefault(); dropzone.style.background = "#eff6ff"; };
+        dropzone.ondrop = (e) => {
+            e.preventDefault();
+            dropzone.style.background = "#eff6ff";
+            if (e.dataTransfer.files.length) {
+                uploadFile(e.dataTransfer.files[0]);
+            }
+        };
+
+        async function uploadFile(file) {
+            if (!file) return;
+            const filename = file.name.toLowerCase();
+            if (!filename.endsWith('.docx') && !filename.endsWith('.pdf')) {
+                alert("Por favor, sube un archivo .docx o .pdf");
+                return;
+            }
+
+            document.getElementById('loading').style.display = "block";
+            document.getElementById('jsonOutput').textContent = "Procesando...";
+
+            const formData = new FormData();
+            formData.append('manuscrito', file);
+
+            try {
+                const response = await fetch('/api/ingesta', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                document.getElementById('jsonOutput').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error(error);
+                document.getElementById('jsonOutput').textContent = "Error al procesar el archivo.";
+            } finally {
+                document.getElementById('loading').style.display = "none";
+            }
+        }
+
+        function toggleGuia() {
+            const guia = document.getElementById('cheatsheet');
+            if (guia.style.display === 'block') {
+                guia.style.display = 'none';
+            } else {
+                guia.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
