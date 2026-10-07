@@ -1,5 +1,5 @@
 // Service Worker Canónico LexDigitalHD (Estrategia Network-First Anti-Caché)
-const CACHE_NAME = 'lexdigitalhd-siosi-v5-network-first';
+const CACHE_NAME = 'lexdigitalhd-siosi-v6-network-first';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
