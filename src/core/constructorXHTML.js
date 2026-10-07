@@ -41,7 +41,51 @@ try {
 // ============================================================================
 
 function procesarTextoInterno(token) {
-    // ... mantén esta función exactamente igual ...
+    let fragmentosHijos = token.fragmentos || token.contenido || [];
+
+    if (fragmentosHijos.length === 0) {
+        let textoPlano = escaparHTML(token.texto || '');
+        return textoPlano.replace(/\n/g, '<br/>');
+    }
+
+    return fragmentosHijos.map(frag => {
+        let textoFrag = escaparHTML(frag.texto || frag.text || '');
+        if (!textoFrag) return '';
+        textoFrag = textoFrag.replace(/\n/g, '<br/>');
+
+        const estiloClave = (frag.estiloCaracter || frag.characterStyle || frag.inDesignStyle || '').toLowerCase().replace(/[\s\_]+/g, "-");
+        const negritaDirecta = frag.formatoDirecto?.negrita || frag.format?.capitalization === 'BOLD';
+
+        const esEstiloVacio = !estiloClave || estiloClave === '[ninguno]' || estiloClave === 'ninguno' || estiloClave === '[]' || estiloClave === '[ningún]';
+
+        let etiqueta = 'span';
+        let clase = '';
+        let atributos = '';
+
+        if (!esEstiloVacio && reglasBase.mapeoEstilosCaracter && reglasBase.mapeoEstilosCaracter[estiloClave]) {
+            const regla = reglasBase.mapeoEstilosCaracter[estiloClave];
+            etiqueta = regla.etiqueta || 'span';
+            clase = regla.clase || estiloClave;
+            if (regla.atributos) {
+                atributos = Object.entries(regla.atributos).map(([k, v]) => ` ${escaparHTML(k)}="${escaparHTML(v)}"`).join('');
+            }
+        } else if (!esEstiloVacio) {
+            etiqueta = 'span';
+            clase = estiloClave;
+        } else if (negritaDirecta) {
+            etiqueta = 'strong';
+        }
+
+        if (esEstiloVacio && !negritaDirecta) {
+            return textoFrag;
+        }
+
+        if (etiqueta === 'strong' && esEstiloVacio) {
+            return `<strong>${textoFrag}</strong>`;
+        }
+
+        return `<${etiqueta} class="${clase}"${atributos}>${textoFrag}</${etiqueta}>`;
+    }).join('');
 }
 
 function construirEstructura(tokensEntrada, documentoEntrada, nombreCSS = 'Lexdigital_Modular.css', cssCrudoOriginal = '') {

@@ -62,14 +62,22 @@ function extraerDocumentoEstructurado(documento) {
                 const deterministicId = `story-${currentStoryId}-p-${p}`;
 
                 nodes.push({
-                    id: deterministicId,
-                    type: "text_node",
-                    content: contenidoLimpio,
-                    attributes: {
-                        styleName: estiloParrafo,
-                        storyId: currentStoryId,
-                        propiedades: propiedades
-                    }
+                    nodeId: deterministicId,
+                    texto: contenidoLimpio,
+                    estiloInDesign: estiloParrafo,
+                    metadatosExportacion: {
+                        exportTag: "p",
+                        exportClass: "parrafo",
+                        ariaRole: "paragraph",
+                        pdfTag: "P"
+                    },
+                    children: [{
+                        texto: contenidoLimpio,
+                        estiloCaracter: "[Ninguno]",
+                        metadatosExportacion: {
+                            exportTag: "span"
+                        }
+                    }]
                 });
             }
         }
@@ -84,9 +92,7 @@ function extraerDocumentoEstructurado(documento) {
             documentName: documento.name || "Sin_Titulo",
             extractionTimestamp: new Date().toISOString()
         },
-        document: {
-            nodes: nodes
-        }
+        cuerpoObra: nodes
     };
 }
 
