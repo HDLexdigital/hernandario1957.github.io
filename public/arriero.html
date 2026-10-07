@@ -859,12 +859,7 @@
             manifestSizasEntity();
         }
 
-        // Al pasar el mouse por primera vez o entrar, iniciar la proclama si no está activa
-        container.addEventListener('mouseenter', () => {
-            if (!overlay.classList.contains('active') && !isSequenceRunning && !isSizasShowing) {
-                showWindow();
-            }
-        });
+        // (Removido: el evento mouseenter ya no dispara la proclama automáticamente para permitir ver el cuadro)
 
         // Al hacer clic en el lienzo general cuando está cerrado, abrir la proclama
         container.addEventListener('click', (e) => {
