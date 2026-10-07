@@ -872,6 +872,14 @@
         // Modal Infografía Controls
         function openInfografiaModal() {
             playLeadClank();
+
+            // Bypass para visor htmlpreview que bloquea iframes de GitHub Raw por política de seguridad (x-frame-options)
+            if (window.location.hostname.includes('htmlpreview.github.io')) {
+                const newUrl = window.location.href.replace('dossier_siosi.html', 'infografia.html');
+                window.open(newUrl, '_blank');
+                return;
+            }
+
             const modal = document.getElementById('infografiaModal');
             const iframe = document.getElementById('infografiaIframe');
             if (!iframe.src || iframe.src === 'about:blank' || iframe.src.indexOf('infografia.html') === -1) {
