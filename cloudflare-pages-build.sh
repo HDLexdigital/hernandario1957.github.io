@@ -2,7 +2,7 @@
 set -e
 
 echo "📦 Instalando dependencias..."
-npm ci
+# npm ci
 
 echo "📁 Creando directorio public..."
 mkdir -p public
