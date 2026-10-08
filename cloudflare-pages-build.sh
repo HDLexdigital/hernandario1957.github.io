@@ -24,7 +24,7 @@ node scripts/build-audit-summary.js || true
 
 # Generar dashboards HTML
 node scripts/build-public-portadas.js || true
-node scripts/build-public-home.js || true
+# node scripts/build-public-home.js || true (Desactivado para preservar La Casa Abierta)
 node scripts/build-public-nav.js || true
 node scripts/build-public-search.js || true
 node scripts/build-public-search-advanced.js || true
