@@ -4,6 +4,7 @@
   "description": "Compilador editorial LexDigital",
   "main": "src/index.js",
   "scripts": {
+    "build": "astro build",
     "test": "jest --config jest.config.js",
     "test:contracts": "jest core/ledm/test/ledm-v2.contract.test.js core/cidm/test/cidm-v1.contract.test.js --config jest.config.js --verbose",
     "test:ledm": "jest core/ledm/test/ledm-v2.contract.test.js --config jest.config.js --verbose",
