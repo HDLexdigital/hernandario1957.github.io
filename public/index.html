@@ -220,6 +220,13 @@
     <div class="hero">
         <h1>La Casa Abierta</h1>
         <p class="subtitulo">Siga, siéntese y tómese un tinto con nosotros. Aquí en LexDigitalHD forjamos la palabra con tecnología de punta y corazón de imprenta.</p>
+        
+        <!-- Botón Bitácora -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="document.getElementById('bitacoraModal').style.display='flex'" style="background-color: var(--acento-rojo); color: var(--blanco); border: 2px solid var(--oro); padding: 12px 35px; font-size: 1.1rem; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 1px; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s;">
+                📓 VER BITÁCORA DEL DÍA
+            </button>
+        </div>
     </div>
 
     <!-- La Trova de Bienvenida -->
@@ -345,6 +352,27 @@
     <div style="text-align: center; padding: 20px; color: #888; font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-style: italic; margin-bottom: 20px;">
         «Cualquiera que, de la mano de la IA, lleve más de 25 madrugadas navegando descalzo por unos y ceros... puede ser mi amigo».<br>
         <span style="font-size: 0.95rem;">(Terapia del yo-con-yo) — Donache</span>
+    </div>
+
+    <!-- Modal Bitácora Emergente -->
+    <div id="bitacoraModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background-color: var(--pergamino); color: var(--cafe-oscuro); padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 3px solid var(--cafe-medio);">
+            <!-- Botón de Cerrar (X) -->
+            <button onclick="document.getElementById('bitacoraModal').style.display='none'" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--cafe-oscuro); font-weight: bold;">&times;</button>
+            
+            <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--acento-rojo); margin-top: 0; border-bottom: 2px solid var(--oro); padding-bottom: 10px;">Bitácora del Taller</h2>
+            
+            <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; line-height: 1.6; margin-top: 20px;">
+                <p><strong>Fecha Actual:</strong> Trabajo en progreso (Etapa de Construcción)</p>
+                
+                <div style="background-color: rgba(184, 151, 88, 0.15); padding: 20px; border-left: 5px solid var(--oro); margin-top: 25px; border-radius: 0 8px 8px 0;">
+                    <p style="margin: 0; font-weight: 800; color: var(--cafe-oscuro); font-size: 1.2rem; margin-bottom: 10px;">🎯 Tarea del Día:</p>
+                    <p style="margin: 0; color: #444;">
+                        Hoy vamos a estar con labores relacionadas con la composición y publicación de <strong>textos matemáticos</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
