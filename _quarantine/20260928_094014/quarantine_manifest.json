@@ -1,0 +1,195 @@
+{
+  "manifestVersion": "1.0.0",
+  "executionDate": "2026-09-28T14:40:14Z",
+  "isolatedFiles": [
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/~$forme Integral – Compilador Editorial y Migración a Linux.docx",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/~$forme Integral – Compilador Editorial y Migración a Linux.docx",
+      "sha256": "c3f8908b131e0f09b3670d7ffd7af6b25fad42cf8591d4a1aa58551f85b7b01b",
+      "sizeBytes": 162,
+      "category": "EDITOR_LOCK"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/.mint-deep-clean.sh.swp",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/.mint-deep-clean.sh.swp",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sizeBytes": 0,
+      "category": "EDITOR_LOCK"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/lexdigitalhd-core.tar.gz",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/lexdigitalhd-core.tar.gz",
+      "sha256": "c36e990b6dd925751accf4f880cc11b34e3cff4af3ebde7419b29a3bacbea0d8",
+      "sizeBytes": 581452849,
+      "category": "MASSIVE_ARCHIVE"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/google-cloud-cli-linux-x86_64.tar.gz",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/google-cloud-cli-linux-x86_64.tar.gz",
+      "sha256": "c1cd1823624a33f2341d0d384aafe2d7b24c1b77c9b131087d772ee0791ff2be",
+      "sizeBytes": 87996124,
+      "category": "MASSIVE_ARCHIVE"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/core.zip",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/core.zip",
+      "sha256": "54c4e1e3dd41a99718ec788c76924c2c08e71fd3f808ea279e29822302b32c76",
+      "sizeBytes": 549733,
+      "category": "MASSIVE_ARCHIVE"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/test.zip",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/test.zip",
+      "sha256": "e5bb474fb93c144f085bcf77994e386b59b671b35ea82728db081c4cddaf5474",
+      "sizeBytes": 418168,
+      "category": "MASSIVE_ARCHIVE"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/logs_archive.zip",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/logs_archive.zip",
+      "sha256": "d221d811ef947b635f83e3754a3692fa7605aab4a0722609ff289278c0ddaa6f",
+      "sizeBytes": 161182,
+      "category": "MASSIVE_ARCHIVE"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/MisJSON/ontologia_publicacion_v1_adaptado.zip",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/ontologia_publicacion_v1_adaptado.zip",
+      "sha256": "494a8004e2f066c42ba111b3203fc34ed5d69a326a9bf4e86238ce7691af9181",
+      "sizeBytes": 513,
+      "category": "MASSIVE_ARCHIVE"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/salidaXHTML/fragmento-4.zip",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/fragmento-4.zip",
+      "sha256": "a449b6f83d132cb1c2930c8685b1e9c82eb072d58bf052503a9ac02bffe1b378",
+      "sizeBytes": 393791,
+      "category": "MASSIVE_ARCHIVE"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/jest-output.txt",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/jest-output.txt",
+      "sha256": "96d4a0129b9869176ff7d30104b3d73089dea84681a770cfd01cb69ff21e3c9a",
+      "sizeBytes": 2133576,
+      "category": "ORPHAN_LOG"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/estructura-proyecto.txt",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/estructura-proyecto.txt",
+      "sha256": "342c25db6d598ffbe897edd3d29cf213bdc7cae8e5bf5e332ad86cda498c6a7d",
+      "sizeBytes": 1122100,
+      "category": "ORPHAN_LOG"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/estructura.txt",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/estructura.txt",
+      "sha256": "984b39cd0c094b7bb41390c857409064f514720be765684cde127a71ef257076",
+      "sizeBytes": 765279,
+      "category": "ORPHAN_LOG"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/e10-e12-auditoria.txt",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/e10-e12-auditoria.txt",
+      "sha256": "a6e3b2a5700be69ff264e5c4f38da61e13ea31472cdaefa1502e41b1bbe7b597",
+      "sizeBytes": 588652,
+      "category": "ORPHAN_LOG"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/diagnosticar-index.cjs",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/diagnosticar-index.cjs",
+      "sha256": "d25f2ab059b2a1ea2cda65dd76f0d9b8580f7feeb02ede7072b83b78eb05dbc5",
+      "sizeBytes": 289,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/tmp-ledm.json",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/tmp-ledm.json",
+      "sha256": "04393f45256262bb9cef90a3db7b55270fd0aab9c1a7d71c044796fc1b6b578e",
+      "sizeBytes": 1127,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/parche_frontera.js",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/parche_frontera.js",
+      "sha256": "681cff936dc0aa99db7ef6f2c69ee476c48b924d06e28e2cd2ef5696684e17a4",
+      "sizeBytes": 2398,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/package1.json",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/package1.json",
+      "sha256": "f1329cc24114e4928de28784ef00c1a1b8b1ff5a349b950d620d6c511aec1665",
+      "sizeBytes": 2228,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/tmp-DOC-B.json",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/tmp-DOC-B.json",
+      "sha256": "e741792d442053978d5f26d937719ff759397490c4038e0087aab3955a1c1010",
+      "sizeBytes": 1305,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/diagnosticar-pipeline.cjs",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/diagnosticar-pipeline.cjs",
+      "sha256": "e6394d7a6fdbe91b77fdf36ba620b7b5ed6bad181615db0c56aa609703364c58",
+      "sizeBytes": 224,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/fix-rutas.cjs",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/fix-rutas.cjs",
+      "sha256": "d057b2e8b692db4c3327b4e3399684284c565484907bc9763516dd68731367d8",
+      "sizeBytes": 2563,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/diagnosticar_ast.js",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/diagnosticar_ast.js",
+      "sha256": "da274d42af8ffc7d9ff178cc3a528b8aff1c4ef625a6e4166477bf869ce5e86b",
+      "sizeBytes": 1394,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/parche-pipeline.cjs",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/parche-pipeline.cjs",
+      "sha256": "d83c6fac31922b9ef424dd6b147cf9900d13b0d6f6cb4ff3a155e2c1e16f6545",
+      "sizeBytes": 950,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/tmp-DOC-A.json",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/tmp-DOC-A.json",
+      "sha256": "f4f005426fddc3de9d7b9086ca0e6933781146670c974fc68bc5403eade74c58",
+      "sizeBytes": 1305,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/fix-casing.cjs",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/fix-casing.cjs",
+      "sha256": "0e40af294747a5fff25bc464d31ea284c1071701be67aececa8b3fdbc6547021",
+      "sizeBytes": 1114,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/fix-final.cjs",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/fix-final.cjs",
+      "sha256": "a8170b854b2b9263fa04feabaa530721e7bfdbdd31963e9b8da445258e1dc7b7",
+      "sizeBytes": 1817,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/parche_bridge.js",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/parche_bridge.js",
+      "sha256": "5b4ddb52ff575be8912690a6d10e2e2b3c9ac4e2b49c354a2bfde42100764098",
+      "sizeBytes": 3094,
+      "category": "HOTFIX_SCRIPT"
+    },
+    {
+      "originalPath": "/home/donache/hernandario1957.github.io/fix-bom.cjs",
+      "quarantinePath": "/home/donache/hernandario1957.github.io/_quarantine/20260928_094014/fix-bom.cjs",
+      "sha256": "cb44fdffe8be7bc2c29296ecc1cafaec253b246b9dac48c4398ce0c529c19035",
+      "sizeBytes": 2137,
+      "category": "HOTFIX_SCRIPT"
+    }
+  ]
+}

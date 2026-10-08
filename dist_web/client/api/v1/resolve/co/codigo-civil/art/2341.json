@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "apiVersion": "1.0.0",
+    "generatedAt": "2026-09-27T23:24:16.013Z",
+    "sourceGraphSha256": "1f14c86031823a3a7ecc51b61dff6a44f17e07b3411eeaf087242adadb2dbfca"
+  },
+  "node": {
+    "globalId": "co:codigo-civil:art:2341",
+    "corpusSlug": "codigo-civil",
+    "localId": "art-2341",
+    "title": "Artículo 2341. Reparación por delito o culpa",
+    "nodeType": "art",
+    "webHref": "/codigo-civil#art-2341",
+    "inDegree": 1,
+    "outDegree": 1,
+    "authorityScore": 0.7191
+  },
+  "references": {
+    "outbound": [
+      {
+        "targetGlobalId": "co:constitucion:art:86",
+        "relationType": "constitutional-basis",
+        "rawCitation": "artículo 86 de la Constitución"
+      }
+    ],
+    "inbound": [
+      {
+        "sourceGlobalId": "co:cgp:art:1",
+        "relationType": "cross-corpus-reference"
+      }
+    ]
+  }
+}

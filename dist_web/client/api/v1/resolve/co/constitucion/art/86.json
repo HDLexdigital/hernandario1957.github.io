@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "apiVersion": "1.0.0",
+    "generatedAt": "2026-09-27T23:24:16.013Z",
+    "sourceGraphSha256": "1f14c86031823a3a7ecc51b61dff6a44f17e07b3411eeaf087242adadb2dbfca"
+  },
+  "node": {
+    "globalId": "co:constitucion:art:86",
+    "corpusSlug": "constitucion",
+    "localId": "art-86",
+    "title": "Artículo 86. Acción de tutela",
+    "nodeType": "art",
+    "webHref": "/constitucion#art-86",
+    "inDegree": 1,
+    "outDegree": 0,
+    "authorityScore": 1
+  },
+  "references": {
+    "outbound": [],
+    "inbound": [
+      {
+        "sourceGlobalId": "co:codigo-civil:art:2341",
+        "relationType": "constitutional-basis"
+      }
+    ]
+  }
+}

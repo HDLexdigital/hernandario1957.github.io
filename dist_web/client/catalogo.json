@@ -10,16 +10,6 @@
     "file": "cidm_real.json"
   },
   {
-    "documentId": "COMERCIO",
-    "id": "comercio",
-    "title": "comercio",
-    "versions": [
-      "v1"
-    ],
-    "version": "1.0.0",
-    "file": "comercio.json"
-  },
-  {
     "documentId": "CONSTITUCION",
     "id": "constitucion",
     "title": "constitucion",
@@ -348,7 +338,7 @@
       "v2"
     ],
     "version": "v1",
-    "file": "v1\\documento.ledm.json"
+    "file": "v1/documento.ledm.json"
   },
   {
     "documentId": "NOTAS_EXTRAIDAS",
@@ -369,5 +359,15 @@
     ],
     "version": "1.0.0",
     "file": "ontologia_publicacion_v1_adaptado.json"
+  },
+  {
+    "documentId": "OUTPUT",
+    "id": "output",
+    "title": "output",
+    "versions": [
+      "v1"
+    ],
+    "version": "1.0.0",
+    "file": "output.json"
   }
 ]

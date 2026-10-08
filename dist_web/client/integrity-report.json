@@ -1,109 +1,109 @@
 {
   "status": "OK",
-  "generatedAt": "2026-09-28T18:40:28.563Z",
+  "generatedAt": "2026-09-27T23:24:16.988Z",
   "artifacts": [
     {
       "type": "dashboard",
       "href": "search.html",
-      "file": "public\\search.html",
+      "file": "public/search.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "search-advanced.html",
-      "file": "public\\search-advanced.html",
+      "file": "public/search-advanced.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "search-relevance.html",
-      "file": "public\\search-relevance.html",
+      "file": "public/search-relevance.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "novedades.html",
-      "file": "public\\novedades.html",
+      "file": "public/novedades.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "global-timeline.html",
-      "file": "public\\global-timeline.html",
+      "file": "public/global-timeline.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "metrics.html",
-      "file": "public\\metrics.html",
+      "file": "public/metrics.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "exports.html",
-      "file": "public\\exports.html",
+      "file": "public/exports.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "collection.html",
-      "file": "public\\collection.html",
+      "file": "public/collection.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "integrity.html",
-      "file": "public\\integrity.html",
+      "file": "public/integrity.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "deploy-status.html",
-      "file": "public\\deploy-status.html",
+      "file": "public/deploy-status.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "external-links.html",
-      "file": "public\\external-links.html",
+      "file": "public/external-links.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "anchors.html",
-      "file": "public\\anchors.html",
+      "file": "public/anchors.html",
       "exists": true,
       "message": null
     },
     {
       "type": "dashboard",
       "href": "audit.html",
-      "file": "public\\audit.html",
+      "file": "public/audit.html",
       "exists": true,
       "message": null
     },
     {
       "type": "reference",
       "href": "./collection-export.json",
-      "file": "public\\exports.html",
+      "file": "public/exports.html",
       "exists": true,
       "message": null
     },
     {
       "type": "reference",
       "href": "./build-metrics.json",
-      "file": "public\\exports.html",
+      "file": "public/exports.html",
       "exists": true,
       "message": null
     }

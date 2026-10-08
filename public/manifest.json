@@ -1,29 +1,31 @@
 {
-  "id": "/",
-  "name": "LexDigitalHD — Dossier Ejecutivo Sí-o-Sí",
-  "short_name": "LexDigitalHD",
-  "description": "Bolsilibro digital canónico, compilador industrial y dossier del Proyecto Sí-o-Sí.",
-  "start_url": "/dossier_siosi.html",
-  "scope": "/",
-  "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
-  "background_color": "#0c0d10",
-  "theme_color": "#d4af37",
-  "orientation": "portrait-primary",
-  "icons": [
+  "documentId": "Constitucion_CO.indd",
+  "version": "1.0.0",
+  "createdAt": "2026-10-07T14:14:14.956Z",
+  "artifacts": [
     {
-      "src": "/icon.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "type": "web",
+      "path": "index.html",
+      "checksum": "5f40a1c8161bd4263fd5198d7f3acc8deb07b990eb942ea0a031cc6208f4ef1b",
+      "rendererVersion": "WebRenderer"
     },
     {
-      "src": "/icon.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
+      "type": "epub",
+      "path": "documento.epub",
+      "checksum": "5ab6a0abd9906146c2b47186bc24f61da72fbc8c450f1a89ecaf70f820babcae",
+      "rendererVersion": "EpubGenerator"
+    },
+    {
+      "type": "pdf-ua",
+      "path": "documento-ua.pdf",
+      "checksum": "26314c961e02632f5808d46767f4ee5a59f1fcbedbb97cfec809fc163cdbf464",
+      "rendererVersion": "build-pdf-weasyprint"
+    },
+    {
+      "type": "pdf-print",
+      "path": "documento-print.pdf",
+      "checksum": "e64ecb9950f32355f12b099ebfe9e6067a7ed00470bdcf2e34a3041b62cafa72",
+      "rendererVersion": "build-pdf-print+ghostscript"
     }
-  ],
-  "categories": ["books", "business", "education"],
-  "prefer_related_applications": false
+  ]
 }

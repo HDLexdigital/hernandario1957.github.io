@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-09-28T18:40:20.987Z",
+  "exportedAt": "2026-09-27T23:24:14.609Z",
   "catalog": [
     {
       "documentId": "CIDM_REAL",
@@ -10,16 +10,6 @@
       ],
       "version": "1.0.0",
       "file": "cidm_real.json"
-    },
-    {
-      "documentId": "COMERCIO",
-      "id": "comercio",
-      "title": "comercio",
-      "versions": [
-        "v1"
-      ],
-      "version": "1.0.0",
-      "file": "comercio.json"
     },
     {
       "documentId": "CONSTITUCION",
@@ -350,7 +340,7 @@
         "v2"
       ],
       "version": "v1",
-      "file": "v1\\documento.ledm.json"
+      "file": "v1/documento.ledm.json"
     },
     {
       "documentId": "NOTAS_EXTRAIDAS",
@@ -371,43 +361,25 @@
       ],
       "version": "1.0.0",
       "file": "ontologia_publicacion_v1_adaptado.json"
+    },
+    {
+      "documentId": "OUTPUT",
+      "id": "output",
+      "title": "output",
+      "versions": [
+        "v1"
+      ],
+      "version": "1.0.0",
+      "file": "output.json"
     }
   ],
   "timeline": [
-    {
-      "documentId": "CIDM_REAL",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "CIDM_REAL",
-      "url": "/CIDM_REAL/v1/"
-    },
-    {
-      "documentId": "COMERCIO",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "COMERCIO",
-      "url": "/COMERCIO/v1/"
-    },
-    {
-      "documentId": "CONSTITUCION",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "CONSTITUCION",
-      "url": "/CONSTITUCION/v1/"
-    },
     {
       "documentId": "CONSTITUCION_CO_CIDM",
       "versionId": "v1",
       "createdAt": null,
       "title": "CONSTITUCION_CO_CIDM",
       "url": "/CONSTITUCION_CO_CIDM/v1/"
-    },
-    {
-      "documentId": "CONTITUCIONAPREPARAR",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "CONTITUCIONAPREPARAR",
-      "url": "/CONTITUCIONAPREPARAR/v1/"
     },
     {
       "documentId": "DECRETO252",
@@ -431,13 +403,6 @@
       "url": "/DOCUMENTO-B/v1/"
     },
     {
-      "documentId": "EJEMPLO_03",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "EJEMPLO_03",
-      "url": "/EJEMPLO_03/v1/"
-    },
-    {
       "documentId": "EJEMPLO_03_AST_ENRIQUECIDO",
       "versionId": "v1",
       "createdAt": null,
@@ -452,167 +417,6 @@
       "url": "/FRAGMENTO/v1/"
     },
     {
-      "documentId": "FRAGMENTO2",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "FRAGMENTO2",
-      "url": "/FRAGMENTO2/v1/"
-    },
-    {
-      "documentId": "FRAGMENTO_CONSTITUCION",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "FRAGMENTO_CONSTITUCION",
-      "url": "/FRAGMENTO_CONSTITUCION/v1/"
-    },
-    {
-      "documentId": "FRAGMENTO_INDD",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "FRAGMENTO_INDD",
-      "url": "/FRAGMENTO_INDD/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787048272866",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787048272866",
-      "url": "/INPUT_REQ-UXP-1787048272866/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787048479152",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787048479152",
-      "url": "/INPUT_REQ-UXP-1787048479152/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787050532163",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787050532163",
-      "url": "/INPUT_REQ-UXP-1787050532163/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787050829014",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787050829014",
-      "url": "/INPUT_REQ-UXP-1787050829014/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787051067716",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787051067716",
-      "url": "/INPUT_REQ-UXP-1787051067716/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787052898129",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787052898129",
-      "url": "/INPUT_REQ-UXP-1787052898129/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787133542567",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787133542567",
-      "url": "/INPUT_REQ-UXP-1787133542567/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787134110013",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787134110013",
-      "url": "/INPUT_REQ-UXP-1787134110013/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787134565322",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787134565322",
-      "url": "/INPUT_REQ-UXP-1787134565322/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787134804067",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787134804067",
-      "url": "/INPUT_REQ-UXP-1787134804067/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787134995386",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787134995386",
-      "url": "/INPUT_REQ-UXP-1787134995386/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787135104195",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787135104195",
-      "url": "/INPUT_REQ-UXP-1787135104195/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787135442125",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787135442125",
-      "url": "/INPUT_REQ-UXP-1787135442125/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-1787138010552",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-1787138010552",
-      "url": "/INPUT_REQ-UXP-1787138010552/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-TEST-1787237748582",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-TEST-1787237748582",
-      "url": "/INPUT_REQ-UXP-TEST-1787237748582/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-TEST-1787237838942",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-TEST-1787237838942",
-      "url": "/INPUT_REQ-UXP-TEST-1787237838942/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-TEST-1787238012454",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-TEST-1787238012454",
-      "url": "/INPUT_REQ-UXP-TEST-1787238012454/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-TEST-1787238457543",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-TEST-1787238457543",
-      "url": "/INPUT_REQ-UXP-TEST-1787238457543/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-TEST-1787239112770",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-TEST-1787239112770",
-      "url": "/INPUT_REQ-UXP-TEST-1787239112770/v1/"
-    },
-    {
-      "documentId": "INPUT_REQ-UXP-TEST-1787243137787",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "INPUT_REQ-UXP-TEST-1787243137787",
-      "url": "/INPUT_REQ-UXP-TEST-1787243137787/v1/"
-    },
-    {
       "documentId": "NORMA-VERSIONADA",
       "versionId": "v1",
       "createdAt": null,
@@ -625,28 +429,14 @@
       "createdAt": null,
       "title": "NORMA-VERSIONADA",
       "url": "/NORMA-VERSIONADA/v2/"
-    },
-    {
-      "documentId": "NOTAS_EXTRAIDAS",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "NOTAS_EXTRAIDAS",
-      "url": "/NOTAS_EXTRAIDAS/v1/"
-    },
-    {
-      "documentId": "ONTOLOGIA_PUBLICACION_V1_ADAPTADO",
-      "versionId": "v1",
-      "createdAt": null,
-      "title": "ONTOLOGIA_PUBLICACION_V1_ADAPTADO",
-      "url": "/ONTOLOGIA_PUBLICACION_V1_ADAPTADO/v1/"
     }
   ],
   "metrics": {
-    "generatedAt": "2026-09-28T17:30:37.565Z",
-    "totalDocuments": 37,
-    "totalVersions": 38,
+    "generatedAt": "2026-09-10T18:04:58.459Z",
+    "totalDocuments": 7,
+    "totalVersions": 8,
     "coreVersion": "1.0.0",
     "ledmVersion": "2.0",
-    "checksum": "6e08fbdb482f669ece5caae676f1d0023215f4c610845036bfc5522ece2ce3b4"
+    "checksum": "cee480b84e08aa6d975dad115317d31c323708dfde08b82250dfa5c1e8f2692f"
   }
 }

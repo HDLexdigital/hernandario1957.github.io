@@ -1,0 +1,30 @@
+{
+  "status": "OK",
+  "generatedAt": "2026-09-23T10:14:48.488Z",
+  "items": [
+    {
+      "documentId": "index",
+      "url": "/DOC-A/index.html#DOC-A-T1",
+      "id": "DOC-A-T1",
+      "level": 1,
+      "text": "Documento A",
+      "status": "OK"
+    },
+    {
+      "documentId": "index",
+      "url": "/DOC-B/index.html#DOC-B-T1",
+      "id": "DOC-B-T1",
+      "level": 1,
+      "text": "Documento B",
+      "status": "OK"
+    },
+    {
+      "documentId": "index",
+      "url": "/index.html#STORY-001-B001",
+      "id": "STORY-001-B001",
+      "level": 1,
+      "text": "Título del capítulo",
+      "status": "OK"
+    }
+  ]
+}

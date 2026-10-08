@@ -1,22 +1,50 @@
 {
   "meta": {
     "apiVersion": "1.0.0",
-    "generatedAt": "2026-09-28T18:40:25.291Z",
-    "sourceGraphSha256": "e5d037d17514405a8ee308ae292f6714b88f28dcdbcd2adcf6f105b9338fe653"
+    "generatedAt": "2026-09-27T23:24:16.013Z",
+    "sourceGraphSha256": "1f14c86031823a3a7ecc51b61dff6a44f17e07b3411eeaf087242adadb2dbfca"
   },
   "corpora": [
     {
       "corpusId": "co-constitucion-1991",
       "slug": "constitucion",
       "title": "Constitución Política de Colombia",
-      "shortTitle": "CP 1991",
+      "shortTitle": "CP",
       "jurisdiction": "CO",
       "type": "constitution",
       "promulgationDate": "1991-07-04",
       "status": "active",
       "endpoints": {
         "canonicalUrl": "/constitucion",
-        "graphNodesCount": 0
+        "graphNodesCount": 2
+      }
+    },
+    {
+      "corpusId": "co-codigo-civil",
+      "slug": "codigo-civil",
+      "title": "Código Civil Colombiano",
+      "shortTitle": "CC",
+      "jurisdiction": "CO",
+      "type": "code",
+      "promulgationDate": "1887-05-26",
+      "status": "active",
+      "endpoints": {
+        "canonicalUrl": "/codigo-civil",
+        "graphNodesCount": 1
+      }
+    },
+    {
+      "corpusId": "co-cgp",
+      "slug": "cgp",
+      "title": "Código General del Proceso",
+      "shortTitle": "CGP",
+      "jurisdiction": "CO",
+      "type": "code",
+      "promulgationDate": "2012-07-12",
+      "status": "active",
+      "endpoints": {
+        "canonicalUrl": "/cgp",
+        "graphNodesCount": 1
       }
     }
   ]

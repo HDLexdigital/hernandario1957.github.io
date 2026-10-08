@@ -1,0 +1,31 @@
+{
+  "documentId": "DOC-A",
+  "version": "1.0.0",
+  "createdAt": "2026-09-23T10:14:48.586Z",
+  "artifacts": [
+    {
+      "type": "web",
+      "path": "index.html",
+      "checksum": "9b212dce29cf39a77b2b76bc443828e345fe739841d1222fdf635ad581cc79ba",
+      "rendererVersion": "WebRenderer"
+    },
+    {
+      "type": "epub",
+      "path": "documento.epub",
+      "checksum": "32e68118cc8271a7a0686de9748353eed33b6d2b4a96339243f8e4c46b239234",
+      "rendererVersion": "EpubGenerator"
+    },
+    {
+      "type": "pdf-ua",
+      "path": "documento-ua.pdf",
+      "checksum": "19dc3475edcf29eadabae9b4aadebcfbac3d81f43b1735a836500c99bd89f01f",
+      "rendererVersion": "build-pdf-weasyprint"
+    },
+    {
+      "type": "pdf-print",
+      "path": "documento-print.pdf",
+      "checksum": "c00d26fd4b8e51a75685cb14cd755c57f2701969dcae7786ebcadfca32d90f85",
+      "rendererVersion": "build-pdf-print+ghostscript"
+    }
+  ]
+}

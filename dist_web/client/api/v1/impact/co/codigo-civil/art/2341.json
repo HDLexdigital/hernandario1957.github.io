@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "apiVersion": "1.0.0",
+    "generatedAt": "2026-09-27T23:24:16.013Z",
+    "sourceGraphSha256": "1f14c86031823a3a7ecc51b61dff6a44f17e07b3411eeaf087242adadb2dbfca",
+    "computationalDisclaimer": "Los puntajes de centralidad y simulaciones de propagación de impacto constituyen métricas de análisis topológico de redes y carecen de valor probatorio o fuerza vinculante sobre la vigencia, jerarquía o aplicabilidad de las disposiciones en el ordenamiento jurídico."
+  },
+  "simulation": {
+    "evaluatedGlobalId": "co:codigo-civil:art:2341",
+    "depthLimit": 3,
+    "totalDependentsAffected": 1,
+    "corpusDistribution": {
+      "cgp": 1
+    },
+    "affectedTree": [
+      {
+        "globalId": "co:cgp:art:1",
+        "corpusSlug": "cgp",
+        "title": "Artículo 1. Objeto y aplicación",
+        "cascadeDepth": 1,
+        "relationType": "cross-corpus-reference",
+        "viaGlobalId": "co:codigo-civil:art:2341"
+      }
+    ]
+  }
+}

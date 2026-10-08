@@ -1,11 +1,51 @@
 {
   "meta": {
     "apiVersion": "1.0.0",
-    "generatedAt": "2026-09-28T18:40:25.291Z",
-    "sourceGraphSha256": "e5d037d17514405a8ee308ae292f6714b88f28dcdbcd2adcf6f105b9338fe653",
+    "generatedAt": "2026-09-27T23:24:16.013Z",
+    "sourceGraphSha256": "1f14c86031823a3a7ecc51b61dff6a44f17e07b3411eeaf087242adadb2dbfca",
     "computationalDisclaimer": "Los puntajes de centralidad y simulaciones de propagación de impacto constituyen métricas de análisis topológico de redes y carecen de valor probatorio o fuerza vinculante sobre la vigencia, jerarquía o aplicabilidad de las disposiciones en el ordenamiento jurídico."
   },
-  "totalNodesEvaluated": 0,
-  "topCentralNodes": [],
-  "bridgeNodes": []
+  "totalNodesEvaluated": 4,
+  "topCentralNodes": [
+    {
+      "rank": 1,
+      "globalId": "co:constitucion:art:86",
+      "title": "Artículo 86. Acción de tutela",
+      "authorityScore": 1,
+      "inDegree": 1
+    },
+    {
+      "rank": 2,
+      "globalId": "co:codigo-civil:art:2341",
+      "title": "Artículo 2341. Reparación por delito o culpa",
+      "authorityScore": 0.7191,
+      "inDegree": 1
+    },
+    {
+      "rank": 3,
+      "globalId": "co:constitucion:art:29",
+      "title": "Artículo 29. Debido proceso",
+      "authorityScore": 0.3887,
+      "inDegree": 0
+    },
+    {
+      "rank": 4,
+      "globalId": "co:cgp:art:1",
+      "title": "Artículo 1. Objeto y aplicación",
+      "authorityScore": 0.3887,
+      "inDegree": 0
+    }
+  ],
+  "bridgeNodes": [
+    {
+      "globalId": "co:codigo-civil:art:2341",
+      "title": "Artículo 2341. Reparación por delito o culpa",
+      "crossCorpusOutDegree": 1
+    },
+    {
+      "globalId": "co:cgp:art:1",
+      "title": "Artículo 1. Objeto y aplicación",
+      "crossCorpusOutDegree": 1
+    }
+  ]
 }

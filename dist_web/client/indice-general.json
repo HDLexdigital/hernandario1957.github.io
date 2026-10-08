@@ -1,0 +1,14 @@
+[
+  {
+    "documentId": "DOC-A",
+    "title": "Documento A",
+    "nodeId": "DOC-A-T1",
+    "url": "/DOC-A/"
+  },
+  {
+    "documentId": "DOC-B",
+    "title": "Documento B",
+    "nodeId": "DOC-B-T1",
+    "url": "/DOC-B/"
+  }
+]

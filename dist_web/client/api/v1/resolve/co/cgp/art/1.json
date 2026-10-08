@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "apiVersion": "1.0.0",
+    "generatedAt": "2026-09-27T23:24:16.013Z",
+    "sourceGraphSha256": "1f14c86031823a3a7ecc51b61dff6a44f17e07b3411eeaf087242adadb2dbfca"
+  },
+  "node": {
+    "globalId": "co:cgp:art:1",
+    "corpusSlug": "cgp",
+    "localId": "art-1",
+    "title": "Artículo 1. Objeto y aplicación",
+    "nodeType": "art",
+    "webHref": "/cgp#art-1",
+    "inDegree": 0,
+    "outDegree": 1,
+    "authorityScore": 0.3887
+  },
+  "references": {
+    "outbound": [
+      {
+        "targetGlobalId": "co:codigo-civil:art:2341",
+        "relationType": "cross-corpus-reference",
+        "rawCitation": "artículo 2341 del Código Civil"
+      }
+    ],
+    "inbound": []
+  }
+}

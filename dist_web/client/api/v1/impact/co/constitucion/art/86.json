@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "apiVersion": "1.0.0",
+    "generatedAt": "2026-09-27T23:24:16.013Z",
+    "sourceGraphSha256": "1f14c86031823a3a7ecc51b61dff6a44f17e07b3411eeaf087242adadb2dbfca",
+    "computationalDisclaimer": "Los puntajes de centralidad y simulaciones de propagación de impacto constituyen métricas de análisis topológico de redes y carecen de valor probatorio o fuerza vinculante sobre la vigencia, jerarquía o aplicabilidad de las disposiciones en el ordenamiento jurídico."
+  },
+  "simulation": {
+    "evaluatedGlobalId": "co:constitucion:art:86",
+    "depthLimit": 3,
+    "totalDependentsAffected": 2,
+    "corpusDistribution": {
+      "codigo-civil": 1,
+      "cgp": 1
+    },
+    "affectedTree": [
+      {
+        "globalId": "co:codigo-civil:art:2341",
+        "corpusSlug": "codigo-civil",
+        "title": "Artículo 2341. Reparación por delito o culpa",
+        "cascadeDepth": 1,
+        "relationType": "constitutional-basis",
+        "viaGlobalId": "co:constitucion:art:86"
+      },
+      {
+        "globalId": "co:cgp:art:1",
+        "corpusSlug": "cgp",
+        "title": "Artículo 1. Objeto y aplicación",
+        "cascadeDepth": 2,
+        "relationType": "cross-corpus-reference",
+        "viaGlobalId": "co:codigo-civil:art:2341"
+      }
+    ]
+  }
+}

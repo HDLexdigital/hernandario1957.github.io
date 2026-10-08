@@ -2,116 +2,343 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LexDigitalHD - Estación de Ingesta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Casa Abierta - LexDigitalHD</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f5; padding: 2rem; color: #333; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { color: #1e40af; border-bottom: 2px solid #e5e7eb; padding-bottom: 1rem; }
-        .dropzone { border: 2px dashed #3b82f6; border-radius: 8px; padding: 3rem; text-align: center; cursor: pointer; background: #eff6ff; transition: background 0.3s; margin-bottom: 1.5rem; }
-        .dropzone:hover { background: #dbeafe; }
-        .dropzone input { display: none; }
-        pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 8px; overflow-x: auto; max-height: 400px; }
-        .loading { display: none; color: #2563eb; font-weight: bold; margin-bottom: 1rem; }
-        .btn-guia { background-color: #f59e0b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; margin-bottom: 1rem; }
-        .btn-guia:hover { background-color: #d97706; }
-        .cheatsheet { display: none; background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px; font-size: 0.95rem; }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;600;800&display=swap');
+
+        :root {
+            --cafe-oscuro: #2c1e16;
+            --cafe-medio: #5c4033;
+            --pergamino: #fdfbf7;
+            --acento-rojo: #8b2b2b;
+            --oro: #b89758;
+            --blanco: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--pergamino);
+            font-family: 'Outfit', sans-serif;
+            color: var(--cafe-oscuro);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--cafe-oscuro) 0%, var(--cafe-medio) 100%);
+            color: var(--blanco);
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid var(--oro);
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p.subtitulo {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 20px auto;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Trova Section */
+        .trova-container {
+            background-color: var(--blanco);
+            border: 2px solid var(--oro);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 700px;
+            margin: -40px auto 40px auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .trova-container h3 {
+            color: var(--acento-rojo);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .trova-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            line-height: 1.8;
+            font-style: italic;
+            color: var(--cafe-oscuro);
+        }
+
+        /* Content Section */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .main-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--acento-rojo);
+            margin-bottom: 10px;
+        }
+
+        .main-content p.bienvenida {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            line-height: 1.7;
+        }
+
+        /* Grid de Documentos */
+        .grid-documentos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: var(--cafe-oscuro);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-bottom: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--acento-rojo);
+        }
+
+        .card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin: 0 0 15px 0;
+            color: var(--cafe-oscuro);
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .card span.btn {
+            background: var(--oro);
+            color: var(--blanco);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            align-self: center;
+            transition: background 0.3s;
+        }
+
+        .card:hover span.btn {
+            background: var(--acento-rojo);
+        }
+
+        /* Llamado a la acción (WhatsApp) */
+        .cta-section {
+            background: var(--cafe-oscuro);
+            color: var(--blanco);
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 40px;
+        }
+
+        .cta-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--oro);
+            margin-top: 0;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.05);
+        }
+
+        .firma {
+            margin-top: 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(255,255,255,0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .trova-container { margin: -20px 20px 30px 20px; padding: 20px; }
+            .trova-text { font-size: 1.2rem; }
+            
+            /* El Circo en la Plaza del Pueblo: Cuando la pantalla es pequeña,
+               retiramos la Romana y vestimos todo el portal de Sans-Serif para máxima legibilidad. */
+            * {
+                font-family: 'Outfit', sans-serif !important;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 style="display: flex; justify-content: space-between; align-items: center;">
-            LexDigitalHD Orchestrator 
-            <span style="font-size: 0.5em; color: #6b7280; font-weight: normal;">Paso 01: Ingesta</span>
-        </h1>
-        
-        <div style="background: #121316; color: #e5e7eb; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #d4af37; font-family: 'Georgia', serif; line-height: 1.6; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-            <p style="margin-top: 0; font-size: 1.15rem; font-style: italic;">
-                «Gravemos en nuestras tipográficas almas que PWA es el majestuoso vehículo que expresará nuestras almas transferidas en palabras y normas tipográficas.»
-            </p>
-            <div style="text-align: right; font-size: 0.85rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px;">
-                — Manifiesto de LexDigitalHD
-            </div>
-        </div>
-        
-        <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap;">
-            <button class="btn-guia" style="margin-bottom: 0;" onclick="toggleGuia()">💡 Ver Guía Rápida de Word</button>
-            <a href="dossier_siosi.html" target="_blank" style="background-color: #d4af37; color: #121316; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#e5c158'" onmouseout="this.style.backgroundColor='#d4af37'">⚡ Abrir Dossier «Proyecto Sí-o-Sí» (PWA)</a>
-        </div>
-        
-        <div class="cheatsheet" id="cheatsheet">
-            <strong>4 Acciones Rápidas en Word antes de subir:</strong>
-            <ul style="margin-top: 0.5rem; margin-bottom: 0;">
-                <li><strong>1. Títulos y Capítulos:</strong> Selecciona y aplica estilos nativos <em>Título 1, Título 2, Título 3</em>.</li>
-                <li><strong>2. Texto Normal:</strong> Presiona Ctrl+E y aplica el estilo <em>Normal</em> para borrar fuentes raras.</li>
-                <li><strong>3. Citas:</strong> Usa el estilo <em>Cita (Quote)</em> para bloques indentados.</li>
-                <li><strong>4. Saltos:</strong> Borra los "Enter" dobles vacíos si los ves.</li>
-            </ul>
-        </div>
 
-        <p>Arrastra aquí un archivo <strong>.docx o .pdf</strong> (o haz clic para seleccionar). El servidor limpiará los formatos y extraerá el texto, generando la estructura JSON en tiempo real.</p>
-        
-        <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
-            <p>📁 Selecciona o suelta tu archivo (.docx o .pdf) aquí</p>
-            <input type="file" id="fileInput" accept=".docx,.pdf" onchange="uploadFile(this.files[0])">
-        </div>
-
-        <div class="loading" id="loading">⏳ Procesando manuscrito... (Leyendo, limpiando formatos y analizando estructura...)</div>
-
-        <h3>Libreta Generada (JSON Estructural para InDesign UXP):</h3>
-        <pre id="jsonOutput">El JSON aparecerá aquí cuando subas un archivo.</pre>
+    <div class="hero">
+        <h1>La Casa Abierta</h1>
+        <p class="subtitulo">Siga, siéntese y tómese un tinto con nosotros. Aquí en LexDigitalHD forjamos la palabra con tecnología de punta y corazón de imprenta.</p>
     </div>
 
-    <script>
-        const dropzone = document.getElementById('dropzone');
+    <!-- La Trova de Bienvenida -->
+    <div class="trova-container">
+        <h3>Un trovador saludo de la Cofradía</h3>
+        <div class="trova-text">
+            Si busca usted un trabajo<br>
+            con código y pulcritud,<br>
+            llegó a la casa correcta<br>
+            pa’ ganarle a la inquietud.<br><br>
+            
+            Aquí no hay máquina fría<br>
+            ni robots de mala gana,<br>
+            le metemos alma y arte<br>
+            ¡con puro acento de ruana!
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h2>¿Qué hay en el Taller?</h2>
+        <p class="bienvenida">No nos andamos con rodeos ni misterios de laboratorio. Queremos que conozca a los muchachos que hacen el trabajo pesado, que entienda cómo organizamos las ideas y que vea con sus propios ojos cómo construimos libros y documentos que no le tienen miedo al paso del tiempo.</p>
+
+        <div class="grid-documentos">
+            
+            <!-- Tarjeta 1 -->
+            <a href="./Folleto_Agentes_LexDigitalHD.html" target="_blank" class="card">
+                <div>
+                    <h3>Conozca a la Cofradía</h3>
+                    <p>El Libro Matriz de nuestros agentes. Las hojas de vida de los 15 caracteres (humanos y cibernéticos) que sudan la camiseta para que sus documentos queden perfectos.</p>
+                </div>
+                <span class="btn">Ver Expedientes</span>
+            </a>
+
+            <!-- Tarjeta 2 -->
+            <a href="./Folleto_Tour_Ecosistema.html" target="_blank" class="card">
+                <div>
+                    <h3>Así Trabajamos Aquí</h3>
+                    <p>El Tour Científico por nuestras entrañas. Descubra cómo pasamos de un Word desordenado a un libro majestuoso, todo supervisado por el ojo clínico humano.</p>
+                </div>
+                <span class="btn">Ver el Proceso</span>
+            </a>
+
+            <!-- Tarjeta 3 -->
+            <a href="./Folleto_Modulacion_Retorica.html" target="_blank" class="card">
+                <div>
+                    <h3>El Manual de Etiqueta</h3>
+                    <p>Porque somos técnicos, pero no aburridos. Un glosario oficial bilingüe (cortesía de nuestro políglota) para entender nuestras expresiones de más alto calibre.</p>
+                </div>
+                <span class="btn">Abrir Manual</span>
+            </a>
+
+            <!-- Tarjeta 4 -->
+            <a href="./Album_Familiar_LexDigitalHD.html" target="_blank" class="card">
+                <div>
+                    <h3>El Álbum Familiar</h3>
+                    <p>Las risas, los errores "catrehijueputas" y las anécdotas de 25 madrugadas navegando descalzos por unos y ceros. La historia real detrás del código.</p>
+                </div>
+                <span class="btn">Ver Recuerdos</span>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Sección de la Mano Biónica (/conchudo) -->
+    <div style="max-width: 900px; margin: 0 auto 60px auto; background-color: var(--cafe-oscuro); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: flex; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+            <img src="./mano_bionica_chibalete.jpg" alt="Mano Biónica de Chibalete" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        <div style="flex: 1; min-width: 300px; padding: 40px; color: var(--pergamino); display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--oro); margin-top: 0; margin-bottom: 15px;">La Mano Biónica de /Chibalete</h3>
+            <p style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 15px; color: #eeddcc;">
+                Si se preguntan cómo logramos componer tipografía de plomo a la velocidad de la luz, aquí está la respuesta. Mandamos a forjar una mano cibernética para nuestro maestro cajista.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.6; font-style: italic; color: #aaa;">
+                *Nota de Gerencia: Exigimos a los servidores de Google que gastaran miles de tokens renderizando cada engranaje, tornillo de bronce y chispa de este brazo. ¿Por qué? Por la simple cultura del todo-gratis. Porque podemos. Y además, porque somos exigentes.*
+            </p>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h2>¿Le quedó sonando alguna idea?</h2>
+        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6; color: #ccc;">
+            En esta Casa Abierta no presionamos ventas. Preferimos cultivar la curiosidad. Si tiene alguna duda sobre nuestra tecnología, nuestros agentes o la forma en que forjamos los textos, envíele un mensaje a nuestro "Robozinho". Él traerá su pregunta directamente a nuestros recintos íntimos, y la Cofradía le preparará una respuesta a su justa medida.
+        </p>
+        <a href="https://wa.me/573000000000?text=¡Hola%20Cofradía!%20Estaba%20paseando%20por%20La%20Casa%20Abierta%20y%20me%20surgió%20esta%20duda:%20" class="btn-whatsapp" target="_blank">
+            ¡Pregunte sin compromiso!
+        </a>
+        <div class="firma">
+            Su pregunta será recibida y analizada en tiempo real por el equipo de LexDigitalHD.<br>
+            Medellín, San Cristóbal.
+        </div>
         
-        dropzone.ondragover = (e) => { e.preventDefault(); dropzone.style.background = "#bfdbfe"; };
-        dropzone.ondragleave = (e) => { e.preventDefault(); dropzone.style.background = "#eff6ff"; };
-        dropzone.ondrop = (e) => {
-            e.preventDefault();
-            dropzone.style.background = "#eff6ff";
-            if (e.dataTransfer.files.length) {
-                uploadFile(e.dataTransfer.files[0]);
-            }
-        };
+        <div style="margin-top: 35px; padding: 15px 25px; border: 1px dashed var(--oro); border-radius: 8px; display: inline-block; max-width: 600px; color: #eeddcc; font-size: 1rem; line-height: 1.5; font-family: 'Inter', sans-serif;">
+            <strong style="color: var(--oro); font-size: 1.1rem; display: block; margin-bottom: 5px;">📢 Aviso de la Cofradía:</strong> 
+            <em>Acabamos de enviar a nuestro querido Robozinho (a lomo de tortuga) en su primera misión oficial: ir a comprar la SIM Card a la Plaza del Pueblo. Apenas regrese y le instale el chip a nuestro conmutador, ¡estaremos listos para recibir sus preguntas!</em>
+        </div>
+    </div>
 
-        async function uploadFile(file) {
-            if (!file) return;
-            const filename = file.name.toLowerCase();
-            if (!filename.endsWith('.docx') && !filename.endsWith('.pdf')) {
-                alert("Por favor, sube un archivo .docx o .pdf");
-                return;
-            }
+    <!-- Sección de Propinas / Donaciones -->
+    <div style="text-align: center; margin: 50px auto 40px auto; padding: 30px; max-width: 600px; background-color: var(--blanco); border: 2px solid var(--oro); border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--cafe-oscuro); margin-top: 0;">El Marranito de /Pingüi</h3>
+        <p style="font-size: 1.05rem; color: #555; line-height: 1.6; margin-bottom: 20px;">
+            Si mira con cuidado, notará a nuestro fiero <strong>/Pingüi</strong> (Centinela de los Puertos) con su espadita de madera Excalibur desenvainada, custodiando celosamente la alcancía de barro del taller.
+        </p>
+        <p style="font-size: 1.2rem; font-weight: 600; color: var(--acento-rojo); margin-bottom: 25px;">
+            ¡Cualquier donación para el tinto es totalmente voluntaria!<br>
+            <span style="font-size: 0.9rem; color: #888; font-weight: normal;">(Pero amablemente sugerida por la punta de la espada).<br>
+            <em>(Fe de erratas: los pingüinos no tomamos café)</em></span>
+        </p>
+        <a href="#" style="display: inline-block; background-color: var(--oro); color: var(--blanco); padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: background 0.3s;">
+            Alimentar al Marrano 🐷
+        </a>
+    </div>
 
-            document.getElementById('loading').style.display = "block";
-            document.getElementById('jsonOutput').textContent = "Procesando...";
+    <!-- Footer Global / Reflexión de Donache -->
+    <div style="text-align: center; padding: 20px; color: #888; font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-style: italic; margin-bottom: 20px;">
+        «Cualquiera que, de la mano de la IA, lleve más de 25 madrugadas navegando descalzo por unos y ceros... puede ser mi amigo.»<br>
+        <span style="font-size: 0.95rem;">(Terapia del yo-con-yo) — Donache</span>
+    </div>
 
-            const formData = new FormData();
-            formData.append('manuscrito', file);
-
-            try {
-                const response = await fetch('/api/ingesta', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const data = await response.json();
-                document.getElementById('jsonOutput').textContent = JSON.stringify(data, null, 2);
-            } catch (error) {
-                console.error(error);
-                document.getElementById('jsonOutput').textContent = "Error al procesar el archivo.";
-            } finally {
-                document.getElementById('loading').style.display = "none";
-            }
-        }
-
-        function toggleGuia() {
-            const guia = document.getElementById('cheatsheet');
-            if (guia.style.display === 'block') {
-                guia.style.display = 'none';
-            } else {
-                guia.style.display = 'block';
-            }
-        }
-    </script>
 </body>
 </html>
