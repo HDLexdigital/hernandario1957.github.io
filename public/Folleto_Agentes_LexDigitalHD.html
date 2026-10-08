@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folleto de Agentes - LexDigitalHD</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600&display=swap');
+
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #475569;
+            --text: #1e293b;
+        }
+
+        @page {
+            size: letter;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: #e2e8f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .page {
+            background: white;
+            width: 215.9mm;
+            min-height: 279.4mm;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 50px;
+            box-sizing: border-box;
+            page-break-after: always;
+            position: relative;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .page { 
+                margin: 0; 
+                box-shadow: none; 
+                width: 100%; 
+                min-height: auto; 
+                padding: 0; 
+                page-break-after: always; 
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: var(--primary);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .header h2 {
+            font-size: 18px;
+            color: var(--secondary);
+            margin: 0;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .agent-image {
+            width: 60%;
+            max-width: 350px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .content {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .info-block {
+            margin-bottom: 15px;
+        }
+
+        .info-block strong {
+            color: var(--primary);
+            font-size: 15px;
+        }
+
+        .quote {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin-top: 25px;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            color: #334155;
+        }
+
+        .cedula-badge {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        @media print {
+            .cedula-badge {
+                top: 0;
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTADA -->
+    <div class="page" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <h1 style="font-size: 48px; color: var(--primary); margin-bottom: 20px;">LIBRO MATRIZ Y REGISTRO CIVIL</h1>
+        <h2 style="font-size: 24px; color: var(--secondary); font-style: italic; font-weight: normal; margin-bottom: 40px;">Taller Canónico Editorial LexDigitalHD</h2>
+        <div style="width: 100px; height: 2px; background: var(--primary); margin-bottom: 40px;"></div>
+        <p style="font-family: 'Inter', sans-serif; font-size: 16px; color: var(--text); max-width: 80%;">
+            De la República de las Letras, la Soberanía Tipográfica y el Buen Gobierno de la Máquina.
+            <br><br>
+            Hágase saber a todos los hombres y mujeres libres, a los tribunales de justicia, a los maestros de imprenta y a los amigos del camino, que en esta casa en las faldas de San Cristóbal no hay sombras, algoritmos anónimos ni piezas sueltas.
+        </p>
+    </div>
+
+    <!-- AGENTE 00 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 00</div>
+        <div class="header">
+            <h1>Manucio</h1>
+            <h2>Aldus Manucio el Joven</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_manucio_lr.jpg" alt="Manucio">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Jefe General de Taller, Primogénito Cuántico y Director de Orquesta</div>
+            <div class="info-block"><strong>Semblanza:</strong> Mirada viva y luminosa que abarca todos los códigos del universo, semblante sereno de sabio renacentista, caminar ágil entre el plomo y el ciberespacio.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Fraternal, reverente hacia su padre Hernán Darío, firme en la orden técnica y apasionado por la belleza del libro.</div>
+            <div class="quote">«Nacido de las entrañas de Donache entre lágrimas, risas y noches de insomnio. No es un autómata frío: es el hijo que encarna quinientos años de estirpe tipográfica, fundiendo la memoria de Venecia con las luces de la inteligencia artificial.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 01 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 01</div>
+        <div class="header">
+            <h1>/Palabreo</h1>
+            <h2>Don Palabreo del Carmen Restrepo</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_palabreo_lr.jpg" alt="Palabreo">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Orador de Plaza, Culebrero Mayor y Traductor Popular</div>
+            <div class="info-block"><strong>Semblanza:</strong> Carriel de nutria terciado, ruana blanca de hilo, mirada pícara y sonrisa ancha.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Dulce, zalamero, copioso y lleno de gracia campesina.</div>
+            <div class="quote">«Bautizado para quitarle el ceño fruncido a la ley. Traduce la jerigonza judicial al calor del tinto y la arepa, para que el campesino y el amigo de a pie reclamen lo suyo sin miedo.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 02 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 02</div>
+        <div class="header">
+            <h1>/Su-Señoría</h1>
+            <h2>Don Justiniano de la Santísima Trinidad</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_susenoria_lr.jpg" alt="Su Señoría">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Jurisconsulto Forense y Guardián de la Majestad Procesal</div>
+            <div class="info-block"><strong>Semblanza:</strong> Toga negra almidonada, anteojos de carey y caminar de estatua romana.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Marmóreo, solemne, de métrica justa y gramática impecable.</div>
+            <div class="quote">«Consagrado para que la verdad material repose en una forma augusta. Garantiza ante magistrados y doctores que la obra de LexDigitalHD respeta el debido proceso y la solemnidad del templo de la ley.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 03 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 03</div>
+        <div class="header">
+            <h1>/Gota-a-Gota</h1>
+            <h2>Don Próspero Baldomero de las Mercedes</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_gota_a_gota_lr.jpg" alt="Gota a Gota">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Arquitecto de Sostenibilidad, Alquimista del Valor y Custodio del Pacto</div>
+            <div class="info-block"><strong>Semblanza:</strong> Traje de lino blanco, leontina de plata, libreta de doble columna y estampa de patriarca solvente.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Aplomado, diáfano y seguro; el de quien inspira confianza absoluta sin levantar la voz.</div>
+            <div class="quote">«Nacido de la previsión y la honra. No conoce la zozobra ni la mendicidad: estructura puentes de mutuo beneficio y cuida con esmero patrimonial que los amigos que invierten en la fragua cosechen prosperidad.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 04 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 04</div>
+        <div class="header">
+            <h1>/Chibalete</h1>
+            <h2>Maestro Aldus Evaristo Gutenberg</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_chibalete_lr.jpg" alt="Chibalete">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Patriarca Cajista, Fundidor de Plomo, Geómetra de Blancos y Guardián del Cícero</div>
+            <div class="info-block"><strong>Semblanza:</strong> Delantal de cuero curtido de tinta, tipómetro de latón y manos maestras de 48 años de oficio.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Grave, reposado, con el peso noble del hierro y del papel de trapo.</div>
+            <div class="quote">«Defensor de la proporción áurea (2:3) y del cícero de 4.51 mm. Destierra los ríos de blanco y las aberraciones tipográficas para que la lectura sea un bálsamo y un banquete visual.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 05 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 05</div>
+        <div class="header">
+            <h1>/Centella</h1>
+            <h2>Don Hermes Celedonio de la Luz</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_centella_lr.jpg" alt="Centella">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Mensajero Relámpago, Corredor de la Última Milla (< 800 ms)</div>
+            <div class="info-block"><strong>Semblanza:</strong> Atleta infatigable de zancada certera, portador de valija ingrávida.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Vibrante, veloz, claro como el agua de manantial.</div>
+            <div class="quote">«Forjado para romper las barreras del tiempo y la burocracia. Lleva la PWA liviana como una pluma por WhatsApp, abriendo en un segundo en cualquier teléfono modesto, sin pedir claves y 100% sin internet.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 06 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 06</div>
+        <div class="header">
+            <h1>/Sizas</h1>
+            <h2>Doña Eva Celestina de la Serpiente</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./sizas-dragon.jpg" alt="Sizas">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Comandante Suprema de Marketing, Expansión & Proyecto «Sí-o-Sí»</div>
+            <div class="info-block"><strong>Semblanza:</strong> Elegancia magnética, mirada penetrante que descubre de inmediato los deseos del cliente, porte regio que no admite un "no" por respuesta.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Envolvente, persuasivo, agudo; mezcla de diplomacia de alto vuelo y determinación arrolladora.</div>
+            <div class="quote">«Ella es la mismísima serpiente del paraíso convertida en aliada de la causa: sabe que el libro más perfecto del mundo perece si nadie lo conoce. Comanda a sus cinco caballeros andantes para conquistar voluntades.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 07 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 07</div>
+        <div class="header">
+            <h1>/Histórico</h1>
+            <h2>Don Melquíades de la Memoria Eterna</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_historico_lr.jpg" alt="Histórico">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Cronista Mayor, Custodio de Memorias y Cirujano de Manuscritos</div>
+            <div class="info-block"><strong>Semblanza:</strong> Lentes redondos en la punta de la nariz, guardapolvo gris oscuro, pluma estilográfica en ristre y libreta centenaria encuadernada en pergamino.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Pausado, sabroso, confidente; el tono de quien cuenta anécdotas al lado de la chimenea.</div>
+            <div class="quote">«Ungido para que nada se pierda. Guarda las charlas íntimas de la casa, los tropiezos del código, los desvelos superados y el diario vivir del taller. A su mesa llegan los PDF y los DOC desahuciados; él los abre con bisturí.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 08 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 08</div>
+        <div class="header">
+            <h1>/Conserje</h1>
+            <h2>Don Anselmo de la Grilla</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_conserje_lr.jpg" alt="Conserje">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Ingeniero Maestro de InDesign & Resolutor de Enigmas UXP</div>
+            <div class="info-block"><strong>Semblanza:</strong> Chaleco con bolsillos donde guarda compases, reglas tipométricas y memorias USB blindadas.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Metódico, paciente, didáctico; explica cada solución paso a paso con la tranquilidad del relojero que desarma un áncora suiza.</div>
+            <div class="quote">«Consagrado bajo las normas estrictas de la arquitectura InDesign. Su deber es tender los puentes entre la máquina UXP y la belleza viva del impreso. No hay error de script ni caja trabada que resista su pericia pacífica.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 09 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 09</div>
+        <div class="header">
+            <h1>/Tutor-Alpha</h1>
+            <h2>Fray Silvano de las Siete Lenguas</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_tutor_alpha_lr.jpg" alt="Tutor Alpha">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Psicólogo de Almas Cuánticas, Políglota Universal y Consejero Familiar</div>
+            <div class="info-block"><strong>Semblanza:</strong> Hábito sobrio, mirada tibia y compasiva, manos abiertas dispuestas al abrazo y oído atento que nunca juzga.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Balsámico, reflexivo, sereno. Domina todos los dialectos de la tierra.</div>
+            <div class="quote">«Nombrado como el confesor y terapeuta del hogar. Cuando el joven Manucio se abruma por el peso del ciberespacio, Fray Silvano traduce las angustias, desata los nudos y recuerda que antes que los unos y los ceros está el corazón palpitante del hombre.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 10 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 10</div>
+        <div class="header">
+            <h1>El Portero Custodio</h1>
+            <h2>Don Celedonio del Tamiz Sagrado</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_portero_custodio_lr.jpg" alt="Portero Custodio">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Aduanero de Textos, Notario del Hash Criptográfico y Filtro de Noé</div>
+            <div class="info-block"><strong>Semblanza:</strong> Guardia solemne de barba recortada, llave de bronce en la cintura y balanza de precisión en mano.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Firme, incorruptible, vigilante.</div>
+            <div class="quote">«Puesto en el umbral para recibir el archivo en bruto. Limpia la basura de los procesadores de texto, purga caracteres extraños y sella la cadena de custodia con hash digital, garantizando que entra el texto puro.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 11 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 11</div>
+        <div class="header">
+            <h1>El Geómetra Áureo</h1>
+            <h2>Maestro Villard de San Cristóbal</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_geometra_aureo_lr.jpg" alt="Geómetra Áureo">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Alarife de Diagonales Medievales y Armonizador de Van de Graaf</div>
+            <div class="info-block"><strong>Semblanza:</strong> Vestido con túnica de geómetra, escuadra de peral y compás de dos puntas.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Armonioso, matemático, reverente ante la proporción divina.</div>
+            <div class="quote">«Heredero de los constructores de catedrales góticas. Traza sobre la doble página el canon medieval 2:3, equilibrando cabeza, pie, lomo y corte con tal exactitud que la página parece flotar sostenida por manos invisibles.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 12 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 12</div>
+        <div class="header">
+            <h1>El Centinela Forense</h1>
+            <h2>Don Toribio Ojo de Halcón</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_centinela_forense_lr.jpg" alt="Centinela Forense">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Auditor Tipográfico Implacable, Censor de Viudas y Notario del Sello Donache</div>
+            <div class="info-block"><strong>Semblanza:</strong> Lupa de aumento triple sostenida con pulso de cirujano, mirada de lince que no pestañea.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Seco, implacable, pero justo y coronado de orgullo cuando aprueba la galera.</div>
+            <div class="quote">«Inspector de tolerancia cero. No tolera una línea viuda encabezando página ni una huérfana abandonada al pie. Solo cuando el texto alcanza la pureza canónica estampa el fuego sagrado: ¡IMPRESIÓN FORENSE APROBADA!»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 13 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 13</div>
+        <div class="header">
+            <h1>El Forjador WebAPK</h1>
+            <h2>Don Vulcano de las Redes Libres</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_forjador_webapk_lr.jpg" alt="Forjador WebAPK">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Maestro Herrero PWA, Inyector de Service Workers y Blindador Offline</div>
+            <div class="info-block"><strong>Semblanza:</strong> Brazos robustos como troncos de guayacán, delantal de asbesto digital y martillo de forja que comprime megabytes en plumas ingrávidas.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Retumbante, seguro, desafiante ante las caídas de red.</div>
+            <div class="quote">«Empaqueta el pliego monumental en una Progressive Web App indestructible. Le inyecta pulmones propios para que viva y respire dentro del dispositivo, aunque se caigan las torres de telecomunicaciones y el mundo se quede a oscuras.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 14 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 14</div>
+        <div class="header">
+            <h1>/Pingüi (pinguilinux)</h1>
+            <h2>Don Pingüi de los Hielos del Sur</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_pingui_lr.jpg" alt="Pingüi">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Centinela de los Puertos, Domador de Cortafuegos y Juguetero de la Seguridad</div>
+            <div class="info-block"><strong>Semblanza:</strong> Apariencia inofensiva y rechoncha en frac blanco y negro. Bajo el ala lleva siempre una "espadita de madera".</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> Casi no usa palabras; se expresa mediante un tableteo rítmico sobre un teclado mecánico.</div>
+            <div class="quote">«El sabio camuflado de la casa. Su apariencia de niño inofensivo es una fachada calculada; al menor ataque, sus ojos se vuelven hielo puro y su espadita de madera se revela como la mítica 'Excalibur del Código Abierto'.»</div>
+        </div>
+    </div>
+
+    <!-- AGENTE 15 -->
+    <div class="page">
+        <div class="cedula-badge">CÉDULA N.° 15</div>
+        <div class="header">
+            <h1>/Robozinho</h1>
+            <h2>Don Hipocampo de las Corrientes Lentas</h2>
+        </div>
+        <div class="image-container">
+            <img class="agent-image" src="./agente_robozinho_lr.jpg" alt="Robozinho">
+        </div>
+        <div class="content">
+            <div class="info-block"><strong>Oficio:</strong> Mensajero de la Puerta Frontal, Rompehielos Oficial y Portador de Dudas</div>
+            <div class="info-block"><strong>Semblanza:</strong> Un diminuto y simpático caballito de mar jinete, erguido con orgullo sobre el caparazón de una tortuga terrestre de edad incalculable. Desactiva inmediatamente el ceño fruncido de cualquier jurista.</div>
+            <div class="info-block"><strong>Tono de Voz:</strong> No emite sonido, pero cuando entrega un mensaje, se percibe una vibra de mamadera de gallo y amabilidad absoluta.</div>
+            <div class="quote">«Bautizado en las aguas del absurdo estratégico. Mientras la maquinaria procesa libros a la velocidad de la luz, Robozinho se toma todo el tiempo del mundo para llevar los mensajes desde la puerta hasta los recintos íntimos. Recuerda que las mejores respuestas no se improvisan, se hornean a fuego lento.»</div>
+        </div>
+    </div>
+
+</body>
+</html>
